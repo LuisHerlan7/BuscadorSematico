@@ -17,12 +17,17 @@ exports.search = async (req, res) => {
     const remoteResults = await dbpediaService.searchDiseases(q, lang);
 
     // Mapear resultados a la forma que espera la plantilla
-    const results = remoteResults.map(r => ({
+    const mappedResults = remoteResults.map(r => ({
       uri: r.uri,
       label: r.label,
       description: r.description || '',
       source: 'dbpedia'
     }));
+    const results = lang === 'es'
+      ? mappedResults
+      : await Promise.all(
+          mappedResults.map(result => translationService.translateResults(result, lang))
+        );
 
     console.log('Merged results:', JSON.stringify(results, null, 2));
     if (req.query.format === 'json') {
