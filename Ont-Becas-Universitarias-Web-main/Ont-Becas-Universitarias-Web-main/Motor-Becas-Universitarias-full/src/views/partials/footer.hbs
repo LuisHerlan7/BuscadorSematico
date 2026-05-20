@@ -1,6 +1,19 @@
 <footer class="mt-5 py-3 bg-light text-center">
   <div class="container">
-    <p class="mb-0">Buscador de Becas Universitarias &copy; {{currentYear}}</p>
-    <p class="text-muted small mb-0">Datos locales y DBpedia (según disponibilidad)</p>
+    <p class="mb-0">
+      {{#if (eq lang 'es')}}Buscador de Becas Universitarias{{/if}}
+      {{#if (eq lang 'en')}}University Scholarship Finder{{/if}}
+      {{#if (eq lang 'pt')}}Buscador de Bolsas Universitarias{{/if}}
+      {{#if (eq lang 'de')}}Universitatsstipendien-Suche{{/if}}
+      {{#if (eq lang 'fr')}}Recherche de Bourses Universitaires{{/if}}
+      &copy; {{currentYear}}
+    </p>
+    <p class="text-muted small mb-0">
+      {{#if (eq lang 'es')}}Datos locales y DBpedia (según disponibilidad){{/if}}
+      {{#if (eq lang 'en')}}Local data and DBpedia (subject to availability){{/if}}
+      {{#if (eq lang 'pt')}}Dados locais e DBpedia (conforme disponibilidade){{/if}}
+      {{#if (eq lang 'de')}}Lokale Daten und DBpedia (je nach Verfugbarkeit){{/if}}
+      {{#if (eq lang 'fr')}}Donnees locales et DBpedia (selon disponibilite){{/if}}
+    </p>
   </div>
 </footer>
