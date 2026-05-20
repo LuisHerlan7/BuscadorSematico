@@ -6,6 +6,59 @@ class DBpediaService {
     return dbpediaConfig.endpoint;
   }
 
+  _buildScholarshipTerms(term) {
+    const normalized = String(term || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .trim();
+
+    const terms = new Set(
+      normalized
+        .split(/\s+/)
+        .filter((word) => word.length >= 4)
+        .filter((word) => !['beca', 'becas', 'para', 'sobre', 'universitaria', 'universitarias'].includes(word))
+    );
+
+    const expansionMap = {
+      beca: ['scholarship', 'grant', 'fellowship'],
+      becas: ['scholarship', 'grant', 'fellowship'],
+      universitaria: ['university', 'student'],
+      universitarias: ['university', 'student'],
+      universidad: ['university'],
+      maestria: ['master', 'graduate'],
+      master: ['master', 'graduate'],
+      doctorado: ['doctoral', 'phd'],
+      pregrado: ['undergraduate'],
+      intercambio: ['exchange', 'erasmus'],
+      movilidad: ['exchange', 'mobility', 'erasmus'],
+      investigacion: ['research', 'fellowship'],
+      excelencia: ['merit', 'excellence'],
+      toefl: ['toefl', 'english'],
+      ingles: ['english', 'toefl', 'ielts']
+    };
+
+    for (const word of normalized.split(/\s+/)) {
+      for (const extra of expansionMap[word] || []) {
+        terms.add(extra);
+      }
+    }
+
+    if (terms.size === 0) {
+      terms.add('scholarship');
+      terms.add('fellowship');
+    }
+
+    return Array.from(terms).slice(0, 8);
+  }
+
+  _buildContainsFilter(variableName, terms) {
+    return terms
+      .map((term) => `CONTAINS(${variableName}, "${String(term).replace(/"/g, '\\"')}")`)
+      .join(' || ');
+  }
+
   async _fetchSparql(query) {
     const response = await axios.get(this._getEndpoint(), {
       params: {
@@ -26,22 +79,64 @@ class DBpediaService {
       return [];
     }
 
-    const safeTerm = String(term).replace(/"/g, '\\"').trim().toLowerCase();
+    return this.searchUniversityScholarshipPrograms(term, lang);
+  }
+
+  async searchUniversityScholarshipPrograms(term, lang = 'es') {
+    if (!term || !term.trim()) {
+      return [];
+    }
+
+    const searchTerms = this._buildScholarshipTerms(term);
+    const searchFilter = this._buildContainsFilter('?text', searchTerms);
     const query = `
+      PREFIX dbr: <http://dbpedia.org/resource/>
       PREFIX dbo: <http://dbpedia.org/ontology/>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
       SELECT DISTINCT ?scholarship ?label ?abstract
       WHERE {
-        ?scholarship rdfs:label ?label .
-        ?scholarship dbo:abstract ?abstract .
+        VALUES ?scholarship {
+          dbr:Fulbright_Program
+          dbr:Rhodes_Scholarship
+          dbr:Chevening_Scholarship
+          dbr:Marshall_Scholarship
+          dbr:Gates_Cambridge_Scholarship
+          dbr:Schwarzman_Scholars
+          dbr:Erasmus_Programme
+          dbr:Erasmus_Mundus
+          dbr:German_Academic_Exchange_Service
+          dbr:Commonwealth_Scholarship_and_Fellowship_Plan
+        }
 
-        FILTER(CONTAINS(LCASE(STR(?label)), "${safeTerm}"))
+        ?scholarship rdfs:label ?label .
+
         FILTER(LANG(?label) = "${lang}" || LANG(?label) = "en")
-        FILTER(LANG(?abstract) = "${lang}" || LANG(?abstract) = "en")
+        OPTIONAL {
+          ?scholarship dbo:abstract ?abstract .
+          FILTER(LANG(?abstract) = "${lang}" || LANG(?abstract) = "en")
+        }
+
+        BIND(LCASE(CONCAT(STR(?label), " ", STR(COALESCE(?abstract, "")))) AS ?text)
+        FILTER(${searchFilter})
+        FILTER(
+          CONTAINS(?text, "scholarship") ||
+          CONTAINS(?text, "fellowship") ||
+          CONTAINS(?text, "grant") ||
+          CONTAINS(?text, "bursary") ||
+          CONTAINS(?text, "financial aid") ||
+          CONTAINS(?text, "student exchange") ||
+          CONTAINS(?text, "university") ||
+          CONTAINS(?text, "fulbright") ||
+          CONTAINS(?text, "erasmus") ||
+          CONTAINS(?text, "chevening") ||
+          CONTAINS(?text, "rhodes") ||
+          CONTAINS(?text, "marshall") ||
+          CONTAINS(?text, "cambridge")
+        )
       }
 
-      LIMIT 10
+      LIMIT 25
     `;
 
     try {
