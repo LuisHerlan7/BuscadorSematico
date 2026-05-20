@@ -52,7 +52,13 @@
               <div class="detail-item">
                 <svg xmlns="http://www.w3.org/2000/svg" class="detail-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 100 12 6 6 0 000-12zM8 9h4v1H8V9z"/></svg>
                 <div class="detail-text">
-                  <span class="detail-label">{{#if (eq ../lang 'es')}}Monto{{else}}Amount{{/if}}</span>
+                  <span class="detail-label">
+                    {{#if (eq ../lang 'es')}}Monto{{/if}}
+                    {{#if (eq ../lang 'en')}}Amount{{/if}}
+                    {{#if (eq ../lang 'pt')}}Valor{{/if}}
+                    {{#if (eq ../lang 'de')}}Betrag{{/if}}
+                    {{#if (eq ../lang 'fr')}}Montant{{/if}}
+                  </span>
                   <span class="detail-value">{{amount}}</span>
                 </div>
               </div>
@@ -62,7 +68,13 @@
               <div class="detail-item">
                 <svg xmlns="http://www.w3.org/2000/svg" class="detail-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H8V3a1 1 0 00-1-1z"/></svg>
                 <div class="detail-text">
-                  <span class="detail-label">{{#if (eq ../lang 'es')}}Fecha límite{{else}}Deadline{{/if}}</span>
+                  <span class="detail-label">
+                    {{#if (eq ../lang 'es')}}Fecha límite{{/if}}
+                    {{#if (eq ../lang 'en')}}Deadline{{/if}}
+                    {{#if (eq ../lang 'pt')}}Prazo final{{/if}}
+                    {{#if (eq ../lang 'de')}}Frist{{/if}}
+                    {{#if (eq ../lang 'fr')}}Date limite{{/if}}
+                  </span>
                   <span class="detail-value">{{deadline}}</span>
                 </div>
               </div>
@@ -72,7 +84,13 @@
               <div class="detail-item">
                 <svg xmlns="http://www.w3.org/2000/svg" class="detail-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 2.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l8-8z"/></svg>
                 <div class="detail-text">
-                  <span class="detail-label">{{#if (eq ../lang 'es')}}Fuente{{else}}Source{{/if}}</span>
+                  <span class="detail-label">
+                    {{#if (eq ../lang 'es')}}Fuente{{/if}}
+                    {{#if (eq ../lang 'en')}}Source{{/if}}
+                    {{#if (eq ../lang 'pt')}}Fonte{{/if}}
+                    {{#if (eq ../lang 'de')}}Quelle{{/if}}
+                    {{#if (eq ../lang 'fr')}}Source{{/if}}
+                  </span>
                   <span class="detail-value">{{source}}</span>
                 </div>
               </div>
@@ -87,13 +105,19 @@
             {{#if (eq ../lang 'en')}}Links{{/if}}
             {{#if (eq ../lang 'pt')}}Links{{/if}}
             {{#if (eq ../lang 'de')}}Links{{/if}}
-            {{#if (eq ../lang 'fr')}}Links{{/if}}
+            {{#if (eq ../lang 'fr')}}Liens{{/if}}
           </h3>
           <div class="disease-links">
             {{#if uri}}
               <a href="{{uri}}" class="disease-link" target="_blank" rel="noopener noreferrer">
                 <svg xmlns="http://www.w3.org/2000/svg" class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 2.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l8-8z"/></svg>
-                <span>{{#if (eq ../lang 'es')}}Ver en fuente{{else}}View source{{/if}}</span>
+                <span>
+                  {{#if (eq ../lang 'es')}}Ver en fuente{{/if}}
+                  {{#if (eq ../lang 'en')}}View source{{/if}}
+                  {{#if (eq ../lang 'pt')}}Ver fonte{{/if}}
+                  {{#if (eq ../lang 'de')}}Quelle ansehen{{/if}}
+                  {{#if (eq ../lang 'fr')}}Voir la source{{/if}}
+                </span>
               </a>
             {{/if}}
             {{#if dbpediaPage}}
@@ -104,7 +128,13 @@
             {{/if}}
 
             <!-- Acciones rápidas: Guardar en localStorage -->
-            <button class="disease-link save-btn" data-uri="{{uri}}" data-label="{{label}}">{{#if (eq ../lang 'es')}}Guardar{{else}}Save{{/if}}</button>
+            <button class="disease-link save-btn" data-uri="{{uri}}" data-label="{{label}}" data-lang="{{../lang}}">
+              {{#if (eq ../lang 'es')}}Guardar{{/if}}
+              {{#if (eq ../lang 'en')}}Save{{/if}}
+              {{#if (eq ../lang 'pt')}}Salvar{{/if}}
+              {{#if (eq ../lang 'de')}}Speichern{{/if}}
+              {{#if (eq ../lang 'fr')}}Enregistrer{{/if}}
+            </button>
           </div>
         </div>
       </div>
@@ -336,13 +366,22 @@ margin: 0 auto;
       btn.addEventListener('click', ()=>{
         const uri = btn.getAttribute('data-uri');
         const label = btn.getAttribute('data-label');
-        if(!uri) return alert('URI no disponible');
+        const lang = btn.getAttribute('data-lang') || 'es';
+        const copy = {
+          es: { missing: 'URI no disponible', saved: 'Guardado', exists: 'Ya guardado' },
+          en: { missing: 'URI unavailable', saved: 'Saved', exists: 'Already saved' },
+          pt: { missing: 'URI indisponivel', saved: 'Salvo', exists: 'Ja salvo' },
+          de: { missing: 'URI nicht verfugbar', saved: 'Gespeichert', exists: 'Bereits gespeichert' },
+          fr: { missing: 'URI indisponible', saved: 'Enregistre', exists: 'Deja enregistre' }
+        };
+        const text = copy[lang] || copy.es;
+        if(!uri) return alert(text.missing);
         const ok = saveFav({ uri, label });
         if(ok) {
-          btn.textContent = 'Guardado';
+          btn.textContent = text.saved;
           btn.disabled = true;
         } else {
-          btn.textContent = 'Ya guardado';
+          btn.textContent = text.exists;
         }
       });
     });
