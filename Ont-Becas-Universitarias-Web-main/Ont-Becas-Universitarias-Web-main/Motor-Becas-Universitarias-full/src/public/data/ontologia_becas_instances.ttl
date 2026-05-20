@@ -1,16 +1,288 @@
 @prefix becas: <http://www.semanticweb.org/ontologia/becas-universitarias#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 
 becas:BECA_Excelencia_USMS a becas:Beca ;
   rdfs:label "Beca de Excelencia USMS"@es ;
   becas:nombreBeca "Beca de Excelencia USMS" ;
   becas:descripcion "Beca por mérito académico, cubre matrícula y manutención." ;
   becas:montoCubierto "5000" ;
-  becas:fechaLímitePostulación "2026-08-31" .
+  becas:fechaLímitePostulación "2026-08-31" ;
+  becas:esOfrecidaPor becas:INST_USMS .
+
+becas:INST_USMS a becas:Universidad ;
+  rdfs:label "Universidad Mayor de San Matías"@es ;
+  becas:nombreInstitucion "Universidad Mayor de San Matías" .
 
 becas:BECA_Movilidad_2026 a becas:Beca ;
   rdfs:label "Beca de Movilidad 2026"@es ;
   becas:nombreBeca "Beca de Movilidad 2026" ;
   becas:descripcion "Financia intercambio internacional (semestre)." ;
   becas:montoCubierto "2000" ;
-  becas:fechaLímitePostulación "2026-05-30" .
+  becas:fechaLímitePostulación "2026-05-30" ;
+  becas:esOfrecidaPor becas:INST_MINEDU .
+
+becas:INST_MINEDU a becas:Organización ;
+  rdfs:label "Ministerio de Educación"@es ;
+  becas:nombreInstitucion "Ministerio de Educación" .
+
+# Instancia de ejemplo para pruebas: requisito TOEFL y beca que lo requiere
+becas:REQUISITO_TOEFL a becas:RequisitoDeIdioma ;
+  rdfs:label "TOEFL"@en ;
+  becas:puntajeExamenMínimo "80" .
+
+becas:BECA_TOEFL a becas:Beca ;
+  rdfs:label "Beca que requiere TOEFL"@es ;
+  becas:nombreBeca "Beca TOEFL" ;
+  becas:descripcion "Beca de ejemplo que requiere TOEFL." ;
+  becas:montoCubierto "1000" ;
+  becas:fechaLímitePostulación "2026-12-31" ;
+  becas:tieneRequisito becas:REQUISITO_TOEFL .
+
+becas:INST_DBPEDIA_advanced_technology_centre_shah_alam a becas:Universidad ;
+  rdfs:label "Advanced Technology Centre Shah Alam"@es ;
+  becas:nombreInstitucion "Advanced Technology Centre Shah Alam" ;
+  owl:sameAs <http://dbpedia.org/resource/Advanced_Technology_Centre_Shah_Alam> .
+
+becas:INST_DBPEDIA_al_mahdi_institute a becas:Universidad ;
+  rdfs:label "Al-Mahdi Institute"@es ;
+  becas:nombreInstitucion "Al-Mahdi Institute" ;
+  owl:sameAs <http://dbpedia.org/resource/Al-Mahdi_Institute> .
+
+becas:INST_DBPEDIA_azman_university_kano a becas:Universidad ;
+  rdfs:label "Azman University, Kano"@es ;
+  becas:nombreInstitucion "Azman University, Kano" ;
+  owl:sameAs <http://dbpedia.org/resource/Azman_University,_Kano> .
+
+becas:INST_DBPEDIA_central_seminary a becas:Universidad ;
+  rdfs:label "Central Seminary"@es ;
+  becas:nombreInstitucion "Central Seminary" ;
+  owl:sameAs <http://dbpedia.org/resource/Central_Seminary> .
+
+becas:INST_DBPEDIA_columbia_publishing_course a becas:Universidad ;
+  rdfs:label "Columbia Publishing Course"@es ;
+  becas:nombreInstitucion "Columbia Publishing Course" ;
+  owl:sameAs <http://dbpedia.org/resource/Columbia_Publishing_Course> .
+
+becas:INST_DBPEDIA_confluence_university_of_science_and_tec a becas:Universidad ;
+  rdfs:label "Confluence University of Science and Technology"@es ;
+  becas:nombreInstitucion "Confluence University of Science and Technology" ;
+  owl:sameAs <http://dbpedia.org/resource/Confluence_University_of_Science_and_Technology> .
+
+becas:INST_DBPEDIA_entrepreneurship_and_technology_innovati a becas:Universidad ;
+  rdfs:label "Entrepreneurship and Technology Innovation Center"@es ;
+  becas:nombreInstitucion "Entrepreneurship and Technology Innovation Center" ;
+  owl:sameAs <http://dbpedia.org/resource/Entrepreneurship_and_Technology_Innovation_Center> .
+
+becas:INST_DBPEDIA_feu_roosevelt a becas:Universidad ;
+  rdfs:label "FEU Roosevelt"@es ;
+  becas:nombreInstitucion "FEU Roosevelt" ;
+  owl:sameAs <http://dbpedia.org/resource/FEU_Roosevelt> .
+
+becas:INST_DBPEDIA_faculty_of_law_of_the_university_of_graz a becas:Universidad ;
+  rdfs:label "Faculty of Law of the University of Graz"@es ;
+  becas:nombreInstitucion "Faculty of Law of the University of Graz" ;
+  owl:sameAs <http://dbpedia.org/resource/Faculty_of_Law_of_the_University_of_Graz> .
+
+becas:INST_DBPEDIA_iilm_university_gurugram a becas:Universidad ;
+  rdfs:label "IILM University Gurugram"@es ;
+  becas:nombreInstitucion "IILM University Gurugram" ;
+  owl:sameAs <http://dbpedia.org/resource/IILM_University_Gurugram> .
+
+becas:PAIS_DBPEDIA_casa_de_pappenheim a becas:País ;
+  rdfs:label "Casa de Pappenheim"@es ;
+  becas:nombreInstitucion "Casa de Pappenheim" ;
+  owl:sameAs <http://dbpedia.org/resource/Pappenheim_(state)> .
+
+becas:PAIS_DBPEDIA_concesi_n_rusa_en_tianjin a becas:País ;
+  rdfs:label "Concesión rusa en Tianjin"@es ;
+  becas:nombreInstitucion "Concesión rusa en Tianjin" ;
+  owl:sameAs <http://dbpedia.org/resource/Russian_concession_of_Tianjin> .
+
+becas:PAIS_DBPEDIA_kanato_de_rus a becas:País ;
+  rdfs:label "Kanato de Rus'"@es ;
+  becas:nombreInstitucion "Kanato de Rus'" ;
+  owl:sameAs <http://dbpedia.org/resource/Rus'_Khaganate> .
+
+becas:PAIS_DBPEDIA_magrava a becas:País ;
+  rdfs:label "Magrava"@es ;
+  becas:nombreInstitucion "Magrava" ;
+  owl:sameAs <http://dbpedia.org/resource/Maghrawa> .
+
+becas:PAIS_DBPEDIA_unidad_territorial_aut_noma_con_un_estat a becas:País ;
+  rdfs:label "Unidad territorial autónoma con un estatus jurídico especial Transnistria"@es ;
+  becas:nombreInstitucion "Unidad territorial autónoma con un estatus jurídico especial Transnistria" ;
+  owl:sameAs <http://dbpedia.org/resource/Administrative-Territorial_Units_of_the_Left_Bank_of_the_Dniester> .
+
+becas:PAIS_DBPEDIA_protectorado_de_toda_palestina a becas:País ;
+  rdfs:label "Protectorado de Toda Palestina"@es ;
+  becas:nombreInstitucion "Protectorado de Toda Palestina" ;
+  owl:sameAs <http://dbpedia.org/resource/All-Palestine_Protectorate> .
+
+becas:PAIS_DBPEDIA_art_quidas a becas:País ;
+  rdfs:label "Artúquidas"@es ;
+  becas:nombreInstitucion "Artúquidas" ;
+  owl:sameAs <http://dbpedia.org/resource/Artuqids> .
+
+becas:PAIS_DBPEDIA_islas_salom_n_brit_nicas a becas:País ;
+  rdfs:label "Islas Salomón británicas"@es ;
+  becas:nombreInstitucion "Islas Salomón británicas" ;
+  owl:sameAs <http://dbpedia.org/resource/British_Solomon_Islands> .
+
+becas:PAIS_DBPEDIA_estado_de_creta a becas:País ;
+  rdfs:label "Estado de Creta"@es ;
+  becas:nombreInstitucion "Estado de Creta" ;
+  owl:sameAs <http://dbpedia.org/resource/Cretan_State> .
+
+becas:PAIS_DBPEDIA_ducado_de_cl_veris a becas:País ;
+  rdfs:label "Ducado de Cléveris"@es ;
+  becas:nombreInstitucion "Ducado de Cléveris" ;
+  owl:sameAs <http://dbpedia.org/resource/Duchy_of_Cleves> .
+
+becas:PAIS_DBPEDIA_ducado_de_franconia a becas:País ;
+  rdfs:label "Ducado de Franconia"@es ;
+  becas:nombreInstitucion "Ducado de Franconia" ;
+  owl:sameAs <http://dbpedia.org/resource/Duchy_of_Franconia> .
+
+becas:PAIS_DBPEDIA_ducado_de_gran_polonia a becas:País ;
+  rdfs:label "Ducado de Gran Polonia"@es ;
+  becas:nombreInstitucion "Ducado de Gran Polonia" ;
+  owl:sameAs <http://dbpedia.org/resource/Duchy_of_Greater_Poland> .
+
+becas:PAIS_DBPEDIA_irlanda_celta a becas:País ;
+  rdfs:label "Irlanda celta"@es ;
+  becas:nombreInstitucion "Irlanda celta" ;
+  owl:sameAs <http://dbpedia.org/resource/Gaelic_Ireland> .
+
+becas:PAIS_DBPEDIA_hohenzollern_hechingen a becas:País ;
+  rdfs:label "Hohenzollern-Hechingen"@es ;
+  becas:nombreInstitucion "Hohenzollern-Hechingen" ;
+  owl:sameAs <http://dbpedia.org/resource/Hohenzollern-Hechingen> .
+
+becas:PAIS_DBPEDIA_portugal_bajo_la_casa_de_austria a becas:País ;
+  rdfs:label "Portugal bajo la Casa de Austria"@es ;
+  becas:nombreInstitucion "Portugal bajo la Casa de Austria" ;
+  owl:sameAs <http://dbpedia.org/resource/Iberian_Union> .
+
+becas:PAIS_DBPEDIA_dinast_a_idris a becas:País ;
+  rdfs:label "Dinastía idrisí"@es ;
+  becas:nombreInstitucion "Dinastía idrisí" ;
+  owl:sameAs <http://dbpedia.org/resource/Idrisid_dynasty> .
+
+becas:PAIS_DBPEDIA_rep_blica_isl_mica_de_afganist_n a becas:País ;
+  rdfs:label "República Islámica de Afganistán"@es ;
+  becas:nombreInstitucion "República Islámica de Afganistán" ;
+  owl:sameAs <http://dbpedia.org/resource/Islamic_Republic_of_Afghanistan> .
+
+becas:PAIS_DBPEDIA_landgraviato_de_hesse a becas:País ;
+  rdfs:label "Landgraviato de Hesse"@es ;
+  becas:nombreInstitucion "Landgraviato de Hesse" ;
+  owl:sameAs <http://dbpedia.org/resource/Landgraviate_of_Hesse> .
+
+becas:PAIS_DBPEDIA_rep_blica_socialista_sovi_tica_de_lituan a becas:País ;
+  rdfs:label "República Socialista Soviética de Lituania (1918-1919)"@es ;
+  becas:nombreInstitucion "República Socialista Soviética de Lituania (1918-1919)" ;
+  owl:sameAs <http://dbpedia.org/resource/Lithuanian_Soviet_Socialist_Republic_(1918–1919)> .
+
+becas:PAIS_DBPEDIA_independent_state_of_raqqa a becas:País ;
+  rdfs:label "Independent State of Raqqa"@es ;
+  becas:nombreInstitucion "Independent State of Raqqa" ;
+  owl:sameAs <http://dbpedia.org/resource/Independent_State_of_Raqqa> .
+
+becas:BECA_DBPEDIA_amy_allison_grant a becas:Beca ;
+  rdfs:label "Amy Allison Grant"@en ;
+  becas:nombreBeca "Amy Allison Grant" ;
+  owl:sameAs <http://dbpedia.org/resource/Amy_Allison_Grant> .
+
+becas:BECA_DBPEDIA_grant_of_glenmoriston a becas:Beca ;
+  rdfs:label "Grant of Glenmoriston"@en ;
+  becas:nombreBeca "Grant of Glenmoriston" ;
+  owl:sameAs <http://dbpedia.org/resource/Grant_of_Glenmoriston> .
+
+becas:BECA_DBPEDIA_grantham_steenkamp a becas:Beca ;
+  rdfs:label "Grantham Steenkamp"@en ;
+  becas:nombreBeca "Grantham Steenkamp" ;
+  owl:sameAs <http://dbpedia.org/resource/Grantham_Steenkamp> .
+
+becas:BECA_DBPEDIA_grantham_and_bourne_uk_parliament_consti a becas:Beca ;
+  rdfs:label "Grantham and Bourne (UK Parliament constituency)"@en ;
+  becas:nombreBeca "Grantham and Bourne (UK Parliament constituency)" ;
+  owl:sameAs <http://dbpedia.org/resource/Grantham_and_Bourne_(UK_Parliament_constituency)> .
+
+becas:BECA_DBPEDIA_jarod_grant a becas:Beca ;
+  rdfs:label "Jarod Grant"@en ;
+  becas:nombreBeca "Jarod Grant" ;
+  owl:sameAs <http://dbpedia.org/resource/Jarod_Grant> .
+
+# Instancia de demostración: Beca que requiere TOEFL
+becas:BECA_TOEFL_DEMO a becas:Beca ;
+  rdfs:label "Beca que requiere TOEFL"@es ;
+  rdfs:label "Scholarship requiring TOEFL"@en ;
+  becas:nombreBeca "TOEFL Requirement Demo" ;
+  becas:descripcion "Instancia de ejemplo: esta beca requiere TOEFL como requisito de idioma." ;
+  becas:tieneRequisito becas:REQ_TOEFL .
+
+becas:REQ_TOEFL a becas:RequisitoDeIdioma ;
+  rdfs:label "TOEFL"@en ;
+  rdfs:label "TOEFL"@es ;
+  becas:nivelIdioma "B2" .
+
+becas:BECA_DBPEDIA_migrant_caregivers_in_taiwan a becas:Beca ;
+  rdfs:label "Migrant caregivers in Taiwan"@en ;
+  becas:nombreBeca "Migrant caregivers in Taiwan" ;
+  owl:sameAs <http://dbpedia.org/resource/Migrant_caregivers_in_Taiwan> .
+
+becas:BECA_DBPEDIA_tierra_amarilla_land_grant a becas:Beca ;
+  rdfs:label "Tierra Amarilla Land Grant"@en ;
+  becas:nombreBeca "Tierra Amarilla Land Grant" ;
+  owl:sameAs <http://dbpedia.org/resource/Tierra_Amarilla_Land_Grant> .
+
+becas:BECA_DBPEDIA_grant_leonard a becas:Beca ;
+  rdfs:label "Grant Leonard"@en ;
+  becas:nombreBeca "Grant Leonard" ;
+  owl:sameAs <http://dbpedia.org/resource/Grant_Leonard> .
+
+becas:BECA_DBPEDIA_jeffrey_d_grant a becas:Beca ;
+  rdfs:label "Jeffrey D. Grant"@en ;
+  becas:nombreBeca "Jeffrey D. Grant" ;
+  owl:sameAs <http://dbpedia.org/resource/Jeffrey_D._Grant> .
+
+becas:BECA_DBPEDIA_jenny_grant_rankin a becas:Beca ;
+  rdfs:label "Jenny Grant Rankin"@en ;
+  becas:nombreBeca "Jenny Grant Rankin" ;
+  owl:sameAs <http://dbpedia.org/resource/Jenny_Grant_Rankin> .
+
+becas:BECA_DBPEDIA_railroad_land_grants_in_the_united_state a becas:Beca ;
+  rdfs:label "Railroad land grants in the United States"@en ;
+  becas:nombreBeca "Railroad land grants in the United States" ;
+  owl:sameAs <http://dbpedia.org/resource/Railroad_land_grants_in_the_United_States> .
+
+becas:BECA_DBPEDIA_thomas_grantham_parliamentarian a becas:Beca ;
+  rdfs:label "Thomas Grantham (Parliamentarian)"@en ;
+  becas:nombreBeca "Thomas Grantham (Parliamentarian)" ;
+  owl:sameAs <http://dbpedia.org/resource/Thomas_Grantham_(Parliamentarian)> .
+
+becas:BECA_DBPEDIA_english_channel_migrant_crossings_2018_p a becas:Beca ;
+  rdfs:label "English Channel migrant crossings (2018–present)"@en ;
+  becas:nombreBeca "English Channel migrant crossings (2018–present)" ;
+  owl:sameAs <http://dbpedia.org/resource/2022_English_Channel_boat_capsizing> .
+
+becas:BECA_DBPEDIA_geoff_grant_tennis a becas:Beca ;
+  rdfs:label "Geoff Grant (tennis)"@en ;
+  becas:nombreBeca "Geoff Grant (tennis)" ;
+  owl:sameAs <http://dbpedia.org/resource/Geoff_Grant_(tennis)> .
+
+becas:BECA_DBPEDIA_list_of_golf_clubs_granted_royal_status a becas:Beca ;
+  rdfs:label "List of golf clubs granted Royal status"@en ;
+  becas:nombreBeca "List of golf clubs granted Royal status" ;
+  owl:sameAs <http://dbpedia.org/resource/List_of_golf_clubs_granted_Royal_status> .
+
+becas:BECA_DBPEDIA_list_of_people_granted_executive_clemenc a becas:Beca ;
+  rdfs:label "List of people granted executive clemency by Donald Trump"@en ;
+  becas:nombreBeca "List of people granted executive clemency by Donald Trump" ;
+  owl:sameAs <http://dbpedia.org/resource/List_of_people_granted_executive_clemency_by_Donald_Trump> .
+
+becas:BECA_DBPEDIA_native_american_policy_of_the_ulysses_s_ a becas:Beca ;
+  rdfs:label "Native American policy of the Ulysses S. Grant administration"@en ;
+  becas:nombreBeca "Native American policy of the Ulysses S. Grant administration" ;
+  owl:sameAs <http://dbpedia.org/resource/Native_American_policy_of_the_Ulysses_S._Grant_administration> .

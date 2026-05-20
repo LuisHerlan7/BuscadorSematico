@@ -2,8 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const { QueryEngine } = require('@comunica/query-sparql');
 const N3 = require('n3');
+const { RdfXmlParser } = require('rdfxml-streaming-parser');
+const streamifyString = require('streamify-string');
 // Usaremos N3.Store como fuente RDFJS compatible con Comunica
-const { searchDiseases } = require('../utils/rdfQueries');
+const sparqlQueries = require('../utils/sparqlQueries');
+const translationService = require('./translationService');
 
 // Preferir archivo de instancias si existe (más práctico para pruebas)
 const defaultOwl = path.join(__dirname, '../public/data/ontologia_becas.owl');
@@ -55,30 +58,50 @@ class RDFService {
     if (ext === '.jsonld') contentType = 'application/ld+json';
 
     const content = fs.readFileSync(filePath, 'utf8');
-    const parser = new N3.Parser({ baseIRI: `file://${filePath}` });
-    const quads = parser.parse(content);
+    let quads = [];
+    if (ext === '.ttl' || ext === '.nt' || ext === '.nq') {
+      const parser = new N3.Parser({ baseIRI: `file://${filePath}` });
+      try {
+        quads = parser.parse(content);
+      } catch (err) {
+        // Si falla el parseo Turtle, intentar cargar el OWL (RDF/XML) como fallback
+        if (fs.existsSync(defaultOwl)) {
+          const owlContent = fs.readFileSync(defaultOwl, 'utf8');
+          const xmlParser = new RdfXmlParser({ baseIRI: `file://${defaultOwl}` });
+          quads = [];
+          await new Promise((resolve, reject) => {
+            const input2 = streamifyString(owlContent);
+            xmlParser.on('data', q => quads.push(q));
+            xmlParser.on('end', resolve);
+            xmlParser.on('error', reject);
+            input2.pipe(xmlParser);
+          });
+        } else {
+          throw err;
+        }
+      }
+    } else if (ext === '.rdf' || ext === '.owl' || ext === '.xml') {
+      // usar rdfxml-streaming-parser para RDF/XML/OWL
+      const parser = new RdfXmlParser({ baseIRI: `file://${filePath}` });
+      await new Promise((resolve, reject) => {
+        const input = streamifyString(content);
+        parser.on('data', quad => quads.push(quad));
+        parser.on('end', resolve);
+        parser.on('error', reject);
+        input.pipe(parser);
+      });
+    } else {
+      const parser = new N3.Parser({ baseIRI: `file://${filePath}` });
+      quads = parser.parse(content);
+    }
     const store = new N3.Store(quads);
     this._dataset = store;
     return store;
   }
 
   async searchDiseases(term, lang = 'es') {
-    const ontologyClass = process.env.ONTOLOGY_CLASS || 'http://www.semanticweb.org/ontologia/becas-universitarias#Beca';
     const escaped = ('' + term).replace(/"/g, '\\"');
-
-    const query = `
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
-      SELECT ?s ?label ?descripcion ?monto ?fecha ?nombre WHERE {
-        ?s a <${ontologyClass}> .
-        ?s rdfs:label ?label .
-        FILTER(CONTAINS(LCASE(STR(?label)), LCASE("${escaped}")))
-        OPTIONAL { ?s becas:descripcion ?descripcion }
-        OPTIONAL { ?s becas:montoCubierto ?monto }
-        OPTIONAL { ?s becas:fechaLímitePostulación ?fecha }
-        OPTIONAL { ?s becas:nombreBeca ?nombre }
-      } LIMIT 50
-    `;
+    const query = sparqlQueries.searchDiseases(escaped, lang);
 
     // Cargar dataset RDFJS y usarlo como fuente
     const dataset = await this._loadDataset();
@@ -90,22 +113,36 @@ class RDFService {
       bindingsStream.on('error', reject);
     });
 
-    return bindings.map(binding => {
-      const s = binding.get('s') || binding.get('?s');
+    const results = bindings.map(binding => {
+      const s = binding.get('beca') || binding.get('?beca');
       const label = binding.get('label') || binding.get('?label');
+      const nombre = binding.get('nombre');
       const descripcion = binding.get('descripcion');
       const monto = binding.get('monto');
-      const fecha = binding.get('fecha');
-      const nombre = binding.get('nombre');
+      const fecha = binding.get('fechaLimite') || binding.get('fecha');
       return {
         uri: s?.value,
-        label: label?.value,
+        label: label?.value || nombre?.value,
         name: nombre?.value,
         description: descripcion?.value,
         amount: monto?.value,
         deadline: fecha?.value
       };
     });
+
+    // Traducción opcional de campos locales si se solicita otro idioma
+    if (lang && lang !== 'es' && translationService) {
+      await Promise.all(results.map(async r => {
+        try {
+          if (r.label) r.label = await translationService.translateText(r.label, lang, 'es');
+          if (r.description) r.description = await translationService.translateText(r.description, lang, 'es');
+        } catch (e) {
+          // fallthrough: devolver datos originales
+        }
+      }));
+    }
+
+    return results;
   }
 
   async getDiseaseDetails(uri) {
@@ -131,6 +168,233 @@ class RDFService {
     });
 
     return details;
+  }
+
+  async searchByIntent(intentObj, lang = 'es') {
+    if (!intentObj) return [];
+    if (intentObj.intent === 'list_institutions') {
+      const query = `
+        PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+        SELECT DISTINCT ?institucion WHERE {
+          ?b a becas:Beca ;
+             becas:esOfrecidaPor ?i .
+          OPTIONAL { ?i becas:nombreInstitucion ?n1 . }
+          OPTIONAL { ?i rdfs:label ?n2 . }
+          BIND(COALESCE(?n1, STR(?n2)) AS ?institucion)
+        }
+        ORDER BY ?institucion
+      `;
+
+      const dataset = await this._loadDataset();
+      const bindingsStream = await this.engine.queryBindings(query, { sources: [dataset] });
+      const bindings = [];
+      await new Promise((resolve, reject) => {
+        bindingsStream.on('data', b => bindings.push(b));
+        bindingsStream.on('end', resolve);
+        bindingsStream.on('error', reject);
+      });
+
+      const results = bindings.map(binding => {
+        const institucion = binding.get('institucion') || binding.get('?institucion');
+        return {
+          label: institucion?.value,
+          description: 'Institucion que ofrece programas de becas'
+        };
+      }).filter(r => r.label);
+
+      return results;
+    }
+
+    if (intentObj.intent !== 'query_property') return [];
+    const prop = intentObj.property; // e.g., 'tieneRequisito'
+    const value = intentObj.value; // e.g., 'TOEFL' or 'alojamiento'
+
+    // Construir consulta dependiendo de propiedad
+    let query = '';
+    // escape value for regex
+    const escapeRegex = v => (''+v).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = escapeRegex(value);
+
+    if (prop === 'tieneRequisito') {
+      query = `
+        PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+        SELECT DISTINCT ?beca ?label ?descripcion WHERE {
+          ?beca rdf:type ?t .
+          ?t rdfs:subClassOf* becas:Beca .
+          ?beca becas:tieneRequisito ?req .
+          ?req rdfs:label ?reqLabel .
+          FILTER(regex(str(?reqLabel), "${re}", "i"))
+          OPTIONAL { ?beca rdfs:label ?label }
+          OPTIONAL { ?beca becas:descripcion ?descripcion }
+        } LIMIT 100
+      `;
+    } else if (prop === 'otorgaBeneficio') {
+      query = `
+        PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+        SELECT DISTINCT ?beca ?label ?descripcion WHERE {
+          ?beca rdf:type ?t .
+          ?t rdfs:subClassOf* becas:Beca .
+          ?beca becas:otorgaBeneficio ?ben .
+          ?ben rdfs:label ?benLabel .
+          FILTER(regex(str(?benLabel), "${re}", "i"))
+          OPTIONAL { ?beca rdfs:label ?label }
+          OPTIONAL { ?beca becas:descripcion ?descripcion }
+        } LIMIT 100
+      `;
+    } else if (prop === 'perteneceAÁrea') {
+      query = `
+        PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+        SELECT DISTINCT ?beca ?label ?descripcion WHERE {
+          ?beca rdf:type ?t .
+          ?t rdfs:subClassOf* becas:Beca .
+          ?beca becas:perteneceAÁrea ?area .
+          ?area rdfs:label ?areaLabel .
+          FILTER(regex(str(?areaLabel), "${re}", "i"))
+          OPTIONAL { ?beca rdfs:label ?label }
+          OPTIONAL { ?beca becas:descripcion ?descripcion }
+        } LIMIT 100
+      `;
+    }
+
+    if (!query) return [];
+    console.log('SPARQL (local) =>', query);
+
+    const dataset = await this._loadDataset();
+    const bindingsStream = await this.engine.queryBindings(query, { sources: [dataset] });
+    const bindings = [];
+    await new Promise((resolve, reject) => {
+      bindingsStream.on('data', b => bindings.push(b));
+      bindingsStream.on('end', resolve);
+      bindingsStream.on('error', reject);
+    });
+
+    const results = bindings.map(binding => {
+      const s = binding.get('beca') || binding.get('?beca');
+      const label = binding.get('label') || binding.get('?label');
+      const descripcion = binding.get('descripcion');
+      return {
+        uri: s?.value,
+        label: label?.value,
+        description: descripcion?.value
+      };
+    });
+
+    // Traducción on-demand
+    if (lang && lang !== 'es' && translationService) {
+      await Promise.all(results.map(async r => {
+        try {
+          if (r.label) r.label = await translationService.translateText(r.label, lang, 'es');
+          if (r.description) r.description = await translationService.translateText(r.description, lang, 'es');
+        } catch (e) {}
+      }));
+    }
+
+    return results;
+  }
+
+  async listBecaTypes(lang = 'es') {
+    const query = `
+      PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+      SELECT DISTINCT ?tipoLabel WHERE {
+        ?tipoClass rdfs:subClassOf* becas:Beca .
+        FILTER(?tipoClass != becas:Beca)
+        ?tipoClass rdfs:label ?tipoLabel .
+      } ORDER BY ?tipoLabel
+    `;
+
+    const dataset = await this._loadDataset();
+    const bindingsStream = await this.engine.queryBindings(query, { sources: [dataset] });
+    const labels = [];
+    await new Promise((resolve, reject) => {
+      bindingsStream.on('data', b => labels.push(b.get('tipoLabel')?.value));
+      bindingsStream.on('end', resolve);
+      bindingsStream.on('error', reject);
+    });
+
+    // traducir si se solicita
+    if (lang && lang !== 'es' && translationService) {
+      await Promise.all(labels.map(async (lbl, i) => {
+        try { labels[i] = await translationService.translateText(lbl, lang, 'es'); } catch (e) {}
+      }));
+    }
+
+    return labels;
+  }
+
+  async searchByType(typeLabel, lang = 'es') {
+    if (!typeLabel) return [];
+    const escapeRegex = v => (''+v).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = escapeRegex(typeLabel);
+    const query = `
+      PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+      SELECT DISTINCT ?beca ?label ?descripcion WHERE {
+        ?beca rdf:type ?t .
+        OPTIONAL { ?t rdfs:label ?tLabel }
+        OPTIONAL { ?t rdfs:subClassOf* ?superClass . OPTIONAL { ?superClass rdfs:label ?superLabel } }
+        OPTIONAL { ?beca rdfs:label ?label }
+        OPTIONAL { ?beca becas:descripcion ?descripcion }
+
+        FILTER(
+          (
+            regex(str(?label), "${re}", "i") ||
+            regex(str(?tLabel), "${re}", "i") ||
+            regex(str(?superLabel), "${re}", "i")
+          )
+          && (?t != rdfs:Class && ?t != owl:Class)
+        )
+      } LIMIT 200
+    `;
+
+    console.log('SPARQL (searchByType) =>', query);
+    const dataset = await this._loadDataset();
+    const bindingsStream = await this.engine.queryBindings(query, { sources: [dataset] });
+    const bindings = [];
+    await new Promise((resolve, reject) => {
+      bindingsStream.on('data', b => bindings.push(b));
+      bindingsStream.on('end', resolve);
+      bindingsStream.on('error', reject);
+    });
+
+    const results = bindings.map(binding => {
+      const s = binding.get('beca') || binding.get('?beca');
+      const label = binding.get('label') || binding.get('?label');
+      const descripcion = binding.get('descripcion');
+      return {
+        uri: s?.value,
+        label: label?.value,
+        description: descripcion?.value
+      };
+    });
+
+    if (lang && lang !== 'es' && translationService) {
+      await Promise.all(results.map(async r => {
+        try {
+          if (r.label) r.label = await translationService.translateText(r.label, lang, 'es');
+          if (r.description) r.description = await translationService.translateText(r.description, lang, 'es');
+        } catch (e) {}
+      }));
+    }
+
+    return results;
   }
 }
 

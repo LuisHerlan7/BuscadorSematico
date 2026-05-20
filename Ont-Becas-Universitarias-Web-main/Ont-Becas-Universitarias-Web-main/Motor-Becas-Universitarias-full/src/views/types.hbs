@@ -1,0 +1,23 @@
+<h1 class="results-title">{{title}}</h1>
+
+{{#if isEmpty}}
+  <div class="no-results">
+    {{#if (eq lang 'es')}}No se han encontrado tipos de beca.{{/if}}
+    {{#if (eq lang 'en')}}No types of scholarship found.{{/if}}
+  </div>
+{{else}}
+  <ul class="types-list">
+    {{#each types}}
+      <li class="type-item">
+        <a href="/search?type={{this}}">{{this}}</a>
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}
+
+<style>
+  .types-list { list-style: none; padding: 0; max-width: 720px; margin: 1rem auto; }
+  .type-item { background: #fff; border: 1px solid #e5e7eb; margin: .5rem 0; padding: .75rem 1rem; border-radius: 8px; }
+  .type-item a { color: #4f46e5; text-decoration: none; font-weight: 600; }
+  .no-results { text-align:center; padding:2rem; background:#fff; border-radius:8px; }
+</style>
