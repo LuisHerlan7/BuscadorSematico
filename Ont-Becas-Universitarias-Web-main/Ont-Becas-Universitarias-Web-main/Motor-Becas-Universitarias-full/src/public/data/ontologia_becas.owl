@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY becas "http://www.semanticweb.org/ontologia/becas-universitarias#" >
+]>
+
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns="http://www.semanticweb.org/ontologia/becas-universitarias#"
+    xml:base="http://www.semanticweb.org/ontologia/becas-universitarias">
+
+    <!-- ============================================================ -->
+    <!--  ONTOLOGÍA                                                    -->
+    <!-- ============================================================ -->
+
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias">
+        <dc:title>Ontología de Becas Universitarias</dc:title>
+        <dc:description>Ontología para la representación y gestión de programas de becas universitarias, instituciones financiadoras, estudiantes y procesos de postulación.</dc:description>
+        <dc:creator>Universidad Mayor de San Simón</dc:creator>
+        <owl:versionInfo>1.0</owl:versionInfo>
+    </owl:Ontology>
+
+
+    <!-- ============================================================ -->
+    <!--  CLASES — RAMA: BECA                                         -->
+    <!-- ============================================================ -->
+
+    <owl:Class rdf:about="#Beca">
+        <rdfs:label xml:lang="es">Beca</rdfs:label>
+        <rdfs:comment>Programa de financiamiento académico otorgado a un estudiante según criterios de elegibilidad.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#BecaCompleta">
+        <rdfs:label xml:lang="es">Beca Completa</rdfs:label>
+        <rdfs:comment>Beca que cubre la totalidad de los costos académicos y de manutención.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beca"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#BecaParcial">
+        <rdfs:label xml:lang="es">Beca Parcial</rdfs:label>
+        <rdfs:comment>Beca que cubre una parte de los costos académicos.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beca"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#BecaDeExcelencia">
+        <rdfs:label xml:lang="es">Beca de Excelencia</rdfs:label>
+        <rdfs:comment>Beca otorgada por mérito académico sobresaliente.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beca"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#BecaSocioeconómica">
+        <rdfs:label xml:lang="es">Beca Socioeconómica</rdfs:label>
+        <rdfs:comment>Beca otorgada con base en criterios de vulnerabilidad económica del postulante.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beca"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#BecaDeMovilidad">
+        <rdfs:label xml:lang="es">Beca de Movilidad</rdfs:label>
+        <rdfs:comment>Beca destinada a financiar estudios o prácticas en otra institución o país.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beca"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#BecaDeIntercambio">
+        <rdfs:label xml:lang="es">Beca de Intercambio</rdfs:label>
+        <rdfs:comment>Beca de movilidad para programas de intercambio académico internacional.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#BecaDeMovilidad"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#BecaDeInvestigación">
+        <rdfs:label xml:lang="es">Beca de Investigación</rdfs:label>
+        <rdfs:comment>Beca destinada a financiar actividades de investigación científica o académica.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beca"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#BecaDePostdoctorado">
+        <rdfs:label xml:lang="es">Beca de Postdoctorado</rdfs:label>
+        <rdfs:comment>Beca de investigación dirigida a profesionales con grado de doctorado.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#BecaDeInvestigación"/>
+    </owl:Class>
+
+
+    <!-- ============================================================ -->
+    <!--  CLASES — RAMA: CONVOCATORIA Y PROCESO                       -->
+    <!-- ============================================================ -->
+
+    <owl:Class rdf:about="#Convocatoria">
+        <rdfs:label xml:lang="es">Convocatoria</rdfs:label>
+        <rdfs:comment>Llamado formal para recibir postulaciones a un programa de becas en un período determinado.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#ConvocatoriaNacional">
+        <rdfs:label xml:lang="es">Convocatoria Nacional</rdfs:label>
+        <rdfs:comment>Convocatoria dirigida a postulantes dentro de un mismo país.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Convocatoria"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#ConvocatoriaInternacional">
+        <rdfs:label xml:lang="es">Convocatoria Internacional</rdfs:label>
+        <rdfs:comment>Convocatoria abierta a postulantes de distintos países.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Convocatoria"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#ProcesoDeSelección">
+        <rdfs:label xml:lang="es">Proceso de Selección</rdfs:label>
+        <rdfs:comment>Conjunto de etapas y criterios utilizados para elegir a los beneficiarios de una beca.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Etapa">
+        <rdfs:label xml:lang="es">Etapa</rdfs:label>
+        <rdfs:comment>Fase específica dentro del proceso de selección de una beca.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#ProcesoDeSelección"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#EtapaDocumental">
+        <rdfs:label xml:lang="es">Etapa Documental</rdfs:label>
+        <rdfs:comment>Etapa de revisión y verificación de documentos presentados por el postulante.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Etapa"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#EtapaDeEntrevista">
+        <rdfs:label xml:lang="es">Etapa de Entrevista</rdfs:label>
+        <rdfs:comment>Etapa en la que el postulante es evaluado mediante entrevista personal o virtual.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Etapa"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#EtapaDePrueba">
+        <rdfs:label xml:lang="es">Etapa de Prueba</rdfs:label>
+        <rdfs:comment>Etapa en la que el postulante rinde una prueba de conocimientos o aptitudes.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Etapa"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#CriterioDeSelección">
+        <rdfs:label xml:lang="es">Criterio de Selección</rdfs:label>
+        <rdfs:comment>Parámetro utilizado para evaluar y comparar a los postulantes en el proceso de selección.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#ProcesoDeSelección"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Postulación">
+        <rdfs:label xml:lang="es">Postulación</rdfs:label>
+        <rdfs:comment>Solicitud formal presentada por un postulante para acceder a una beca.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#PostulaciónEnLínea">
+        <rdfs:label xml:lang="es">Postulación en Línea</rdfs:label>
+        <rdfs:comment>Postulación realizada a través de plataformas digitales.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Postulación"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#PostulaciónPresencial">
+        <rdfs:label xml:lang="es">Postulación Presencial</rdfs:label>
+        <rdfs:comment>Postulación realizada de forma física ante la institución convocante.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Postulación"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#ContratoDeBeca">
+        <rdfs:label xml:lang="es">Contrato de Beca</rdfs:label>
+        <rdfs:comment>Acuerdo formal entre el beneficiario y la institución otorgante que establece derechos, obligaciones y condiciones de la beca.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Renovación">
+        <rdfs:label xml:lang="es">Renovación</rdfs:label>
+        <rdfs:comment>Proceso por el cual un beneficiario mantiene o extiende su beca por un período adicional.</rdfs:comment>
+    </owl:Class>
+
+
+    <!-- ============================================================ -->
+    <!--  CLASES — RAMA: ACTORES                                      -->
+    <!-- ============================================================ -->
+
+    <owl:Class rdf:about="#Persona">
+        <rdfs:label xml:lang="es">Persona</rdfs:label>
+        <rdfs:comment>Individuo que participa en el sistema de becas universitarias.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Estudiante">
+        <rdfs:label xml:lang="es">Estudiante</rdfs:label>
+        <rdfs:comment>Persona matriculada en un programa académico universitario.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Persona"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Postulante">
+        <rdfs:label xml:lang="es">Postulante</rdfs:label>
+        <rdfs:comment>Persona que ha presentado una solicitud formal para acceder a una beca.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Persona"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Beneficiario">
+        <rdfs:label xml:lang="es">Beneficiario</rdfs:label>
+        <rdfs:comment>Persona que ha sido seleccionada y recibe los beneficios de una beca.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Persona"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Egresado">
+        <rdfs:label xml:lang="es">Egresado</rdfs:label>
+        <rdfs:comment>Persona que ha completado un programa académico universitario.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Persona"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Organización">
+        <rdfs:label xml:lang="es">Organización</rdfs:label>
+        <rdfs:comment>Entidad colectiva que participa en el sistema de becas universitarias.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Institución">
+        <rdfs:label xml:lang="es">Institución</rdfs:label>
+        <rdfs:comment>Organización formal de carácter educativo o académico.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Organización"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Universidad">
+        <rdfs:label xml:lang="es">Universidad</rdfs:label>
+        <rdfs:comment>Institución de educación superior que ofrece programas de pregrado y posgrado.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Institución"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#InstitutoDeInvestigación">
+        <rdfs:label xml:lang="es">Instituto de Investigación</rdfs:label>
+        <rdfs:comment>Institución especializada en actividades de investigación científica o tecnológica.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Institución"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Organismo">
+        <rdfs:label xml:lang="es">Organismo</rdfs:label>
+        <rdfs:comment>Entidad pública, internacional o privada con capacidad de financiar o administrar becas.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Organización"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#OrganismoGubernamental">
+        <rdfs:label xml:lang="es">Organismo Gubernamental</rdfs:label>
+        <rdfs:comment>Entidad estatal que gestiona o financia programas de becas.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Organismo"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#OrganismoInternacional">
+        <rdfs:label xml:lang="es">Organismo Internacional</rdfs:label>
+        <rdfs:comment>Entidad de alcance multinacional que ofrece o administra becas internacionales.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Organismo"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Fundación">
+        <rdfs:label xml:lang="es">Fundación</rdfs:label>
+        <rdfs:comment>Organización sin fines de lucro que financia programas de becas.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Organismo"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Patrocinador">
+        <rdfs:label xml:lang="es">Patrocinador</rdfs:label>
+        <rdfs:comment>Organización o entidad que aporta los recursos financieros de una beca.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Organización"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#ComitéEvaluador">
+        <rdfs:label xml:lang="es">Comité Evaluador</rdfs:label>
+        <rdfs:comment>Grupo de personas o entidades responsable de evaluar y seleccionar a los beneficiarios de una beca.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Organización"/>
+    </owl:Class>
+
+
+    <!-- ============================================================ -->
+    <!--  CLASES — RAMA: REQUISITOS                                   -->
+    <!-- ============================================================ -->
+
+    <owl:Class rdf:about="#Requisito">
+        <rdfs:label xml:lang="es">Requisito</rdfs:label>
+        <rdfs:comment>Condición que debe cumplir un postulante para ser elegible a una beca.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#RequisitoAcadémico">
+        <rdfs:label xml:lang="es">Requisito Académico</rdfs:label>
+        <rdfs:comment>Condición relacionada con el desempeño o historial académico del postulante.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Requisito"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#RequisitoDeIdioma">
+        <rdfs:label xml:lang="es">Requisito de Idioma</rdfs:label>
+        <rdfs:comment>Condición que exige un nivel mínimo de competencia en un idioma específico.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Requisito"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#RequisitoSocioeconómico">
+        <rdfs:label xml:lang="es">Requisito Socioeconómico</rdfs:label>
+        <rdfs:comment>Condición relacionada con la situación económica o social del postulante.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Requisito"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#RequisitoDocumental">
+        <rdfs:label xml:lang="es">Requisito Documental</rdfs:label>
+        <rdfs:comment>Documento específico que debe presentar el postulante para completar su solicitud.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Requisito"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Incompatibilidad">
+        <rdfs:label xml:lang="es">Incompatibilidad</rdfs:label>
+        <rdfs:comment>Restricción que impide a un beneficiario recibir simultáneamente dos o más becas.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Requisito"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Exención">
+        <rdfs:label xml:lang="es">Exención</rdfs:label>
+        <rdfs:comment>Dispensa formal de uno o más requisitos para un postulante en condiciones especiales.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Requisito"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Documento">
+        <rdfs:label xml:lang="es">Documento</rdfs:label>
+        <rdfs:comment>Registro formal requerido durante el proceso de postulación.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#CertificadoAcadémico">
+        <rdfs:label xml:lang="es">Certificado Académico</rdfs:label>
+        <rdfs:comment>Documento que acredita el historial o rendimiento académico del postulante.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Documento"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#CertificadoDeIdioma">
+        <rdfs:label xml:lang="es">Certificado de Idioma</rdfs:label>
+        <rdfs:comment>Documento que acredita el nivel de competencia lingüística (TOEFL, IELTS, DELE, etc.).</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Documento"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#CartaDeRecomendación">
+        <rdfs:label xml:lang="es">Carta de Recomendación</rdfs:label>
+        <rdfs:comment>Documento emitido por un académico o profesional que avala al postulante.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Documento"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Pasaporte">
+        <rdfs:label xml:lang="es">Pasaporte</rdfs:label>
+        <rdfs:comment>Documento de identidad internacional requerido para becas en el extranjero.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Documento"/>
+    </owl:Class>
+
+
+    <!-- ============================================================ -->
+    <!--  CLASES — RAMA: BENEFICIOS                                   -->
+    <!-- ============================================================ -->
+
+    <owl:Class rdf:about="#Beneficio">
+        <rdfs:label xml:lang="es">Beneficio</rdfs:label>
+        <rdfs:comment>Apoyo o recurso otorgado al beneficiario como parte de la beca.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#CoberturaMatrícula">
+        <rdfs:label xml:lang="es">Cobertura de Matrícula</rdfs:label>
+        <rdfs:comment>Beneficio que cubre total o parcialmente los aranceles de inscripción universitaria.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beneficio"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Manutención">
+        <rdfs:label xml:lang="es">Manutención</rdfs:label>
+        <rdfs:comment>Apoyo económico para cubrir gastos básicos de vida del beneficiario.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beneficio"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Alojamiento">
+        <rdfs:label xml:lang="es">Alojamiento</rdfs:label>
+        <rdfs:comment>Beneficio que cubre los gastos de vivienda del beneficiario durante sus estudios.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Manutención"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Alimentación">
+        <rdfs:label xml:lang="es">Alimentación</rdfs:label>
+        <rdfs:comment>Beneficio que cubre los gastos de alimentación del beneficiario.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Manutención"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Transporte">
+        <rdfs:label xml:lang="es">Transporte</rdfs:label>
+        <rdfs:comment>Beneficio que cubre gastos de traslado, incluyendo pasajes internacionales.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beneficio"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#SeguroMédico">
+        <rdfs:label xml:lang="es">Seguro Médico</rdfs:label>
+        <rdfs:comment>Beneficio que provee cobertura de salud al beneficiario durante la vigencia de la beca.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beneficio"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#ApoyoAcadémico">
+        <rdfs:label xml:lang="es">Apoyo Académico</rdfs:label>
+        <rdfs:comment>Beneficio orientado a acompañar el desempeño académico del beneficiario.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beneficio"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Tutoría">
+        <rdfs:label xml:lang="es">Tutoría</rdfs:label>
+        <rdfs:comment>Servicio de acompañamiento académico personalizado para el beneficiario.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#ApoyoAcadémico"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#ApoyoParaMateriales">
+        <rdfs:label xml:lang="es">Apoyo para Materiales</rdfs:label>
+        <rdfs:comment>Beneficio que cubre la adquisición de libros, equipos u otros materiales académicos.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#ApoyoAcadémico"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Estipendio">
+        <rdfs:label xml:lang="es">Estipendio</rdfs:label>
+        <rdfs:comment>Asignación económica periódica entregada directamente al beneficiario.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Beneficio"/>
+    </owl:Class>
+
+
+    <!-- ============================================================ -->
+    <!--  CLASES — RAMA: CONTEXTO ACADÉMICO                          -->
+    <!-- ============================================================ -->
+
+    <owl:Class rdf:about="#NivelDeEstudio">
+        <rdfs:label xml:lang="es">Nivel de Estudio</rdfs:label>
+        <rdfs:comment>Grado o nivel académico al que corresponde un programa de estudios o beca.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Pregrado">
+        <rdfs:label xml:lang="es">Pregrado</rdfs:label>
+        <rdfs:comment>Nivel de estudio universitario de licenciatura o equivalente.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#NivelDeEstudio"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Posgrado">
+        <rdfs:label xml:lang="es">Posgrado</rdfs:label>
+        <rdfs:comment>Nivel de estudio universitario posterior al pregrado.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#NivelDeEstudio"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Maestría">
+        <rdfs:label xml:lang="es">Maestría</rdfs:label>
+        <rdfs:comment>Programa de posgrado de primer nivel.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Posgrado"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Doctorado">
+        <rdfs:label xml:lang="es">Doctorado</rdfs:label>
+        <rdfs:comment>Programa de posgrado de máximo nivel académico.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Posgrado"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Postdoctorado">
+        <rdfs:label xml:lang="es">Postdoctorado</rdfs:label>
+        <rdfs:comment>Programa de investigación avanzada posterior al doctorado.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#Posgrado"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#ÁreaDeConocimiento">
+        <rdfs:label xml:lang="es">Área de Conocimiento</rdfs:label>
+        <rdfs:comment>Campo disciplinar al que pertenece un programa académico o beca.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Tecnología">
+        <rdfs:label xml:lang="es">Tecnología</rdfs:label>
+        <rdfs:comment>Área de conocimiento relacionada con ingeniería, informática y ciencias aplicadas.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#ÁreaDeConocimiento"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#CienciasNaturales">
+        <rdfs:label xml:lang="es">Ciencias Naturales</rdfs:label>
+        <rdfs:comment>Área de conocimiento que incluye física, química, biología y ciencias de la tierra.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#ÁreaDeConocimiento"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#CienciasSociales">
+        <rdfs:label xml:lang="es">Ciencias Sociales</rdfs:label>
+        <rdfs:comment>Área de conocimiento que incluye economía, sociología, derecho y educación.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#ÁreaDeConocimiento"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Humanidades">
+        <rdfs:label xml:lang="es">Humanidades</rdfs:label>
+        <rdfs:comment>Área de conocimiento que incluye filosofía, historia, lingüística y literatura.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#ÁreaDeConocimiento"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Artes">
+        <rdfs:label xml:lang="es">Artes</rdfs:label>
+        <rdfs:comment>Área de conocimiento relacionada con artes plásticas, música, teatro y diseño.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="#ÁreaDeConocimiento"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="#País">
+        <rdfs:label xml:lang="es">País</rdfs:label>
+        <rdfs:comment>Estado nación asociado a la institución, convocatoria o lugar de estudio.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="#PeriodoAcadémico">
+        <rdfs:label xml:lang="es">Período Académico</rdfs:label>
+        <rdfs:comment>Unidad de tiempo académico (semestre, año) en que se desarrolla la beca.</rdfs:comment>
+    </owl:Class>
+
+
+    <!-- ============================================================ -->
+    <!--  PROPIEDADES DE OBJETO                                       -->
+    <!-- ============================================================ -->
+
+    <owl:ObjectProperty rdf:about="#tieneRequisito">
+        <rdfs:label xml:lang="es">tiene requisito</rdfs:label>
+        <rdfs:comment>Relaciona una beca con las condiciones que debe cumplir el postulante.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#Requisito"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#otorgaBeneficio">
+        <rdfs:label xml:lang="es">otorga beneficio</rdfs:label>
+        <rdfs:comment>Relaciona una beca con los beneficios que provee al beneficiario.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#Beneficio"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#esOfrecidaPor">
+        <rdfs:label xml:lang="es">es ofrecida por</rdfs:label>
+        <rdfs:comment>Relaciona una beca con la institución u organismo que la ofrece.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#Organización"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#esFinanciadaPor">
+        <rdfs:label xml:lang="es">es financiada por</rdfs:label>
+        <rdfs:comment>Relaciona una beca con el patrocinador que aporta los recursos.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#Patrocinador"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#perteneceANivel">
+        <rdfs:label xml:lang="es">pertenece a nivel</rdfs:label>
+        <rdfs:comment>Relaciona una beca con el nivel de estudio al que está dirigida.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#NivelDeEstudio"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#perteneceAÁrea">
+        <rdfs:label xml:lang="es">pertenece a área</rdfs:label>
+        <rdfs:comment>Relaciona una beca con el área de conocimiento que financia.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#ÁreaDeConocimiento"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#destinadaAPaís">
+        <rdfs:label xml:lang="es">destinada a país</rdfs:label>
+        <rdfs:comment>Relaciona una beca con el país donde se realizan los estudios financiados.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#País"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#esIncompatibleCon">
+        <rdfs:label xml:lang="es">es incompatible con</rdfs:label>
+        <rdfs:comment>Indica que dos becas no pueden ser recibidas simultáneamente por el mismo beneficiario.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#Beca"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#tieneConvocatoria">
+        <rdfs:label xml:lang="es">tiene convocatoria</rdfs:label>
+        <rdfs:comment>Relaciona una beca con su convocatoria vigente.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#Convocatoria"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#tieneProcesoDeSelección">
+        <rdfs:label xml:lang="es">tiene proceso de selección</rdfs:label>
+        <rdfs:comment>Relaciona una convocatoria con su proceso de selección.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Convocatoria"/>
+        <rdfs:range rdf:resource="#ProcesoDeSelección"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#evaluadaPor">
+        <rdfs:label xml:lang="es">evaluada por</rdfs:label>
+        <rdfs:comment>Relaciona el proceso de selección con el comité que lo conduce.</rdfs:comment>
+        <rdfs:domain rdf:resource="#ProcesoDeSelección"/>
+        <rdfs:range rdf:resource="#ComitéEvaluador"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#tieneEtapa">
+        <rdfs:label xml:lang="es">tiene etapa</rdfs:label>
+        <rdfs:comment>Relaciona un proceso de selección con sus etapas.</rdfs:comment>
+        <rdfs:domain rdf:resource="#ProcesoDeSelección"/>
+        <rdfs:range rdf:resource="#Etapa"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#postulaDe">
+        <rdfs:label xml:lang="es">postula a</rdfs:label>
+        <rdfs:comment>Relaciona a un postulante con la beca a la que aplica.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Postulante"/>
+        <rdfs:range rdf:resource="#Beca"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#esBeneficiarioDe">
+        <rdfs:label xml:lang="es">es beneficiario de</rdfs:label>
+        <rdfs:comment>Relaciona a una persona con la beca que recibe.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beneficiario"/>
+        <rdfs:range rdf:resource="#Beca"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#requiereCertificación">
+        <rdfs:label xml:lang="es">requiere certificación</rdfs:label>
+        <rdfs:comment>Relaciona un requisito de idioma con la certificación específica exigida.</rdfs:comment>
+        <rdfs:domain rdf:resource="#RequisitoDeIdioma"/>
+        <rdfs:range rdf:resource="#CertificadoDeIdioma"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#tieneContrato">
+        <rdfs:label xml:lang="es">tiene contrato</rdfs:label>
+        <rdfs:comment>Relaciona a un beneficiario con su contrato de beca.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beneficiario"/>
+        <rdfs:range rdf:resource="#ContratoDeBeca"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#tieneRenovación">
+        <rdfs:label xml:lang="es">tiene renovación</rdfs:label>
+        <rdfs:comment>Relaciona una beca con su proceso de renovación.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="#Renovación"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#gestionadaPor">
+        <rdfs:label xml:lang="es">gestionada por</rdfs:label>
+        <rdfs:comment>Relaciona una convocatoria con el organismo que la administra.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Convocatoria"/>
+        <rdfs:range rdf:resource="#Organismo"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#requiereDocumento">
+        <rdfs:label xml:lang="es">requiere documento</rdfs:label>
+        <rdfs:comment>Relaciona un requisito documental con el tipo de documento exigido.</rdfs:comment>
+        <rdfs:domain rdf:resource="#RequisitoDocumental"/>
+        <rdfs:range rdf:resource="#Documento"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#seDesarrollaEn">
+        <rdfs:label xml:lang="es">se desarrolla en</rdfs:label>
+        <rdfs:comment>Relaciona una beca o institución con el país donde se lleva a cabo.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Institución"/>
+        <rdfs:range rdf:resource="#País"/>
+    </owl:ObjectProperty>
+
+
+    <!-- ============================================================ -->
+    <!--  PROPIEDADES DE DATOS                                        -->
+    <!-- ============================================================ -->
+
+    <owl:DatatypeProperty rdf:about="#promedioMínimo">
+        <rdfs:label xml:lang="es">promedio mínimo</rdfs:label>
+        <rdfs:comment>Calificación académica mínima requerida para postular a la beca.</rdfs:comment>
+        <rdfs:domain rdf:resource="#RequisitoAcadémico"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#creditosAprobados">
+        <rdfs:label xml:lang="es">créditos aprobados</rdfs:label>
+        <rdfs:comment>Número mínimo de créditos aprobados que debe tener el postulante.</rdfs:comment>
+        <rdfs:domain rdf:resource="#RequisitoAcadémico"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#nivelIdioma">
+        <rdfs:label xml:lang="es">nivel de idioma</rdfs:label>
+        <rdfs:comment>Nivel mínimo de competencia lingüística requerido (ej. B2, C1).</rdfs:comment>
+        <rdfs:domain rdf:resource="#RequisitoDeIdioma"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#puntajeExamenMínimo">
+        <rdfs:label xml:lang="es">puntaje mínimo de examen</rdfs:label>
+        <rdfs:comment>Puntaje mínimo en examen de idioma requerido (ej. TOEFL 80, IELTS 6.0).</rdfs:comment>
+        <rdfs:domain rdf:resource="#RequisitoDeIdioma"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#duración">
+        <rdfs:label xml:lang="es">duración</rdfs:label>
+        <rdfs:comment>Duración de la beca expresada en meses.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#fechaInicio">
+        <rdfs:label xml:lang="es">fecha de inicio</rdfs:label>
+        <rdfs:comment>Fecha en que comienza la vigencia de la convocatoria o beca.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Convocatoria"/>
+        <rdfs:range rdf:resource="&xsd;date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#fechaLímitePostulación">
+        <rdfs:label xml:lang="es">fecha límite de postulación</rdfs:label>
+        <rdfs:comment>Fecha máxima para presentar la solicitud en una convocatoria.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Convocatoria"/>
+        <rdfs:range rdf:resource="&xsd;date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#fechaDeResultados">
+        <rdfs:label xml:lang="es">fecha de resultados</rdfs:label>
+        <rdfs:comment>Fecha en que se publican los resultados de la convocatoria.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Convocatoria"/>
+        <rdfs:range rdf:resource="&xsd;date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#montoCubierto">
+        <rdfs:label xml:lang="es">monto cubierto</rdfs:label>
+        <rdfs:comment>Monto económico cubierto por el beneficio, en la moneda correspondiente.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beneficio"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#esRenovable">
+        <rdfs:label xml:lang="es">es renovable</rdfs:label>
+        <rdfs:comment>Indica si la beca puede ser renovada al término del período inicial.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#condiciónSocioeconómica">
+        <rdfs:label xml:lang="es">condición socioeconómica</rdfs:label>
+        <rdfs:comment>Descripción del nivel socioeconómico requerido para el requisito.</rdfs:comment>
+        <rdfs:domain rdf:resource="#RequisitoSocioeconómico"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#penalizaciónPorIncumplimiento">
+        <rdfs:label xml:lang="es">penalización por incumplimiento</rdfs:label>
+        <rdfs:comment>Descripción de las consecuencias para el beneficiario en caso de no cumplir las condiciones de la beca.</rdfs:comment>
+        <rdfs:domain rdf:resource="#ContratoDeBeca"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#nombreCompleto">
+        <rdfs:label xml:lang="es">nombre completo</rdfs:label>
+        <rdfs:comment>Nombre completo de la persona.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Persona"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#correoElectrónico">
+        <rdfs:label xml:lang="es">correo electrónico</rdfs:label>
+        <rdfs:comment>Dirección de correo electrónico de la persona o institución.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#nombreInstitucion">
+        <rdfs:label xml:lang="es">nombre de institución</rdfs:label>
+        <rdfs:comment>Nombre oficial de la institución u organización.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Organización"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#nombreBeca">
+        <rdfs:label xml:lang="es">nombre de beca</rdfs:label>
+        <rdfs:comment>Nombre oficial del programa de beca.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Beca"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#descripción">
+        <rdfs:label xml:lang="es">descripción</rdfs:label>
+        <rdfs:comment>Descripción general del recurso (beca, convocatoria, institución, etc.).</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+
+    <!-- ============================================================ -->
+    <!--  SECCIÓN PARA INSTANCIAS                                     -->
+    <!--  Añade tus instancias debajo de cada bloque correspondiente  -->
+    <!-- ============================================================ -->
+
+    <!-- INSTANCIAS DE: Beca
+    <owl:NamedIndividual rdf:about="#NombreDeTuBeca">
+        <rdf:type rdf:resource="#BecaCompleta"/>
+        <nombreBeca>Nombre oficial de la beca</nombreBeca>
+        <descripción>Descripción breve</descripción>
+        <duración rdf:datatype="&xsd;integer">24</duración>
+        <esRenovable rdf:datatype="&xsd;boolean">true</esRenovable>
+        <perteneceANivel rdf:resource="#Maestría"/>
+        <perteneceAÁrea rdf:resource="#Tecnología"/>
+        <esOfrecidaPor rdf:resource="#NombreDeTuInstitucion"/>
+    </owl:NamedIndividual>
+    -->
+
+    <!-- INSTANCIAS DE: Universidad / Institución
+    <owl:NamedIndividual rdf:about="#NombreDeTuInstitucion">
+        <rdf:type rdf:resource="#Universidad"/>
+        <nombreInstitucion>Nombre oficial</nombreInstitucion>
+        <seDesarrollaEn rdf:resource="#Bolivia"/>
+    </owl:NamedIndividual>
+    -->
+
+    <!-- INSTANCIAS DE: País
+    <owl:NamedIndividual rdf:about="#Bolivia">
+        <rdf:type rdf:resource="#País"/>
+        <nombreInstitucion>Bolivia</nombreInstitucion>
+    </owl:NamedIndividual>
+    -->
+
+    <!-- INSTANCIAS DE: Convocatoria
+    <owl:NamedIndividual rdf:about="#NombreDeTuConvocatoria">
+        <rdf:type rdf:resource="#ConvocatoriaNacional"/>
+        <fechaInicio rdf:datatype="&xsd;date">2025-03-01</fechaInicio>
+        <fechaLímitePostulación rdf:datatype="&xsd;date">2025-05-31</fechaLímitePostulación>
+        <fechaDeResultados rdf:datatype="&xsd;date">2025-07-01</fechaDeResultados>
+        <tieneProcesoDeSelección rdf:resource="#NombreDeTuProceso"/>
+    </owl:NamedIndividual>
+    -->
+
+    <!-- INSTANCIAS DE: Postulante / Beneficiario
+    <owl:NamedIndividual rdf:about="#NombreDelEstudiante">
+        <rdf:type rdf:resource="#Beneficiario"/>
+        <nombreCompleto>Nombre Apellido</nombreCompleto>
+        <correoElectrónico>correo@ejemplo.com</correoElectrónico>
+        <esBeneficiarioDe rdf:resource="#NombreDeTuBeca"/>
+    </owl:NamedIndividual>
+    -->
+
+    <!-- INSTANCIAS DE: Requisito
+    <owl:NamedIndividual rdf:about="#RequisitoPromedio">
+        <rdf:type rdf:resource="#RequisitoAcadémico"/>
+        <promedioMínimo rdf:datatype="&xsd;decimal">7.0</promedioMínimo>
+    </owl:NamedIndividual>
+    -->
+
+    <!-- INSTANCIAS DE: Organismo / Patrocinador
+    <owl:NamedIndividual rdf:about="#NombreDelOrganismo">
+        <rdf:type rdf:resource="#OrganismoGubernamental"/>
+        <nombreInstitucion>Nombre del organismo</nombreInstitucion>
+        <seDesarrollaEn rdf:resource="#Bolivia"/>
+    </owl:NamedIndividual>
+    -->
+
+</rdf:RDF>

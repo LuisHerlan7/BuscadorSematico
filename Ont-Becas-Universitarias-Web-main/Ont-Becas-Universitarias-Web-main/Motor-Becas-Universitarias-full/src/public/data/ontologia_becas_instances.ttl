@@ -1,0 +1,16 @@
+@prefix becas: <http://www.semanticweb.org/ontologia/becas-universitarias#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+becas:BECA_Excelencia_USMS a becas:Beca ;
+  rdfs:label "Beca de Excelencia USMS"@es ;
+  becas:nombreBeca "Beca de Excelencia USMS" ;
+  becas:descripcion "Beca por mérito académico, cubre matrícula y manutención." ;
+  becas:montoCubierto "5000" ;
+  becas:fechaLímitePostulación "2026-08-31" .
+
+becas:BECA_Movilidad_2026 a becas:Beca ;
+  rdfs:label "Beca de Movilidad 2026"@es ;
+  becas:nombreBeca "Beca de Movilidad 2026" ;
+  becas:descripcion "Financia intercambio internacional (semestre)." ;
+  becas:montoCubierto "2000" ;
+  becas:fechaLímitePostulación "2026-05-30" .
