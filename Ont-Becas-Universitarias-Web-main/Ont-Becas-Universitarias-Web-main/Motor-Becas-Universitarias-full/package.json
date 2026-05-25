@@ -22,6 +22,7 @@
     "fs": "^0.0.1-security",
     "n3": "^1.26.0",
     "natural": "^5.2.3",
+    "nodemon": "^3.1.14",
     "rdf-ext": "^2.5.2",
     "rdf-parse": "^4.0.0",
     "rdf-parser-rdfxml": "^0.3.1",

@@ -2,8 +2,17 @@ const axios = require('axios');
 const dbpediaConfig = require('../config/dbpedia');
 
 class DBpediaService {
+  constructor() {
+    this.unavailableUntil = 0;
+    this.lastNetworkWarningAt = 0;
+  }
+
   _getEndpoint() {
     return dbpediaConfig.endpoint;
+  }
+
+  _isTemporarilyUnavailable() {
+    return Date.now() < this.unavailableUntil;
   }
 
   _buildScholarshipTerms(term) {
@@ -60,10 +69,19 @@ class DBpediaService {
   }
 
   async _fetchSparql(query) {
+    if (this._isTemporarilyUnavailable()) {
+      throw Object.assign(new Error('DBpedia temporalmente no disponible'), { code: 'DBPEDIA_UNAVAILABLE' });
+    }
+
+    const { timeout, ...queryOptions } = dbpediaConfig.defaultQueryOptions;
     const response = await axios.get(this._getEndpoint(), {
       params: {
-        ...dbpediaConfig.defaultQueryOptions,
+        ...queryOptions,
         query
+      },
+      timeout: dbpediaConfig.timeout || timeout || 15000,
+      headers: {
+        Accept: 'application/sparql-results+json, application/json'
       }
     });
 
@@ -84,6 +102,9 @@ class DBpediaService {
 
   async searchUniversityScholarshipPrograms(term, lang = 'es') {
     if (!term || !term.trim()) {
+      return [];
+    }
+    if (this._isTemporarilyUnavailable()) {
       return [];
     }
 
@@ -167,6 +188,10 @@ class DBpediaService {
   }
 
   async getDiseaseDetails(uri, lang = 'es') {
+    if (this._isTemporarilyUnavailable()) {
+      return null;
+    }
+
     const query = `
       PREFIX dbo: <http://dbpedia.org/ontology/>
       PREFIX dbp: <http://dbpedia.org/property/>
@@ -200,6 +225,8 @@ class DBpediaService {
 
   async searchByIntent(intentObj, lang = 'es') {
     if (!intentObj || intentObj.intent !== 'query_property') return [];
+    if (this._isTemporarilyUnavailable()) return [];
+
     const value = intentObj.value || '';
     const escaped = String(value).replace(/"/g, '\\"');
 
@@ -228,8 +255,24 @@ class DBpediaService {
   }
 
   _handleError(error) {
+    const message = error.message || error.code || error.cause?.code || error.name || 'Error desconocido';
+
+    const networkCodes = new Set(['ETIMEDOUT', 'ENOTFOUND', 'ECONNRESET', 'ECONNREFUSED', 'EAI_AGAIN']);
+
+    if (networkCodes.has(error.code) || networkCodes.has(error.cause?.code)) {
+      this.unavailableUntil = Date.now() + 60000;
+      if (Date.now() - this.lastNetworkWarningAt > 60000) {
+        this.lastNetworkWarningAt = Date.now();
+        console.warn(`DBpedia no esta disponible (${message}). Se continuara solo con resultados locales.`);
+      }
+      return;
+    }
+
     console.error('DBpedia Service Error:');
-    console.error(`- Message: ${error.message}`);
+    console.error(`- Message: ${message}`);
+    if (error.code) {
+      console.error(`- Code: ${error.code}`);
+    }
     if (error.response) {
       console.error(`- Status: ${error.response.status}`);
       console.error(`- Response: ${JSON.stringify(error.response.data)}`);

@@ -17,16 +17,6 @@ function extractFallbackTerms(query, intent) {
     'un', 'las', 'los', 'el', 'la', 'y'
   ]);
 
-  const ignored = new Set();
-  if (intent?.value) {
-    ignored.add(
-      String(intent.value)
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/\p{Diacritic}/gu, '')
-    );
-  }
-
   return Array.from(
     new Set(
       normalized
@@ -34,9 +24,37 @@ function extractFallbackTerms(query, intent) {
         .map(term => term.trim())
         .filter(term => term.length >= 4)
         .filter(term => !stopWords.has(term))
-        .filter(term => !ignored.has(term))
     )
   );
+}
+
+function appendUniqueResults(target, seen, results) {
+  for (const it of results) {
+    const key = it.uri || (it.label && it.label.toLowerCase());
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    target.push(it);
+  }
+}
+
+function mapLocalResults(results) {
+  return results.map(r => ({
+    uri: r.uri,
+    label: r.label,
+    description: r.description || r.name || '',
+    amount: r.amount,
+    deadline: r.deadline,
+    source: 'local'
+  }));
+}
+
+function mapRemoteResults(results) {
+  return results.map(r => ({
+    uri: r.uri,
+    label: r.label,
+    description: r.description || '',
+    source: 'dbpedia'
+  }));
 }
 
 exports.home = (req, res) => {
@@ -123,32 +141,10 @@ exports.search = async (req, res) => {
             return res.render('search-results', { q, results });
           }
 
-    const mapLocal = localResults.map(r => ({
-      uri: r.uri,
-      label: r.label,
-      description: r.description || r.name || '',
-      amount: r.amount,
-      deadline: r.deadline,
-      source: 'local'
-    }));
+    appendUniqueResults(merged, seen, mapLocalResults(localResults).concat(mapRemoteResults(remoteResults)));
 
-    const mapRemote = remoteResults.map(r => ({
-      uri: r.uri,
-      label: r.label,
-      description: r.description || '',
-      source: 'dbpedia'
-    }));
-
-    for (const it of mapLocal.concat(mapRemote)) {
-      const key = it.uri || (it.label && it.label.toLowerCase());
-      if (!key) continue;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      merged.push(it);
-    }
-
-    // Si se detectó intención pero no hubo resultados, hacer fallback a búsqueda textual
-    if (intent && merged.length === 0) {
+    // Si no hubo resultados, hacer fallback a busqueda textual por palabras relevantes.
+    if (merged.length === 0) {
       const [fbLocalRes, fbRemoteRes] = await Promise.allSettled([
         rdfService.searchDiseases(q, lang),
         dbpediaService.searchDiseases(q, lang)
@@ -156,16 +152,7 @@ exports.search = async (req, res) => {
       const fbLocal = fbLocalRes.status === 'fulfilled' ? fbLocalRes.value : [];
       const fbRemote = fbRemoteRes.status === 'fulfilled' ? fbRemoteRes.value : [];
 
-      const fbMapLocal = fbLocal.map(r => ({ uri: r.uri, label: r.label, description: r.description || r.name || '', amount: r.amount, deadline: r.deadline, source: 'local' }));
-      const fbMapRemote = fbRemote.map(r => ({ uri: r.uri, label: r.label, description: r.description || '', source: 'dbpedia' }));
-
-      for (const it of fbMapLocal.concat(fbMapRemote)) {
-        const key = it.uri || (it.label && it.label.toLowerCase());
-        if (!key) continue;
-        if (seen.has(key)) continue;
-        seen.add(key);
-        merged.push(it);
-      }
+      appendUniqueResults(merged, seen, mapLocalResults(fbLocal).concat(mapRemoteResults(fbRemote)));
 
       if (merged.length === 0) {
         const fallbackTerms = extractFallbackTerms(q, intent);
@@ -179,16 +166,7 @@ exports.search = async (req, res) => {
           const termLocal = termLocalRes.status === 'fulfilled' ? termLocalRes.value : [];
           const termRemote = termRemoteRes.status === 'fulfilled' ? termRemoteRes.value : [];
 
-          const termMapLocal = termLocal.map(r => ({ uri: r.uri, label: r.label, description: r.description || r.name || '', amount: r.amount, deadline: r.deadline, source: 'local' }));
-          const termMapRemote = termRemote.map(r => ({ uri: r.uri, label: r.label, description: r.description || '', source: 'dbpedia' }));
-
-          for (const it of termMapLocal.concat(termMapRemote)) {
-            const key = it.uri || (it.label && it.label.toLowerCase());
-            if (!key) continue;
-            if (seen.has(key)) continue;
-            seen.add(key);
-            merged.push(it);
-          }
+          appendUniqueResults(merged, seen, mapLocalResults(termLocal).concat(mapRemoteResults(termRemote)));
         }
       }
     }

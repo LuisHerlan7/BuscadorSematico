@@ -2,287 +2,306 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
-becas:BECA_Excelencia_USMS a becas:Beca ;
-  rdfs:label "Beca de Excelencia USMS"@es ;
-  becas:nombreBeca "Beca de Excelencia USMS" ;
-  becas:descripcion "Beca por mérito académico, cubre matrícula y manutención." ;
-  becas:montoCubierto "5000" ;
-  becas:fechaLímitePostulación "2026-08-31" ;
-  becas:esOfrecidaPor becas:INST_USMS .
+#################################################################
+# Esquema minimo usado por las consultas locales
+#################################################################
+
+becas:Beca rdfs:label "Beca"@es .
+
+becas:BecaCompleta rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca Completa"@es .
+
+becas:BecaParcial rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca Parcial"@es .
+
+becas:BecaDeExcelencia rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca de Excelencia"@es .
+
+becas:BecaSocioeconomica rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca Socioeconomica"@es .
+
+becas:BecaDeMovilidad rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca de Movilidad"@es .
+
+becas:BecaDeIntercambio rdfs:subClassOf becas:BecaDeMovilidad ;
+  rdfs:label "Beca de Intercambio"@es .
+
+becas:BecaDeInvestigacion rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca de Investigacion"@es .
+
+becas:BecaDePostdoctorado rdfs:subClassOf becas:BecaDeInvestigacion ;
+  rdfs:label "Beca de Postdoctorado"@es .
+
+#################################################################
+# Catalogos controlados
+#################################################################
+
+becas:NIVEL_Pregrado a becas:Pregrado ;
+  rdfs:label "Pregrado"@es .
+
+becas:NIVEL_Maestria a becas:Maestria ;
+  rdfs:label "Maestria"@es .
+
+becas:NIVEL_Doctorado a becas:Doctorado ;
+  rdfs:label "Doctorado"@es .
+
+becas:NIVEL_Postdoctorado a becas:Postdoctorado ;
+  rdfs:label "Postdoctorado"@es .
+
+becas:AREA_Tecnologia a becas:Tecnologia ;
+  rdfs:label "Tecnologia"@es .
+
+becas:AREA_CienciasSociales a becas:CienciasSociales ;
+  rdfs:label "Ciencias Sociales"@es .
+
+becas:AREA_CienciasNaturales a becas:CienciasNaturales ;
+  rdfs:label "Ciencias Naturales"@es .
+
+becas:AREA_Humanidades a becas:Humanidades ;
+  rdfs:label "Humanidades"@es .
+
+becas:AREA_Artes a becas:Artes ;
+  rdfs:label "Artes"@es .
+
+becas:PAIS_Bolivia a becas:Pais ;
+  rdfs:label "Bolivia"@es ;
+  becas:nombreInstitucion "Bolivia" .
+
+becas:PAIS_EstadosUnidos a becas:Pais ;
+  rdfs:label "Estados Unidos"@es ;
+  becas:nombreInstitucion "Estados Unidos" ;
+  owl:sameAs <http://dbpedia.org/resource/United_States> .
+
+becas:PAIS_Alemania a becas:Pais ;
+  rdfs:label "Alemania"@es ;
+  becas:nombreInstitucion "Alemania" ;
+  owl:sameAs <http://dbpedia.org/resource/Germany> .
+
+becas:PAIS_ReinoUnido a becas:Pais ;
+  rdfs:label "Reino Unido"@es ;
+  becas:nombreInstitucion "Reino Unido" ;
+  owl:sameAs <http://dbpedia.org/resource/United_Kingdom> .
+
+#################################################################
+# Instituciones validadas
+#################################################################
 
 becas:INST_USMS a becas:Universidad ;
-  rdfs:label "Universidad Mayor de San Matías"@es ;
-  becas:nombreInstitucion "Universidad Mayor de San Matías" .
+  rdfs:label "Universidad Mayor de San Simon"@es ;
+  becas:nombreInstitucion "Universidad Mayor de San Simon" .
 
-becas:BECA_Movilidad_2026 a becas:Beca ;
-  rdfs:label "Beca de Movilidad 2026"@es ;
-  becas:nombreBeca "Beca de Movilidad 2026" ;
-  becas:descripcion "Financia intercambio internacional (semestre)." ;
-  becas:montoCubierto "2000" ;
-  becas:fechaLímitePostulación "2026-05-30" ;
-  becas:esOfrecidaPor becas:INST_MINEDU .
+becas:INST_MINEDU a becas:OrganismoGubernamental ;
+  rdfs:label "Ministerio de Educacion"@es ;
+  becas:nombreInstitucion "Ministerio de Educacion" .
 
-becas:INST_MINEDU a becas:Organización ;
-  rdfs:label "Ministerio de Educación"@es ;
-  becas:nombreInstitucion "Ministerio de Educación" .
+becas:INST_Fulbright a becas:OrganismoInternacional ;
+  rdfs:label "Programa Fulbright"@es ;
+  becas:nombreInstitucion "Programa Fulbright" ;
+  owl:sameAs <http://dbpedia.org/resource/Fulbright_Program> .
 
-# Instancia de ejemplo para pruebas: requisito TOEFL y beca que lo requiere
-becas:REQUISITO_TOEFL a becas:RequisitoDeIdioma ;
-  rdfs:label "TOEFL"@en ;
-  becas:puntajeExamenMínimo "80" .
+becas:INST_DAAD a becas:OrganismoInternacional ;
+  rdfs:label "Servicio Aleman de Intercambio Academico"@es ;
+  becas:nombreInstitucion "DAAD" ;
+  owl:sameAs <http://dbpedia.org/resource/German_Academic_Exchange_Service> .
 
-becas:BECA_TOEFL a becas:Beca ;
-  rdfs:label "Beca que requiere TOEFL"@es ;
-  becas:nombreBeca "Beca TOEFL" ;
-  becas:descripcion "Beca de ejemplo que requiere TOEFL." ;
-  becas:montoCubierto "1000" ;
-  becas:fechaLímitePostulación "2026-12-31" ;
-  becas:tieneRequisito becas:REQUISITO_TOEFL .
+becas:INST_Chevening a becas:OrganismoInternacional ;
+  rdfs:label "Chevening"@es ;
+  becas:nombreInstitucion "Chevening" ;
+  owl:sameAs <http://dbpedia.org/resource/Chevening_Scholarship> .
 
-becas:INST_DBPEDIA_advanced_technology_centre_shah_alam a becas:Universidad ;
-  rdfs:label "Advanced Technology Centre Shah Alam"@es ;
-  becas:nombreInstitucion "Advanced Technology Centre Shah Alam" ;
-  owl:sameAs <http://dbpedia.org/resource/Advanced_Technology_Centre_Shah_Alam> .
+becas:INST_ErasmusMundus a becas:OrganismoInternacional ;
+  rdfs:label "Erasmus Mundus"@es ;
+  becas:nombreInstitucion "Erasmus Mundus" ;
+  owl:sameAs <http://dbpedia.org/resource/Erasmus_Mundus> .
 
-becas:INST_DBPEDIA_al_mahdi_institute a becas:Universidad ;
-  rdfs:label "Al-Mahdi Institute"@es ;
-  becas:nombreInstitucion "Al-Mahdi Institute" ;
-  owl:sameAs <http://dbpedia.org/resource/Al-Mahdi_Institute> .
+#################################################################
+# Requisitos
+#################################################################
 
-becas:INST_DBPEDIA_azman_university_kano a becas:Universidad ;
-  rdfs:label "Azman University, Kano"@es ;
-  becas:nombreInstitucion "Azman University, Kano" ;
-  owl:sameAs <http://dbpedia.org/resource/Azman_University,_Kano> .
+becas:REQ_PromedioExcelencia a becas:RequisitoAcademico ;
+  rdfs:label "Promedio minimo de excelencia"@es ;
+  becas:promedioMinimo "85" .
 
-becas:INST_DBPEDIA_central_seminary a becas:Universidad ;
-  rdfs:label "Central Seminary"@es ;
-  becas:nombreInstitucion "Central Seminary" ;
-  owl:sameAs <http://dbpedia.org/resource/Central_Seminary> .
-
-becas:INST_DBPEDIA_columbia_publishing_course a becas:Universidad ;
-  rdfs:label "Columbia Publishing Course"@es ;
-  becas:nombreInstitucion "Columbia Publishing Course" ;
-  owl:sameAs <http://dbpedia.org/resource/Columbia_Publishing_Course> .
-
-becas:INST_DBPEDIA_confluence_university_of_science_and_tec a becas:Universidad ;
-  rdfs:label "Confluence University of Science and Technology"@es ;
-  becas:nombreInstitucion "Confluence University of Science and Technology" ;
-  owl:sameAs <http://dbpedia.org/resource/Confluence_University_of_Science_and_Technology> .
-
-becas:INST_DBPEDIA_entrepreneurship_and_technology_innovati a becas:Universidad ;
-  rdfs:label "Entrepreneurship and Technology Innovation Center"@es ;
-  becas:nombreInstitucion "Entrepreneurship and Technology Innovation Center" ;
-  owl:sameAs <http://dbpedia.org/resource/Entrepreneurship_and_Technology_Innovation_Center> .
-
-becas:INST_DBPEDIA_feu_roosevelt a becas:Universidad ;
-  rdfs:label "FEU Roosevelt"@es ;
-  becas:nombreInstitucion "FEU Roosevelt" ;
-  owl:sameAs <http://dbpedia.org/resource/FEU_Roosevelt> .
-
-becas:INST_DBPEDIA_faculty_of_law_of_the_university_of_graz a becas:Universidad ;
-  rdfs:label "Faculty of Law of the University of Graz"@es ;
-  becas:nombreInstitucion "Faculty of Law of the University of Graz" ;
-  owl:sameAs <http://dbpedia.org/resource/Faculty_of_Law_of_the_University_of_Graz> .
-
-becas:INST_DBPEDIA_iilm_university_gurugram a becas:Universidad ;
-  rdfs:label "IILM University Gurugram"@es ;
-  becas:nombreInstitucion "IILM University Gurugram" ;
-  owl:sameAs <http://dbpedia.org/resource/IILM_University_Gurugram> .
-
-becas:PAIS_DBPEDIA_casa_de_pappenheim a becas:País ;
-  rdfs:label "Casa de Pappenheim"@es ;
-  becas:nombreInstitucion "Casa de Pappenheim" ;
-  owl:sameAs <http://dbpedia.org/resource/Pappenheim_(state)> .
-
-becas:PAIS_DBPEDIA_concesi_n_rusa_en_tianjin a becas:País ;
-  rdfs:label "Concesión rusa en Tianjin"@es ;
-  becas:nombreInstitucion "Concesión rusa en Tianjin" ;
-  owl:sameAs <http://dbpedia.org/resource/Russian_concession_of_Tianjin> .
-
-becas:PAIS_DBPEDIA_kanato_de_rus a becas:País ;
-  rdfs:label "Kanato de Rus'"@es ;
-  becas:nombreInstitucion "Kanato de Rus'" ;
-  owl:sameAs <http://dbpedia.org/resource/Rus'_Khaganate> .
-
-becas:PAIS_DBPEDIA_magrava a becas:País ;
-  rdfs:label "Magrava"@es ;
-  becas:nombreInstitucion "Magrava" ;
-  owl:sameAs <http://dbpedia.org/resource/Maghrawa> .
-
-becas:PAIS_DBPEDIA_unidad_territorial_aut_noma_con_un_estat a becas:País ;
-  rdfs:label "Unidad territorial autónoma con un estatus jurídico especial Transnistria"@es ;
-  becas:nombreInstitucion "Unidad territorial autónoma con un estatus jurídico especial Transnistria" ;
-  owl:sameAs <http://dbpedia.org/resource/Administrative-Territorial_Units_of_the_Left_Bank_of_the_Dniester> .
-
-becas:PAIS_DBPEDIA_protectorado_de_toda_palestina a becas:País ;
-  rdfs:label "Protectorado de Toda Palestina"@es ;
-  becas:nombreInstitucion "Protectorado de Toda Palestina" ;
-  owl:sameAs <http://dbpedia.org/resource/All-Palestine_Protectorate> .
-
-becas:PAIS_DBPEDIA_art_quidas a becas:País ;
-  rdfs:label "Artúquidas"@es ;
-  becas:nombreInstitucion "Artúquidas" ;
-  owl:sameAs <http://dbpedia.org/resource/Artuqids> .
-
-becas:PAIS_DBPEDIA_islas_salom_n_brit_nicas a becas:País ;
-  rdfs:label "Islas Salomón británicas"@es ;
-  becas:nombreInstitucion "Islas Salomón británicas" ;
-  owl:sameAs <http://dbpedia.org/resource/British_Solomon_Islands> .
-
-becas:PAIS_DBPEDIA_estado_de_creta a becas:País ;
-  rdfs:label "Estado de Creta"@es ;
-  becas:nombreInstitucion "Estado de Creta" ;
-  owl:sameAs <http://dbpedia.org/resource/Cretan_State> .
-
-becas:PAIS_DBPEDIA_ducado_de_cl_veris a becas:País ;
-  rdfs:label "Ducado de Cléveris"@es ;
-  becas:nombreInstitucion "Ducado de Cléveris" ;
-  owl:sameAs <http://dbpedia.org/resource/Duchy_of_Cleves> .
-
-becas:PAIS_DBPEDIA_ducado_de_franconia a becas:País ;
-  rdfs:label "Ducado de Franconia"@es ;
-  becas:nombreInstitucion "Ducado de Franconia" ;
-  owl:sameAs <http://dbpedia.org/resource/Duchy_of_Franconia> .
-
-becas:PAIS_DBPEDIA_ducado_de_gran_polonia a becas:País ;
-  rdfs:label "Ducado de Gran Polonia"@es ;
-  becas:nombreInstitucion "Ducado de Gran Polonia" ;
-  owl:sameAs <http://dbpedia.org/resource/Duchy_of_Greater_Poland> .
-
-becas:PAIS_DBPEDIA_irlanda_celta a becas:País ;
-  rdfs:label "Irlanda celta"@es ;
-  becas:nombreInstitucion "Irlanda celta" ;
-  owl:sameAs <http://dbpedia.org/resource/Gaelic_Ireland> .
-
-becas:PAIS_DBPEDIA_hohenzollern_hechingen a becas:País ;
-  rdfs:label "Hohenzollern-Hechingen"@es ;
-  becas:nombreInstitucion "Hohenzollern-Hechingen" ;
-  owl:sameAs <http://dbpedia.org/resource/Hohenzollern-Hechingen> .
-
-becas:PAIS_DBPEDIA_portugal_bajo_la_casa_de_austria a becas:País ;
-  rdfs:label "Portugal bajo la Casa de Austria"@es ;
-  becas:nombreInstitucion "Portugal bajo la Casa de Austria" ;
-  owl:sameAs <http://dbpedia.org/resource/Iberian_Union> .
-
-becas:PAIS_DBPEDIA_dinast_a_idris a becas:País ;
-  rdfs:label "Dinastía idrisí"@es ;
-  becas:nombreInstitucion "Dinastía idrisí" ;
-  owl:sameAs <http://dbpedia.org/resource/Idrisid_dynasty> .
-
-becas:PAIS_DBPEDIA_rep_blica_isl_mica_de_afganist_n a becas:País ;
-  rdfs:label "República Islámica de Afganistán"@es ;
-  becas:nombreInstitucion "República Islámica de Afganistán" ;
-  owl:sameAs <http://dbpedia.org/resource/Islamic_Republic_of_Afghanistan> .
-
-becas:PAIS_DBPEDIA_landgraviato_de_hesse a becas:País ;
-  rdfs:label "Landgraviato de Hesse"@es ;
-  becas:nombreInstitucion "Landgraviato de Hesse" ;
-  owl:sameAs <http://dbpedia.org/resource/Landgraviate_of_Hesse> .
-
-becas:PAIS_DBPEDIA_rep_blica_socialista_sovi_tica_de_lituan a becas:País ;
-  rdfs:label "República Socialista Soviética de Lituania (1918-1919)"@es ;
-  becas:nombreInstitucion "República Socialista Soviética de Lituania (1918-1919)" ;
-  owl:sameAs <http://dbpedia.org/resource/Lithuanian_Soviet_Socialist_Republic_(1918–1919)> .
-
-becas:PAIS_DBPEDIA_independent_state_of_raqqa a becas:País ;
-  rdfs:label "Independent State of Raqqa"@es ;
-  becas:nombreInstitucion "Independent State of Raqqa" ;
-  owl:sameAs <http://dbpedia.org/resource/Independent_State_of_Raqqa> .
-
-becas:BECA_DBPEDIA_amy_allison_grant a becas:Beca ;
-  rdfs:label "Amy Allison Grant"@en ;
-  becas:nombreBeca "Amy Allison Grant" ;
-  owl:sameAs <http://dbpedia.org/resource/Amy_Allison_Grant> .
-
-becas:BECA_DBPEDIA_grant_of_glenmoriston a becas:Beca ;
-  rdfs:label "Grant of Glenmoriston"@en ;
-  becas:nombreBeca "Grant of Glenmoriston" ;
-  owl:sameAs <http://dbpedia.org/resource/Grant_of_Glenmoriston> .
-
-becas:BECA_DBPEDIA_grantham_steenkamp a becas:Beca ;
-  rdfs:label "Grantham Steenkamp"@en ;
-  becas:nombreBeca "Grantham Steenkamp" ;
-  owl:sameAs <http://dbpedia.org/resource/Grantham_Steenkamp> .
-
-becas:BECA_DBPEDIA_grantham_and_bourne_uk_parliament_consti a becas:Beca ;
-  rdfs:label "Grantham and Bourne (UK Parliament constituency)"@en ;
-  becas:nombreBeca "Grantham and Bourne (UK Parliament constituency)" ;
-  owl:sameAs <http://dbpedia.org/resource/Grantham_and_Bourne_(UK_Parliament_constituency)> .
-
-becas:BECA_DBPEDIA_jarod_grant a becas:Beca ;
-  rdfs:label "Jarod Grant"@en ;
-  becas:nombreBeca "Jarod Grant" ;
-  owl:sameAs <http://dbpedia.org/resource/Jarod_Grant> .
-
-# Instancia de demostración: Beca que requiere TOEFL
-becas:BECA_TOEFL_DEMO a becas:Beca ;
-  rdfs:label "Beca que requiere TOEFL"@es ;
-  rdfs:label "Scholarship requiring TOEFL"@en ;
-  becas:nombreBeca "TOEFL Requirement Demo" ;
-  becas:descripcion "Instancia de ejemplo: esta beca requiere TOEFL como requisito de idioma." ;
-  becas:tieneRequisito becas:REQ_TOEFL .
+becas:REQ_PromedioBueno a becas:RequisitoAcademico ;
+  rdfs:label "Promedio minimo bueno"@es ;
+  becas:promedioMinimo "75" .
 
 becas:REQ_TOEFL a becas:RequisitoDeIdioma ;
-  rdfs:label "TOEFL"@en ;
   rdfs:label "TOEFL"@es ;
+  rdfs:label "TOEFL"@en ;
+  becas:nivelIdioma "B2" ;
+  becas:puntajeExamenMinimo "80" .
+
+becas:REQ_InglesB2 a becas:RequisitoDeIdioma ;
+  rdfs:label "Ingles B2"@es ;
   becas:nivelIdioma "B2" .
 
-becas:BECA_DBPEDIA_migrant_caregivers_in_taiwan a becas:Beca ;
-  rdfs:label "Migrant caregivers in Taiwan"@en ;
-  becas:nombreBeca "Migrant caregivers in Taiwan" ;
-  owl:sameAs <http://dbpedia.org/resource/Migrant_caregivers_in_Taiwan> .
+becas:REQ_CartaMotivacion a becas:RequisitoDocumental ;
+  rdfs:label "Carta de motivacion"@es .
 
-becas:BECA_DBPEDIA_tierra_amarilla_land_grant a becas:Beca ;
-  rdfs:label "Tierra Amarilla Land Grant"@en ;
-  becas:nombreBeca "Tierra Amarilla Land Grant" ;
-  owl:sameAs <http://dbpedia.org/resource/Tierra_Amarilla_Land_Grant> .
+becas:REQ_VulnerabilidadEconomica a becas:RequisitoSocioeconomico ;
+  rdfs:label "Vulnerabilidad economica"@es ;
+  becas:condicionSocioeconomica "Vulnerabilidad economica demostrable" .
 
-becas:BECA_DBPEDIA_grant_leonard a becas:Beca ;
-  rdfs:label "Grant Leonard"@en ;
-  becas:nombreBeca "Grant Leonard" ;
-  owl:sameAs <http://dbpedia.org/resource/Grant_Leonard> .
+#################################################################
+# Beneficios
+#################################################################
 
-becas:BECA_DBPEDIA_jeffrey_d_grant a becas:Beca ;
-  rdfs:label "Jeffrey D. Grant"@en ;
-  becas:nombreBeca "Jeffrey D. Grant" ;
-  owl:sameAs <http://dbpedia.org/resource/Jeffrey_D._Grant> .
+becas:BEN_MatriculaCompleta a becas:CoberturaMatricula ;
+  rdfs:label "Cobertura completa de matricula"@es ;
+  becas:montoCubierto "100%" .
 
-becas:BECA_DBPEDIA_jenny_grant_rankin a becas:Beca ;
-  rdfs:label "Jenny Grant Rankin"@en ;
-  becas:nombreBeca "Jenny Grant Rankin" ;
-  owl:sameAs <http://dbpedia.org/resource/Jenny_Grant_Rankin> .
+becas:BEN_MatriculaParcial a becas:CoberturaMatricula ;
+  rdfs:label "Cobertura parcial de matricula"@es ;
+  becas:montoCubierto "50%" .
 
-becas:BECA_DBPEDIA_railroad_land_grants_in_the_united_state a becas:Beca ;
-  rdfs:label "Railroad land grants in the United States"@en ;
-  becas:nombreBeca "Railroad land grants in the United States" ;
-  owl:sameAs <http://dbpedia.org/resource/Railroad_land_grants_in_the_United_States> .
+becas:BEN_EstipendioMensual a becas:Estipendio ;
+  rdfs:label "Estipendio mensual"@es ;
+  becas:montoCubierto "Variable" .
 
-becas:BECA_DBPEDIA_thomas_grantham_parliamentarian a becas:Beca ;
-  rdfs:label "Thomas Grantham (Parliamentarian)"@en ;
-  becas:nombreBeca "Thomas Grantham (Parliamentarian)" ;
-  owl:sameAs <http://dbpedia.org/resource/Thomas_Grantham_(Parliamentarian)> .
+becas:BEN_Pasajes a becas:Transporte ;
+  rdfs:label "Pasajes internacionales"@es .
 
-becas:BECA_DBPEDIA_english_channel_migrant_crossings_2018_p a becas:Beca ;
-  rdfs:label "English Channel migrant crossings (2018–present)"@en ;
-  becas:nombreBeca "English Channel migrant crossings (2018–present)" ;
-  owl:sameAs <http://dbpedia.org/resource/2022_English_Channel_boat_capsizing> .
+becas:BEN_SeguroMedico a becas:SeguroMedico ;
+  rdfs:label "Seguro medico"@es .
 
-becas:BECA_DBPEDIA_geoff_grant_tennis a becas:Beca ;
-  rdfs:label "Geoff Grant (tennis)"@en ;
-  becas:nombreBeca "Geoff Grant (tennis)" ;
-  owl:sameAs <http://dbpedia.org/resource/Geoff_Grant_(tennis)> .
+becas:BEN_Alojamiento a becas:Alojamiento ;
+  rdfs:label "Alojamiento"@es .
 
-becas:BECA_DBPEDIA_list_of_golf_clubs_granted_royal_status a becas:Beca ;
-  rdfs:label "List of golf clubs granted Royal status"@en ;
-  becas:nombreBeca "List of golf clubs granted Royal status" ;
-  owl:sameAs <http://dbpedia.org/resource/List_of_golf_clubs_granted_Royal_status> .
+#################################################################
+# Becas universitarias confiables
+#################################################################
 
-becas:BECA_DBPEDIA_list_of_people_granted_executive_clemenc a becas:Beca ;
-  rdfs:label "List of people granted executive clemency by Donald Trump"@en ;
-  becas:nombreBeca "List of people granted executive clemency by Donald Trump" ;
-  owl:sameAs <http://dbpedia.org/resource/List_of_people_granted_executive_clemency_by_Donald_Trump> .
+becas:BECA_Excelencia_USMS a becas:BecaDeExcelencia ;
+  rdfs:label "Beca de Excelencia USMS"@es ;
+  becas:nombreBeca "Beca de Excelencia USMS" ;
+  becas:descripcion "Beca por merito academico para estudiantes con alto rendimiento. Cubre matricula y apoyo de manutencion." ;
+  becas:montoCubierto "5000" ;
+  becas:fechaLimitePostulacion "2026-08-31" ;
+  becas:fechaLímitePostulación "2026-08-31" ;
+  becas:esOfrecidaPor becas:INST_USMS ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_Tecnologia ;
+  becas:perteneceAÁrea becas:AREA_Tecnologia ;
+  becas:tieneRequisito becas:REQ_PromedioExcelencia ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:destinadaAPais becas:PAIS_Bolivia .
 
-becas:BECA_DBPEDIA_native_american_policy_of_the_ulysses_s_ a becas:Beca ;
-  rdfs:label "Native American policy of the Ulysses S. Grant administration"@en ;
-  becas:nombreBeca "Native American policy of the Ulysses S. Grant administration" ;
-  owl:sameAs <http://dbpedia.org/resource/Native_American_policy_of_the_Ulysses_S._Grant_administration> .
+becas:BECA_Movilidad_2026 a becas:BecaDeMovilidad ;
+  rdfs:label "Beca de Movilidad 2026"@es ;
+  becas:nombreBeca "Beca de Movilidad 2026" ;
+  becas:descripcion "Beca para intercambio academico internacional durante un semestre." ;
+  becas:montoCubierto "2000" ;
+  becas:fechaLimitePostulacion "2026-05-30" ;
+  becas:fechaLímitePostulación "2026-05-30" ;
+  becas:esOfrecidaPor becas:INST_MINEDU ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_CienciasSociales ;
+  becas:perteneceAÁrea becas:AREA_CienciasSociales ;
+  becas:tieneRequisito becas:REQ_PromedioBueno ;
+  becas:tieneRequisito becas:REQ_CartaMotivacion ;
+  becas:otorgaBeneficio becas:BEN_Pasajes ;
+  becas:otorgaBeneficio becas:BEN_SeguroMedico .
+
+becas:BECA_TOEFL a becas:BecaParcial ;
+  rdfs:label "Beca que requiere TOEFL"@es ;
+  becas:nombreBeca "Beca TOEFL" ;
+  becas:descripcion "Beca para estudiantes que acreditan dominio de ingles mediante TOEFL." ;
+  becas:montoCubierto "1000" ;
+  becas:fechaLimitePostulacion "2026-12-31" ;
+  becas:fechaLímitePostulación "2026-12-31" ;
+  becas:esOfrecidaPor becas:INST_USMS ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_Humanidades ;
+  becas:perteneceAÁrea becas:AREA_Humanidades ;
+  becas:tieneRequisito becas:REQ_TOEFL ;
+  becas:otorgaBeneficio becas:BEN_MatriculaParcial .
+
+becas:BECA_Fulbright_Posgrado a becas:BecaDeInvestigacion ;
+  rdfs:label "Beca Fulbright de Posgrado"@es ;
+  becas:nombreBeca "Beca Fulbright de Posgrado" ;
+  becas:descripcion "Programa de becas para estudios de posgrado e investigacion en Estados Unidos." ;
+  becas:montoCubierto "Variable" ;
+  becas:fechaLimitePostulacion "2026-10-15" ;
+  becas:fechaLímitePostulación "2026-10-15" ;
+  becas:esOfrecidaPor becas:INST_Fulbright ;
+  becas:perteneceANivel becas:NIVEL_Maestria ;
+  becas:perteneceAArea becas:AREA_CienciasSociales ;
+  becas:perteneceAÁrea becas:AREA_CienciasSociales ;
+  becas:tieneRequisito becas:REQ_InglesB2 ;
+  becas:tieneRequisito becas:REQ_CartaMotivacion ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:otorgaBeneficio becas:BEN_SeguroMedico ;
+  becas:destinadaAPais becas:PAIS_EstadosUnidos ;
+  owl:sameAs <http://dbpedia.org/resource/Fulbright_Program> .
+
+becas:BECA_DAAD_Investigacion a becas:BecaDeInvestigacion ;
+  rdfs:label "Beca DAAD de Investigacion"@es ;
+  becas:nombreBeca "Beca DAAD de Investigacion" ;
+  becas:descripcion "Beca para investigacion academica y estudios de posgrado en Alemania." ;
+  becas:montoCubierto "Variable" ;
+  becas:fechaLimitePostulacion "2026-09-30" ;
+  becas:fechaLímitePostulación "2026-09-30" ;
+  becas:esOfrecidaPor becas:INST_DAAD ;
+  becas:perteneceANivel becas:NIVEL_Doctorado ;
+  becas:perteneceAArea becas:AREA_CienciasNaturales ;
+  becas:perteneceAÁrea becas:AREA_CienciasNaturales ;
+  becas:tieneRequisito becas:REQ_InglesB2 ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:otorgaBeneficio becas:BEN_SeguroMedico ;
+  becas:destinadaAPais becas:PAIS_Alemania ;
+  owl:sameAs <http://dbpedia.org/resource/German_Academic_Exchange_Service> .
+
+becas:BECA_Chevening_Maestria a becas:BecaCompleta ;
+  rdfs:label "Beca Chevening de Maestria"@es ;
+  becas:nombreBeca "Beca Chevening de Maestria" ;
+  becas:descripcion "Beca internacional para estudios de maestria en Reino Unido." ;
+  becas:montoCubierto "Variable" ;
+  becas:fechaLimitePostulacion "2026-11-05" ;
+  becas:fechaLímitePostulación "2026-11-05" ;
+  becas:esOfrecidaPor becas:INST_Chevening ;
+  becas:perteneceANivel becas:NIVEL_Maestria ;
+  becas:perteneceAArea becas:AREA_CienciasSociales ;
+  becas:perteneceAÁrea becas:AREA_CienciasSociales ;
+  becas:tieneRequisito becas:REQ_InglesB2 ;
+  becas:tieneRequisito becas:REQ_CartaMotivacion ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:otorgaBeneficio becas:BEN_Pasajes ;
+  becas:destinadaAPais becas:PAIS_ReinoUnido ;
+  owl:sameAs <http://dbpedia.org/resource/Chevening_Scholarship> .
+
+becas:BECA_Erasmus_Mundus a becas:BecaDeIntercambio ;
+  rdfs:label "Beca Erasmus Mundus"@es ;
+  becas:nombreBeca "Beca Erasmus Mundus" ;
+  becas:descripcion "Beca para movilidad academica y programas conjuntos de posgrado en Europa." ;
+  becas:montoCubierto "Variable" ;
+  becas:fechaLimitePostulacion "2026-01-15" ;
+  becas:fechaLímitePostulación "2026-01-15" ;
+  becas:esOfrecidaPor becas:INST_ErasmusMundus ;
+  becas:perteneceANivel becas:NIVEL_Maestria ;
+  becas:perteneceAArea becas:AREA_Tecnologia ;
+  becas:perteneceAÁrea becas:AREA_Tecnologia ;
+  becas:tieneRequisito becas:REQ_InglesB2 ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_Pasajes ;
+  becas:otorgaBeneficio becas:BEN_Alojamiento ;
+  owl:sameAs <http://dbpedia.org/resource/Erasmus_Mundus> .
+
+becas:BECA_Socioeconomica_MINEDU a becas:BecaSocioeconomica ;
+  rdfs:label "Beca Socioeconomica MINEDU"@es ;
+  becas:nombreBeca "Beca Socioeconomica MINEDU" ;
+  becas:descripcion "Beca nacional para estudiantes con vulnerabilidad economica demostrable." ;
+  becas:montoCubierto "1500" ;
+  becas:fechaLimitePostulacion "2026-07-20" ;
+  becas:fechaLímitePostulación "2026-07-20" ;
+  becas:esOfrecidaPor becas:INST_MINEDU ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_CienciasSociales ;
+  becas:perteneceAÁrea becas:AREA_CienciasSociales ;
+  becas:tieneRequisito becas:REQ_VulnerabilidadEconomica ;
+  becas:otorgaBeneficio becas:BEN_MatriculaParcial ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:destinadaAPais becas:PAIS_Bolivia .
