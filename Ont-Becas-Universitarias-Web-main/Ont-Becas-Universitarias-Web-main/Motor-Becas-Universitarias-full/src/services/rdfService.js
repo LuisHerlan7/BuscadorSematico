@@ -2,41 +2,20 @@ const fs = require('fs');
 const path = require('path');
 const { QueryEngine } = require('@comunica/query-sparql');
 const N3 = require('n3');
-// Usaremos N3.Store como fuente RDFJS compatible con Comunica
-const { searchDiseases } = require('../utils/rdfQueries');
 
-// Preferir archivo de instancias si existe (más práctico para pruebas)
+// Rutas de los archivos ontológicos
 const defaultOwl = path.join(__dirname, '../public/data/ontologia_becas.owl');
 const instancesTtl = path.join(__dirname, '../public/data/ontologia_becas_instances.ttl');
-let rdfFilePath = process.env.ONTOLOGY_FILE || defaultOwl; 
+
+let rdfFilePath = process.env.ONTOLOGY_FILE || defaultOwl;
 if (fs.existsSync(instancesTtl)) {
   rdfFilePath = process.env.ONTOLOGY_FILE || instancesTtl;
 }
 
-// Convertir a URL de archivo adecuada para Comunica (file:///...) en Windows
-function toFileUrl(p) {
-  if (!p) return p;
-  if (p.startsWith('file://')) return p;
-  const abs = path.resolve(p).replace(/\\/g, '/');
-  return `file:///${abs}`;
-}
-const rdfFileUrl = toFileUrl(rdfFilePath);
-// Determinar mediaType según extensión
-function mediaTypeFor(p) {
-  if (!p) return undefined;
-  const lower = p.toLowerCase();
-  if (lower.endsWith('.ttl')) return 'text/turtle';
-  if (lower.endsWith('.nt')) return 'application/n-triples';
-  if (lower.endsWith('.nq')) return 'application/n-quads';
-  if (lower.endsWith('.rdf') || lower.endsWith('.owl') || lower.endsWith('.xml')) return 'application/rdf+xml';
-  return undefined;
-}
-const rdfMediaType = mediaTypeFor(rdfFilePath);
-
 class RDFService {
   constructor() {
     this.engine = new QueryEngine();
-    this._dataset = null; // cache del dataset cargado
+    this._dataset = null; // caché del dataset cargado en memoria
   }
 
   async _loadDataset() {
@@ -47,43 +26,53 @@ class RDFService {
       throw new Error(`No se encontró el archivo ontológico en: ${filePath}`);
     }
 
-    const ext = path.extname(filePath).toLowerCase();
-    let contentType = 'application/rdf+xml';
-    if (ext === '.ttl') contentType = 'text/turtle';
-    if (ext === '.nq') contentType = 'application/n-quads';
-    if (ext === '.nt') contentType = 'application/n-triples';
-    if (ext === '.jsonld') contentType = 'application/ld+json';
-
+    // Nota: N3 maneja nativamente Turtle (.ttl), TriG, N-Triples, N-Quads.
+    // Si tu .owl está en formato RDF/XML puro, el parser N3 fallará. 
+    // Es recomendable convertir tu .owl a .ttl.
     const content = fs.readFileSync(filePath, 'utf8');
     const parser = new N3.Parser({ baseIRI: `file://${filePath}` });
     const quads = parser.parse(content);
+
     const store = new N3.Store(quads);
     this._dataset = store;
     return store;
   }
 
-  async searchDiseases(term, lang = 'es') {
+  async searchScholarships(term, lang = 'es') {
     const ontologyClass = process.env.ONTOLOGY_CLASS || 'http://www.semanticweb.org/ontologia/becas-universitarias#Beca';
     const escaped = ('' + term).replace(/"/g, '\\"');
 
     const query = `
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
-      SELECT ?s ?label ?descripcion ?monto ?fecha ?nombre WHERE {
-        ?s a <${ontologyClass}> .
+      SELECT DISTINCT ?s ?label ?descripcion ?monto ?fechaFinal ?nombre WHERE {
+        {
+          # Buscar instancias de Beca o cualquier subclase de Beca
+          ?s a ?type .
+          ?type rdfs:subClassOf* becas:Beca .
+        } UNION {
+          # Fallback: cualquier entidad con nombreBeca es una beca
+          ?s becas:nombreBeca ?anyNombre .
+        }
         ?s rdfs:label ?label .
-        FILTER(CONTAINS(LCASE(STR(?label)), LCASE("${escaped}")))
         OPTIONAL { ?s becas:descripcion ?descripcion }
         OPTIONAL { ?s becas:montoCubierto ?monto }
         OPTIONAL { ?s becas:fechaLímitePostulación ?fecha }
+        OPTIONAL { ?s becas:fechaLimitePostulacion ?fechaAlt }
         OPTIONAL { ?s becas:nombreBeca ?nombre }
+        BIND(COALESCE(?fecha, ?fechaAlt) AS ?fechaFinal)
+        FILTER(
+          CONTAINS(LCASE(STR(?label)), LCASE("${escaped}"))
+          || CONTAINS(LCASE(STR(?nombre)), LCASE("${escaped}"))
+          || CONTAINS(LCASE(STR(?descripcion)), LCASE("${escaped}"))
+        )
       } LIMIT 50
     `;
 
-    // Cargar dataset RDFJS y usarlo como fuente
     const dataset = await this._loadDataset();
     const bindingsStream = await this.engine.queryBindings(query, { sources: [dataset] });
     const bindings = [];
+
     await new Promise((resolve, reject) => {
       bindingsStream.on('data', b => bindings.push(b));
       bindingsStream.on('end', resolve);
@@ -93,44 +82,67 @@ class RDFService {
     return bindings.map(binding => {
       const s = binding.get('s') || binding.get('?s');
       const label = binding.get('label') || binding.get('?label');
-      const descripcion = binding.get('descripcion');
-      const monto = binding.get('monto');
-      const fecha = binding.get('fecha');
-      const nombre = binding.get('nombre');
+      const descripcion = binding.get('descripcion') || binding.get('?descripcion');
+      const monto = binding.get('monto') || binding.get('?monto');
+      const fecha = binding.get('fechaFinal') || binding.get('?fechaFinal') || binding.get('fecha') || binding.get('?fecha');
+      const nombre = binding.get('nombre') || binding.get('?nombre');
+
       return {
         uri: s?.value,
         label: label?.value,
-        name: nombre?.value,
+        name: nombre?.value || label?.value,
         description: descripcion?.value,
         amount: monto?.value,
-        deadline: fecha?.value
+        deadline: fecha?.value,
+        source: 'local'
       };
     });
   }
 
-  async getDiseaseDetails(uri) {
+  async getScholarshipDetails(uri) {
     const query = `
       SELECT ?p ?o WHERE {
         <${uri}> ?p ?o .
       }
     `;
+
     const dataset = await this._loadDataset();
     const bindingsStream = await this.engine.queryBindings(query, { sources: [dataset] });
     const bindings = [];
+
     await new Promise((resolve, reject) => {
       bindingsStream.on('data', b => bindings.push(b));
       bindingsStream.on('end', resolve);
       bindingsStream.on('error', reject);
     });
 
-    const details = {};
+    const raw = {};
     bindings.forEach(binding => {
       const p = binding.get('p') || binding.get('?p');
       const o = binding.get('o') || binding.get('?o');
-      if (p && o) details[p.value] = o.value;
+      if (p && o) raw[p.value] = o.value;
     });
 
-    return details;
+    const NS = 'http://www.semanticweb.org/ontologia/becas-universitarias#';
+    const RDFS = 'http://www.w3.org/2000/01/rdf-schema#';
+
+    const label = raw[`${RDFS}label`] || raw[`${NS}nombreBeca`] || uri;
+    const desc = raw[`${NS}descripcion`] || raw[`${NS}descripción`] || '';
+    const amount = raw[`${NS}montoCubierto`] || null;
+    const deadline = raw[`${NS}fechaLímitePostulación`] || raw[`${NS}fechaLimitePostulacion`] || null;
+
+    return {
+      uri,
+      label,
+      name: label,
+      abstract: desc,
+      description: desc,
+      amount,
+      deadline,
+      thumbnail: null,
+      source: 'local',
+      _raw: raw
+    };
   }
 }
 

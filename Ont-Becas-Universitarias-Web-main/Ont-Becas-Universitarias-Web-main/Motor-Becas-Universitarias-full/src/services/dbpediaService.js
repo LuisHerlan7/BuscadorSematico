@@ -1,130 +1,145 @@
 const axios = require('axios');
 const dbpediaConfig = require('../config/dbpedia');
-const sparqlQueries = require('../utils/sparqlQueries');
+
+// Palabras clave exactas provistas por el usuario (NO MODIFICADAS)
+const SCHOLARSHIP_KEYWORDS = [
+  'scholarship', 'fellowship', 'grant', 'bursary', 'exchange',
+  'beca', 'estudio', 'universit', 'educa', 'award', 'fellow',
+  'programa', 'program', 'fund', 'financi', 'subvencion', 'ayuda',
+  'stipend', 'erasmus', 'fulbright', 'daad', 'maestria', 'doctorado',
+  'academic', 'academics', 'research', 'investigacion', 'student',
+  'alumno', 'becario'
+];
 
 class DBpediaService {
   _getEndpoint() {
     return dbpediaConfig.endpoint;
   }
 
-  // Buscar entidades en DBpedia por label que contenga el término
-  async searchDiseases(term, lang = 'es') {
-    const endpoint = this._getEndpoint();
-    const escaped = ('' + term).replace(/"/g, '\\"').toLowerCase();
+  /**
+   * Construye el término de búsqueda FTS.
+   * Se añaden mapeos semánticos para que si el usuario busca "requisitos",
+   * el motor de DBpedia entienda y busque también "requirements" o "eligibility".
+   */
+  _buildBifTerm(term) {
+    const esEnMap = {
+      'beca': 'scholarship',
+      'becas': 'scholarship',
+      'universitaria': 'university',
+      'universitarias': 'university',
+      'universidad': 'university',
+      'maestria': 'master',
+      'doctorado': 'phd',
+      'intercambio': 'exchange',
+      'investigacion': 'research',
+      'pregrado': 'undergraduate',
+      'posgrado': 'graduate',
+      'excelencia': 'excellence',
+      'movilidad': 'mobility',
+      // Mapeos específicos orientados a requisitos solicitados:
+      'requisitos': 'requirements',
+      'requisito': 'requirement',
+      'elegibilidad': 'eligibility',
+      'criterios': 'criteria',
+      'postulacion': 'application'
+    };
 
-    const query = `
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX dbo: <http://dbpedia.org/ontology/>
+    const normalized = String(term || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .trim();
 
-      SELECT DISTINCT ?s ?label ?abstract WHERE {
-        ?s rdfs:label ?label .
-        FILTER(CONTAINS(LCASE(STR(?label)), "${escaped}"))
-        OPTIONAL { ?s dbo:abstract ?abstractRaw . FILTER(LANG(?abstractRaw) = "${lang}" || LANG(?abstractRaw) = "en") }
-        BIND(COALESCE(?abstractRaw, "") AS ?abstract)
-      } LIMIT 50
-    `;
+    const words = normalized.split(/\s+/).filter(w => w.length >= 3);
+    if (words.length === 0) return "'scholarship'";
 
-    try {
-      const response = await axios.get(endpoint, {
-        params: {
-          ...dbpediaConfig.defaultQueryOptions,
-          query
-        }
-      });
-
-      if (!response.data || !response.data.results) {
-        throw new Error('Invalid response structure from DBpedia');
-      }
-
-      const results = response.data.results.bindings.map(result => ({
-        uri: result.s?.value,
-        label: result.label?.value,
-        description: result.abstract?.value || ''
-      }));
-
-      return results;
-    } catch (error) {
-      this._handleError(error);
-      return [];
+    const allWords = new Set();
+    for (const w of words) {
+      allWords.add(w);
+      if (esEnMap[w]) allWords.add(esEnMap[w]);
     }
-  }
 
-  async getDiseaseDetails(uri, lang = 'es') {
-    const endpoint = this._getEndpoint();
-
-    const query = `
-      PREFIX dbo: <http://dbpedia.org/ontology/>
-      PREFIX dbp: <http://dbpedia.org/property/>
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-      SELECT DISTINCT ?label ?abstract ?type WHERE {
-        BIND(<${uri}> AS ?s)
-        OPTIONAL { ?s rdfs:label ?label . FILTER(LANG(?label) = "${lang}") }
-        OPTIONAL { ?s dbo:abstract ?abstract . FILTER(LANG(?abstract) = "${lang}" || LANG(?abstract) = "en") }
-        OPTIONAL { ?s a ?type }
-      } LIMIT 200
-    `;
-
-    try {
-      const response = await axios.get(endpoint, {
-        params: {
-          ...dbpediaConfig.defaultQueryOptions,
-          query
-        }
-      });
-
-      const rows = response.data.results.bindings;
-      if (!rows || rows.length === 0) return null;
-
-      const base = rows[0];
-      return {
-        uri,
-        label: base.label?.value,
-        description: base.abstract?.value,
-        types: Array.from(new Set(rows.map(r => r.type?.value).filter(Boolean)))
-      };
-    } catch (error) {
-      this._handleError(error);
-      return null;
-    }
+    return Array.from(allWords)
+      .slice(0, 6) // Ampliado ligeramente para cubrir términos de requisitos
+      .map(w => `'${w}'`)
+      .join(' OR ');
   }
 
   /**
-   * Búsqueda semántica general de becas por término
-   * Pregunta: "¿Cuáles son todas las becas que coinciden con este término de búsqueda?"
-   * 
-   * @param {string} term - Término a buscar (ej: "ingeniería", "medicina")
-   * @param {string} lang - Código de idioma (ej: "es", "en")
-   * @returns {Promise<Array>} Array de becas con {uri, label, description, institution}
-   * 
-   * @example
-   * const results = await dbpediaService.searchScholarships("ingeniería", "es");
-   * // Retorna becas relacionadas con ingeniería en español
+   * Filtro del lado de Node.js para asegurar relevancia con la lista estricta.
+   */
+  _filterScholarshipResults(bindings) {
+    const seen = new Set();
+    const results = [];
+
+    for (const b of bindings) {
+      const uri = b.scholarship?.value;
+      const label = (b.label?.value || '').toLowerCase();
+      const desc = (b.desc?.value || '').toLowerCase();
+
+      if (!uri || seen.has(uri)) continue;
+
+      const relevant = SCHOLARSHIP_KEYWORDS.some(k => label.includes(k) || desc.includes(k));
+      if (!relevant) continue;
+
+      seen.add(uri);
+      results.push({
+        uri,
+        safeUri: encodeURIComponent(uri),
+        label: b.label?.value || '',
+        name: b.label?.value || '',
+        description: b.desc?.value || '',
+        abstract: b.desc?.value || '',
+        source: 'dbpedia'
+      });
+    }
+
+    return results;
+  }
+
+  /**
+   * BUSCADOR DE BECAS:
+   * Realiza la consulta semántica limpiando ruido y priorizando entidades académicas.
    */
   async searchScholarships(term, lang = 'es') {
-    const endpoint = this._getEndpoint();
-    const query = sparqlQueries.searchScholarships(term, lang);
+    if (!term || !String(term).trim()) return [];
+
+    const bifTerm = this._buildBifTerm(term);
+
+    const query = `
+      PREFIX dbo: <http://dbpedia.org/ontology/>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+      SELECT DISTINCT ?scholarship ?label ?desc WHERE {
+        ?scholarship rdfs:label ?label .
+        ?label bif:contains "${bifTerm.replace(/"/g, '\\"')}" .
+        FILTER(LANG(?label) = "${lang}" || LANG(?label) = "en")
+
+        OPTIONAL { ?scholarship dbo:description ?d .  FILTER(LANG(?d)  = "${lang}" || LANG(?d)  = "en") }
+        OPTIONAL { ?scholarship rdfs:comment    ?c .  FILTER(LANG(?c)  = "${lang}" || LANG(?c)  = "en") }
+        OPTIONAL { ?scholarship dbo:abstract    ?a .  FILTER(LANG(?a)  = "${lang}" || LANG(?a)  = "en") }
+
+        BIND(COALESCE(?d, ?c, ?a) AS ?desc)
+
+        # Filtros semánticos estrictos para evitar personas o lugares con la palabra "beca" en su biografía
+        MINUS { ?scholarship a dbo:Person }
+        MINUS { ?scholarship a dbo:Place }
+        MINUS { ?scholarship a dbo:Book }
+        MINUS { ?scholarship a dbo:Film }
+      }
+      ORDER BY DESC(BOUND(?desc))
+      LIMIT 100
+    `;
 
     try {
-      const response = await axios.get(endpoint, {
-        params: {
-          ...dbpediaConfig.defaultQueryOptions,
-          query
-        }
+      const response = await axios.get(this._getEndpoint(), {
+        params: { query, format: 'json', timeout: 8000 },
+        timeout: 9000
       });
 
-      if (!response.data || !response.data.results) {
-        throw new Error('Invalid response structure from DBpedia');
-      }
-
-      const results = response.data.results.bindings.map(result => ({
-        uri: result.s?.value,
-        label: result.label?.value,
-        description: result.abstract?.value || '',
-        institution: result.institution?.value || null
-      }));
-
-      return results;
+      const bindings = response.data?.results?.bindings || [];
+      return this._filterScholarshipResults(bindings);
     } catch (error) {
       this._handleError(error);
       return [];
@@ -132,61 +147,63 @@ class DBpediaService {
   }
 
   /**
-   * Obtener detalles completos de una beca específica
-   * Pregunta: "¿Cuál es toda la información disponible para esta beca en particular?"
-   * 
-   * @param {string} uri - URI de la beca (ej: "http://dbpedia.org/resource/Beca_MIT")
-   * @param {string} lang - Código de idioma (ej: "es", "en")
-   * @returns {Promise<Object>} Objeto con detalles de la beca o null si no existe
-   * 
-   * @returns {Object} {
-   *   uri: string,
-   *   safeUri: string (encoded),
-   *   name: string,
-   *   abstract: string,
-   *   institution: string,
-   *   country: string,
-   *   level: string (ej: "Pregrado", "Maestría"),
-   *   benefits: string,
-   *   requirements: string,
-   *   thumbnail: string (URL),
-   *   location: string
-   * }
-   * 
-   * @example
-   * const details = await dbpediaService.getScholarshipDetails("http://dbpedia.org/resource/Beca_MIT", "es");
-   * // Retorna todos los detalles de la beca MIT
+   * DETALLES DE LA BECA Y SUS REQUISITOS:
+   * Extrae de forma dirigida los campos de requisitos y criterios de elegibilidad mapeados por DBpedia.
    */
   async getScholarshipDetails(uri, lang = 'es') {
-    const endpoint = this._getEndpoint();
-    const query = sparqlQueries.getScholarshipDetails(uri, lang);
+    const query = `
+      PREFIX dbo: <http://dbpedia.org/ontology/>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX dbp: <http://dbpedia.org/property/>
+
+      SELECT ?label ?d ?c ?a ?thumbnail ?eligibility ?requirements ?criteria WHERE {
+        BIND(<${uri}> AS ?s)
+        OPTIONAL { ?s rdfs:label ?label .    FILTER(LANG(?label) = "${lang}" || LANG(?label) = "en") }
+        OPTIONAL { ?s dbo:description ?d .   FILTER(LANG(?d)  = "${lang}" || LANG(?d)  = "en") }
+        OPTIONAL { ?s rdfs:comment    ?c .   FILTER(LANG(?c)  = "${lang}" || LANG(?c)  = "en") }
+        OPTIONAL { ?s dbo:abstract    ?a .   FILTER(LANG(?a)  = "${lang}" || LANG(?a)  = "en") }
+        OPTIONAL { ?s dbo:thumbnail   ?thumbnail }
+        
+        # Propiedades de Requisitos extraídas desde las cajas de información (Infoboxes) de Wikipedia
+        OPTIONAL { ?s dbp:eligibility ?eligibility }
+        OPTIONAL { ?s dbp:requirements ?requirements }
+        OPTIONAL { ?s dbp:criteria ?criteria }
+      }
+    `;
 
     try {
-      const response = await axios.get(endpoint, {
-        params: {
-          ...dbpediaConfig.defaultQueryOptions,
-          query
-        }
+      const response = await axios.get(this._getEndpoint(), {
+        params: { query, format: 'json', timeout: 8000 },
+        timeout: 9000
       });
 
-      const rows = response.data.results.bindings;
-      if (!rows || rows.length === 0) return null;
+      const rows = response.data?.results?.bindings || [];
+      if (rows.length === 0) return null;
 
-      // Usar la primera fila como base (contiene todos los campos OPTIONAL recuperados)
-      const base = rows[0];
-      
+      // Selección de idioma preferente para textos básicos
+      const labelRow = rows.find(r => r.label?.['xml:lang'] === lang) || rows[0];
+      const descRow = rows.find(r => (r.d || r.c || r.a) && (r.d?.['xml:lang'] === lang || r.c?.['xml:lang'] === lang || r.a?.['xml:lang'] === lang)) || rows[0];
+      const thumbnail = rows.find(r => r.thumbnail)?.thumbnail?.value || null;
+
+      const desc = descRow?.d?.value || descRow?.c?.value || descRow?.a?.value || '';
+
+      // Procesamiento dirigido de Requisitos / Criterios detectados en DBpedia
+      const rawRequirements = rows.find(r => r.requirements)?.requirements?.value;
+      const rawEligibility = rows.find(r => r.eligibility)?.eligibility?.value;
+      const rawCriteria = rows.find(r => r.criteria)?.criteria?.value;
+
+      // Se unifican en un formato legible para el frontend
+      let requirementsText = rawRequirements || rawEligibility || rawCriteria || null;
+
       return {
-        uri: uri,
-        safeUri: encodeURIComponent(uri),
-        name: base.name?.value || '',
-        abstract: base.abstract?.value || '',
-        institution: base.institution?.value || '',
-        country: base.country?.value || '',
-        level: base.level?.value || '',
-        benefits: base.benefits?.value || '',
-        requirements: base.requirements?.value || '',
-        thumbnail: base.thumbnail?.value || null,
-        location: base.location?.value || ''
+        uri,
+        label: labelRow?.label?.value || uri,
+        name: labelRow?.label?.value || uri,
+        abstract: desc,
+        description: desc,
+        thumbnail,
+        requirements: requirementsText, // Nueva propiedad conteniendo los requisitos explícitos
+        source: 'dbpedia'
       };
     } catch (error) {
       this._handleError(error);
@@ -194,100 +211,19 @@ class DBpediaService {
     }
   }
 
-  /**
-   * Buscar becas por nivel académico
-   * Pregunta: "¿Cuáles son las becas disponibles para un nivel académico específico?"
-   * 
-   * @param {string} level - Nivel académico (ej: "Pregrado", "Maestría", "Doctorado")
-   * @param {string} lang - Código de idioma (ej: "es", "en")
-   * @returns {Promise<Array>} Array de becas con {uri, label, description, level}
-   * 
-   * @example
-   * const masterBecas = await dbpediaService.searchScholarshipsByLevel("Maestría", "es");
-   * // Retorna todas las becas de maestría disponibles
-   */
-  async searchScholarshipsByLevel(level, lang = 'es') {
-    const endpoint = this._getEndpoint();
-    const query = sparqlQueries.searchScholarshipsByLevel(level, lang);
-
-    try {
-      const response = await axios.get(endpoint, {
-        params: {
-          ...dbpediaConfig.defaultQueryOptions,
-          query
-        }
-      });
-
-      if (!response.data || !response.data.results) {
-        throw new Error('Invalid response structure from DBpedia');
-      }
-
-      const results = response.data.results.bindings.map(result => ({
-        uri: result.s?.value,
-        label: result.label?.value,
-        description: result.abstract?.value || '',
-        level: result.level?.value || level
-      }));
-
-      return results;
-    } catch (error) {
-      this._handleError(error);
-      return [];
-    }
-  }
-
-  /**
-   * Buscar becas por requisito de idioma
-   * Pregunta: "¿Cuáles son las becas que requieren dominio de un idioma específico?"
-   * 
-   * @param {string} language - Idioma requerido (ej: "Inglés", "Alemán", "Francés")
-   * @param {string} lang - Código de idioma (ej: "es", "en")
-   * @returns {Promise<Array>} Array de becas con {uri, label, description, requiredLanguage}
-   * 
-   * @example
-   * const englishBecas = await dbpediaService.searchScholarshipsByLanguage("Inglés", "es");
-   * // Retorna todas las becas que requieren inglés
-   */
-  async searchScholarshipsByLanguage(language, lang = 'es') {
-    const endpoint = this._getEndpoint();
-    const query = sparqlQueries.searchScholarshipsByLanguage(language, lang);
-
-    try {
-      const response = await axios.get(endpoint, {
-        params: {
-          ...dbpediaConfig.defaultQueryOptions,
-          query
-        }
-      });
-
-      if (!response.data || !response.data.results) {
-        throw new Error('Invalid response structure from DBpedia');
-      }
-
-      const results = response.data.results.bindings.map(result => ({
-        uri: result.s?.value,
-        label: result.label?.value,
-        description: result.abstract?.value || '',
-        requiredLanguage: result.requiredLanguage?.value || language
-      }));
-
-      return results;
-    } catch (error) {
-      this._handleError(error);
-      return [];
-    }
+  async searchByIntent(intentObj, lang = 'es') {
+    if (!intentObj || intentObj.intent !== 'query_property') return [];
+    const value = intentObj.value || '';
+    return this.searchScholarships(value, lang);
   }
 
   _handleError(error) {
-    console.error('DBpedia Service Error:');
-    console.error(`- Message: ${error.message}`);
+    console.error('DBpedia Service Error Custom Log:');
+    console.error(`  Message: ${error.message}`);
     if (error.response) {
-      console.error(`- Status: ${error.response.status}`);
-      console.error(`- Response: ${JSON.stringify(error.response.data)}`);
+      console.error(`  Status: ${error.response.status}`);
     }
   }
 }
 
 module.exports = new DBpediaService();
-
-

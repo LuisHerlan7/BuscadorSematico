@@ -21,6 +21,9 @@ module.exports = function(app) {
       encodeURI: function(uri) {
         return encodeURIComponent(uri);
       },
+      encodeURIComponent: function(uri) {
+        return encodeURIComponent(uri);
+      },
       
       // Helper para truncar texto
       truncate: function(str, len) {

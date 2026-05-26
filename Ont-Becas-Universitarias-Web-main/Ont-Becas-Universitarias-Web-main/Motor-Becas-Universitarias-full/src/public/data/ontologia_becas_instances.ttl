@@ -1,16 +1,356 @@
 @prefix becas: <http://www.semanticweb.org/ontologia/becas-universitarias#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 
-becas:BECA_Excelencia_USMS a becas:Beca ;
+#################################################################
+# Esquema minimo usado por las consultas locales
+#################################################################
+
+becas:Beca rdfs:label "Beca"@es .
+
+becas:BecaCompleta rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca Completa"@es .
+
+becas:BecaParcial rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca Parcial"@es .
+
+becas:BecaDeExcelencia rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca de Excelencia"@es .
+
+becas:BecaSocioeconomica rdfs:subClassOf becas:BecaSocioeconómica .
+
+becas:BecaSocioeconómica rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca Socioeconómica"@es .
+
+becas:BecaDeMovilidad rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca de Movilidad"@es .
+
+becas:BecaDeIntercambio rdfs:subClassOf becas:BecaDeMovilidad ;
+  rdfs:label "Beca de Intercambio"@es .
+
+becas:BecaDeInvestigacion rdfs:subClassOf becas:Beca ;
+  rdfs:label "Beca de Investigacion"@es .
+
+becas:BecaDePostdoctorado rdfs:subClassOf becas:BecaDeInvestigacion ;
+  rdfs:label "Beca de Postdoctorado"@es .
+
+#################################################################
+# Catalogos controlados
+#################################################################
+
+becas:NIVEL_Pregrado a becas:Pregrado ;
+  rdfs:label "Pregrado"@es .
+
+becas:NIVEL_Maestria a becas:Maestria ;
+  rdfs:label "Maestria"@es .
+
+becas:NIVEL_Maestría a becas:Maestría ;
+  rdfs:label "Maestría"@es ;
+  rdfs:label "Maestria"@es .
+
+becas:NIVEL_Doctorado a becas:Doctorado ;
+  rdfs:label "Doctorado"@es .
+
+becas:NIVEL_Postdoctorado a becas:Postdoctorado ;
+  rdfs:label "Postdoctorado"@es .
+
+becas:AREA_Tecnologia a becas:Tecnologia ;
+  rdfs:label "Tecnologia"@es .
+
+becas:AREA_Tecnología a becas:Tecnología ;
+  rdfs:label "Tecnología"@es ;
+  rdfs:label "Tecnologia"@es .
+
+becas:AREA_CienciasSociales a becas:CienciasSociales ;
+  rdfs:label "Ciencias Sociales"@es .
+
+becas:AREA_CienciasNaturales a becas:CienciasNaturales ;
+  rdfs:label "Ciencias Naturales"@es .
+
+becas:AREA_Humanidades a becas:Humanidades ;
+  rdfs:label "Humanidades"@es .
+
+becas:AREA_Artes a becas:Artes ;
+  rdfs:label "Artes"@es .
+
+becas:PAIS_Bolivia a becas:Pais ;
+  rdfs:label "Bolivia"@es ;
+  becas:nombreInstitucion "Bolivia" .
+
+becas:PAIS_Bolivia_OWL a becas:País ;
+  rdfs:label "Bolivia"@es ;
+  becas:nombreInstitucion "Bolivia" .
+
+becas:PAIS_EstadosUnidos a becas:Pais ;
+  rdfs:label "Estados Unidos"@es ;
+  becas:nombreInstitucion "Estados Unidos" ;
+  owl:sameAs <http://dbpedia.org/resource/United_States> .
+
+becas:PAIS_EstadosUnidos_OWL a becas:País ;
+  rdfs:label "Estados Unidos"@es ;
+  becas:nombreInstitucion "Estados Unidos" ;
+  owl:sameAs <http://dbpedia.org/resource/United_States> .
+
+becas:PAIS_Alemania a becas:Pais ;
+  rdfs:label "Alemania"@es ;
+  becas:nombreInstitucion "Alemania" ;
+  owl:sameAs <http://dbpedia.org/resource/Germany> .
+
+becas:PAIS_Alemania_OWL a becas:País ;
+  rdfs:label "Alemania"@es ;
+  becas:nombreInstitucion "Alemania" ;
+  owl:sameAs <http://dbpedia.org/resource/Germany> .
+
+becas:PAIS_ReinoUnido a becas:Pais ;
+  rdfs:label "Reino Unido"@es ;
+  becas:nombreInstitucion "Reino Unido" ;
+  owl:sameAs <http://dbpedia.org/resource/United_Kingdom> .
+
+becas:PAIS_ReinoUnido_OWL a becas:País ;
+  rdfs:label "Reino Unido"@es ;
+  becas:nombreInstitucion "Reino Unido" ;
+  owl:sameAs <http://dbpedia.org/resource/United_Kingdom> .
+
+#################################################################
+# Instituciones validadas
+#################################################################
+
+becas:INST_USMS a becas:Universidad ;
+  rdfs:label "Universidad Mayor de San Simon"@es ;
+  becas:nombreInstitucion "Universidad Mayor de San Simon" .
+
+becas:INST_MINEDU a becas:OrganismoGubernamental ;
+  rdfs:label "Ministerio de Educacion"@es ;
+  becas:nombreInstitucion "Ministerio de Educacion" .
+
+becas:INST_Fulbright a becas:OrganismoInternacional ;
+  rdfs:label "Programa Fulbright"@es ;
+  becas:nombreInstitucion "Programa Fulbright" ;
+  owl:sameAs <http://dbpedia.org/resource/Fulbright_Program> .
+
+becas:INST_DAAD a becas:OrganismoInternacional ;
+  rdfs:label "Servicio Aleman de Intercambio Academico"@es ;
+  becas:nombreInstitucion "DAAD" ;
+  owl:sameAs <http://dbpedia.org/resource/German_Academic_Exchange_Service> .
+
+becas:INST_Chevening a becas:OrganismoInternacional ;
+  rdfs:label "Chevening"@es ;
+  becas:nombreInstitucion "Chevening" ;
+  owl:sameAs <http://dbpedia.org/resource/Chevening_Scholarship> .
+
+becas:INST_ErasmusMundus a becas:OrganismoInternacional ;
+  rdfs:label "Erasmus Mundus"@es ;
+  becas:nombreInstitucion "Erasmus Mundus" ;
+  owl:sameAs <http://dbpedia.org/resource/Erasmus_Mundus> .
+
+#################################################################
+# Requisitos
+#################################################################
+
+becas:REQ_PromedioExcelencia a becas:RequisitoAcademico ;
+  rdfs:label "Promedio minimo de excelencia"@es ;
+  becas:promedioMinimo "85" ;
+  becas:promedioMínimo "85" .
+
+becas:REQ_PromedioBueno a becas:RequisitoAcademico ;
+  rdfs:label "Promedio minimo bueno"@es ;
+  becas:promedioMinimo "75" ;
+  becas:promedioMínimo "75" .
+
+becas:REQ_TOEFL a becas:RequisitoDeIdioma ;
+  rdfs:label "TOEFL"@es ;
+  rdfs:label "TOEFL"@en ;
+  becas:nivelIdioma "B2" ;
+  becas:puntajeExamenMinimo "80" ;
+  becas:puntajeExamenMínimo "80" .
+
+becas:REQ_InglesB2 a becas:RequisitoDeIdioma ;
+  rdfs:label "Ingles B2"@es ;
+  becas:nivelIdioma "B2" .
+
+becas:REQ_CartaMotivacion a becas:RequisitoDocumental ;
+  rdfs:label "Carta de motivacion"@es .
+
+becas:REQ_VulnerabilidadEconomica a becas:RequisitoSocioeconomico ;
+  rdfs:label "Vulnerabilidad economica"@es ;
+  becas:condicionSocioeconomica "Vulnerabilidad economica demostrable" ;
+  becas:condiciónSocioeconómica "Vulnerabilidad económica demostrable" .
+
+#################################################################
+# Beneficios
+#################################################################
+
+becas:BEN_MatriculaCompleta a becas:CoberturaMatricula ;
+  rdfs:label "Cobertura completa de matricula"@es ;
+  rdfs:label "Cobertura completa de matrícula"@es ;
+  becas:montoCubierto "100%" .
+
+becas:BEN_MatriculaParcial a becas:CoberturaMatricula ;
+  rdfs:label "Cobertura parcial de matricula"@es ;
+  rdfs:label "Cobertura parcial de matrícula"@es ;
+  becas:montoCubierto "50%" .
+
+becas:BEN_EstipendioMensual a becas:Estipendio ;
+  rdfs:label "Estipendio mensual"@es ;
+  becas:montoCubierto "Variable" .
+
+becas:BEN_Pasajes a becas:Transporte ;
+  rdfs:label "Pasajes internacionales"@es .
+
+becas:BEN_SeguroMedico a becas:SeguroMedico ;
+  rdfs:label "Seguro medico"@es ;
+  rdfs:label "Seguro médico"@es .
+
+becas:BEN_Alojamiento a becas:Alojamiento ;
+  rdfs:label "Alojamiento"@es .
+
+#################################################################
+# Becas universitarias confiables
+#################################################################
+
+becas:BECA_Excelencia_USMS a becas:BecaDeExcelencia ;
   rdfs:label "Beca de Excelencia USMS"@es ;
   becas:nombreBeca "Beca de Excelencia USMS" ;
-  becas:descripcion "Beca por mérito académico, cubre matrícula y manutención." ;
+  becas:descripcion "Beca por merito academico para estudiantes con alto rendimiento. Cubre matricula y apoyo de manutencion." ;
+  becas:descripción "Beca por mérito académico para estudiantes con alto rendimiento. Cubre matrícula y apoyo de manutención." ;
   becas:montoCubierto "5000" ;
-  becas:fechaLímitePostulación "2026-08-31" .
+  becas:fechaLimitePostulacion "2026-08-31" ;
+  becas:fechaLímitePostulación "2026-08-31" ;
+  becas:esOfrecidaPor becas:INST_USMS ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_Tecnologia ;
+  becas:perteneceAÁrea becas:AREA_Tecnología ;
+  becas:tieneRequisito becas:REQ_PromedioExcelencia ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:destinadaAPais becas:PAIS_Bolivia ;
+  becas:destinadaAPaís becas:PAIS_Bolivia_OWL .
 
-becas:BECA_Movilidad_2026 a becas:Beca ;
+becas:BECA_Movilidad_2026 a becas:BecaDeMovilidad ;
   rdfs:label "Beca de Movilidad 2026"@es ;
   becas:nombreBeca "Beca de Movilidad 2026" ;
-  becas:descripcion "Financia intercambio internacional (semestre)." ;
+  becas:descripcion "Beca para intercambio academico internacional durante un semestre." ;
+  becas:descripción "Beca para intercambio académico internacional durante un semestre." ;
   becas:montoCubierto "2000" ;
-  becas:fechaLímitePostulación "2026-05-30" .
+  becas:fechaLimitePostulacion "2026-05-30" ;
+  becas:fechaLímitePostulación "2026-05-30" ;
+  becas:esOfrecidaPor becas:INST_MINEDU ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_CienciasSociales ;
+  becas:perteneceAÁrea becas:AREA_CienciasSociales ;
+  becas:tieneRequisito becas:REQ_PromedioBueno ;
+  becas:tieneRequisito becas:REQ_CartaMotivacion ;
+  becas:otorgaBeneficio becas:BEN_Pasajes ;
+  becas:otorgaBeneficio becas:BEN_SeguroMedico .
+
+becas:BECA_TOEFL a becas:BecaParcial ;
+  rdfs:label "Beca que requiere TOEFL"@es ;
+  becas:nombreBeca "Beca TOEFL" ;
+  becas:descripcion "Beca para estudiantes que acreditan dominio de ingles mediante TOEFL." ;
+  becas:descripción "Beca para estudiantes que acreditan dominio de inglés mediante TOEFL." ;
+  becas:montoCubierto "1000" ;
+  becas:fechaLimitePostulacion "2026-12-31" ;
+  becas:fechaLímitePostulación "2026-12-31" ;
+  becas:esOfrecidaPor becas:INST_USMS ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_Humanidades ;
+  becas:perteneceAÁrea becas:AREA_Humanidades ;
+  becas:tieneRequisito becas:REQ_TOEFL ;
+  becas:otorgaBeneficio becas:BEN_MatriculaParcial .
+
+becas:BECA_Fulbright_Posgrado a becas:BecaDeInvestigacion ;
+  rdfs:label "Beca Fulbright de Posgrado"@es ;
+  becas:nombreBeca "Beca Fulbright de Posgrado" ;
+  becas:descripcion "Programa de becas para estudios de posgrado e investigacion en Estados Unidos." ;
+  becas:descripción "Programa de becas para estudios de posgrado e investigación en Estados Unidos." ;
+  becas:montoCubierto "Variable" ;
+  becas:fechaLimitePostulacion "2026-10-15" ;
+  becas:fechaLímitePostulación "2026-10-15" ;
+  becas:esOfrecidaPor becas:INST_Fulbright ;
+  becas:perteneceANivel becas:NIVEL_Maestría ;
+  becas:perteneceAArea becas:AREA_CienciasSociales ;
+  becas:perteneceAÁrea becas:AREA_CienciasSociales ;
+  becas:tieneRequisito becas:REQ_InglesB2 ;
+  becas:tieneRequisito becas:REQ_CartaMotivacion ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:otorgaBeneficio becas:BEN_SeguroMedico ;
+  becas:destinadaAPais becas:PAIS_EstadosUnidos ;
+  becas:destinadaAPaís becas:PAIS_EstadosUnidos_OWL ;
+  owl:sameAs <http://dbpedia.org/resource/Fulbright_Program> .
+
+becas:BECA_DAAD_Investigacion a becas:BecaDeInvestigacion ;
+  rdfs:label "Beca DAAD de Investigacion"@es ;
+  becas:nombreBeca "Beca DAAD de Investigacion" ;
+  becas:descripcion "Beca para investigacion academica y estudios de posgrado en Alemania." ;
+  becas:descripción "Beca para investigación académica y estudios de posgrado en Alemania." ;
+  becas:montoCubierto "Variable" ;
+  becas:fechaLimitePostulacion "2026-09-30" ;
+  becas:fechaLímitePostulación "2026-09-30" ;
+  becas:esOfrecidaPor becas:INST_DAAD ;
+  becas:perteneceANivel becas:NIVEL_Doctorado ;
+  becas:perteneceAArea becas:AREA_CienciasNaturales ;
+  becas:perteneceAÁrea becas:AREA_CienciasNaturales ;
+  becas:tieneRequisito becas:REQ_InglesB2 ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:otorgaBeneficio becas:BEN_SeguroMedico ;
+  becas:destinadaAPais becas:PAIS_Alemania ;
+  becas:destinadaAPaís becas:PAIS_Alemania_OWL ;
+  owl:sameAs <http://dbpedia.org/resource/German_Academic_Exchange_Service> .
+
+becas:BECA_Chevening_Maestria a becas:BecaCompleta ;
+  rdfs:label "Beca Chevening de Maestria"@es ;
+  becas:nombreBeca "Beca Chevening de Maestria" ;
+  becas:descripcion "Beca internacional para estudios de maestria en Reino Unido." ;
+  becas:descripción "Beca internacional para estudios de maestría en Reino Unido." ;
+  becas:montoCubierto "Variable" ;
+  becas:fechaLimitePostulacion "2026-11-05" ;
+  becas:fechaLímitePostulación "2026-11-05" ;
+  becas:esOfrecidaPor becas:INST_Chevening ;
+  becas:perteneceANivel becas:NIVEL_Maestría ;
+  becas:perteneceAArea becas:AREA_CienciasSociales ;
+  becas:perteneceAÁrea becas:AREA_CienciasSociales ;
+  becas:tieneRequisito becas:REQ_InglesB2 ;
+  becas:tieneRequisito becas:REQ_CartaMotivacion ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:otorgaBeneficio becas:BEN_Pasajes ;
+  becas:destinadaAPais becas:PAIS_ReinoUnido ;
+  becas:destinadaAPaís becas:PAIS_ReinoUnido_OWL ;
+  owl:sameAs <http://dbpedia.org/resource/Chevening_Scholarship> .
+
+becas:BECA_Erasmus_Mundus a becas:BecaDeIntercambio ;
+  rdfs:label "Beca Erasmus Mundus"@es ;
+  becas:nombreBeca "Beca Erasmus Mundus" ;
+  becas:descripcion "Beca para movilidad academica y programas conjuntos de posgrado en Europa." ;
+  becas:descripción "Beca para movilidad académica y programas conjuntos de posgrado en Europa." ;
+  becas:montoCubierto "Variable" ;
+  becas:fechaLimitePostulacion "2026-01-15" ;
+  becas:fechaLímitePostulación "2026-01-15" ;
+  becas:esOfrecidaPor becas:INST_ErasmusMundus ;
+  becas:perteneceANivel becas:NIVEL_Maestría ;
+  becas:perteneceAArea becas:AREA_Tecnologia ;
+  becas:perteneceAÁrea becas:AREA_Tecnología ;
+  becas:tieneRequisito becas:REQ_InglesB2 ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_Pasajes ;
+  becas:otorgaBeneficio becas:BEN_Alojamiento ;
+  owl:sameAs <http://dbpedia.org/resource/Erasmus_Mundus> .
+
+becas:BECA_Socioeconomica_MINEDU a becas:BecaSocioeconómica ;
+  rdfs:label "Beca Socioeconomica MINEDU"@es ;
+  becas:nombreBeca "Beca Socioeconomica MINEDU" ;
+  becas:descripcion "Beca nacional para estudiantes con vulnerabilidad economica demostrable." ;
+  becas:descripción "Beca nacional para estudiantes con vulnerabilidad económica demostrable." ;
+  becas:montoCubierto "1500" ;
+  becas:fechaLimitePostulacion "2026-07-20" ;
+  becas:fechaLímitePostulación "2026-07-20" ;
+  becas:esOfrecidaPor becas:INST_MINEDU ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_CienciasSociales ;
+  becas:perteneceAÁrea becas:AREA_CienciasSociales ;
+  becas:tieneRequisito becas:REQ_VulnerabilidadEconomica ;
+  becas:otorgaBeneficio becas:BEN_MatriculaParcial ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:destinadaAPais becas:PAIS_Bolivia ;
+  becas:destinadaAPaís becas:PAIS_Bolivia_OWL .
