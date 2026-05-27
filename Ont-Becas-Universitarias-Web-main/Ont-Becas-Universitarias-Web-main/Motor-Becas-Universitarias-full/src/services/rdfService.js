@@ -101,8 +101,13 @@ class RDFService {
 
   async getScholarshipDetails(uri) {
     const query = `
-      SELECT ?p ?o WHERE {
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+      SELECT ?p ?o ?oLbl WHERE {
         <${uri}> ?p ?o .
+        OPTIONAL {
+          ?o rdfs:label ?oLbl .
+        }
       }
     `;
 
@@ -116,20 +121,52 @@ class RDFService {
       bindingsStream.on('error', reject);
     });
 
+    const NS = 'http://www.semanticweb.org/ontologia/becas-universitarias#';
+    const RDFS = 'http://www.w3.org/2000/01/rdf-schema#';
+    const OWL = 'http://www.w3.org/2002/07/owl#';
+
     const raw = {};
+    const requirements = [];
+    const benefits = [];
+    let institution = null;
+    let level = null;
+    let area = null;
+    let country = null;
+
     bindings.forEach(binding => {
       const p = binding.get('p') || binding.get('?p');
       const o = binding.get('o') || binding.get('?o');
-      if (p && o) raw[p.value] = o.value;
-    });
+      const oLbl = binding.get('oLbl') || binding.get('?oLbl');
 
-    const NS = 'http://www.semanticweb.org/ontologia/becas-universitarias#';
-    const RDFS = 'http://www.w3.org/2000/01/rdf-schema#';
+      if (!p || !o) return;
+
+      const propUri = p.value;
+      const objVal = o.value;
+      const objLabel = oLbl ? oLbl.value : objVal.split('#')[1] || objVal;
+
+      raw[propUri] = objVal;
+
+      if (propUri === `${NS}tieneRequisito`) {
+        requirements.push(objLabel);
+      } else if (propUri === `${NS}otorgaBeneficio`) {
+        benefits.push(objLabel);
+      } else if (propUri === `${NS}esOfrecidaPor`) {
+        institution = objLabel;
+      } else if (propUri === `${NS}perteneceANivel`) {
+        level = objLabel;
+      } else if (propUri === `${NS}perteneceAArea` || propUri === `${NS}perteneceAÁrea`) {
+        area = objLabel;
+      } else if (propUri === `${NS}destinadaAPais` || propUri === `${NS}destinadaAPaís`) {
+        country = objLabel;
+      }
+    });
 
     const label = raw[`${RDFS}label`] || raw[`${NS}nombreBeca`] || uri;
     const desc = raw[`${NS}descripcion`] || raw[`${NS}descripción`] || '';
     const amount = raw[`${NS}montoCubierto`] || null;
     const deadline = raw[`${NS}fechaLímitePostulación`] || raw[`${NS}fechaLimitePostulacion`] || null;
+    const dbpediaUri = raw[`${OWL}sameAs`] || null;
+    const seeAlso = raw[`${RDFS}seeAlso`] || null;
 
     return {
       uri,
@@ -139,6 +176,14 @@ class RDFService {
       description: desc,
       amount,
       deadline,
+      dbpediaUri,
+      seeAlso,
+      requirements: requirements.length > 0 ? requirements.join(', ') : null,
+      benefits: benefits.length > 0 ? benefits.join(', ') : null,
+      institution,
+      level,
+      area,
+      country,
       thumbnail: null,
       source: 'local',
       _raw: raw

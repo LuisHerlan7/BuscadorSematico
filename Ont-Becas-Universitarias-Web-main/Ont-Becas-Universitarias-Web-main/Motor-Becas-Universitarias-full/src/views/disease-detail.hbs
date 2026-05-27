@@ -56,6 +56,46 @@
           </li>
           {{/if}}
 
+          {{#if disease.institution}}
+          <li class="beca-info-item">
+            <span class="beca-info-icon">🏢</span>
+            <div>
+              <span class="beca-info-label">Institución</span>
+              <span class="beca-info-value">{{disease.institution}}</span>
+            </div>
+          </li>
+          {{/if}}
+
+          {{#if disease.level}}
+          <li class="beca-info-item">
+            <span class="beca-info-icon">🎓</span>
+            <div>
+              <span class="beca-info-label">Nivel</span>
+              <span class="beca-info-value">{{disease.level}}</span>
+            </div>
+          </li>
+          {{/if}}
+
+          {{#if disease.area}}
+          <li class="beca-info-item">
+            <span class="beca-info-icon">🔬</span>
+            <div>
+              <span class="beca-info-label">Área</span>
+              <span class="beca-info-value">{{disease.area}}</span>
+            </div>
+          </li>
+          {{/if}}
+
+          {{#if disease.country}}
+          <li class="beca-info-item">
+            <span class="beca-info-icon">📍</span>
+            <div>
+              <span class="beca-info-label">País de Destino</span>
+              <span class="beca-info-value">{{disease.country}}</span>
+            </div>
+          </li>
+          {{/if}}
+
         </ul>
       </div>
     </aside>
@@ -76,14 +116,41 @@
         {{/if}}
       </section>
 
+      {{#if disease.requirements}}
+      <section class="beca-requirements" style="margin-top: 2rem;">
+        <h2 class="section-heading">Requisitos / Elegibilidad</h2>
+        <p>{{disease.requirements}}</p>
+      </section>
+      {{/if}}
+
+      {{#if disease.benefits}}
+      <section class="beca-benefits" style="margin-top: 2rem;">
+        <h2 class="section-heading">Beneficios / Cobertura</h2>
+        <p>{{disease.benefits}}</p>
+      </section>
+      {{/if}}
+
       <div class="beca-actions">
         <a href="/search?q={{disease.name}}" class="btn-back">
           ← Volver a resultados
         </a>
-        {{#if disease.uri}}
+        
+        {{#if disease.seeAlso}}
+          <a href="{{disease.seeAlso}}" class="btn-dbpedia" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16,185,129,.35);" target="_blank" rel="noopener noreferrer">
+            Visitar Sitio Oficial ↗
+          </a>
+        {{/if}}
+
+        {{#if (eq disease.source 'dbpedia')}}
           <a href="{{disease.uri}}" class="btn-dbpedia" target="_blank" rel="noopener noreferrer">
             Ver en DBpedia ↗
           </a>
+        {{else}}
+          {{#if disease.dbpediaUri}}
+            <a href="{{disease.dbpediaUri}}" class="btn-dbpedia" target="_blank" rel="noopener noreferrer">
+              Ver en DBpedia ↗
+            </a>
+          {{/if}}
         {{/if}}
       </div>
     </main>

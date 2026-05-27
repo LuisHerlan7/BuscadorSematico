@@ -109,7 +109,39 @@ becas:PAIS_ReinoUnido a becas:Pais ;
 becas:PAIS_ReinoUnido_OWL a becas:País ;
   rdfs:label "Reino Unido"@es ;
   becas:nombreInstitucion "Reino Unido" ;
+  becas:nombreInstitución "Reino Unido" ;
   owl:sameAs <http://dbpedia.org/resource/United_Kingdom> .
+
+becas:PAIS_Espana a becas:Pais ;
+  rdfs:label "España"@es ;
+  becas:nombreInstitucion "España" ;
+  owl:sameAs <http://dbpedia.org/resource/Spain> .
+
+becas:PAIS_Espana_OWL a becas:País ;
+  rdfs:label "España"@es ;
+  becas:nombreInstitucion "España" ;
+  owl:sameAs <http://dbpedia.org/resource/Spain> .
+
+becas:PAIS_Japon a becas:Pais ;
+  rdfs:label "Japón"@es ;
+  becas:nombreInstitucion "Japón" ;
+  owl:sameAs <http://dbpedia.org/resource/Japan> .
+
+becas:PAIS_Japon_OWL a becas:País ;
+  rdfs:label "Japón"@es ;
+  becas:nombreInstitucion "Japón" ;
+  owl:sameAs <http://dbpedia.org/resource/Japan> .
+
+becas:PAIS_Francia a becas:Pais ;
+  rdfs:label "Francia"@es ;
+  becas:nombreInstitucion "Francia" ;
+  owl:sameAs <http://dbpedia.org/resource/France> .
+
+becas:PAIS_Francia_OWL a becas:País ;
+  rdfs:label "Francia"@es ;
+  becas:nombreInstitucion "Francia" ;
+  owl:sameAs <http://dbpedia.org/resource/France> .
+
 
 #################################################################
 # Instituciones validadas
@@ -142,6 +174,42 @@ becas:INST_ErasmusMundus a becas:OrganismoInternacional ;
   rdfs:label "Erasmus Mundus"@es ;
   becas:nombreInstitucion "Erasmus Mundus" ;
   owl:sameAs <http://dbpedia.org/resource/Erasmus_Mundus> .
+
+becas:INST_UMSA a becas:Universidad ;
+  rdfs:label "Universidad Mayor de San Andres"@es ;
+  becas:nombreInstitucion "Universidad Mayor de San Andres" ;
+  owl:sameAs <http://dbpedia.org/resource/Higher_University_of_San_Andr%C3%A9s> .
+
+becas:INST_UPB a becas:Universidad ;
+  rdfs:label "Universidad Privada Boliviana"@es ;
+  becas:nombreInstitucion "Universidad Privada Boliviana" ;
+  owl:sameAs <http://dbpedia.org/resource/Universidad_Privada_Boliviana> .
+
+becas:INST_UCB a becas:Universidad ;
+  rdfs:label "Universidad Catolica Boliviana"@es ;
+  becas:nombreInstitucion "Universidad Catolica Boliviana" ;
+  owl:sameAs <http://dbpedia.org/resource/Universidad_Cat%C3%B3lica_Boliviana_San_Pablo> .
+
+becas:INST_UAGRM a becas:Universidad ;
+  rdfs:label "Universidad Autonoma Gabriel Rene Moreno"@es ;
+  becas:nombreInstitucion "Universidad Autonoma Gabriel Rene Moreno" ;
+  owl:sameAs <http://dbpedia.org/resource/Universidad_Aut%C3%B3noma_Gabriel_Ren%C3%A9_Moreno> .
+
+becas:INST_FundacionCarolina a becas:OrganismoInternacional ;
+  rdfs:label "Fundacion Carolina"@es ;
+  becas:nombreInstitucion "Fundacion Carolina" ;
+  owl:sameAs <http://dbpedia.org/resource/Fundaci%C3%B3n_Carolina> .
+
+becas:INST_Monbukagakusho a becas:OrganismoInternacional ;
+  rdfs:label "Gobierno de Japon (MEXT)"@es ;
+  becas:nombreInstitucion "MEXT" ;
+  owl:sameAs <http://dbpedia.org/resource/Monbukagakusho_Scholarship> .
+
+becas:INST_CampusFrance a becas:OrganismoInternacional ;
+  rdfs:label "Campus France"@es ;
+  becas:nombreInstitucion "Campus France" ;
+  owl:sameAs <http://dbpedia.org/resource/Campus_France> .
+
 
 #################################################################
 # Requisitos
@@ -176,6 +244,19 @@ becas:REQ_VulnerabilidadEconomica a becas:RequisitoSocioeconomico ;
   becas:condicionSocioeconomica "Vulnerabilidad economica demostrable" ;
   becas:condiciónSocioeconómica "Vulnerabilidad económica demostrable" .
 
+becas:REQ_PropuestaInvestigacion a becas:RequisitoAcademico ;
+  rdfs:label "Propuesta de investigacion"@es ;
+  rdfs:label "Propuesta de investigación"@es .
+
+becas:REQ_TituloGrado a becas:RequisitoAcademico ;
+  rdfs:label "Titulo academico de grado"@es ;
+  rdfs:label "Título académico de grado"@es .
+
+becas:REQ_CartaRecomendacion a becas:RequisitoDocumental ;
+  rdfs:label "Carta de recomendacion academica"@es ;
+  rdfs:label "Carta de recomendación académica"@es .
+
+
 #################################################################
 # Beneficios
 #################################################################
@@ -209,8 +290,8 @@ becas:BEN_Alojamiento a becas:Alojamiento ;
 #################################################################
 
 becas:BECA_Excelencia_USMS a becas:BecaDeExcelencia ;
-  rdfs:label "Beca de Excelencia USMS"@es ;
-  becas:nombreBeca "Beca de Excelencia USMS" ;
+  rdfs:label "Beca de Excelencia"@es ;
+  becas:nombreBeca "Beca de Excelencia" ;
   becas:descripcion "Beca por merito academico para estudiantes con alto rendimiento. Cubre matricula y apoyo de manutencion." ;
   becas:descripción "Beca por mérito académico para estudiantes con alto rendimiento. Cubre matrícula y apoyo de manutención." ;
   becas:montoCubierto "5000" ;
@@ -224,7 +305,7 @@ becas:BECA_Excelencia_USMS a becas:BecaDeExcelencia ;
   becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
   becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
   becas:destinadaAPais becas:PAIS_Bolivia ;
-  becas:destinadaAPaís becas:PAIS_Bolivia_OWL .
+  rdfs:seeAlso <https://www.becas.com/tipos-de-becas/becas-de-excelencia> .
 
 becas:BECA_Movilidad_2026 a becas:BecaDeMovilidad ;
   rdfs:label "Beca de Movilidad 2026"@es ;
@@ -241,7 +322,8 @@ becas:BECA_Movilidad_2026 a becas:BecaDeMovilidad ;
   becas:tieneRequisito becas:REQ_PromedioBueno ;
   becas:tieneRequisito becas:REQ_CartaMotivacion ;
   becas:otorgaBeneficio becas:BEN_Pasajes ;
-  becas:otorgaBeneficio becas:BEN_SeguroMedico .
+  becas:otorgaBeneficio becas:BEN_SeguroMedico ;
+  rdfs:seeAlso <https://buscadordebecas.com/como-aplicar-becas-de-movilidad-internacional/> .
 
 becas:BECA_TOEFL a becas:BecaParcial ;
   rdfs:label "Beca que requiere TOEFL"@es ;
@@ -256,7 +338,7 @@ becas:BECA_TOEFL a becas:BecaParcial ;
   becas:perteneceAArea becas:AREA_Humanidades ;
   becas:perteneceAÁrea becas:AREA_Humanidades ;
   becas:tieneRequisito becas:REQ_TOEFL ;
-  becas:otorgaBeneficio becas:BEN_MatriculaParcial .
+  rdfs:seeAlso <https://www.ets.org/content/ets-org/language-master/es_mx/home/toefl/grants.html> .
 
 becas:BECA_Fulbright_Posgrado a becas:BecaDeInvestigacion ;
   rdfs:label "Beca Fulbright de Posgrado"@es ;
@@ -354,3 +436,103 @@ becas:BECA_Socioeconomica_MINEDU a becas:BecaSocioeconómica ;
   becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
   becas:destinadaAPais becas:PAIS_Bolivia ;
   becas:destinadaAPaís becas:PAIS_Bolivia_OWL .
+
+becas:BECA_Fundacion_Carolina a becas:BecaCompleta ;
+  rdfs:label "Beca Fundacion Carolina de Postgrado"@es ;
+  becas:nombreBeca "Beca Fundacion Carolina de Postgrado" ;
+  becas:descripcion "Programa de becas para estudios de postgrado y doctorado en universidades espanolas para estudiantes iberoamericanos." ;
+  becas:descripción "Programa de becas para estudios de postgrado y doctorado en universidades españolas para estudiantes iberoamericanos." ;
+  becas:montoCubierto "Matrícula, boleto de avión, seguro médico y estipendio mensual" ;
+  becas:fechaLimitePostulacion "2026-03-15" ;
+  becas:fechaLímitePostulación "2026-03-15" ;
+  becas:esOfrecidaPor becas:INST_FundacionCarolina ;
+  becas:perteneceANivel becas:NIVEL_Maestría ;
+  becas:perteneceAArea becas:AREA_Tecnologia ;
+  becas:perteneceAÁrea becas:AREA_Tecnología ;
+  becas:tieneRequisito becas:REQ_PromedioExcelencia ;
+  becas:tieneRequisito becas:REQ_TituloGrado ;
+  becas:tieneRequisito becas:REQ_CartaMotivacion ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_Pasajes ;
+  becas:otorgaBeneficio becas:BEN_SeguroMedico ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:destinadaAPais becas:PAIS_Espana ;
+  becas:destinadaAPaís becas:PAIS_Espana_OWL ;
+  owl:sameAs <http://dbpedia.org/resource/Fundaci%C3%B3n_Carolina> .
+
+becas:BECA_Mext_Japon a becas:BecaCompleta ;
+  rdfs:label "Beca MEXT del Gobierno de Japon"@es ;
+  becas:nombreBeca "Beca MEXT del Gobierno de Japon" ;
+  becas:descripcion "Beca completa financiada por el Ministerio de Educacion, Cultura, Deportes, Ciencia y Tecnologia del Japon para estudios de investigacion y postgrado." ;
+  becas:descripción "Beca completa financiada por el Ministerio de Educación, Cultura, Deportes, Ciencia y Tecnología del Japón para estudios de investigación y postgrado." ;
+  becas:montoCubierto "143000 JPY mensuales, pasaje aéreo de ida y vuelta, y exención de tasas académicas" ;
+  becas:fechaLimitePostulacion "2026-06-10" ;
+  becas:fechaLímitePostulación "2026-06-10" ;
+  becas:esOfrecidaPor becas:INST_Monbukagakusho ;
+  becas:perteneceANivel becas:NIVEL_Doctorado ;
+  becas:perteneceAArea becas:AREA_CienciasNaturales ;
+  becas:perteneceAÁrea becas:AREA_CienciasNaturales ;
+  becas:tieneRequisito becas:REQ_InglesB2 ;
+  becas:tieneRequisito becas:REQ_PropuestaInvestigacion ;
+  becas:tieneRequisito becas:REQ_TituloGrado ;
+  becas:tieneRequisito becas:REQ_CartaRecomendacion ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:otorgaBeneficio becas:BEN_Pasajes ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:destinadaAPais becas:PAIS_Japon ;
+  becas:destinadaAPaís becas:PAIS_Japon_OWL ;
+  owl:sameAs <http://dbpedia.org/resource/Monbukagakusho_Scholarship> .
+
+becas:BECA_IDH_UMSA a becas:BecaSocioeconómica ;
+  rdfs:label "Beca Comedor e IDH UMSA"@es ;
+  becas:nombreBeca "Beca Comedor e IDH UMSA" ;
+  becas:descripcion "Apoyo socioeconomico financiado por recursos del Impuesto Directo a los Hidrocarburos (IDH) para estudiantes regulares con necesidad socioeconomica de la UMSA." ;
+  becas:descripción "Apoyo socioeconómico financiado por recursos del Impuesto Directo a los Hidrocarburos (IDH) para estudiantes regulares con necesidad socioeconómica de la UMSA." ;
+  becas:montoCubierto "Almuerzo diario gratuito en el comedor universitario o estipendio monetario equivalente" ;
+  becas:fechaLimitePostulacion "2026-03-31" ;
+  becas:fechaLímitePostulación "2026-03-31" ;
+  becas:esOfrecidaPor becas:INST_UMSA ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_CienciasSociales ;
+  becas:perteneceAÁrea becas:AREA_CienciasSociales ;
+  becas:tieneRequisito becas:REQ_VulnerabilidadEconomica ;
+  becas:tieneRequisito becas:REQ_PromedioBueno ;
+  becas:otorgaBeneficio becas:BEN_MatriculaParcial ;
+  becas:otorgaBeneficio becas:BEN_EstipendioMensual ;
+  becas:destinadaAPais becas:PAIS_Bolivia ;
+  becas:destinadaAPaís becas:PAIS_Bolivia_OWL .
+
+becas:BECA_Excelencia_UPB a becas:BecaDeExcelencia ;
+  rdfs:label "Beca de Excelencia UPB"@es ;
+  becas:nombreBeca "Beca de Excelencia UPB" ;
+  becas:descripcion "Beca academica parcial o completa otorgada a estudiantes sobresalientes de secundaria mediante concurso de becas a nivel nacional." ;
+  becas:descripción "Beca académica parcial o completa otorgada a estudiantes sobresalientes de secundaria mediante concurso de becas a nivel nacional." ;
+  becas:montoCubierto "Hasta 100% de la colegiatura academica" ;
+  becas:fechaLimitePostulacion "2026-11-30" ;
+  becas:fechaLímitePostulación "2026-11-30" ;
+  becas:esOfrecidaPor becas:INST_UPB ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_Tecnologia ;
+  becas:perteneceAÁrea becas:AREA_Tecnología ;
+  becas:tieneRequisito becas:REQ_PromedioExcelencia ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:destinadaAPais becas:PAIS_Bolivia ;
+  becas:destinadaAPaís becas:PAIS_Bolivia_OWL .
+
+becas:BECA_Excelencia_UCB a becas:BecaDeExcelencia ;
+  rdfs:label "Beca Bachiller Destacado UCB"@es ;
+  becas:nombreBeca "Beca Bachiller Destacado UCB" ;
+  becas:descripcion "Beca de excelencia para los mejores bachilleres de unidades educativas del pais que deseen ingresar a la Universidad Catolica Boliviana." ;
+  becas:descripción "Beca de excelencia para los mejores bachilleres de unidades educativas del país que deseen ingresar a la Universidad Católica Boliviana." ;
+  becas:montoCubierto "Corte del 100% de la matricula semestral" ;
+  becas:fechaLimitePostulacion "2026-01-30" ;
+  becas:fechaLímitePostulación "2026-01-30" ;
+  becas:esOfrecidaPor becas:INST_UCB ;
+  becas:perteneceANivel becas:NIVEL_Pregrado ;
+  becas:perteneceAArea becas:AREA_Humanidades ;
+  becas:perteneceAÁrea becas:AREA_Humanidades ;
+  becas:tieneRequisito becas:REQ_PromedioExcelencia ;
+  becas:otorgaBeneficio becas:BEN_MatriculaCompleta ;
+  becas:destinadaAPais becas:PAIS_Bolivia ;
+  becas:destinadaAPaís becas:PAIS_Bolivia_OWL .
+
