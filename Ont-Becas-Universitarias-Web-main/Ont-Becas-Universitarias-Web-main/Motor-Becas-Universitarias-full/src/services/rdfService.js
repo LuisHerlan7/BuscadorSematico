@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const { QueryEngine } = require('@comunica/query-sparql');
-const N3 = require('n3');
 
 // Rutas de los archivos ontológicos
 const defaultOwl = path.join(__dirname, '../public/data/ontologia_becas.owl');
@@ -12,35 +11,99 @@ if (fs.existsSync(instancesTtl)) {
   rdfFilePath = process.env.ONTOLOGY_FILE || instancesTtl;
 }
 
+// Términos genéricos que describen la ontología o conectores comunes
+const GENERIC_TERMS = new Set([
+  'beca', 'becas', 'universitaria', 'universitarias', 
+  'universitario', 'universitarios', 'universidad', 'universidades',
+  'estudio', 'estudios', 'programa', 'programas', 'de', 'para', 'en'
+]);
+
 class RDFService {
   constructor() {
     this.engine = new QueryEngine();
-    this._dataset = null; // caché del dataset cargado en memoria
-  }
-
-  async _loadDataset() {
-    if (this._dataset) return this._dataset;
-
+    
+    // Resolvemos la ruta absoluta del archivo ontológico
     const filePath = path.resolve(rdfFilePath);
     if (!fs.existsSync(filePath)) {
       throw new Error(`No se encontró el archivo ontológico en: ${filePath}`);
     }
+    
+    // Cargamos el contenido del archivo en memoria para evitar accesos repetitivos a disco
+    this.fileContent = fs.readFileSync(filePath, 'utf8');
+    
+    // Determinamos dinámicamente el mediaType según la extensión del archivo
+    const ext = path.extname(filePath).toLowerCase();
+    this.mediaType = ext === '.ttl' ? 'text/turtle' : 'application/rdf+xml';
+  }
 
-    // Nota: N3 maneja nativamente Turtle (.ttl), TriG, N-Triples, N-Quads.
-    // Si tu .owl está en formato RDF/XML puro, el parser N3 fallará. 
-    // Es recomendable convertir tu .owl a .ttl.
-    const content = fs.readFileSync(filePath, 'utf8');
-    const parser = new N3.Parser({ baseIRI: `file://${filePath}` });
-    const quads = parser.parse(content);
+  _getComunicaSources() {
+    return [{
+      type: 'serialized',
+      value: this.fileContent,
+      mediaType: this.mediaType,
+      baseIRI: 'http://www.semanticweb.org/ontologia/becas-universitarias#'
+    }];
+  }
 
-    const store = new N3.Store(quads);
-    this._dataset = store;
-    return store;
+  /**
+   * Tokeniza y normaliza el término de búsqueda
+   */
+  _parseSearchKeywords(term) {
+    if (!term) return [];
+    const normalized = term
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // Elimina acentos
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .trim();
+    
+    return normalized.split(/\s+/).filter(w => w.length >= 2);
+  }
+
+  /**
+   * Filtra términos genéricos para quedarse con las palabras clave específicas
+   */
+  _getSpecificKeywords(keywords) {
+    return keywords.filter(w => {
+      let stem = w;
+      // Singularización básica para español
+      if (w.endsWith('es') && w.length > 4) {
+        stem = w.slice(0, -2);
+      } else if (w.endsWith('s') && !w.endsWith('es') && w.length > 3) {
+        stem = w.slice(0, -1);
+      }
+      return !GENERIC_TERMS.has(w) && !GENERIC_TERMS.has(stem);
+    });
+  }
+
+  /**
+   * Construye dinámicamente la cláusula FILTER en SPARQL para admitir búsquedas multi-palabra y evitar búsquedas vacías
+   */
+  _buildSPARQLFilter(term) {
+    const keywords = this._parseSearchKeywords(term);
+    const specific = this._getSpecificKeywords(keywords);
+
+    if (specific.length === 0) {
+      // Si la búsqueda solo contiene términos genéricos (ej. "becas universitarias"),
+      // devolvemos todas las becas de la ontología sin aplicar filtro rígido de texto.
+      return '';
+    }
+
+    // Si contiene palabras clave específicas, construimos filtros tolerantes con OR (||)
+    const filterClauses = specific.map(word => {
+      const escaped = word.replace(/"/g, '\\"');
+      return `(
+        CONTAINS(LCASE(STR(?label)), "${escaped}")
+        || CONTAINS(LCASE(STR(?nombre)), "${escaped}")
+        || CONTAINS(LCASE(STR(?descripcion)), "${escaped}")
+      )`;
+    });
+
+    return `FILTER(${filterClauses.join(' || ')})`;
   }
 
   async searchScholarships(term, lang = 'es') {
-    const ontologyClass = process.env.ONTOLOGY_CLASS || 'http://www.semanticweb.org/ontologia/becas-universitarias#Beca';
-    const escaped = ('' + term).replace(/"/g, '\\"');
+    const filterClause = this._buildSPARQLFilter(term);
 
     const query = `
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -61,16 +124,13 @@ class RDFService {
         OPTIONAL { ?s becas:fechaLimitePostulacion ?fechaAlt }
         OPTIONAL { ?s becas:nombreBeca ?nombre }
         BIND(COALESCE(?fecha, ?fechaAlt) AS ?fechaFinal)
-        FILTER(
-          CONTAINS(LCASE(STR(?label)), LCASE("${escaped}"))
-          || CONTAINS(LCASE(STR(?nombre)), LCASE("${escaped}"))
-          || CONTAINS(LCASE(STR(?descripcion)), LCASE("${escaped}"))
-        )
+        
+        ${filterClause}
       } LIMIT 50
     `;
 
-    const dataset = await this._loadDataset();
-    const bindingsStream = await this.engine.queryBindings(query, { sources: [dataset] });
+    // Consultamos pasando los datos serializados
+    const bindingsStream = await this.engine.queryBindings(query, { sources: this._getComunicaSources() });
     const bindings = [];
 
     await new Promise((resolve, reject) => {
@@ -111,8 +171,8 @@ class RDFService {
       }
     `;
 
-    const dataset = await this._loadDataset();
-    const bindingsStream = await this.engine.queryBindings(query, { sources: [dataset] });
+    // Consultamos pasando los datos serializados
+    const bindingsStream = await this.engine.queryBindings(query, { sources: this._getComunicaSources() });
     const bindings = [];
 
     await new Promise((resolve, reject) => {
