@@ -231,7 +231,9 @@ class RDFService {
           ?req rdfs:label ?reqLabel .
           FILTER(regex(str(?reqLabel), "${re}", "i"))
           OPTIONAL { ?beca rdfs:label ?label }
-          OPTIONAL { ?beca becas:descripcion ?descripcion }
+          OPTIONAL { ?beca becas:descripcion ?descripcionSimple }
+          OPTIONAL { ?beca becas:descripción ?descripcionOwl }
+          BIND(COALESCE(?descripcionSimple, ?descripcionOwl) AS ?descripcion)
         } LIMIT 100
       `;
     } else if (prop === 'otorgaBeneficio') {
@@ -247,7 +249,9 @@ class RDFService {
           ?ben rdfs:label ?benLabel .
           FILTER(regex(str(?benLabel), "${re}", "i"))
           OPTIONAL { ?beca rdfs:label ?label }
-          OPTIONAL { ?beca becas:descripcion ?descripcion }
+          OPTIONAL { ?beca becas:descripcion ?descripcionSimple }
+          OPTIONAL { ?beca becas:descripción ?descripcionOwl }
+          BIND(COALESCE(?descripcionSimple, ?descripcionOwl) AS ?descripcion)
         } LIMIT 100
       `;
     } else if (prop === 'perteneceAÁrea') {
@@ -259,11 +263,81 @@ class RDFService {
         SELECT DISTINCT ?beca ?label ?descripcion WHERE {
           ?beca rdf:type ?t .
           ?t rdfs:subClassOf* becas:Beca .
-          ?beca becas:perteneceAÁrea ?area .
-          ?area rdfs:label ?areaLabel .
+          {
+            ?beca becas:perteneceAÁrea ?area .
+            ?area rdfs:label ?areaLabel .
+          } UNION {
+            ?beca becas:perteneceAArea ?area .
+            ?area rdfs:label ?areaLabel .
+          }
           FILTER(regex(str(?areaLabel), "${re}", "i"))
           OPTIONAL { ?beca rdfs:label ?label }
-          OPTIONAL { ?beca becas:descripcion ?descripcion }
+          OPTIONAL { ?beca becas:descripcion ?descripcionSimple }
+          OPTIONAL { ?beca becas:descripción ?descripcionOwl }
+          BIND(COALESCE(?descripcionSimple, ?descripcionOwl) AS ?descripcion)
+        } LIMIT 100
+      `;
+    } else if (prop === 'perteneceANivel') {
+      query = `
+        PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+        SELECT DISTINCT ?beca ?label ?descripcion WHERE {
+          ?beca rdf:type ?t .
+          ?t rdfs:subClassOf* becas:Beca .
+          ?beca becas:perteneceANivel ?nivel .
+          ?nivel rdfs:label ?nivelLabel .
+          FILTER(regex(str(?nivelLabel), "${re}", "i"))
+          OPTIONAL { ?beca rdfs:label ?label }
+          OPTIONAL { ?beca becas:descripcion ?descripcionSimple }
+          OPTIONAL { ?beca becas:descripción ?descripcionOwl }
+          BIND(COALESCE(?descripcionSimple, ?descripcionOwl) AS ?descripcion)
+        } LIMIT 100
+      `;
+    } else if (prop === 'esOfrecidaPor') {
+      query = `
+        PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+        SELECT DISTINCT ?beca ?label ?descripcion WHERE {
+          ?beca rdf:type ?t .
+          ?t rdfs:subClassOf* becas:Beca .
+          ?beca becas:esOfrecidaPor ?inst .
+          OPTIONAL { ?inst rdfs:label ?instLabel }
+          OPTIONAL { ?inst becas:nombreInstitucion ?instNombre }
+          FILTER(
+            regex(str(COALESCE(?instLabel, "")), "${re}", "i") ||
+            regex(str(COALESCE(?instNombre, "")), "${re}", "i")
+          )
+          OPTIONAL { ?beca rdfs:label ?label }
+          OPTIONAL { ?beca becas:descripcion ?descripcionSimple }
+          OPTIONAL { ?beca becas:descripción ?descripcionOwl }
+          BIND(COALESCE(?descripcionSimple, ?descripcionOwl) AS ?descripcion)
+        } LIMIT 100
+      `;
+    } else if (prop === 'destinadaAPaís') {
+      query = `
+        PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+        SELECT DISTINCT ?beca ?label ?descripcion WHERE {
+          ?beca rdf:type ?t .
+          ?t rdfs:subClassOf* becas:Beca .
+          {
+            ?beca becas:destinadaAPaís ?pais .
+            ?pais rdfs:label ?paisLabel .
+          } UNION {
+            ?beca becas:destinadaAPais ?pais .
+            ?pais rdfs:label ?paisLabel .
+          }
+          FILTER(regex(str(?paisLabel), "${re}", "i"))
+          OPTIONAL { ?beca rdfs:label ?label }
+          OPTIONAL { ?beca becas:descripcion ?descripcionSimple }
+          OPTIONAL { ?beca becas:descripción ?descripcionOwl }
+          BIND(COALESCE(?descripcionSimple, ?descripcionOwl) AS ?descripcion)
         } LIMIT 100
       `;
     }
@@ -351,7 +425,9 @@ class RDFService {
         OPTIONAL { ?t rdfs:label ?tLabel }
         OPTIONAL { ?t rdfs:subClassOf* ?superClass . OPTIONAL { ?superClass rdfs:label ?superLabel } }
         OPTIONAL { ?beca rdfs:label ?label }
-        OPTIONAL { ?beca becas:descripcion ?descripcion }
+        OPTIONAL { ?beca becas:descripcion ?descripcionSimple }
+        OPTIONAL { ?beca becas:descripción ?descripcionOwl }
+        BIND(COALESCE(?descripcionSimple, ?descripcionOwl) AS ?descripcion)
 
         FILTER(
           (

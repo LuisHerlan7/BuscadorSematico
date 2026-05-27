@@ -22,17 +22,46 @@ module.exports = {
 
         BIND(COALESCE(?nombre, ?labelRaw) AS ?label)
 
-        # Buscar por coincidencia sobre label/nombre/descripcion o en el área asociada
-        OPTIONAL { ?beca becas:descripcion ?descripcion }
-        OPTIONAL { ?beca becas:montoCubierto ?monto }
-        OPTIONAL { ?beca becas:fechaLímitePostulación ?fechaLimite }
+        # Buscar por coincidencia sobre label/nombre/descripcion y entidades relacionadas
+        OPTIONAL { ?beca becas:descripcion ?descripcionSimple }
+        OPTIONAL { ?beca becas:descripción ?descripcionOwl }
+        BIND(COALESCE(?descripcionSimple, ?descripcionOwl) AS ?descripcion)
+
+        OPTIONAL { ?beca becas:montoCubierto ?montoDirecto }
+        OPTIONAL {
+          ?beca becas:otorgaBeneficio ?beneficioMonto .
+          ?beneficioMonto becas:montoCubierto ?montoBeneficio .
+        }
+        BIND(COALESCE(?montoDirecto, ?montoBeneficio) AS ?monto)
+
+        OPTIONAL { ?beca becas:fechaLímitePostulación ?fechaLimiteOwl }
+        OPTIONAL { ?beca becas:fechaLimitePostulacion ?fechaLimiteSimple }
+        BIND(COALESCE(?fechaLimiteOwl, ?fechaLimiteSimple) AS ?fechaLimite)
 
         OPTIONAL { ?beca becas:perteneceAÁrea ?area . ?area rdfs:label ?areaLabel }
+        OPTIONAL { ?beca becas:perteneceAArea ?areaSimple . ?areaSimple rdfs:label ?areaSimpleLabel }
+        OPTIONAL { ?beca becas:perteneceANivel ?nivel . ?nivel rdfs:label ?nivelLabel }
+        OPTIONAL { ?beca becas:esOfrecidaPor ?institucion . ?institucion rdfs:label ?institucionLabel }
+        OPTIONAL { ?beca becas:esOfrecidaPor ?institucionNombre . ?institucionNombre becas:nombreInstitucion ?institucionNombreLabel }
+        OPTIONAL { ?beca becas:tieneRequisito ?requisito . ?requisito rdfs:label ?requisitoLabel }
+        OPTIONAL { ?beca becas:otorgaBeneficio ?beneficio . ?beneficio rdfs:label ?beneficioLabel }
+        OPTIONAL { ?beca becas:destinadaAPaís ?pais . ?pais rdfs:label ?paisLabel }
+        OPTIONAL { ?beca becas:destinadaAPais ?paisSimple . ?paisSimple rdfs:label ?paisSimpleLabel }
+        OPTIONAL { ?t rdfs:label ?tipoLabel }
 
         FILTER(
           CONTAINS(LCASE(STR(COALESCE(?label, ""))), LCASE("${escapedTerm}")) ||
           CONTAINS(LCASE(STR(COALESCE(?descripcion, ""))), LCASE("${escapedTerm}")) ||
-          CONTAINS(LCASE(STR(COALESCE(?areaLabel, ""))), LCASE("${escapedTerm}"))
+          CONTAINS(LCASE(STR(COALESCE(?areaLabel, ""))), LCASE("${escapedTerm}")) ||
+          CONTAINS(LCASE(STR(COALESCE(?areaSimpleLabel, ""))), LCASE("${escapedTerm}")) ||
+          CONTAINS(LCASE(STR(COALESCE(?nivelLabel, ""))), LCASE("${escapedTerm}")) ||
+          CONTAINS(LCASE(STR(COALESCE(?institucionLabel, ""))), LCASE("${escapedTerm}")) ||
+          CONTAINS(LCASE(STR(COALESCE(?institucionNombreLabel, ""))), LCASE("${escapedTerm}")) ||
+          CONTAINS(LCASE(STR(COALESCE(?requisitoLabel, ""))), LCASE("${escapedTerm}")) ||
+          CONTAINS(LCASE(STR(COALESCE(?beneficioLabel, ""))), LCASE("${escapedTerm}")) ||
+          CONTAINS(LCASE(STR(COALESCE(?paisLabel, ""))), LCASE("${escapedTerm}")) ||
+          CONTAINS(LCASE(STR(COALESCE(?paisSimpleLabel, ""))), LCASE("${escapedTerm}")) ||
+          CONTAINS(LCASE(STR(COALESCE(?tipoLabel, ""))), LCASE("${escapedTerm}"))
         )
       }
       LIMIT 100

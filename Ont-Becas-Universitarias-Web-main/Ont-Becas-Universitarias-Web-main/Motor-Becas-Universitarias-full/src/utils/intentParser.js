@@ -3,9 +3,24 @@
 const KEYWORDS = [
   {keywords: ['toefl'], property: 'tieneRequisito', type: 'requisito', valueNormalize: s => s.toUpperCase()},
   {keywords: ['ielts'], property: 'tieneRequisito', type: 'requisito', valueNormalize: s => s.toUpperCase()},
+  {keywords: ['ingles', 'inglés', 'b2'], property: 'tieneRequisito', type: 'requisito', valueNormalize: s => s},
+  {keywords: ['promedio', 'excelencia'], property: 'tieneRequisito', type: 'requisito', valueNormalize: s => s},
   {keywords: ['alojamiento','housing'], property: 'otorgaBeneficio', type: 'beneficio', valueNormalize: s => s},
-  {keywords: ['manutención','stipend','stipendio'], property: 'otorgaBeneficio', type: 'beneficio', valueNormalize: s => s},
-  {keywords: ['ingenier','engineering','ingeniería'], property: 'perteneceAÁrea', type: 'area', valueNormalize: s => s},
+  {keywords: ['manutención','manutencion','stipend','stipendio'], property: 'otorgaBeneficio', type: 'beneficio', valueNormalize: s => s},
+  {keywords: ['matricula', 'matrícula'], property: 'otorgaBeneficio', type: 'beneficio', valueNormalize: s => s},
+  {keywords: ['pasajes', 'transporte'], property: 'otorgaBeneficio', type: 'beneficio', valueNormalize: s => s},
+  {keywords: ['seguro', 'seguro medico', 'seguro médico'], property: 'otorgaBeneficio', type: 'beneficio', valueNormalize: s => s},
+  {keywords: ['tecnologia', 'tecnología', 'ingenier', 'engineering', 'ingeniería'], property: 'perteneceAÁrea', type: 'area', valueNormalize: s => s},
+  {keywords: ['ciencias sociales', 'sociales'], property: 'perteneceAÁrea', type: 'area', valueNormalize: () => 'Ciencias Sociales'},
+  {keywords: ['ciencias naturales', 'naturales'], property: 'perteneceAÁrea', type: 'area', valueNormalize: () => 'Ciencias Naturales'},
+  {keywords: ['humanidades'], property: 'perteneceAÁrea', type: 'area', valueNormalize: s => s},
+  {keywords: ['artes'], property: 'perteneceAÁrea', type: 'area', valueNormalize: s => s},
+  {keywords: ['pregrado'], property: 'perteneceANivel', type: 'nivel', valueNormalize: s => s},
+  {keywords: ['maestria', 'maestría', 'master'], property: 'perteneceANivel', type: 'nivel', valueNormalize: () => 'Maestr'},
+  {keywords: ['doctorado', 'doctoral'], property: 'perteneceANivel', type: 'nivel', valueNormalize: s => s},
+  {keywords: ['postdoctorado'], property: 'perteneceANivel', type: 'nivel', valueNormalize: s => s},
+  {keywords: ['fulbright', 'daad', 'chevening', 'erasmus', 'usms', 'minedu'], property: 'esOfrecidaPor', type: 'institucion', valueNormalize: s => s},
+  {keywords: ['bolivia', 'alemania', 'estados unidos', 'reino unido'], property: 'destinadaAPaís', type: 'pais', valueNormalize: s => s},
   {keywords: ['movilidad','exchange','intercambio'], property: 'perteneceAÁrea', type: 'area', valueNormalize: s => s}
 ];
 
