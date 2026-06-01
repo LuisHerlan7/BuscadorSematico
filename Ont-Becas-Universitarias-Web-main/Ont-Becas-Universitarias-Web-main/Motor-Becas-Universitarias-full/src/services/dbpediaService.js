@@ -1,6 +1,4 @@
 const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
 const dbpediaConfig = require('../config/dbpedia');
 
 // Palabras clave exactas provistas por el usuario (NO MODIFICADAS)
@@ -136,19 +134,12 @@ class DBpediaService {
 
     try {
       const response = await axios.get(this._getEndpoint(), {
-        params: { query, format: 'json', timeout: 25000 },
-        timeout: 30000
+        params: { query, format: 'json', timeout: 8000 },
+        timeout: 9000
       });
 
       const bindings = response.data?.results?.bindings || [];
-      const results = this._filterScholarshipResults(bindings);
-      
-      // Guardar resultados en caché de forma no bloqueante
-      for (const res of results) {
-        this._writeToCache(res, lang);
-      }
-      
-      return results;
+      return this._filterScholarshipResults(bindings);
     } catch (error) {
       this._handleError(error);
       return [];
@@ -182,8 +173,8 @@ class DBpediaService {
 
     try {
       const response = await axios.get(this._getEndpoint(), {
-        params: { query, format: 'json', timeout: 25000 },
-        timeout: 30000
+        params: { query, format: 'json', timeout: 8000 },
+        timeout: 9000
       });
 
       const rows = response.data?.results?.bindings || [];
@@ -204,7 +195,7 @@ class DBpediaService {
       // Se unifican en un formato legible para el frontend
       let requirementsText = rawRequirements || rawEligibility || rawCriteria || null;
 
-      const details = {
+      return {
         uri,
         label: labelRow?.label?.value || uri,
         name: labelRow?.label?.value || uri,
@@ -214,11 +205,6 @@ class DBpediaService {
         requirements: requirementsText, // Nueva propiedad conteniendo los requisitos explícitos
         source: 'dbpedia'
       };
-
-      // Guardar en caché
-      this._writeToCache(details, lang);
-
-      return details;
     } catch (error) {
       this._handleError(error);
       return null;
@@ -229,66 +215,6 @@ class DBpediaService {
     if (!intentObj || intentObj.intent !== 'query_property') return [];
     const value = intentObj.value || '';
     return this.searchScholarships(value, lang);
-  }
-
-  _writeToCache(scholarship, lang = 'es') {
-    try {
-      const cachePath = path.join(__dirname, '../public/data/dbpedia-cache.ttl');
-      
-      // Asegurarse de que el archivo existe y tiene cabeceras si está vacío
-      if (!fs.existsSync(cachePath)) {
-        fs.writeFileSync(cachePath, `@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n@prefix dbo: <http://dbpedia.org/ontology/> .\n@prefix dbp: <http://dbpedia.org/property/> .\n@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n@prefix becas: <http://www.semanticweb.org/ontologia/becas-universitarias#> .\n\n`, 'utf8');
-      }
-      
-      const fileContent = fs.readFileSync(cachePath, 'utf8');
-      const uri = scholarship.uri;
-      
-      if (!uri) return;
-      
-      // Comprobar si esta URI específica ya está en el caché
-      if (fileContent.includes(`<${uri}>`)) {
-        // Si ya existe en caché, sólo agregamos propiedades adicionales (como requisitos o miniatura) si no estaban
-        let newTriples = '';
-        if (scholarship.thumbnail && !fileContent.includes(scholarship.thumbnail)) {
-          newTriples += `<${uri}> dbo:thumbnail <${scholarship.thumbnail}> .\n`;
-        }
-        if (scholarship.requirements) {
-          const escapedReq = scholarship.requirements.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-          if (!fileContent.includes(escapedReq)) {
-            newTriples += `<${uri}> dbp:requirements "${escapedReq}"@${lang} .\n`;
-          }
-        }
-        if (newTriples) {
-          fs.appendFileSync(cachePath, newTriples, 'utf8');
-        }
-        return;
-      }
-      
-      // Si la URI no está en el caché, escribimos la estructura Turtle completa
-      const escapedLabel = (scholarship.label || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-      const escapedName = (scholarship.name || scholarship.label || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-      const escapedDesc = (scholarship.description || scholarship.abstract || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-      
-      let tripleStr = `\n<${uri}> a becas:Beca ;\n`;
-      tripleStr += `    rdfs:label "${escapedLabel}"@${lang} ;\n`;
-      tripleStr += `    becas:nombreBeca "${escapedName}"@${lang} ;\n`;
-      if (escapedDesc) {
-        tripleStr += `    becas:descripcion "${escapedDesc}"@${lang} ;\n`;
-      }
-      tripleStr += `    becas:origen "dbpedia" .\n`;
-      
-      if (scholarship.thumbnail) {
-        tripleStr += `<${uri}> dbo:thumbnail <${scholarship.thumbnail}> .\n`;
-      }
-      if (scholarship.requirements) {
-        const escapedReq = scholarship.requirements.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-        tripleStr += `<${uri}> dbp:requirements "${escapedReq}"@${lang} .\n`;
-      }
-      
-      fs.appendFileSync(cachePath, tripleStr, 'utf8');
-    } catch (e) {
-      console.error('Error al guardar en el caché de DBpedia:', e);
-    }
   }
 
   _handleError(error) {

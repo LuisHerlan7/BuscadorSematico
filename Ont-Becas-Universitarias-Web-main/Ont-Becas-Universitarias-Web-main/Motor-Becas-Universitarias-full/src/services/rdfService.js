@@ -37,29 +37,12 @@ class RDFService {
   }
 
   _getComunicaSources() {
-    const sources = [{
+    return [{
       type: 'serialized',
       value: this.fileContent,
       mediaType: this.mediaType,
       baseIRI: 'http://www.semanticweb.org/ontologia/becas-universitarias#'
     }];
-
-    const cachePath = path.join(__dirname, '../public/data/dbpedia-cache.ttl');
-    if (fs.existsSync(cachePath)) {
-      try {
-        const cacheContent = fs.readFileSync(cachePath, 'utf8');
-        sources.push({
-          type: 'serialized',
-          value: cacheContent,
-          mediaType: 'text/turtle',
-          baseIRI: 'http://www.semanticweb.org/ontologia/becas-universitarias#'
-        });
-      } catch (err) {
-        console.error('Error al cargar dbpedia-cache.ttl en Comunica:', err.message);
-      }
-    }
-
-    return sources;
   }
 
   /**
@@ -171,7 +154,7 @@ class RDFService {
         description: descripcion?.value,
         amount: monto?.value,
         deadline: fecha?.value,
-        source: s?.value && s.value.includes('dbpedia.org') ? 'dbpedia' : 'local'
+        source: 'local'
       };
     });
   }
@@ -262,7 +245,7 @@ class RDFService {
       area,
       country,
       thumbnail: null,
-      source: uri.includes('dbpedia.org') ? 'dbpedia' : 'local',
+      source: 'local',
       _raw: raw
     };
   }

@@ -21,7 +21,18 @@ exports.search = async (req, res) => {
       dbpediaService.searchScholarships(q, lang)
     ]);
 
-    // Resultados de DBpedia remota
+    // Resultados locales (ontologia_becas_instances.ttl)
+    const localResults = (localResult.status === 'fulfilled' ? localResult.value : []).map(r => ({
+      uri: r.uri,
+      label: r.label,
+      name: r.name || r.label,
+      description: r.description || '',
+      amount: r.amount || null,
+      deadline: r.deadline || null,
+      source: 'local'
+    }));
+
+    // Resultados de DBpedia
     const dbpediaResults = (dbpediaResult.status === 'fulfilled' ? dbpediaResult.value : []).map(r => ({
       uri: r.uri,
       label: r.label,
@@ -29,26 +40,6 @@ exports.search = async (req, res) => {
       description: r.description || '',
       source: 'dbpedia'
     }));
-
-    // Resultados locales (ontologia_becas_instances.ttl + dbpedia-cache.ttl)
-    const rawLocalResults = localResult.status === 'fulfilled' ? localResult.value : [];
-    
-    // Si la búsqueda remota de DBpedia respondió exitosamente, filtramos del local
-    // los resultados que provengan del caché de DBpedia para evitar duplicidad.
-    // Si falló DBpedia (sin internet/error), mantenemos los resultados cacheados.
-    const isDbpediaOnline = dbpediaResult.status === 'fulfilled' && dbpediaResults.length > 0;
-    
-    const localResults = rawLocalResults
-      .filter(r => !isDbpediaOnline || !r.uri?.includes('dbpedia.org'))
-      .map(r => ({
-        uri: r.uri,
-        label: r.label,
-        name: r.name || r.label,
-        description: r.description || '',
-        amount: r.amount || null,
-        deadline: r.deadline || null,
-        source: r.source || (r.uri?.includes('dbpedia.org') ? 'dbpedia' : 'local')
-      }));
 
     // Log de errores si alguna fuente falló
     if (localResult.status === 'rejected') {
@@ -75,14 +66,10 @@ exports.search = async (req, res) => {
       }
     }
 
-    // Calcular conteos dinámicos basados en la procedencia real de los elementos
-    const localCount = results.filter(r => r.source === 'local').length;
-    const dbpediaCount = results.filter(r => r.source === 'dbpedia').length;
-
-    console.log(`Búsqueda "${q}": ${localCount} locales, ${dbpediaCount} DBpedia, ${results.length} combinados`);
+    console.log(`Búsqueda "${q}": ${localResults.length} locales, ${dbpediaResults.length} DBpedia, ${results.length} combinados`);
 
     if (req.query.format === 'json') {
-      return res.json({ query: q, results, localCount, dbpediaCount });
+      return res.json({ query: q, results, localCount: localResults.length, dbpediaCount: dbpediaResults.length });
     }
 
     res.render('search-results', {
@@ -91,8 +78,8 @@ exports.search = async (req, res) => {
       diseases: results,      // Mantenido por compatibilidad
       scholarships: results,
       isEmpty: results.length === 0,
-      localCount,
-      dbpediaCount,
+      localCount: localResults.length,
+      dbpediaCount: dbpediaResults.length,
       lang,
       showDetails: true
     });
@@ -112,23 +99,13 @@ exports.diseaseDetails = async (req, res) => {
     const lang = req.lang || 'es';
     const decoded = decodeURIComponent(uri);
 
-    // Enrutar por origen: dbpedia.org → servicio remoto (con fallback a caché local si falla), resto → ontología local
+    // Enrutar por origen: dbpedia.org → servicio remoto, resto → ontología local
     let scholarship;
     if (decoded.includes('dbpedia.org')) {
-      try {
-        scholarship = await dbpediaService.getScholarshipDetails(decoded, lang);
-      } catch (err) {
-        console.error('Error al consultar detalles de DBpedia remota, intentando desde caché local:', err.message);
-      }
-      
-      // Fallback: si no respondió DBpedia, cargar detalles del caché local de Comunica
-      if (!scholarship) {
-        scholarship = await rdfService.getScholarshipDetails(decoded);
-        if (scholarship) {
-          scholarship.source = 'dbpedia'; // Forzar que se pinte como DBpedia
-        }
-      }
+      // CORREGIDO
+      scholarship = await dbpediaService.getScholarshipDetails(decoded, lang);
     } else {
+      // CORREGIDO
       scholarship = await rdfService.getScholarshipDetails(decoded);
     }
 
