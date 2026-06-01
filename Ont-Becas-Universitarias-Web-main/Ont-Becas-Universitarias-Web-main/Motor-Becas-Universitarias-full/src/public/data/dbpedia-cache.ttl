@@ -1,0 +1,1294 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbp: <http://dbpedia.org/property/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix becas: <http://www.semanticweb.org/ontologia/becas-universitarias#> .
+
+
+<http://dbpedia.org/resource/Fulbright_Program> a becas:Beca ;
+    rdfs:label "Programa Fulbright"@es ;
+    becas:nombreBeca "Programa Fulbright"@es ;
+    becas:descripcion "beca Fulbright de investigación (subvenciones basadas en méritos)"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/List_of_Fulbright_Scholars_from_the_University_of_Belgrade_Faculty_of_Law> a becas:Beca ;
+    rdfs:label "List of Fulbright Scholars from the University of Belgrade Faculty of Law"@es ;
+    becas:nombreBeca "List of Fulbright Scholars from the University of Belgrade Faculty of Law"@es ;
+    becas:descripcion "artículo de lista de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/James_Fulbright> a becas:Beca ;
+    rdfs:label "James Fulbright"@es ;
+    becas:nombreBeca "James Fulbright"@es ;
+    becas:descripcion "página de desambiguación de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:Fulbright_Distinguished_Chairs> a becas:Beca ;
+    rdfs:label "Fulbright Distinguished Chairs"@es ;
+    becas:nombreBeca "Fulbright Distinguished Chairs"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_College> a becas:Beca ;
+    rdfs:label "Fulbright College"@es ;
+    becas:nombreBeca "Fulbright College"@es ;
+    becas:descripcion "página de desambiguación de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/J._William_and_Harriet_Fulbright_Center> a becas:Beca ;
+    rdfs:label "J. William and Harriet Fulbright Center"@es ;
+    becas:nombreBeca "J. William and Harriet Fulbright Center"@es ;
+    becas:descripcion "American non-profit"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Norton_Rose_Fulbright> a becas:Beca ;
+    rdfs:label "Norton Rose Fulbright"@es ;
+    becas:nombreBeca "Norton Rose Fulbright"@es ;
+    becas:descripcion "law firm"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/J._William_Fulbright_College_of_Arts_and_Sciences> a becas:Beca ;
+    rdfs:label "J. William Fulbright College of Arts and Sciences"@es ;
+    becas:nombreBeca "J. William Fulbright College of Arts and Sciences"@es ;
+    becas:descripcion "college at University of Arkansas for students interested in liberal arts"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/UK_Fulbright_Commission> a becas:Beca ;
+    rdfs:label "UK Fulbright Commission"@es ;
+    becas:nombreBeca "UK Fulbright Commission"@es ;
+    becas:descripcion "scholarship foundation"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/U.S.-Italy_Fulbright_Commission> a becas:Beca ;
+    rdfs:label "U.S.-Italy Fulbright Commission"@es ;
+    becas:nombreBeca "U.S.-Italy Fulbright Commission"@es ;
+    becas:descripcion "bi-national executor of Fulbright grants since 1948"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_University_Vietnam> a becas:Beca ;
+    rdfs:label "Fulbright University Vietnam"@es ;
+    becas:nombreBeca "Fulbright University Vietnam"@es ;
+    becas:descripcion "Vietnamese University"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_Tower> a becas:Beca ;
+    rdfs:label "Fulbright Tower"@es ;
+    becas:nombreBeca "Fulbright Tower"@es ;
+    becas:descripcion "skyscraper located in downtown Houston Texas"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_&_Jaworski> a becas:Beca ;
+    rdfs:label "Fulbright & Jaworski"@es ;
+    becas:nombreBeca "Fulbright & Jaworski"@es ;
+    becas:descripcion "American law firm"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_Association> a becas:Beca ;
+    rdfs:label "Fulbright Association"@es ;
+    becas:nombreBeca "Fulbright Association"@es ;
+    becas:descripcion "organization"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright–Hays_Act_of_1961> a becas:Beca ;
+    rdfs:label "Fulbright–Hays Act of 1961"@es ;
+    becas:nombreBeca "Fulbright–Hays Act of 1961"@es ;
+    becas:descripcion "U.S. law establishing the Fulbright Program, seeking to improve foreign relations and cultural ties"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_Austria> a becas:Beca ;
+    rdfs:label "Fulbright Austria"@es ;
+    becas:nombreBeca "Fulbright Austria"@es ;
+    becas:descripcion "Austrian-American Educational Commission, a bilateral educational commission and Fulbright program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_Commission_Iceland> a becas:Beca ;
+    rdfs:label "Fulbright Commission Iceland"@es ;
+    becas:nombreBeca "Fulbright Commission Iceland"@es ;
+    becas:descripcion "iceland's Fulbright Program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/J._William_Fulbright_Foreign_Scholarship_Board> a becas:Beca ;
+    rdfs:label "J. William Fulbright Foreign Scholarship Board"@es ;
+    becas:nombreBeca "J. William Fulbright Foreign Scholarship Board"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_Academy> a becas:Beca ;
+    rdfs:label "Fulbright Academy"@es ;
+    becas:nombreBeca "Fulbright Academy"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Slovak_Fulbright_Commission> a becas:Beca ;
+    rdfs:label "Slovak Fulbright Commission"@es ;
+    becas:nombreBeca "Slovak Fulbright Commission"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Franco-American_Fulbright_Commission> a becas:Beca ;
+    rdfs:label "Franco-American Fulbright Commission"@es ;
+    becas:nombreBeca "Franco-American Fulbright Commission"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_Commission_Belgium> a becas:Beca ;
+    rdfs:label "Fulbright Commission Belgium"@es ;
+    becas:nombreBeca "Fulbright Commission Belgium"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_Economics_Teaching_Program> a becas:Beca ;
+    rdfs:label "Fulbright Economics Teaching Program"@es ;
+    becas:nombreBeca "Fulbright Economics Teaching Program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_Hall> a becas:Beca ;
+    rdfs:label "Fulbright Hall"@es ;
+    becas:nombreBeca "Fulbright Hall"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_hearings> a becas:Beca ;
+    rdfs:label "Fulbright hearings"@es ;
+    becas:nombreBeca "Fulbright hearings"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_Act_of_1946> a becas:Beca ;
+    rdfs:label "Fulbright Act of 1946"@es ;
+    becas:nombreBeca "Fulbright Act of 1946"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright-Nehru_International_Fellowship> a becas:Beca ;
+    rdfs:label "Fulbright-Nehru International Fellowship"@es ;
+    becas:nombreBeca "Fulbright-Nehru International Fellowship"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Harris-Fulbright_Natural_Gas_Bill> a becas:Beca ;
+    rdfs:label "Harris-Fulbright Natural Gas Bill"@es ;
+    becas:nombreBeca "Harris-Fulbright Natural Gas Bill"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Fulbright_(disambiguation)> a becas:Beca ;
+    rdfs:label "Fulbright (disambiguation)"@es ;
+    becas:nombreBeca "Fulbright (disambiguation)"@es ;
+    becas:origen "dbpedia" .
+<http://dbpedia.org/resource/Fulbright_Program> dbo:thumbnail <http://commons.wikimedia.org/wiki/Special:FilePath/Fulbright_Program.svg?width=300> .
+
+<http://dbpedia.org/resource/Digital_Scholarship_in_the_Humanities> a becas:Beca ;
+    rdfs:label "Digital Scholarship in the Humanities"@es ;
+    becas:nombreBeca "Digital Scholarship in the Humanities"@es ;
+    becas:descripcion "revista científica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Opportunity_Scholarship_Program> a becas:Beca ;
+    rdfs:label "Opportunity Scholarship Program"@es ;
+    becas:nombreBeca "Opportunity Scholarship Program"@es ;
+    becas:descripcion "página de desambiguación de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:Pseudo-scholarship> a becas:Beca ;
+    rdfs:label "Pseudo-scholarship"@es ;
+    becas:nombreBeca "Pseudo-scholarship"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Chevening_Scholarship> a becas:Beca ;
+    rdfs:label "Chevening Scholarship"@es ;
+    becas:nombreBeca "Chevening Scholarship"@es ;
+    becas:descripcion "beca otorgada por el Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Scholarship> a becas:Beca ;
+    rdfs:label "Scholarship"@es ;
+    becas:nombreBeca "Scholarship"@es ;
+    becas:descripcion "ayuda financiera para la educación de un estudiante"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Digital_scholarship> a becas:Beca ;
+    rdfs:label "Digital scholarship"@es ;
+    becas:nombreBeca "Digital scholarship"@es ;
+    becas:descripcion "utilización de pruebas digitales, métodos de indagación, investigación, publicación y conservación para alcanzar objetivos académicos y de investigación"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:Accounting_scholarship> a becas:Beca ;
+    rdfs:label "Accounting scholarship"@es ;
+    becas:nombreBeca "Accounting scholarship"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Athletic_scholarship> a becas:Beca ;
+    rdfs:label "Athletic scholarship"@es ;
+    becas:nombreBeca "Athletic scholarship"@es ;
+    becas:descripcion "concesión de ayuda económica educativa para un deportista"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:Textual_scholarship> a becas:Beca ;
+    rdfs:label "Textual scholarship"@es ;
+    becas:nombreBeca "Textual scholarship"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Vinerian_Scholarship> a becas:Beca ;
+    rdfs:label "Vinerian Scholarship"@es ;
+    becas:nombreBeca "Vinerian Scholarship"@es ;
+    becas:descripcion "artículo de lista de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:Boxer_Indemnity_Scholarship_recipients> a becas:Beca ;
+    rdfs:label "Boxer Indemnity Scholarship recipients"@es ;
+    becas:nombreBeca "Boxer Indemnity Scholarship recipients"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:Opera_scholarship> a becas:Beca ;
+    rdfs:label "Opera scholarship"@es ;
+    becas:nombreBeca "Opera scholarship"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:Homeric_scholarship> a becas:Beca ;
+    rdfs:label "Homeric scholarship"@es ;
+    becas:nombreBeca "Homeric scholarship"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Donaldson_Scholarship> a becas:Beca ;
+    rdfs:label "Donaldson Scholarship"@es ;
+    becas:nombreBeca "Donaldson Scholarship"@es ;
+    becas:descripcion "scholarship in Canada"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Point_Foundation_(LGBT)> a becas:Beca ;
+    rdfs:label "Point Foundation (scholarship fund)"@es ;
+    becas:nombreBeca "Point Foundation (scholarship fund)"@es ;
+    becas:descripcion "non-profit organization in the USA"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Children's_Scholarship_Fund> a becas:Beca ;
+    rdfs:label "Children's Scholarship Fund"@es ;
+    becas:nombreBeca "Children's Scholarship Fund"@es ;
+    becas:descripcion "non-profit organization in the USA"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Dr_Manmohan_Singh_Scholarship> a becas:Beca ;
+    rdfs:label "Dr Manmohan Singh Scholarship"@es ;
+    becas:nombreBeca "Dr Manmohan Singh Scholarship"@es ;
+    becas:descripcion "scholarships of University of Cambridge"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Homeric_scholarship> a becas:Beca ;
+    rdfs:label "Homeric scholarship"@es ;
+    becas:nombreBeca "Homeric scholarship"@es ;
+    becas:descripcion "study of any Homeric topic, especially the Iliad and Odyssey"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Boxer_Indemnity_Scholarship> a becas:Beca ;
+    rdfs:label "Boxer Indemnity Scholarship"@es ;
+    becas:nombreBeca "Boxer Indemnity Scholarship"@es ;
+    becas:descripcion "scholarship for Chinese students to be educated in the US"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/International_Parliamentary_Scholarship> a becas:Beca ;
+    rdfs:label "International Parliamentary Scholarship"@es ;
+    becas:nombreBeca "International Parliamentary Scholarship"@es ;
+    becas:descripcion "internship program organized annually by the German Bundestag"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Jérôme_Lohez_9/11_Scholarship_Foundation> a becas:Beca ;
+    rdfs:label "Jérôme Lohez 9/11 Scholarship Foundation"@es ;
+    becas:nombreBeca "Jérôme Lohez 9/11 Scholarship Foundation"@es ;
+    becas:descripcion "non-profit organization in the United States"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Orange_Tulip_Scholarship> a becas:Beca ;
+    rdfs:label "Orange Tulip Scholarship"@es ;
+    becas:nombreBeca "Orange Tulip Scholarship"@es ;
+    becas:descripcion "Dutch organisation for internationalisation in education"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Marshall_Scholarship> a becas:Beca ;
+    rdfs:label "Marshall Scholarship"@es ;
+    becas:nombreBeca "Marshall Scholarship"@es ;
+    becas:descripcion "scholarships for Americans to study in the UK, named in honor of George Marshall and the Marshall Plan"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Morehead-Cain_Scholarship> a becas:Beca ;
+    rdfs:label "Morehead-Cain Scholarship"@es ;
+    becas:nombreBeca "Morehead-Cain Scholarship"@es ;
+    becas:descripcion "Scholarship program at the University of North Carolina at Chapel Hill"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Michigan_Promise_Scholarship> a becas:Beca ;
+    rdfs:label "Michigan Promise Scholarship"@es ;
+    becas:nombreBeca "Michigan Promise Scholarship"@es ;
+    becas:descripcion "merit-based scholarship program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Voice_of_Democracy_(scholarship)> a becas:Beca ;
+    rdfs:label "Voice of Democracy (scholarship)"@es ;
+    becas:nombreBeca "Voice of Democracy (scholarship)"@es ;
+    becas:descripcion "scholarship program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Mitchell_Scholarship> a becas:Beca ;
+    rdfs:label "Mitchell Scholarship"@es ;
+    becas:nombreBeca "Mitchell Scholarship"@es ;
+    becas:descripcion "fellowship for Americans to study in Ireland"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Gates_Cambridge_Scholarship> a becas:Beca ;
+    rdfs:label "Gates Cambridge Scholarship"@es ;
+    becas:nombreBeca "Gates Cambridge Scholarship"@es ;
+    becas:descripcion "Scholarship program funded by the Bill and Melinda Gates Foundation"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/California_Scholarship_Federation> a becas:Beca ;
+    rdfs:label "California Scholarship Federation"@es ;
+    becas:nombreBeca "California Scholarship Federation"@es ;
+    becas:descripcion "Scholarship organization in California, United States"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Konstanty_Kalinowski_Scholarship_Program> a becas:Beca ;
+    rdfs:label "Konstanty Kalinowski Scholarship Program"@es ;
+    becas:nombreBeca "Konstanty Kalinowski Scholarship Program"@es ;
+    becas:descripcion "scholarship program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Harry_S._Truman_Scholarship> a becas:Beca ;
+    rdfs:label "Harry S. Truman Scholarship"@es ;
+    becas:nombreBeca "Harry S. Truman Scholarship"@es ;
+    becas:descripcion "American graduate fellowship"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Eldon_Law_Scholarship> a becas:Beca ;
+    rdfs:label "Eldon Law Scholarship"@es ;
+    becas:nombreBeca "Eldon Law Scholarship"@es ;
+    becas:descripcion "scholarship awarded to students from the University of Oxford"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Rhodes_Scholarship> a becas:Beca ;
+    rdfs:label "Rhodes Scholarship"@es ;
+    becas:nombreBeca "Rhodes Scholarship"@es ;
+    becas:descripcion "international postgraduate award for students to study at the University of Oxford"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Kennedy_Scholarship> a becas:Beca ;
+    rdfs:label "Kennedy Scholarship"@es ;
+    becas:nombreBeca "Kennedy Scholarship"@es ;
+    becas:descripcion "British university scholarship"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/History_of_scholarship> a becas:Beca ;
+    rdfs:label "History of scholarship"@es ;
+    becas:nombreBeca "History of scholarship"@es ;
+    becas:descripcion "aspect of history"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Society_for_Medieval_Feminist_Scholarship> a becas:Beca ;
+    rdfs:label "Society for Medieval Feminist Scholarship"@es ;
+    becas:nombreBeca "Society for Medieval Feminist Scholarship"@es ;
+    becas:descripcion "learned society that promotes the study of the Middle Ages from the perspective of gender studies, women's studies, and feminist studies"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Corporation_for_Digital_Scholarship> a becas:Beca ;
+    rdfs:label "Corporation for Digital Scholarship"@es ;
+    becas:nombreBeca "Corporation for Digital Scholarship"@es ;
+    becas:descripcion "US nonprofit supporting software and services for researchers and cultural heritage institutions."@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/China_Scholarship_Council> a becas:Beca ;
+    rdfs:label "China Scholarship Council"@es ;
+    becas:nombreBeca "China Scholarship Council"@es ;
+    becas:descripcion "Chinese Ministry of Education body"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/HOPE_Scholarship> a becas:Beca ;
+    rdfs:label "HOPE Scholarship"@es ;
+    becas:nombreBeca "HOPE Scholarship"@es ;
+    becas:descripcion "scholarship program in the US state of Georgia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Commonwealth_Scholarship_and_Fellowship_Plan> a becas:Beca ;
+    rdfs:label "Commonwealth Scholarship and Fellowship Plan"@es ;
+    becas:nombreBeca "Commonwealth Scholarship and Fellowship Plan"@es ;
+    becas:descripcion "an international programme which offers scholarships and fellowships to citizens of other Commonwealth countries"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Jardine_Scholarship> a becas:Beca ;
+    rdfs:label "Jardine Scholarship"@es ;
+    becas:nombreBeca "Jardine Scholarship"@es ;
+    becas:descripcion "Undergraduate award for study at the Universities of Oxford and Cambridge"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Mendelssohn_Scholarship> a becas:Beca ;
+    rdfs:label "Mendelssohn Scholarship"@es ;
+    becas:nombreBeca "Mendelssohn Scholarship"@es ;
+    becas:descripcion "award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Ernst_Ludwig_Ehrlich_Scholarship_Fund> a becas:Beca ;
+    rdfs:label "Ernst Ludwig Ehrlich Scholarship Fund"@es ;
+    becas:nombreBeca "Ernst Ludwig Ehrlich Scholarship Fund"@es ;
+    becas:descripcion "Scholarship fund in Germany"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/National_Merit_Scholarship_Program> a becas:Beca ;
+    rdfs:label "National Merit Scholarship Program"@es ;
+    becas:nombreBeca "National Merit Scholarship Program"@es ;
+    becas:descripcion "American academic scholarship competition"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Neda_Agha-Soltan_Graduate_Scholarship> a becas:Beca ;
+    rdfs:label "Neda Agha-Soltan Graduate Scholarship"@es ;
+    becas:nombreBeca "Neda Agha-Soltan Graduate Scholarship"@es ;
+    becas:descripcion "Scholarship for post-graduate philosophy students at The Queen's College"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Scholarship_America> a becas:Beca ;
+    rdfs:label "Scholarship America"@es ;
+    becas:nombreBeca "Scholarship America"@es ;
+    becas:descripcion "organization"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Boden_Scholarship> a becas:Beca ;
+    rdfs:label "Boden Scholarship"@es ;
+    becas:nombreBeca "Boden Scholarship"@es ;
+    becas:descripcion "established in 1833 at the University of Oxford for students learning Sanskrit"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Boettcher_Scholarship> a becas:Beca ;
+    rdfs:label "Boettcher Scholarship"@es ;
+    becas:nombreBeca "Boettcher Scholarship"@es ;
+    becas:descripcion "full tuition scholarship for students from Colorado, United States"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Churchill_Scholarship> a becas:Beca ;
+    rdfs:label "Churchill Scholarship"@es ;
+    becas:nombreBeca "Churchill Scholarship"@es ;
+    becas:descripcion "anglo-American post-graduate scholarship program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Arkwright_Scholarship> a becas:Beca ;
+    rdfs:label "Arkwright Scholarship"@es ;
+    becas:nombreBeca "Arkwright Scholarship"@es ;
+    becas:descripcion "organization"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Health_Professions_Scholarship_Program> a becas:Beca ;
+    rdfs:label "Health Professions Scholarship Program"@es ;
+    becas:nombreBeca "Health Professions Scholarship Program"@es ;
+    becas:descripcion "US military scholarship program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Society_for_Academic_Freedom_and_Scholarship> a becas:Beca ;
+    rdfs:label "Society for Academic Freedom and Scholarship"@es ;
+    becas:nombreBeca "Society for Academic Freedom and Scholarship"@es ;
+    becas:descripcion "organization"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Heisman_High_School_Scholarship> a becas:Beca ;
+    rdfs:label "Heisman High School Scholarship"@es ;
+    becas:nombreBeca "Heisman High School Scholarship"@es ;
+    becas:descripcion "athletic scholarship in the United States"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Benjamin_A._Gilman_International_Scholarship> a becas:Beca ;
+    rdfs:label "Benjamin A. Gilman International Scholarship"@es ;
+    becas:nombreBeca "Benjamin A. Gilman International Scholarship"@es ;
+    becas:descripcion "American scholarship"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Exhibition_(scholarship)> a becas:Beca ;
+    rdfs:label "Exhibition (scholarship)"@es ;
+    becas:nombreBeca "Exhibition (scholarship)"@es ;
+    becas:descripcion "type of scholarship award or bursary"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Monbukagakusho_Scholarship> a becas:Beca ;
+    rdfs:label "Monbukagakusho Scholarship"@es ;
+    becas:nombreBeca "Monbukagakusho Scholarship"@es ;
+    becas:descripcion "academic scholarship"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/The_Stadium_Scholarship_Program> a becas:Beca ;
+    rdfs:label "The Stadium Scholarship Program"@es ;
+    becas:nombreBeca "The Stadium Scholarship Program"@es ;
+    becas:descripcion "cooperative living program at Ohio State University"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Hathaway_Scholarship> a becas:Beca ;
+    rdfs:label "Hathaway Scholarship"@es ;
+    becas:nombreBeca "Hathaway Scholarship"@es ;
+    becas:descripcion "scholarship in Wyoming"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Norway_Scholarship> a becas:Beca ;
+    rdfs:label "Norway Scholarship"@es ;
+    becas:nombreBeca "Norway Scholarship"@es ;
+    becas:descripcion "Scholarship to study at Wadham College, University of Oxford"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Canada_Millennium_Scholarship_Foundation> a becas:Beca ;
+    rdfs:label "Canada Millennium Scholarship Foundation"@es ;
+    becas:nombreBeca "Canada Millennium Scholarship Foundation"@es ;
+    becas:descripcion "scholarship Foundation"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Jefferson_Scholarship> a becas:Beca ;
+    rdfs:label "Jefferson Scholarship"@es ;
+    becas:nombreBeca "Jefferson Scholarship"@es ;
+    becas:descripcion "Scholarship program at the University of Virginia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Tertiary_Scholarship_and_Loans_Service> a becas:Beca ;
+    rdfs:label "Tertiary Scholarship and Loans Service"@es ;
+    becas:nombreBeca "Tertiary Scholarship and Loans Service"@es ;
+    becas:descripcion "Fijian organization"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Brett_Whiteley_Travelling_Art_Scholarship> a becas:Beca ;
+    rdfs:label "Brett Whiteley Travelling Art Scholarship"@es ;
+    becas:nombreBeca "Brett Whiteley Travelling Art Scholarship"@es ;
+    becas:descripcion "Australian Annual Art Award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Textual_scholarship> a becas:Beca ;
+    rdfs:label "Textual scholarship"@es ;
+    becas:nombreBeca "Textual scholarship"@es ;
+    becas:descripcion "the academic analysis of texts"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Lagos_State_Scholarship_Board> a becas:Beca ;
+    rdfs:label "Lagos State Scholarship Board"@es ;
+    becas:nombreBeca "Lagos State Scholarship Board"@es ;
+    becas:descripcion "governmental body that oversees scholarship in Lagos State"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Team_USA_Scholarship> a becas:Beca ;
+    rdfs:label "Team USA Scholarship"@es ;
+    becas:nombreBeca "Team USA Scholarship"@es ;
+    becas:descripcion "American racing scholarship program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Miles_Morland_Foundation_Writing_Scholarship> a becas:Beca ;
+    rdfs:label "Miles Morland Foundation Writing Scholarship"@es ;
+    becas:nombreBeca "Miles Morland Foundation Writing Scholarship"@es ;
+    becas:descripcion "annual scholarship for African writers"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Barry_M._Goldwater_Scholarship> a becas:Beca ;
+    rdfs:label "Barry M. Goldwater Scholarship"@es ;
+    becas:nombreBeca "Barry M. Goldwater Scholarship"@es ;
+    becas:descripcion "American merit based scholarship awarded to prospective scientists"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Bright_Futures_Scholarship_Program> a becas:Beca ;
+    rdfs:label "Bright Futures Scholarship Program"@es ;
+    becas:nombreBeca "Bright Futures Scholarship Program"@es ;
+    becas:descripcion "Florida scholarship program"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Amy_Lowell_Poetry_Travelling_Scholarship> a becas:Beca ;
+    rdfs:label "Amy Lowell Poetry Travelling Scholarship"@es ;
+    becas:nombreBeca "Amy Lowell Poetry Travelling Scholarship"@es ;
+    becas:descripcion "American poetry award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Scholarship_of_Teaching_and_Learning_in_Psychology> a becas:Beca ;
+    rdfs:label "Scholarship of Teaching and Learning in Psychology"@es ;
+    becas:nombreBeca "Scholarship of Teaching and Learning in Psychology"@es ;
+    becas:descripcion "journal"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Root-Tilden-Kern_Scholarship> a becas:Beca ;
+    rdfs:label "Root-Tilden-Kern Scholarship"@es ;
+    becas:nombreBeca "Root-Tilden-Kern Scholarship"@es ;
+    becas:descripcion "public interest award at NYU's law school"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Hispanic_Scholarship_Fund> a becas:Beca ;
+    rdfs:label "Hispanic Scholarship Fund"@es ;
+    becas:nombreBeca "Hispanic Scholarship Fund"@es ;
+    becas:descripcion "American nonprofit organization"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Robert_C._Byrd_Honors_Scholarship_Program> a becas:Beca ;
+    rdfs:label "Robert C. Byrd Honors Scholarship Program"@es ;
+    becas:nombreBeca "Robert C. Byrd Honors Scholarship Program"@es ;
+    becas:descripcion "federally funded and state-administered merit-based scholarship program in the United States"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/The_Flinn_Scholarship> a becas:Beca ;
+    rdfs:label "The Flinn Scholarship"@es ;
+    becas:nombreBeca "The Flinn Scholarship"@es ;
+    becas:descripcion "merit based scholarship"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Mandela_Rhodes_Scholarship> a becas:Beca ;
+    rdfs:label "Mandela Rhodes Scholarship"@es ;
+    becas:nombreBeca "Mandela Rhodes Scholarship"@es ;
+    becas:descripcion "scholarship for postgraduate study for African citizens"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Nevada_Millennium_Scholarship> a becas:Beca ;
+    rdfs:label "Nevada Millennium Scholarship"@es ;
+    becas:nombreBeca "Nevada Millennium Scholarship"@es ;
+    becas:descripcion "U.S. state scholarship for Nevada in-state colleges"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Uniform_Advantage_and_AACN_Nursing_Scholarship> a becas:Beca ;
+    rdfs:label "Uniform Advantage and AACN Nursing Scholarship"@es ;
+    becas:nombreBeca "Uniform Advantage and AACN Nursing Scholarship"@es ;
+    becas:descripcion "Nursing school scholorship"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Marine_Corps_Scholarship_Foundation> a becas:Beca ;
+    rdfs:label "Marine Corps Scholarship Foundation"@es ;
+    becas:nombreBeca "Marine Corps Scholarship Foundation"@es ;
+    becas:descripcion "organization"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Scholarship_level> a becas:Beca ;
+    rdfs:label "Scholarship level"@es ;
+    becas:nombreBeca "Scholarship level"@es ;
+    becas:descripcion "Type of UK national school examination award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Scholarship_of_teaching_and_learning> a becas:Beca ;
+    rdfs:label "Scholarship of teaching and learning"@es ;
+    becas:nombreBeca "Scholarship of teaching and learning"@es ;
+    becas:descripcion "study and practice of post-secondary teaching"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Taiwan_Scholarship> a becas:Beca ;
+    rdfs:label "Taiwan Scholarship"@es ;
+    becas:nombreBeca "Taiwan Scholarship"@es ;
+    becas:descripcion "organization"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Queen_Elizabeth_Scholarship_Trust> a becas:Beca ;
+    rdfs:label "Queen Elizabeth Scholarship Trust"@es ;
+    becas:nombreBeca "Queen Elizabeth Scholarship Trust"@es ;
+    becas:descripcion "art and craft educational trust for British craftsmanship"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/South_Australian_Scholarship> a becas:Beca ;
+    rdfs:label "South Australian Scholarship"@es ;
+    becas:nombreBeca "South Australian Scholarship"@es ;
+    becas:descripcion "scholarship for oversees study awarded by the University of Adelaide"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Stamps_Scholarship> a becas:Beca ;
+    rdfs:label "Stamps Scholarship"@es ;
+    becas:nombreBeca "Stamps Scholarship"@es ;
+    becas:descripcion "merit based scholarship"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/John_Macphail_Scholarship> a becas:Beca ;
+    rdfs:label "John Macphail Scholarship"@es ;
+    becas:nombreBeca "John Macphail Scholarship"@es ;
+    becas:descripcion "rugby union award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/New_Zealand_Scholarship> a becas:Beca ;
+    rdfs:label "New Zealand Scholarship"@es ;
+    becas:nombreBeca "New Zealand Scholarship"@es ;
+    becas:descripcion "New Zealand secondary school award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/ontology/university> a becas:Beca ;
+    rdfs:label "university"@es ;
+    becas:nombreBeca "university"@es ;
+    becas:descripcion "university a person goes or went to."@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Cardiff_University> a becas:Beca ;
+    rdfs:label "Cardiff University"@es ;
+    becas:nombreBeca "Cardiff University"@es ;
+    becas:descripcion "universidad en Cardiff, Gales"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Loyola_University> a becas:Beca ;
+    rdfs:label "Loyola University"@es ;
+    becas:nombreBeca "Loyola University"@es ;
+    becas:descripcion "página de desambiguación de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Chinese_university> a becas:Beca ;
+    rdfs:label "Chinese university"@es ;
+    becas:nombreBeca "Chinese university"@es ;
+    becas:descripcion "página de desambiguación de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_North_Carolina> a becas:Beca ;
+    rdfs:label "University of North Carolina"@es ;
+    becas:nombreBeca "University of North Carolina"@es ;
+    becas:descripcion "universidad público estadounidense"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:University_of_California,_Los_Angeles> a becas:Beca ;
+    rdfs:label "University of California, Los Angeles"@es ;
+    becas:nombreBeca "University of California, Los Angeles"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:University_of_Southampton> a becas:Beca ;
+    rdfs:label "University of Southampton"@es ;
+    becas:nombreBeca "University of Southampton"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:University_of_Tartu> a becas:Beca ;
+    rdfs:label "University of Tartu"@es ;
+    becas:nombreBeca "University of Tartu"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Complutense_University_of_Madrid> a becas:Beca ;
+    rdfs:label "Complutense University of Madrid"@es ;
+    becas:nombreBeca "Complutense University of Madrid"@es ;
+    becas:descripcion "universidad pública española en la Comunidad de Madrid"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Ludwig_Maximilian_University_of_Munich> a becas:Beca ;
+    rdfs:label "Ludwig Maximilian University of Munich"@es ;
+    becas:nombreBeca "Ludwig Maximilian University of Munich"@es ;
+    becas:descripcion "universidad de Alemania"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Rutgers_University> a becas:Beca ;
+    rdfs:label "Rutgers University"@es ;
+    becas:nombreBeca "Rutgers University"@es ;
+    becas:descripcion "universidad pública de investigación multicampus en Nueva Jersey, Estados Unidos"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/San_Francisco_State_University> a becas:Beca ;
+    rdfs:label "San Francisco State University"@es ;
+    becas:nombreBeca "San Francisco State University"@es ;
+    becas:descripcion "Universidad en San Francisco, California, Estados Unidos"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_College_London> a becas:Beca ;
+    rdfs:label "University College London"@es ;
+    becas:nombreBeca "University College London"@es ;
+    becas:descripcion "universidad británica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_California,_Los_Angeles> a becas:Beca ;
+    rdfs:label "University of California, Los Angeles"@es ;
+    becas:nombreBeca "University of California, Los Angeles"@es ;
+    becas:descripcion "universidad pública en Los Ángeles, California, Estados Unidos"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_California,_San_Diego> a becas:Beca ;
+    rdfs:label "University of California, San Diego"@es ;
+    becas:nombreBeca "University of California, San Diego"@es ;
+    becas:descripcion "universidad pública en La Jolla, California, Estados Unidos"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Cambridge> a becas:Beca ;
+    rdfs:label "University of Cambridge"@es ;
+    becas:nombreBeca "University of Cambridge"@es ;
+    becas:descripcion "universidad del Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Copenhagen> a becas:Beca ;
+    rdfs:label "University of Copenhagen"@es ;
+    becas:nombreBeca "University of Copenhagen"@es ;
+    becas:descripcion "universidad pública de investigación en Copenhague, Dinamarca"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Edinburgh> a becas:Beca ;
+    rdfs:label "University of Edinburgh"@es ;
+    becas:nombreBeca "University of Edinburgh"@es ;
+    becas:descripcion "universidad en Edimburgo, Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Exeter> a becas:Beca ;
+    rdfs:label "University of Exeter"@es ;
+    becas:nombreBeca "University of Exeter"@es ;
+    becas:descripcion "Una Universidad pública en el sur-oeste de Inglaterra, Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Glasgow> a becas:Beca ;
+    rdfs:label "University of Glasgow"@es ;
+    becas:nombreBeca "University of Glasgow"@es ;
+    becas:descripcion "universidad británica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Miami> a becas:Beca ;
+    rdfs:label "University of Miami"@es ;
+    becas:nombreBeca "University of Miami"@es ;
+    becas:descripcion "universidad privada de investigación en Coral Gables, Florida, Estados Unidos"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Sheffield> a becas:Beca ;
+    rdfs:label "University of Sheffield"@es ;
+    becas:nombreBeca "University of Sheffield"@es ;
+    becas:descripcion "institución educativa y de investigación británica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Warwick> a becas:Beca ;
+    rdfs:label "University of Warwick"@es ;
+    becas:nombreBeca "University of Warwick"@es ;
+    becas:descripcion "universidad"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:University_of_Cambridge> a becas:Beca ;
+    rdfs:label "University of Cambridge"@es ;
+    becas:nombreBeca "University of Cambridge"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/European_University_Association> a becas:Beca ;
+    rdfs:label "European University Association"@es ;
+    becas:nombreBeca "European University Association"@es ;
+    becas:descripcion "association and interest group of universities in Europe"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:University_of_Nottingham> a becas:Beca ;
+    rdfs:label "University of Nottingham"@es ;
+    becas:nombreBeca "University of Nottingham"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:University_of_Oxford> a becas:Beca ;
+    rdfs:label "University of Oxford"@es ;
+    becas:nombreBeca "University of Oxford"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:University_of_Bologna> a becas:Beca ;
+    rdfs:label "University of Bologna"@es ;
+    becas:nombreBeca "University of Bologna"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:University_of_Bristol> a becas:Beca ;
+    rdfs:label "University of Bristol"@es ;
+    becas:nombreBeca "University of Bristol"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Category:East_China_University_of_Technology> a becas:Beca ;
+    rdfs:label "East China University of Technology"@es ;
+    becas:nombreBeca "East China University of Technology"@es ;
+    becas:descripcion "categoría de Wikimedia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Jagiellonian_University> a becas:Beca ;
+    rdfs:label "Jagiellonian University"@es ;
+    becas:nombreBeca "Jagiellonian University"@es ;
+    becas:descripcion "universidad de Cracovia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Leiden_University> a becas:Beca ;
+    rdfs:label "Leiden University"@es ;
+    becas:nombreBeca "Leiden University"@es ;
+    becas:descripcion "universidad de los Países Bajos"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Queen's_University_Belfast> a becas:Beca ;
+    rdfs:label "Queen's University Belfast"@es ;
+    becas:nombreBeca "Queen's University Belfast"@es ;
+    becas:descripcion "universidad pública de investigación en Belfast, Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Bristol> a becas:Beca ;
+    rdfs:label "University of Bristol"@es ;
+    becas:nombreBeca "University of Bristol"@es ;
+    becas:descripcion "universidad del Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Manchester> a becas:Beca ;
+    rdfs:label "University of Manchester"@es ;
+    becas:nombreBeca "University of Manchester"@es ;
+    becas:descripcion "universidad pública británica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Oxford> a becas:Beca ;
+    rdfs:label "University of Oxford"@es ;
+    becas:nombreBeca "University of Oxford"@es ;
+    becas:descripcion "universidad pública en Inglaterra, Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Durham_University> a becas:Beca ;
+    rdfs:label "Durham University"@es ;
+    becas:nombreBeca "Durham University"@es ;
+    becas:descripcion "universidad británica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Queen_Mary_University_of_London> a becas:Beca ;
+    rdfs:label "Queen Mary University of London"@es ;
+    becas:nombreBeca "Queen Mary University of London"@es ;
+    becas:descripcion "universidad pública británica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Birmingham> a becas:Beca ;
+    rdfs:label "University of Birmingham"@es ;
+    becas:nombreBeca "University of Birmingham"@es ;
+    becas:descripcion "Universidad del Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_California> a becas:Beca ;
+    rdfs:label "University of California"@es ;
+    becas:nombreBeca "University of California"@es ;
+    becas:descripcion "sistema de universidades públicas de California"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Leeds> a becas:Beca ;
+    rdfs:label "University of Leeds"@es ;
+    becas:nombreBeca "University of Leeds"@es ;
+    becas:descripcion "Universidad en Inglaterra"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Southampton> a becas:Beca ;
+    rdfs:label "University of Southampton"@es ;
+    becas:nombreBeca "University of Southampton"@es ;
+    becas:descripcion "universidad británica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_York> a becas:Beca ;
+    rdfs:label "University of York"@es ;
+    becas:nombreBeca "University of York"@es ;
+    becas:descripcion "universidad del Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Newcastle_University> a becas:Beca ;
+    rdfs:label "Newcastle University"@es ;
+    becas:nombreBeca "Newcastle University"@es ;
+    becas:descripcion "universidad en Newcastle upon Tyne, Reino Unido"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Odesa_University> a becas:Beca ;
+    rdfs:label "Odesa University"@es ;
+    becas:nombreBeca "Odesa University"@es ;
+    becas:descripcion "universidad de Ucrania"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Pompeu_Fabra_University> a becas:Beca ;
+    rdfs:label "Pompeu Fabra University"@es ;
+    becas:nombreBeca "Pompeu Fabra University"@es ;
+    becas:descripcion "universidad pública de Barcelona, Cataluña"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Liverpool> a becas:Beca ;
+    rdfs:label "University of Liverpool"@es ;
+    becas:nombreBeca "University of Liverpool"@es ;
+    becas:descripcion "University in Liverpool, United Kingdom"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_St_Andrews> a becas:Beca ;
+    rdfs:label "University of St Andrews"@es ;
+    becas:nombreBeca "University of St Andrews"@es ;
+    becas:descripcion "university in St Andrews, Fife, Scotland, UK"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Tartu> a becas:Beca ;
+    rdfs:label "University of Tartu"@es ;
+    becas:nombreBeca "University of Tartu"@es ;
+    becas:descripcion "university in Tartu, Estonia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Bologna> a becas:Beca ;
+    rdfs:label "University of Bologna"@es ;
+    becas:nombreBeca "University of Bologna"@es ;
+    becas:descripcion "universidad italiana"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Helsinki> a becas:Beca ;
+    rdfs:label "University of Helsinki"@es ;
+    becas:nombreBeca "University of Helsinki"@es ;
+    becas:descripcion "universidad de Finlandia"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Nevada,_Las_Vegas> a becas:Beca ;
+    rdfs:label "University of Nevada, Las Vegas"@es ;
+    becas:nombreBeca "University of Nevada, Las Vegas"@es ;
+    becas:descripcion "universidad pública de investigación en Paradise, Nevada, Estados Unidos"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Southwest_Agricultural_University> a becas:Beca ;
+    rdfs:label "Southwest Agricultural University"@es ;
+    becas:nombreBeca "Southwest Agricultural University"@es ;
+    becas:descripcion "universidad en la República Popular China"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Nottingham> a becas:Beca ;
+    rdfs:label "University of Nottingham"@es ;
+    becas:nombreBeca "University of Nottingham"@es ;
+    becas:descripcion "universidad inglesa con sede en Nottingham, Inglaterra"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Central_European_University> a becas:Beca ;
+    rdfs:label "Central European University"@es ;
+    becas:nombreBeca "Central European University"@es ;
+    becas:descripcion "universidad en Viena, Austria"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/University_of_Luxembourg> a becas:Beca ;
+    rdfs:label "University of Luxembourg"@es ;
+    becas:nombreBeca "University of Luxembourg"@es ;
+    becas:descripcion "centro de estudios universitarios luxemburgués"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Spanish_Society_of_Academic_Excellence> a becas:Beca ;
+    rdfs:label "Spanish Society of Academic Excellence"@es ;
+    becas:nombreBeca "Spanish Society of Academic Excellence"@es ;
+    becas:descripcion "asociación española que reúne a la excelencia académica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Art_Directors_Guild_Award_for_Excellence_in_Production_Design_for_a_Fantasy_Film> a becas:Beca ;
+    rdfs:label "Art Directors Guild Award for Excellence in Production Design for a Fantasy Film"@es ;
+    becas:nombreBeca "Art Directors Guild Award for Excellence in Production Design for a Fantasy Film"@es ;
+    becas:descripcion "categoría de Premio del Sindicato de directores artísticos"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Lo_Nuestro_Excellence_Award> a becas:Beca ;
+    rdfs:label "Lo Nuestro Excellence Award"@es ;
+    becas:nombreBeca "Lo Nuestro Excellence Award"@es ;
+    becas:descripcion "premio de música latina"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Michael_Shaara_Award_for_Excellence_in_Civil_War_Fiction> a becas:Beca ;
+    rdfs:label "Michael Shaara Award for Excellence in Civil War Fiction"@es ;
+    becas:nombreBeca "Michael Shaara Award for Excellence in Civil War Fiction"@es ;
+    becas:descripcion "premio literario estadounidense de ficción histórica"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/EFQM> a becas:Beca ;
+    rdfs:label "EFQM excellence model"@es ;
+    becas:nombreBeca "EFQM excellence model"@es ;
+    becas:descripcion "Fundación Europea para la Gestión de la Calidad"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/ARC_Centre_of_Excellence_for_All-Sky_Astrophysics> a becas:Beca ;
+    rdfs:label "ARC Centre of Excellence for All-Sky Astrophysics"@es ;
+    becas:nombreBeca "ARC Centre of Excellence for All-Sky Astrophysics"@es ;
+    becas:descripcion "research center"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Art_Directors_Guild_Award_for_Excellence_in_Production_Design_for_a_Feature_Film> a becas:Beca ;
+    rdfs:label "Art Directors Guild Award for Excellence in Production Design for a Feature Film"@es ;
+    becas:nombreBeca "Art Directors Guild Award for Excellence in Production Design for a Feature Film"@es ;
+    becas:descripcion "annual film award (1996-1999)"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Andrew_Carnegie_Medals_for_Excellence_in_Fiction_and_Nonfiction> a becas:Beca ;
+    rdfs:label "Andrew Carnegie Medals for Excellence in Fiction and Nonfiction"@es ;
+    becas:nombreBeca "Andrew Carnegie Medals for Excellence in Fiction and Nonfiction"@es ;
+    becas:descripcion "awards for best fiction and nonfiction books for adult readers published in the U.S"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Air_and_Space_Organizational_Excellence_Award> a becas:Beca ;
+    rdfs:label "Air and Space Organizational Excellence Award"@es ;
+    becas:nombreBeca "Air and Space Organizational Excellence Award"@es ;
+    becas:descripcion "United States Air Force unit award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Foundation_For_Excellence> a becas:Beca ;
+    rdfs:label "Foundation For Excellence"@es ;
+    becas:nombreBeca "Foundation For Excellence"@es ;
+    becas:descripcion "non-profit organization which supports students in India"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Foundation_for_Excellence_in_Education> a becas:Beca ;
+    rdfs:label "Foundation for Excellence in Education"@es ;
+    becas:nombreBeca "Foundation for Excellence in Education"@es ;
+    becas:descripcion "American education think tank"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Lieutenant_Governor's_Award_for_Literary_Excellence> a becas:Beca ;
+    rdfs:label "Lieutenant Governor's Award for Literary Excellence"@es ;
+    becas:nombreBeca "Lieutenant Governor's Award for Literary Excellence"@es ;
+    becas:descripcion "award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Accessories_Council_Excellence_Awards> a becas:Beca ;
+    rdfs:label "Accessories Council Excellence Awards"@es ;
+    becas:nombreBeca "Accessories Council Excellence Awards"@es ;
+    becas:descripcion "ACE Awards"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/2005_Industrial_Design_Excellence_Awards> a becas:Beca ;
+    rdfs:label "2005 Industrial Design Excellence Awards"@es ;
+    becas:nombreBeca "2005 Industrial Design Excellence Awards"@es ;
+    becas:descripcion "International Design Excellence Awards held in 2005"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Canada_Awards_for_Excellence> a becas:Beca ;
+    rdfs:label "Canada Awards for Excellence"@es ;
+    becas:nombreBeca "Canada Awards for Excellence"@es ;
+    becas:descripcion "national quality awards of Canada"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Catharine_E._B._Cox_Award_for_Excellence_in_the_Visual_Arts> a becas:Beca ;
+    rdfs:label "Catharine E. B. Cox Award for Excellence in the Visual Arts"@es ;
+    becas:nombreBeca "Catharine E. B. Cox Award for Excellence in the Visual Arts"@es ;
+    becas:descripcion "biennial award given to visual artist"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Centers_of_Biomedical_Research_Excellence> a becas:Beca ;
+    rdfs:label "Centers of Biomedical Research Excellence"@es ;
+    becas:nombreBeca "Centers of Biomedical Research Excellence"@es ;
+    becas:descripcion "medical research institute in the United States"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Centre_for_Excellence_in_Teaching_and_Learning_through_Design> a becas:Beca ;
+    rdfs:label "Centre for Excellence in Teaching and Learning through Design"@es ;
+    becas:nombreBeca "Centre for Excellence in Teaching and Learning through Design"@es ;
+    becas:descripcion "British higher education initiative"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Costume_Designers_Guild_Award_for_Excellence_in_Contemporary_Television> a becas:Beca ;
+    rdfs:label "Costume Designers Guild Award for Excellence in Contemporary Television"@es ;
+    becas:nombreBeca "Costume Designers Guild Award for Excellence in Contemporary Television"@es ;
+    becas:descripcion "annual CDG TV award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Costume_Designers_Guild_Award_for_Excellence_in_Period/Fantasy_Film> a becas:Beca ;
+    rdfs:label "Costume Designers Guild Award for Excellence in Period/Fantasy Film"@es ;
+    becas:nombreBeca "Costume Designers Guild Award for Excellence in Period/Fantasy Film"@es ;
+    becas:descripcion "annual award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Partnership_for_Academic_Competition_Excellence> a becas:Beca ;
+    rdfs:label "Partnership for Academic Competition Excellence"@es ;
+    becas:nombreBeca "Partnership for Academic Competition Excellence"@es ;
+    becas:descripcion "organization"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Retention_Excellence_Award> a becas:Beca ;
+    rdfs:label "Retention Excellence Award"@es ;
+    becas:nombreBeca "Retention Excellence Award"@es ;
+    becas:descripcion "usa navy award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/BBWAA_Career_Excellence_Award> a becas:Beca ;
+    rdfs:label "BBWAA Career Excellence Award"@es ;
+    becas:nombreBeca "BBWAA Career Excellence Award"@es ;
+    becas:descripcion "annual award for baseball writers"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Bucksbaum_Institute_for_Clinical_Excellence> a becas:Beca ;
+    rdfs:label "Bucksbaum Institute for Clinical Excellence"@es ;
+    becas:nombreBeca "Bucksbaum Institute for Clinical Excellence"@es ;
+    becas:descripcion "academic institution in United States of America"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/The_Excellence_in_Diversity_Awards> a becas:Beca ;
+    rdfs:label "The Excellence in Diversity Awards"@es ;
+    becas:nombreBeca "The Excellence in Diversity Awards"@es ;
+    becas:descripcion "British award for employers"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Research_Excellence_Framework> a becas:Beca ;
+    rdfs:label "Research Excellence Framework"@es ;
+    becas:nombreBeca "Research Excellence Framework"@es ;
+    becas:descripcion "UK university research assessment process"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Centre_of_Excellence_for_Biosecurity_Risk_Analysis> a becas:Beca ;
+    rdfs:label "Centre of Excellence for Biosecurity Risk Analysis"@es ;
+    becas:nombreBeca "Centre of Excellence for Biosecurity Risk Analysis"@es ;
+    becas:descripcion "research institute at the University of Melbourne"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/RSA_Award_for_Excellence_in_Mathematics> a becas:Beca ;
+    rdfs:label "RSA Award for Excellence in Mathematics"@es ;
+    becas:nombreBeca "RSA Award for Excellence in Mathematics"@es ;
+    becas:descripcion "annual award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/German_Universities_Excellence_Initiative> a becas:Beca ;
+    rdfs:label "German Universities Excellence Initiative"@es ;
+    becas:nombreBeca "German Universities Excellence Initiative"@es ;
+    becas:descripcion "German education initiative"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Presidential_Order_of_Excellence> a becas:Beca ;
+    rdfs:label "Presidential Order of Excellence"@es ;
+    becas:nombreBeca "Presidential Order of Excellence"@es ;
+    becas:descripcion "Georgian award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Bushwick_Leaders_High_School_for_Academic_Excellence> a becas:Beca ;
+    rdfs:label "Bushwick Leaders High School for Academic Excellence"@es ;
+    becas:nombreBeca "Bushwick Leaders High School for Academic Excellence"@es ;
+    becas:descripcion "high school in Brooklyn, New York City"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Tony_Honors_for_Excellence_in_Theatre> a becas:Beca ;
+    rdfs:label "Tony Honors for Excellence in Theatre"@es ;
+    becas:nombreBeca "Tony Honors for Excellence in Theatre"@es ;
+    becas:descripcion "Non-competitive theatre award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Thailand_Center_of_Excellence_for_Life_Sciences> a becas:Beca ;
+    rdfs:label "Thailand Center of Excellence for Life Sciences"@es ;
+    becas:nombreBeca "Thailand Center of Excellence for Life Sciences"@es ;
+    becas:descripcion "Thai governmental research institute"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Eric_Breindel_Award_for_Excellence_in_Opinion_Journalism> a becas:Beca ;
+    rdfs:label "Eric Breindel Award for Excellence in Opinion Journalism"@es ;
+    becas:nombreBeca "Eric Breindel Award for Excellence in Opinion Journalism"@es ;
+    becas:descripcion "American journalism prize (1999-2012)"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Economic_Statistics_Centre_of_Excellence> a becas:Beca ;
+    rdfs:label "Economic Statistics Centre of Excellence"@es ;
+    becas:nombreBeca "Economic Statistics Centre of Excellence"@es ;
+    becas:descripcion "British economics research institute"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/A.G._Huntsman_Award_for_Excellence_in_the_Marine_Sciences> a becas:Beca ;
+    rdfs:label "A.G. Huntsman Award for Excellence in the Marine Sciences"@es ;
+    becas:nombreBeca "A.G. Huntsman Award for Excellence in the Marine Sciences"@es ;
+    becas:descripcion "medal awarded by the Royal Society of Canada"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Presidential_Award_for_Excellence_in_Mathematics_and_Science_Teaching> a becas:Beca ;
+    rdfs:label "Presidential Award for Excellence in Mathematics and Science Teaching"@es ;
+    becas:nombreBeca "Presidential Award for Excellence in Mathematics and Science Teaching"@es ;
+    becas:descripcion "award bestowed by the President of the United States"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/ALA_Medal_of_Excellence> a becas:Beca ;
+    rdfs:label "ALA Medal of Excellence"@es ;
+    becas:nombreBeca "ALA Medal of Excellence"@es ;
+    becas:descripcion "American Library Association award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/National_Centre_of_Excellence_in_Geology> a becas:Beca ;
+    rdfs:label "National Centre of Excellence in Geology"@es ;
+    becas:nombreBeca "National Centre of Excellence in Geology"@es ;
+    becas:descripcion "geological research institute maintained by University of Peshawar, Peshawar, Khyber Pakhtunkhwa, Pakistan"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Ernest_J._Gaines_Award_for_Literary_Excellence> a becas:Beca ;
+    rdfs:label "Ernest J. Gaines Award for Literary Excellence"@es ;
+    becas:nombreBeca "Ernest J. Gaines Award for Literary Excellence"@es ;
+    becas:descripcion "American literary award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Bruce_Alberts_Award_for_Excellence_in_Science_Education> a becas:Beca ;
+    rdfs:label "Bruce Alberts Award for Excellence in Science Education"@es ;
+    becas:nombreBeca "Bruce Alberts Award for Excellence in Science Education"@es ;
+    becas:descripcion "American Society for Cell Biology award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Art_Directors_Guild_Award_for_Excellence_in_Production_Design_for_a_One-Hour_Contemporary_Single-Camera_Series> a becas:Beca ;
+    rdfs:label "Art Directors Guild Award for Excellence in Production Design for a One-Hour Contemporary Single-Camera Series"@es ;
+    becas:nombreBeca "Art Directors Guild Award for Excellence in Production Design for a One-Hour Contemporary Single-Camera Series"@es ;
+    becas:descripcion "Television award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Costume_Designers_Guild_Award_for_Excellence_in_Period_Television> a becas:Beca ;
+    rdfs:label "Costume Designers Guild Award for Excellence in Period Television"@es ;
+    becas:nombreBeca "Costume Designers Guild Award for Excellence in Period Television"@es ;
+    becas:descripcion "costume design award"@es ;
+    becas:origen "dbpedia" .
+
+<http://dbpedia.org/resource/Durham_University_Centre_of_Cricketing_Excellence> a becas:Beca ;
+    rdfs:label "Durham University Centre of Cricketing Excellence"@es ;
+    becas:nombreBeca "Durham University Centre of Cricketing Excellence"@es ;
+    becas:descripcion "UK cricket team"@es ;
+    becas:origen "dbpedia" .
