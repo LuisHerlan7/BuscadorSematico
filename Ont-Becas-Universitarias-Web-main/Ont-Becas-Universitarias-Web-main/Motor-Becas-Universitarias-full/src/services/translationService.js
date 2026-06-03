@@ -1,7 +1,7 @@
 const { translate } = require('@vitalets/google-translate-api');
 
 class TranslationService {
-  async translateText(text, targetLang, sourceLang = 'es') {
+  async translateText(text, targetLang, sourceLang = 'auto') {
     try {
       const result = await translate(text, { 
         to: targetLang,
@@ -18,7 +18,7 @@ class TranslationService {
     if (targetLang === 'es') return results;
     
     const translated = { ...results };
-    const fieldsToTranslate = ['abstract', 'genre', 'platform'];
+    const fieldsToTranslate = ['label', 'description', 'abstract', 'genre', 'platform'];
     
     for (const field of fieldsToTranslate) {
       if (translated[field]) {
