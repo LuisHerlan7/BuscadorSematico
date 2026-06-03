@@ -16,21 +16,23 @@
             <path d="M22 32 L30 40 L42 26" stroke="#6366f1" stroke-width="3"
                   stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span>Beca Universitaria</span>
+          <span>{{t 'scholarship_badge'}}</span>
         </div>
       {{/if}}
 
       <div class="beca-info-card">
-        <h2 class="beca-info-title">Información General</h2>
+        <h2 class="beca-info-title">{{t 'general_info'}}</h2>
         <ul class="beca-info-list">
 
           {{#if disease.source}}
           <li class="beca-info-item">
             <span class="beca-info-icon">🌐</span>
             <div>
-              <span class="beca-info-label">Fuente</span>
+              <span class="beca-info-label">{{t 'source'}}</span>
               <span class="beca-info-value source-badge {{disease.source}}">
-                {{#if (eq disease.source 'dbpedia')}}DBpedia{{else}}Local{{/if}}
+                {{#if (eq disease.source 'dbpedia')}}DBpedia{{/if}}
+                {{#if (eq disease.source 'dbpedia-offline')}}DBpedia Offline{{/if}}
+                {{#if (eq disease.source 'local')}}Local{{/if}}
               </span>
             </div>
           </li>
@@ -40,7 +42,7 @@
           <li class="beca-info-item">
             <span class="beca-info-icon">💰</span>
             <div>
-              <span class="beca-info-label">Monto Cubierto</span>
+              <span class="beca-info-label">{{t 'amount'}}</span>
               <span class="beca-info-value">{{disease.amount}}</span>
             </div>
           </li>
@@ -50,7 +52,7 @@
           <li class="beca-info-item">
             <span class="beca-info-icon">📅</span>
             <div>
-              <span class="beca-info-label">Fecha Límite</span>
+              <span class="beca-info-label">{{t 'deadline'}}</span>
               <span class="beca-info-value">{{disease.deadline}}</span>
             </div>
           </li>
@@ -60,7 +62,7 @@
           <li class="beca-info-item">
             <span class="beca-info-icon">🏢</span>
             <div>
-              <span class="beca-info-label">Institución</span>
+              <span class="beca-info-label">{{t 'institution'}}</span>
               <span class="beca-info-value">{{disease.institution}}</span>
             </div>
           </li>
@@ -70,7 +72,7 @@
           <li class="beca-info-item">
             <span class="beca-info-icon">🎓</span>
             <div>
-              <span class="beca-info-label">Nivel</span>
+              <span class="beca-info-label">{{t 'level'}}</span>
               <span class="beca-info-value">{{disease.level}}</span>
             </div>
           </li>
@@ -80,7 +82,7 @@
           <li class="beca-info-item">
             <span class="beca-info-icon">🔬</span>
             <div>
-              <span class="beca-info-label">Área</span>
+              <span class="beca-info-label">{{t 'area'}}</span>
               <span class="beca-info-value">{{disease.area}}</span>
             </div>
           </li>
@@ -90,7 +92,7 @@
           <li class="beca-info-item">
             <span class="beca-info-icon">📍</span>
             <div>
-              <span class="beca-info-label">País de Destino</span>
+              <span class="beca-info-label">{{t 'country'}}</span>
               <span class="beca-info-value">{{disease.country}}</span>
             </div>
           </li>
@@ -103,52 +105,52 @@
     <!-- Columna derecha: nombre, descripción, acciones -->
     <main class="beca-main">
       <header class="beca-header">
-        <div class="beca-badge">Beca Universitaria</div>
+        <div class="beca-badge">{{t 'scholarship_badge'}}</div>
         <h1 class="beca-name">{{disease.name}}</h1>
       </header>
 
       <section class="beca-description">
-        <h2 class="section-heading">Descripción</h2>
+        <h2 class="section-heading">{{t 'description'}}</h2>
         {{#if disease.abstract}}
           <p>{{disease.abstract}}</p>
         {{else}}
-          <p class="no-desc">No hay descripción disponible para esta beca.</p>
+          <p class="no-desc">{{t 'no_description'}}</p>
         {{/if}}
       </section>
 
       {{#if disease.requirements}}
       <section class="beca-requirements" style="margin-top: 2rem;">
-        <h2 class="section-heading">Requisitos / Elegibilidad</h2>
+        <h2 class="section-heading">{{t 'requirements'}}</h2>
         <p>{{disease.requirements}}</p>
       </section>
       {{/if}}
 
       {{#if disease.benefits}}
       <section class="beca-benefits" style="margin-top: 2rem;">
-        <h2 class="section-heading">Beneficios / Cobertura</h2>
+        <h2 class="section-heading">{{t 'benefits'}}</h2>
         <p>{{disease.benefits}}</p>
       </section>
       {{/if}}
 
       <div class="beca-actions">
-        <a href="/search?q={{disease.name}}" class="btn-back">
-          ← Volver a resultados
+        <a href="/search?q={{disease.name}}&lang={{lang}}" class="btn-back">
+          ← {{t 'back_results'}}
         </a>
         
         {{#if disease.seeAlso}}
           <a href="{{disease.seeAlso}}" class="btn-dbpedia" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16,185,129,.35);" target="_blank" rel="noopener noreferrer">
-            Visitar Sitio Oficial ↗
+            {{t 'official_site'}} ↗
           </a>
         {{/if}}
 
         {{#if (eq disease.source 'dbpedia')}}
           <a href="{{disease.uri}}" class="btn-dbpedia" target="_blank" rel="noopener noreferrer">
-            Ver en DBpedia ↗
+            {{t 'view_dbpedia'}} ↗
           </a>
         {{else}}
           {{#if disease.dbpediaUri}}
             <a href="{{disease.dbpediaUri}}" class="btn-dbpedia" target="_blank" rel="noopener noreferrer">
-              Ver en DBpedia ↗
+              {{t 'view_dbpedia'}} ↗
             </a>
           {{/if}}
         {{/if}}
@@ -252,6 +254,7 @@
     font-weight: 600 !important;
   }
   .source-badge.dbpedia { background: #dbeafe; color: #1d4ed8; }
+  .source-badge.dbpedia-offline { background: #fef3c7; color: #92400e; }
   .source-badge.local   { background: #d1fae5; color: #065f46; }
 
   /* ── Main ── */

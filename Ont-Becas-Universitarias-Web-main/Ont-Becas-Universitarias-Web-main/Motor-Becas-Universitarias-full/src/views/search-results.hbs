@@ -10,14 +10,20 @@
   <div class="source-summary-bar">
     <div class="source-summary-item local-summary">
       <span class="source-summary-icon">📄</span>
-      <span class="source-summary-label">Ontología Local</span>
+      <span class="source-summary-label">{{t 'source_local'}}</span>
       <span class="source-summary-count">{{localCount}}</span>
     </div>
     <div class="source-summary-divider"></div>
     <div class="source-summary-item dbpedia-summary">
       <span class="source-summary-icon">🌐</span>
-      <span class="source-summary-label">DBpedia</span>
+      <span class="source-summary-label">{{t 'source_dbpedia'}}</span>
       <span class="source-summary-count">{{dbpediaCount}}</span>
+    </div>
+    <div class="source-summary-divider"></div>
+    <div class="source-summary-item dbpedia-offline-summary">
+      <span class="source-summary-icon">▣</span>
+      <span class="source-summary-label">{{t 'source_dbpedia_offline'}}</span>
+      <span class="source-summary-count">{{dbpediaOfflineCount}}</span>
     </div>
   </div>
 {{/unless}}
@@ -68,7 +74,7 @@
               <div class="detail-item">
                 <svg xmlns="http://www.w3.org/2000/svg" class="detail-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 100 12 6 6 0 000-12zM8 9h4v1H8V9z"/></svg>
                 <div class="detail-text">
-                  <span class="detail-label">{{#if (eq ../lang 'es')}}Monto{{else}}Amount{{/if}}</span>
+                  <span class="detail-label">{{t 'amount'}}</span>
                   <span class="detail-value">{{amount}}</span>
                 </div>
               </div>
@@ -78,7 +84,7 @@
               <div class="detail-item">
                 <svg xmlns="http://www.w3.org/2000/svg" class="detail-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H8V3a1 1 0 00-1-1z"/></svg>
                 <div class="detail-text">
-                  <span class="detail-label">{{#if (eq ../lang 'es')}}Fecha límite{{else}}Deadline{{/if}}</span>
+                  <span class="detail-label">{{t 'deadline'}}</span>
                   <span class="detail-value">{{deadline}}</span>
                 </div>
               </div>
@@ -88,8 +94,12 @@
               <div class="detail-item">
                 <svg xmlns="http://www.w3.org/2000/svg" class="detail-icon" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M10 6v4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 <div class="detail-text">
-                  <span class="detail-label">{{#if (eq ../lang 'es')}}Fuente{{else}}Source{{/if}}</span>
-                  <span class="detail-value source-pill {{source}}">{{#if (eq source 'dbpedia')}}🌐 DBpedia{{else}}📄 Local{{/if}}</span>
+                  <span class="detail-label">{{t 'source'}}</span>
+                  <span class="detail-value source-pill {{source}}">
+                    {{#if (eq source 'dbpedia')}}DBpedia{{/if}}
+                    {{#if (eq source 'dbpedia-offline')}}DBpedia Offline{{/if}}
+                    {{#if (eq source 'local')}}Local{{/if}}
+                  </span>
                 </div>
               </div>
             {{/if}}
@@ -98,18 +108,12 @@
 
         <!-- Enlace a la página de detalles de la beca -->
         <div class="disease-footer">
-          <h3 class="references-title">
-            {{#if (eq ../lang 'es')}}Acciones{{/if}}
-            {{#if (eq ../lang 'en')}}Actions{{/if}}
-            {{#if (eq ../lang 'pt')}}Ações{{/if}}
-            {{#if (eq ../lang 'de')}}Aktionen{{/if}}
-            {{#if (eq ../lang 'fr')}}Actions{{/if}}
-          </h3>
+          <h3 class="references-title">{{t 'actions'}}</h3>
           <div class="disease-links">
             {{#if uri}}
               <a href="/disease/{{encodeURIComponent uri}}" class="disease-link detail-link">
                 <svg xmlns="http://www.w3.org/2000/svg" class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"/></svg>
-                <span>{{#if (eq ../lang 'es')}}Ver Detalles{{else}}View Details{{/if}}</span>
+                <span>{{t 'view_details'}}</span>
               </a>
             {{/if}}
             {{#if dbpediaPage}}
@@ -120,7 +124,14 @@
             {{/if}}
 
             <!-- Guardar en favoritos -->
-            <button class="disease-link save-btn" data-uri="{{uri}}" data-label="{{label}}">{{#if (eq ../lang 'es')}}Guardar{{else}}Save{{/if}}</button>
+            <button
+              class="disease-link save-btn"
+              data-uri="{{uri}}"
+              data-label="{{label}}"
+              data-saved-text="{{t 'saved'}}"
+              data-exists-text="{{t 'already_saved'}}"
+              data-missing-text="{{t 'uri_unavailable'}}"
+            >{{t 'save'}}</button>
           </div>
         </div>
       </div>
@@ -196,6 +207,10 @@
   .dbpedia-summary .source-summary-count {
     background: #dbeafe;
     color: #1d4ed8;
+  }
+  .dbpedia-offline-summary .source-summary-count {
+    background: #fef3c7;
+    color: #92400e;
   }
   .source-summary-divider {
     width: 1px;
@@ -397,6 +412,7 @@ margin: 0 auto;
     line-height: 1.6;
   }
   .source-pill.dbpedia { background: #dbeafe; color: #1d4ed8; }
+  .source-pill.dbpedia-offline { background: #fef3c7; color: #92400e; }
   .source-pill.local   { background: #d1fae5; color: #065f46; }
 
   /* Detail link button */
@@ -431,13 +447,16 @@ margin: 0 auto;
       btn.addEventListener('click', ()=>{
         const uri = btn.getAttribute('data-uri');
         const label = btn.getAttribute('data-label');
-        if(!uri) return alert('URI no disponible');
+        const savedText = btn.getAttribute('data-saved-text') || 'Guardado';
+        const existsText = btn.getAttribute('data-exists-text') || 'Ya guardado';
+        const missingText = btn.getAttribute('data-missing-text') || 'URI no disponible';
+        if(!uri) return alert(missingText);
         const ok = saveFav({ uri, label });
         if(ok) {
-          btn.textContent = 'Guardado';
+          btn.textContent = savedText;
           btn.disabled = true;
         } else {
-          btn.textContent = 'Ya guardado';
+          btn.textContent = existsText;
         }
       });
     });

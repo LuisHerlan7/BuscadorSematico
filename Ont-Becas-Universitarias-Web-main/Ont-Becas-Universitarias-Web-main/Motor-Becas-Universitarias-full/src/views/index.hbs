@@ -30,6 +30,11 @@
           
           <div class="hero-search">
             {{> search-form }}
+            <!-- Hidden DBpedia import button (visible only with ?dev=1) -->
+            <div id="dbpedia-import" style="display:none; margin-top:10px;">
+              <button id="btn-import-dbpedia" class="btn btn-sm btn-outline-secondary">Importar datos DBpedia (dev)</button>
+              <span id="import-status" style="margin-left:8px;color:#666;font-size:0.9rem"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -233,6 +238,33 @@
       }
     }
   </style>
+  <script>
+    (function(){
+      try {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('dev') === '1') {
+          const el = document.getElementById('dbpedia-import');
+          el.style.display = 'block';
+          document.getElementById('btn-import-dbpedia').addEventListener('click', async function(){
+            const status = document.getElementById('import-status');
+            status.textContent = 'Iniciando...';
+            try {
+              const res = await fetch('/admin/import-dbpedia?dev=1', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ limit: 300, merge: true, langs: 'es,en,pt,de,fr' })
+              });
+              const j = await res.json();
+              if (j.status === 'started') status.textContent = 'Importación iniciada (pid ' + j.pid + ')';
+              else status.textContent = 'Respuesta: ' + JSON.stringify(j);
+            } catch (e) {
+              status.textContent = 'Error: ' + e.message;
+            }
+          });
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
 </div>
 
 <!-- Sección de enfermedades destacadas -->

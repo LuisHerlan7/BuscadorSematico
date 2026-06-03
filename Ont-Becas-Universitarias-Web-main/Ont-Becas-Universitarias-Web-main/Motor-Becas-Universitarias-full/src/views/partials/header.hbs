@@ -14,13 +14,20 @@
       </div>
     </div>
   </div>
-  
+
+  <!-- Botón de importación DBpedia (aparece sólo con zoom alejado <=50%) -->
+  <div id="dbpedia-import-header" style="display:none;">
+    <button id="btn-import-dbpedia-header" class="btn btn-sm btn-outline-light">Importar DBpedia</button>
+    <span id="import-status-header" style="margin-left:8px;color:#ddd;font-size:0.9rem"></span>
+  </div>
+
   <style>
     /* Estilos para el navbar mejorado */
     .navbar-improved {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
       transition: all 0.3s ease;
+      position: relative;
     }
     
     .navbar-improved::before {
@@ -97,5 +104,89 @@
     .navbar-improved:hover {
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     }
+
+    /* Estilos del botón de import DBpedia en header */
+    #dbpedia-import-header {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1200;
+      display: none; /* controlado por JS */
+    }
+    #btn-import-dbpedia-header {
+      padding: 6px 10px;
+      font-size: 0.85rem;
+    }
   </style>
+
+  <script>
+    (function(){
+      const container = document.getElementById('dbpedia-import-header');
+      const btn = document.getElementById('btn-import-dbpedia-header');
+      const status = document.getElementById('import-status-header');
+
+      function getZoomPercent(){
+        try {
+          // Método robusto: medir el ancho real de un elemento de referencia en CSS pixels
+          const tester = document.createElement('div');
+          tester.style.width = '100px';
+          tester.style.height = '1px';
+          tester.style.position = 'absolute';
+          tester.style.left = '-9999px';
+          document.body.appendChild(tester);
+          const measured = tester.getBoundingClientRect().width;
+          document.body.removeChild(tester);
+          if (measured && typeof measured === 'number') {
+            // si measured = 50 → zoom 50%
+            return Math.round(measured);
+          }
+        } catch (e) {
+          // fallbacks
+          try {
+            if (window.visualViewport && typeof window.visualViewport.scale === 'number') return Math.round(window.visualViewport.scale * 100);
+            if (window.outerWidth && window.innerWidth) return Math.round((window.innerWidth / window.outerWidth) * 100);
+            if (typeof window.devicePixelRatio === 'number' && window.devicePixelRatio > 0) return Math.round(100 / window.devicePixelRatio);
+          } catch (e2){}
+        }
+        return 100;
+      }
+
+      function updateVisibility(){
+        const percent = getZoomPercent();
+        if (!container) return;
+        console.log('[debug] zoom percent estimate:', percent);
+        // Mostrar sólo cuando el zoom sea <= 50% (o medir devuelve <=50)
+        if (percent <= 50) {
+          container.style.display = 'block';
+        } else {
+          container.style.display = 'none';
+        }
+      }
+
+      // Inicial y listeners
+      try {
+        updateVisibility();
+        if (window.visualViewport && window.visualViewport.addEventListener) window.visualViewport.addEventListener('resize', updateVisibility);
+        window.addEventListener('resize', updateVisibility);
+      } catch(e){ /* ignore */ }
+
+      if (btn) btn.addEventListener('click', async function(){
+        if (!status) return;
+        status.textContent = 'Iniciando...';
+        try {
+          const res = await fetch('/admin/import-dbpedia?dev=1', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ limit: 300, merge: true, langs: 'es,en,pt,de,fr' })
+          });
+          const j = await res.json();
+          if (j.status === 'started') status.textContent = 'Importación iniciada (pid ' + j.pid + ')';
+          else status.textContent = 'Respuesta: ' + (j.message || JSON.stringify(j));
+        } catch (err){
+          status.textContent = 'Error: ' + (err.message || err);
+        }
+      });
+    })();
+  </script>
 </header>
