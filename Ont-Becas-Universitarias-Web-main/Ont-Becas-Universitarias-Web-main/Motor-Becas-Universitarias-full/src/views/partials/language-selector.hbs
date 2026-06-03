@@ -3,7 +3,6 @@
     class="btn dropdown-toggle btn-outline-light" 
     type="button" 
     id="languageDropdown" 
-    data-bs-toggle="dropdown"
     aria-expanded="false"
   >
     <span class="language-option">
@@ -29,7 +28,7 @@
     </span>
     <i class="bi bi-chevron-down dropdown-arrow"></i>
   </button>
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu" id="langMenu">
     <li><a class="dropdown-item" href="?lang=en"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="24" height="12" class="flag-icon">
   <clipPath id="s">
     <path d="M0,0 v30 h60 v-30 z"/>
@@ -57,6 +56,9 @@
     .language-selector {
       position: relative;
       transition: all 0.3s ease;
+      overflow: visible;
+      z-index: 1001;
+      display: inline-block;
     }
     
     .language-selector .btn {
@@ -95,42 +97,132 @@
       border-radius: 2px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       transition: transform 0.2s ease;
-    }
-    
-    .dropdown-item:hover .flag-icon {
-      transform: scale(1.1);
+      flex-shrink: 0;
     }
     
     .dropdown-menu {
+      display: none;
+      position: fixed !important;
+      z-index: 99999 !important;
       min-width: 180px;
       border: none;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      animation: fadeInUp 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
       border-radius: 8px;
-      overflow: hidden;
+      background-color: #fff;
+      padding: 0;
+      list-style: none;
+      margin: 0;
+      left: 0 !important;
+      top: 0 !important;
+    }
+    
+    .dropdown-menu.show {
+      display: block !important;
     }
     
     .dropdown-item {
       display: flex;
       align-items: center;
-      padding: 8px 16px;
+      padding: 10px 16px;
       transition: all 0.2s ease;
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+      background-color: #fff;
+      border: none;
+      width: 100%;
+      text-align: left;
     }
     
     .dropdown-item:hover {
-      background-color: #f8f9fa;
+      background-color: #f0f0f0;
       transform: translateX(5px);
     }
     
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .dropdown-item:active {
+      background-color: #e8e8e8;
     }
   </style>
+
+  <script>
+    (function() {
+      function initDropdown() {
+        const btn = document.getElementById('languageDropdown');
+        const menu = document.getElementById('langMenu');
+        
+        if (!btn || !menu) {
+          return;
+        }
+        
+        const items = menu.querySelectorAll('.dropdown-item');
+        
+        // Clic en botón para abrir/cerrar
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const isOpen = menu.classList.contains('show');
+          
+          if (!isOpen) {
+            // Calcular posición
+            const rect = btn.getBoundingClientRect();
+            const left = rect.left;
+            const top = rect.bottom + 8;
+            
+            // Establecer posición con inline styles
+            menu.style.position = 'fixed';
+            menu.style.left = left + 'px';
+            menu.style.top = top + 'px';
+            menu.style.zIndex = '99999';
+            menu.style.display = 'none';
+          }
+          
+          menu.classList.toggle('show');
+        });
+        
+        // Clic en items
+        items.forEach((item, idx) => {
+          item.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const href = this.getAttribute('href');
+            const langMatch = href.match(/lang=([a-z]+)/);
+            
+            if (langMatch && langMatch[1]) {
+              const lang = langMatch[1];
+              
+              const params = new URLSearchParams(window.location.search);
+              params.set('lang', lang);
+              const newUrl = window.location.pathname + '?' + params.toString();
+              
+              window.location.href = newUrl;
+            }
+          });
+        });
+        
+        // Cerrar al hacer click fuera
+        document.addEventListener('click', function(e) {
+          if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+            if (menu.classList.contains('show')) {
+              menu.classList.remove('show');
+            }
+          }
+        });
+        
+        // Cerrar con Escape
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && menu && menu.classList.contains('show')) {
+            menu.classList.remove('show');
+          }
+        });
+      }
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDropdown);
+      } else {
+        initDropdown();
+      }
+    })();
+  </script>
 </div>
