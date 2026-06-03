@@ -1,5 +1,6 @@
 const axios = require('axios');
 const dbpediaConfig = require('../config/dbpedia');
+const rdfService = require('./rdfService');
 
 // Palabras clave exactas provistas por el usuario (NO MODIFICADAS)
 const SCHOLARSHIP_KEYWORDS = [
@@ -14,6 +15,14 @@ const SCHOLARSHIP_KEYWORDS = [
 class DBpediaService {
   _getEndpoint() {
     return dbpediaConfig.endpoint;
+  }
+
+  searchOfflineScholarships(term, lang = 'es') {
+    return rdfService.searchOfflineDbpediaScholarships(term, lang);
+  }
+
+  getOfflineScholarshipDetails(uri, lang = 'es') {
+    return rdfService.getOfflineDbpediaScholarshipDetails(uri, lang);
   }
 
   /**
@@ -139,10 +148,11 @@ class DBpediaService {
       });
 
       const bindings = response.data?.results?.bindings || [];
-      return this._filterScholarshipResults(bindings);
+      const remoteResults = this._filterScholarshipResults(bindings);
+      return remoteResults.length > 0 ? remoteResults : await this.searchOfflineScholarships(term, lang);
     } catch (error) {
       this._handleError(error);
-      return [];
+      return this.searchOfflineScholarships(term, lang);
     }
   }
 
@@ -178,7 +188,7 @@ class DBpediaService {
       });
 
       const rows = response.data?.results?.bindings || [];
-      if (rows.length === 0) return null;
+      if (rows.length === 0) return this.getOfflineScholarshipDetails(uri, lang);
 
       // Selección de idioma preferente para textos básicos
       const labelRow = rows.find(r => r.label?.['xml:lang'] === lang) || rows[0];
@@ -207,7 +217,7 @@ class DBpediaService {
       };
     } catch (error) {
       this._handleError(error);
-      return null;
+      return this.getOfflineScholarshipDetails(uri, lang);
     }
   }
 
