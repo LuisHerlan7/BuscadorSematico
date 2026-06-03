@@ -31,3 +31,20 @@ if (require.main === module) {
 }
 
 module.exports = app;
+
+// Manejador de errores para registrar errores 500 durante desarrollo
+if (process.env.NODE_ENV !== 'production') {
+  app.use((err, req, res, next) => {
+    console.error('Unhandled error:', err && err.stack ? err.stack : err);
+    try {
+      res.status(err.status || 500).render('error', {
+        title: 'Error',
+        message: err.message || 'Internal Server Error',
+        error: err,
+        lang: req.lang || 'es'
+      });
+    } catch (e) {
+      res.status(500).send('Internal Server Error');
+    }
+  });
+}

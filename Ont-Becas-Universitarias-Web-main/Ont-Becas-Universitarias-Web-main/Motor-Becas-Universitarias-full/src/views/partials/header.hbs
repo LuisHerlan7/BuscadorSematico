@@ -2,7 +2,11 @@
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
       <h1 class="h4 mb-0">
-        <a href="/?lang={{lang}}" class="text-white text-decoration-none logo-link">{{t 'site_title'}}</a>
+        {{#if @root.query}}
+          <a href="{{@root.currentUrl}}?q={{encodeURIComponent @root.query}}&lang={{lang}}" class="text-white text-decoration-none logo-link">{{t 'site_title'}}</a>
+        {{else}}
+          <a href="/{{#if lang}}{{lang}}{{else}}es{{/if}}" class="text-white text-decoration-none logo-link">{{t 'site_title'}}</a>
+        {{/if}}
       </h1>
 
       <!-- Agrupamos selector de idioma + formulario en un flex -->

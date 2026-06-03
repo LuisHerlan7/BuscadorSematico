@@ -36,6 +36,13 @@ describe('Integración /search y /disease', () => {
     expect(res.text).toContain('Test en');
   });
 
+  test('al cambiar idioma preserva el parámetro q en los enlaces del selector', async () => {
+    const res = await request(app).get('/search').query({ q: 'abc', lang: 'es' });
+    expect(res.status).toBe(200);
+    // el enlace para cambiar a 'en' debe contener q=abc
+    expect(res.text).toMatch(/\?q=abc(&|\u0026).*lang=en|\?lang=en(&|\u0026).*q=abc/);
+  });
+
   test('GET /disease/:uri usa dbpediaService para URIs dbpedia', async () => {
     const uri = encodeURIComponent('http://dbpedia.org/resource/TestScholarship');
     const res = await request(app).get(`/disease/${uri}`).query({ lang: 'pt' });
