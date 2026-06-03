@@ -52,7 +52,7 @@ module.exports = function(app) {
       },
       
       // Helper para obtener texto traducido
-      t: function(key) {
+      t: function(key, options) {
         const translations = {
           'site_title': {
             es: 'Buscador de Becas',
@@ -110,10 +110,199 @@ module.exports = function(app) {
             pt: 'Pesquise bolsas por nome, instituição, nível acadêmico ou área de conhecimento. Explore requisitos, valores e datas de inscrição para planejar sua inscrição.',
             fr: "Recherchez des bourses par nom, institution, niveau académique ou domaine d'études. Explorez les exigences, les montants et les dates de candidature pour planifier votre candidature.",
             de: 'Suchen Sie Stipendien nach Name, Institution, akademischem Niveau oder Fachbereich. Informieren Sie sich über Voraussetzungen, Beträge und Bewerbungsfristen, um Ihre Bewerbung zu planen.'
+          },
+          'source_local': {
+            es: 'Ontología Local',
+            en: 'Local Ontology',
+            pt: 'Ontologia Local',
+            fr: 'Ontologie Locale',
+            de: 'Lokale Ontologie'
+          },
+          'source_dbpedia': {
+            es: 'DBpedia',
+            en: 'DBpedia',
+            pt: 'DBpedia',
+            fr: 'DBpedia',
+            de: 'DBpedia'
+          },
+          'source_dbpedia_offline': {
+            es: 'DBpedia Offline',
+            en: 'Offline DBpedia',
+            pt: 'DBpedia Offline',
+            fr: 'DBpedia Hors Ligne',
+            de: 'DBpedia Offline'
+          },
+          'amount': {
+            es: 'Monto',
+            en: 'Amount',
+            pt: 'Valor',
+            fr: 'Montant',
+            de: 'Betrag'
+          },
+          'deadline': {
+            es: 'Fecha límite',
+            en: 'Deadline',
+            pt: 'Prazo final',
+            fr: 'Date limite',
+            de: 'Frist'
+          },
+          'source': {
+            es: 'Fuente',
+            en: 'Source',
+            pt: 'Fonte',
+            fr: 'Source',
+            de: 'Quelle'
+          },
+          'actions': {
+            es: 'Acciones',
+            en: 'Actions',
+            pt: 'Ações',
+            fr: 'Actions',
+            de: 'Aktionen'
+          },
+          'view_details': {
+            es: 'Ver Detalles',
+            en: 'View Details',
+            pt: 'Ver Detalhes',
+            fr: 'Voir les Détails',
+            de: 'Details Anzeigen'
+          },
+          'save': {
+            es: 'Guardar',
+            en: 'Save',
+            pt: 'Salvar',
+            fr: 'Enregistrer',
+            de: 'Speichern'
+          },
+          'saved': {
+            es: 'Guardado',
+            en: 'Saved',
+            pt: 'Salvo',
+            fr: 'Enregistré',
+            de: 'Gespeichert'
+          },
+          'already_saved': {
+            es: 'Ya guardado',
+            en: 'Already saved',
+            pt: 'Já salvo',
+            fr: 'Déjà enregistré',
+            de: 'Bereits gespeichert'
+          },
+          'uri_unavailable': {
+            es: 'URI no disponible',
+            en: 'URI unavailable',
+            pt: 'URI indisponível',
+            fr: 'URI indisponible',
+            de: 'URI nicht verfügbar'
+          },
+          'footer_title': {
+            es: 'Buscador de Becas Universitarias',
+            en: 'University Scholarship Finder',
+            pt: 'Buscador de Bolsas Universitárias',
+            fr: 'Recherche de Bourses Universitaires',
+            de: 'Universitätsstipendien-Suche'
+          },
+          'footer_data': {
+            es: 'Datos locales y DBpedia (según disponibilidad)',
+            en: 'Local data and DBpedia (subject to availability)',
+            pt: 'Dados locais e DBpedia (conforme disponibilidade)',
+            fr: 'Données locales et DBpedia (selon disponibilité)',
+            de: 'Lokale Daten und DBpedia (je nach Verfügbarkeit)'
+          },
+          'general_info': {
+            es: 'Información General',
+            en: 'General Information',
+            pt: 'Informações Gerais',
+            fr: 'Informations Générales',
+            de: 'Allgemeine Informationen'
+          },
+          'scholarship_badge': {
+            es: 'Beca Universitaria',
+            en: 'University Scholarship',
+            pt: 'Bolsa Universitária',
+            fr: 'Bourse Universitaire',
+            de: 'Universitätsstipendium'
+          },
+          'description': {
+            es: 'Descripción',
+            en: 'Description',
+            pt: 'Descrição',
+            fr: 'Description',
+            de: 'Beschreibung'
+          },
+          'no_description': {
+            es: 'No hay descripción disponible para esta beca.',
+            en: 'No description is available for this scholarship.',
+            pt: 'Não há descrição disponível para esta bolsa.',
+            fr: "Aucune description n'est disponible pour cette bourse.",
+            de: 'Für dieses Stipendium ist keine Beschreibung verfügbar.'
+          },
+          'requirements': {
+            es: 'Requisitos / Elegibilidad',
+            en: 'Requirements / Eligibility',
+            pt: 'Requisitos / Elegibilidade',
+            fr: 'Conditions / Éligibilité',
+            de: 'Anforderungen / Eignung'
+          },
+          'benefits': {
+            es: 'Beneficios / Cobertura',
+            en: 'Benefits / Coverage',
+            pt: 'Benefícios / Cobertura',
+            fr: 'Avantages / Couverture',
+            de: 'Leistungen / Abdeckung'
+          },
+          'institution': {
+            es: 'Institución',
+            en: 'Institution',
+            pt: 'Instituição',
+            fr: 'Institution',
+            de: 'Institution'
+          },
+          'level': {
+            es: 'Nivel',
+            en: 'Level',
+            pt: 'Nível',
+            fr: 'Niveau',
+            de: 'Niveau'
+          },
+          'area': {
+            es: 'Área',
+            en: 'Area',
+            pt: 'Área',
+            fr: 'Domaine',
+            de: 'Bereich'
+          },
+          'country': {
+            es: 'País de Destino',
+            en: 'Destination Country',
+            pt: 'País de Destino',
+            fr: 'Pays de Destination',
+            de: 'Zielland'
+          },
+          'back_results': {
+            es: 'Volver a resultados',
+            en: 'Back to results',
+            pt: 'Voltar aos resultados',
+            fr: 'Retour aux résultats',
+            de: 'Zurück zu den Ergebnissen'
+          },
+          'official_site': {
+            es: 'Visitar Sitio Oficial',
+            en: 'Visit Official Site',
+            pt: 'Visitar Site Oficial',
+            fr: 'Visiter le Site Officiel',
+            de: 'Offizielle Seite Besuchen'
+          },
+          'view_dbpedia': {
+            es: 'Ver en DBpedia',
+            en: 'View on DBpedia',
+            pt: 'Ver no DBpedia',
+            fr: 'Voir sur DBpedia',
+            de: 'Auf DBpedia Anzeigen'
           }
         };
 
-        const lang = this.lang || 'es';
+        const lang = this.lang || options?.data?.root?.lang || 'es';
         return translations[key]?.[lang] || key;
       },
       
