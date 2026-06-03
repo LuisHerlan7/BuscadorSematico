@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Digital_Scholarship_in_the_Humanities">
+    <rdfs:label xml:lang="en">Digital Scholarship in the Humanities</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Opportunity_Scholarship_Program">
+    <rdfs:label xml:lang="en">Opportunity Scholarship Program</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Pseudo-scholarship">
+    <rdfs:label xml:lang="en">Pseudo-scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Chevening_Scholarship">
+    <rdfs:label xml:lang="es">Beca Chevening</rdfs:label>
+    <rdfs:label xml:lang="en">Chevening Scholarship</rdfs:label>
+    <rdfs:seeAlso rdf:resource="http://commons.wikimedia.org/wiki/Special:FilePath/Chevening_Partnerships_event_(16731149468).jpg?width=300"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Scholarship">
+    <rdfs:label xml:lang="es">Beca</rdfs:label>
+    <rdfs:label xml:lang="en">Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa de estudo</rdfs:label>
+    <rdfs:label xml:lang="de">Stipendium</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse d&apos;études</rdfs:label>
+    <rdfs:seeAlso rdf:resource="http://commons.wikimedia.org/wiki/Special:FilePath/2015_SRNS_Family_Scholarships_(35559759033).jpg?width=300"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Digital_scholarship">
+    <rdfs:label xml:lang="en">Digital scholarship</rdfs:label>
+    <rdfs:seeAlso rdf:resource="http://commons.wikimedia.org/wiki/Special:FilePath/E-learning.jpg?width=300"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Accounting_scholarship">
+    <rdfs:label xml:lang="en">Accounting scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Athletic_scholarship">
+    <rdfs:label xml:lang="es">Beca deportiva</rdfs:label>
+    <rdfs:label xml:lang="en">Athletic scholarship</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse sportive</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Textual_scholarship">
+    <rdfs:label xml:lang="en">Textual scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Vinerian_Scholarship">
+    <rdfs:label xml:lang="en">Vinerian Scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Boxer_Indemnity_Scholarship_recipients">
+    <rdfs:label xml:lang="en">Boxer Indemnity Scholarship recipients</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Opera_scholarship">
+    <rdfs:label xml:lang="en">Opera scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Homeric_scholarship">
+    <rdfs:label xml:lang="en">Homeric scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Popular_scholarship">
+    <rdfs:label xml:lang="en">Popular scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/List_of_mathematics_scholarship_competitions">
+    <rdfs:label xml:lang="en">List of mathematics scholarship competitions</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Journal_of_Nursing_Scholarship">
+    <rdfs:label xml:lang="en">Journal of Nursing Scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Muslim_scholarship">
+    <rdfs:label xml:lang="en">Muslim scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Scholarship_and_fellowship_recipients">
+    <rdfs:label xml:lang="en">Scholarship and fellowship recipients</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Shakespearean_scholarship">
+    <rdfs:label xml:lang="en">Shakespearean scholarship</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Pulitzer_Traveling_Scholarship_winners">
+    <rdfs:label xml:lang="en">Pulitzer Traveling Scholarship winners</rdfs:label>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+</rdf:RDF>
