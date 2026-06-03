@@ -10,7 +10,7 @@
       required
       aria-label="{{t 'search_placeholder'}}"
     >
-    <button type="submit" class="search-button">
+    <button type="submit" class="search-button" aria-label="{{t 'search_button'}}">
       <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20">
         <path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
       </svg>
@@ -22,6 +22,7 @@
     /* Estilos para el formulario mejorado */
     .search-form-improved {
       position: relative;
+      width: 100%;
       max-width: 600px;
       margin: 0 auto;
     }
@@ -30,15 +31,24 @@
       display: flex;
       align-items: center;
       position: relative;
+      width: 100%;
       transition: all 0.3s ease;
     }
     
     .search-input {
       flex: 1;
-      padding: 12px 20px;
+      min-width: 0;
+      width: 100%;
+      height: 48px;
+      padding: 0 20px;
       border: 2px solid #e0e0e0;
-      border-radius: 30px;
+      border-radius: 30px 0 0 30px;
+      border-right: 0;
       font-size: 1rem;
+      line-height: 1.2;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       transition: all 0.3s ease;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       background-color: #fff;
@@ -61,20 +71,23 @@
     }
     
     .search-button {
-      position: absolute;
-      right: 5px;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 16px;
+      gap: 8px;
+      padding: 0 18px;
       background: linear-gradient(135deg, #5e35b1, #3949ab);
       color: white;
       border: none;
-      border-radius: 25px;
+      border-radius: 0 30px 30px 0;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      height: calc(100% - 10px);
+      min-height: 48px;
+      min-width: 110px;
+      white-space: nowrap;
+      overflow: hidden;
     }
     
     .search-button:hover {
@@ -88,6 +101,7 @@
     }
     
     .search-icon {
+      flex: 0 0 auto;
       transition: transform 0.3s ease;
     }
     
@@ -96,7 +110,6 @@
     }
     
     .search-text {
-      margin-left: 8px;
       font-weight: 500;
       transition: all 0.3s ease;
     }
@@ -112,6 +125,7 @@
     .search-button::after {
       content: '';
       position: absolute;
+      inset: 50% auto auto 50%;
       width: 20px;
       height: 20px;
       background: rgba(255, 255, 255, 0.3);
@@ -132,12 +146,30 @@
       }
       
       .search-button {
-        width: 40px;
-        padding: 8px;
+        min-width: 52px;
+        padding: 0 14px;
       }
       
       .search-icon {
         margin-right: 0;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .search-container {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .search-input {
+        border-radius: 24px;
+        border-right: 2px solid #e0e0e0;
+      }
+
+      .search-button {
+        width: 100%;
+        min-height: 44px;
+        border-radius: 24px;
       }
     }
   </style>

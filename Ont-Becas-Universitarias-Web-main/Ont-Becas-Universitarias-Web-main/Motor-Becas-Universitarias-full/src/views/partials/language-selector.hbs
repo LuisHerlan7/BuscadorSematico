@@ -56,21 +56,27 @@
     /* Estilos para el selector de idioma */
     .language-selector {
       position: relative;
+      z-index: 1040;
       transition: all 0.3s ease;
+      flex: 0 0 auto;
     }
     
     .language-selector .btn {
-      display: flex;
+      position: relative;
+      display: inline-flex;
       align-items: center;
+      flex-wrap: nowrap;
       gap: 8px;
       padding: 8px 12px;
       border-radius: 20px;
       transition: all 0.3s ease;
       border-width: 2px;
+      white-space: nowrap;
+      min-width: max-content;
+      line-height: 1;
     }
     
     .language-selector .btn:hover {
-      transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       background-color: rgba(255, 255, 255, 0.1);
     }
@@ -82,6 +88,7 @@
     .dropdown-arrow {
       transition: transform 0.3s ease;
       font-size: 0.8rem;
+      flex: 0 0 auto;
     }
     
     .language-selector.show .dropdown-arrow {
@@ -92,6 +99,8 @@
       width: 20px;
       height: 15px;
       margin-right: 8px;
+      flex: 0 0 auto;
+      display: block;
       border-radius: 2px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       transition: transform 0.2s ease;
@@ -102,19 +111,47 @@
     }
     
     .dropdown-menu {
-      min-width: 180px;
-      border: none;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      animation: fadeInUp 0.3s ease;
-      border-radius: 8px;
+      z-index: 1050;
+      min-width: 220px;
+      margin-top: 0.75rem;
+      padding: 0.5rem 0;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      border-radius: 12px;
       overflow: hidden;
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.98);
+      transform-origin: top center;
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
+      pointer-events: none;
+    }
+
+    .dropdown-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s;
+      pointer-events: auto;
     }
     
     .dropdown-item {
       display: flex;
       align-items: center;
-      padding: 8px 16px;
+      gap: 8px;
+      padding: 10px 16px;
       transition: all 0.2s ease;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    .language-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      line-height: 1;
     }
     
     .dropdown-item:hover {
@@ -122,15 +159,5 @@
       transform: translateX(5px);
     }
     
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
   </style>
 </div>

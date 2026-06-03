@@ -59,23 +59,24 @@
     .hero-image-col {
       position: relative;
       min-height: 400px;
+      overflow: hidden;
     }
     
     .hero-image-wrapper {
       position: relative;
       width: 100%;
       height: 100%;
+      overflow: hidden;
     }
     
     .hero-image {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center center;
+      transform-origin: center center;
       transition: transform 0.5s ease;
-    }
-    
-    .hero-image-col:hover .hero-image {
-      transform: scale(1.03);
     }
     
     .hero-overlay {
@@ -113,6 +114,12 @@
     .hero-image-col:hover .hero-subtitle,
     .hero-image-col:hover .hero-text {
       opacity: 1;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .hero-image-col:hover .hero-image {
+        transform: scale(1.03);
+      }
     }
     
     /* Estilos para la columna de contenido */
