@@ -114,8 +114,8 @@ exports.diseaseDetails = async (req, res) => {
       // CORREGIDO
       scholarship = await dbpediaService.getScholarshipDetails(decoded, lang);
     } else {
-      // CORREGIDO
-      scholarship = await rdfService.getScholarshipDetails(decoded);
+      // CORREGIDO: pasar 'lang' al servicio RDF para respetar preferencia de idioma
+      scholarship = await rdfService.getScholarshipDetails(decoded, lang);
     }
 
     if (!scholarship) {

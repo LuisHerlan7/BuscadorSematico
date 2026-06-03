@@ -9,6 +9,8 @@ module.exports = function(req, res, next) {
   // 2. Verificar cookie
   if (req.cookies.lang && ['en', 'es', 'pt', 'de', 'fr'].includes(req.cookies.lang)) {
     req.lang = req.cookies.lang;
+    res.locals = res.locals || {};
+    res.locals.lang = req.lang;
     return next();
   }
   
@@ -18,11 +20,15 @@ module.exports = function(req, res, next) {
     const preferredLang = acceptLanguage.split(',')[0].split('-')[0];
     if (['en', 'es', 'pt', 'de', 'fr'].includes(preferredLang)) {
       req.lang = preferredLang;
+      res.locals = res.locals || {};
+      res.locals.lang = req.lang;
       return next();
     }
   }
   
   // 4. Valor por defecto
   req.lang = 'en';
+  res.locals = res.locals || {};
+  res.locals.lang = req.lang;
   next();
 };

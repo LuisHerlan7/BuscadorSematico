@@ -22,8 +22,12 @@ app.use('/', routes);
 app.use('/rdf', rdfRoutes); // Usar rutas RDF
 //app.use('/api', apiRoutes);
 
-// Iniciar servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// Export app para permitir tests sin arrancar servidor automáticamente
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

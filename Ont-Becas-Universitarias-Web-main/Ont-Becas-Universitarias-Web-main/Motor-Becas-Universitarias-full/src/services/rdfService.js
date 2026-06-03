@@ -79,9 +79,17 @@ class RDFService {
 
   _pickLiteral(group, field, lang = 'es') {
     const values = group[field] || [];
-    const preferred = values.find(v => v.lang === lang)
-      || values.find(v => v.lang === 'es')
-      || values.find(v => v.lang === 'en')
+    if (!values || values.length === 0) return null;
+
+    const prefer = (candidateLang) => values.find(v => String(v.lang || '').toLowerCase() === String(candidateLang || '').toLowerCase());
+
+    // Normalize requested lang (allow 'es-ES' -> 'es')
+    const normalized = String(lang || '').split('-')[0].toLowerCase();
+
+    const preferred = prefer(lang)
+      || prefer(normalized)
+      || prefer('es')
+      || prefer('en')
       || values[0];
 
     return preferred?.value || null;
@@ -355,7 +363,7 @@ class RDFService {
     });
   }
 
-  async getScholarshipDetails(uri) {
+  async getScholarshipDetails(uri, lang = 'es') {
     const query = `
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
@@ -374,6 +382,7 @@ class RDFService {
     const OWL = 'http://www.w3.org/2002/07/owl#';
 
     const raw = {};
+    const rawLiterals = {}; // map propUri -> [{lang, value}, ...]
     const requirements = [];
     const benefits = [];
     let institution = null;
@@ -391,8 +400,11 @@ class RDFService {
       const propUri = p.value;
       const objVal = o.value;
       const objLabel = oLbl ? oLbl.value : objVal.split('#')[1] || objVal;
+      const oLang = oLbl ? (oLbl.language || oLbl['xml:lang'] || '') : '';
 
       raw[propUri] = objVal;
+      rawLiterals[propUri] = rawLiterals[propUri] || [];
+      if (oLbl) rawLiterals[propUri].push({ lang: oLang, value: oLbl.value });
 
       if (propUri === `${NS}tieneRequisito`) {
         requirements.push(objLabel);
@@ -409,8 +421,12 @@ class RDFService {
       }
     });
 
-    const label = raw[`${RDFS}label`] || raw[`${NS}nombreBeca`] || uri;
-    const desc = raw[`${NS}descripcion`] || raw[`${NS}descripción`] || '';
+    // Construir grupos temporales para selección por idioma
+    const labelGroup = { labels: rawLiterals[`${RDFS}label`] || rawLiterals[`${NS}nombreBeca`] || [] };
+    const descGroup = { descriptions: rawLiterals[`${NS}descripcion`] || rawLiterals[`${NS}descripción`] || [] };
+
+    const label = this._pickLiteral(labelGroup, 'labels', lang) || raw[`${RDFS}label`] || raw[`${NS}nombreBeca`] || uri;
+    const desc = this._pickLiteral(descGroup, 'descriptions', lang) || raw[`${NS}descripcion`] || raw[`${NS}descripción`] || '';
     const amount = raw[`${NS}montoCubierto`] || null;
     const deadline = raw[`${NS}fechaLímitePostulación`] || raw[`${NS}fechaLimitePostulacion`] || null;
     const dbpediaUri = raw[`${OWL}sameAs`] || null;

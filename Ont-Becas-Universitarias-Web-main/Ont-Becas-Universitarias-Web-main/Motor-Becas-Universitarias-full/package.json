@@ -5,7 +5,9 @@
   "scripts": {
     "build": "node scripts/validate-build.js",
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "test": "jest --runInBand",
+    "add-multilingual-labels": "node scripts/add_multilingual_labels.js"
   },
   "keywords": [],
   "author": "",
@@ -34,5 +36,10 @@
     "sparql-http-client": "^3.0.1",
     "streamify-string": "^1.0.1",
     "streaming-iterables": "^8.0.1"
+  }
+  ,
+  "devDependencies": {
+    "jest": "^29.6.0",
+    "supertest": "^6.3.3"
   }
 }
