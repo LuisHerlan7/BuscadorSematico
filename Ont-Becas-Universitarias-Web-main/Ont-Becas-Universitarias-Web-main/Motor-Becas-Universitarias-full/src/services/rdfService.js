@@ -1,15 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const { QueryEngine } = require('@comunica/query-sparql');
 
 // Rutas de los archivos ontológicos
 const defaultOwl = path.join(__dirname, '../public/data/ontologia_becas.owl');
-const instancesTtl = path.join(__dirname, '../public/data/ontologia_becas_instances.ttl');
-
-let rdfFilePath = process.env.ONTOLOGY_FILE || defaultOwl;
-if (fs.existsSync(instancesTtl)) {
-  rdfFilePath = process.env.ONTOLOGY_FILE || instancesTtl;
-}
+const rdfFilePath = process.env.ONTOLOGY_FILE || defaultOwl;
 
 // Términos genéricos que describen la ontología o conectores comunes
 const GENERIC_TERMS = new Set([
@@ -20,8 +14,18 @@ const GENERIC_TERMS = new Set([
 
 class RDFService {
   constructor() {
+    this.engine = null;
+    this.fileContent = null;
+    this.mediaType = null;
+    this.offlineDbpediaRecords = null;
+  }
+
+  _ensureLoaded() {
+    if (this.engine && this.fileContent && this.mediaType) return;
+
+    const { QueryEngine } = require('@comunica/query-sparql');
     this.engine = new QueryEngine();
-    
+
     // Resolvemos la ruta absoluta del archivo ontológico
     const filePath = path.resolve(rdfFilePath);
     if (!fs.existsSync(filePath)) {
@@ -31,18 +35,218 @@ class RDFService {
     // Cargamos el contenido del archivo en memoria para evitar accesos repetitivos a disco
     this.fileContent = fs.readFileSync(filePath, 'utf8');
     
-    // Determinamos dinámicamente el mediaType según la extensión del archivo
-    const ext = path.extname(filePath).toLowerCase();
-    this.mediaType = ext === '.ttl' ? 'text/turtle' : 'application/rdf+xml';
+    this.mediaType = 'application/rdf+xml';
   }
 
   _getComunicaSources() {
+    this._ensureLoaded();
+
     return [{
       type: 'serialized',
       value: this.fileContent,
       mediaType: this.mediaType,
       baseIRI: 'http://www.semanticweb.org/ontologia/becas-universitarias#'
     }];
+  }
+
+  async _queryBindings(query) {
+    const sources = this._getComunicaSources();
+    const bindingsStream = await this.engine.queryBindings(query, { sources });
+    const bindings = [];
+
+    await new Promise((resolve, reject) => {
+      bindingsStream.on('data', b => bindings.push(b));
+      bindingsStream.on('end', resolve);
+      bindingsStream.on('error', reject);
+    });
+
+    return bindings;
+  }
+
+  _normalize(value) {
+    return String(value || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .trim();
+  }
+
+  _isGenericScholarshipSearch(term) {
+    const normalized = this._normalize(term);
+    return ['beca', 'becas', 'scholarship', 'scholarships', 'bolsa', 'bolsas', 'bourse', 'stipendium'].includes(normalized);
+  }
+
+  _pickLiteral(group, field, lang = 'es') {
+    const values = group[field] || [];
+    const preferred = values.find(v => v.lang === lang)
+      || values.find(v => v.lang === 'es')
+      || values.find(v => v.lang === 'en')
+      || values[0];
+
+    return preferred?.value || null;
+  }
+
+  _mapOfflineGroup(uri, group, lang = 'es') {
+    const label = this._pickLiteral(group, 'labels', lang) || uri;
+    const description = this._pickLiteral(group, 'descriptions', lang) || '';
+    const fragment = uri.split('#').pop() || uri;
+    const publicUri = `offline-dbpedia:${fragment}`;
+
+    return {
+      uri: publicUri,
+      safeUri: encodeURIComponent(publicUri),
+      ontologyUri: uri,
+      dbpediaUri: group.dbpediaUri || null,
+      dbpediaPage: group.dbpediaUri || null,
+      label,
+      name: label,
+      description,
+      abstract: description,
+      type: group.type || null,
+      institution: group.institution || null,
+      level: group.level || null,
+      area: group.area || null,
+      country: group.country || null,
+      amount: group.amount || null,
+      deadline: group.deadline || null,
+      requirements: this._pickLiteral(group, 'requirements', lang),
+      benefits: this._pickLiteral(group, 'benefits', lang),
+      seeAlso: group.seeAlso || null,
+      thumbnail: null,
+      source: 'dbpedia-offline'
+    };
+  }
+
+  _decodeXml(value) {
+    return String(value || '')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;/g, "'")
+      .replace(/&amp;/g, '&');
+  }
+
+  _extractFirst(block, tagName) {
+    const pattern = new RegExp(`<${tagName}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tagName}>`);
+    const match = block.match(pattern);
+    return match ? this._decodeXml(match[1].trim()) : null;
+  }
+
+  _extractLiterals(block, tagName) {
+    const pattern = new RegExp(`<${tagName}([^>]*)>([\\s\\S]*?)<\\/${tagName}>`, 'g');
+    const values = [];
+    let match;
+
+    while ((match = pattern.exec(block)) !== null) {
+      const langMatch = match[1].match(/xml:lang="([^"]+)"/);
+      values.push({
+        lang: langMatch ? langMatch[1] : '',
+        value: this._decodeXml(match[2].trim())
+      });
+    }
+
+    return values;
+  }
+
+  _extractResource(block, tagName) {
+    const pattern = new RegExp(`<${tagName}[^>]*rdf:resource="([^"]+)"`);
+    const match = block.match(pattern);
+    return match ? this._decodeXml(match[1]) : null;
+  }
+
+  _loadOfflineDbpediaRecords() {
+    if (this.offlineDbpediaRecords) return this.offlineDbpediaRecords;
+
+    const filePath = path.resolve(rdfFilePath);
+    const content = fs.readFileSync(filePath, 'utf8');
+    const individualPattern = /<owl:NamedIndividual\s+rdf:about="([^"]+)">([\s\S]*?)<\/owl:NamedIndividual>/g;
+    const records = new Map();
+    let match;
+
+    while ((match = individualPattern.exec(content)) !== null) {
+      const [, about, block] = match;
+      if (!block.includes('<esRespaldoDBpedia')) continue;
+
+      const typeResource = this._extractResource(block, 'rdf:type');
+      const labels = this._extractLiterals(block, 'rdfs:label');
+      const descriptions = this._extractLiterals(block, 'descripción');
+      const requirements = this._extractLiterals(block, 'requisitosTexto');
+      const benefits = this._extractLiterals(block, 'beneficiosTexto');
+      const dbpediaUri = this._extractResource(block, 'owl:sameAs');
+      const seeAlso = this._extractResource(block, 'rdfs:seeAlso');
+
+      const uri = about.startsWith('#')
+        ? `http://www.semanticweb.org/ontologia/becas-universitarias${about}`
+        : about;
+
+      records.set(uri, {
+        labels,
+        descriptions,
+        requirements,
+        benefits,
+        type: typeResource ? typeResource.replace('#', '') : null,
+        amount: this._extractFirst(block, 'montoCubierto'),
+        deadline: this._extractFirst(block, 'fechaLímitePostulación'),
+        institution: this._extractFirst(block, 'institucionTexto'),
+        level: this._extractFirst(block, 'nivelTexto'),
+        area: this._extractFirst(block, 'areaTexto'),
+        country: this._extractFirst(block, 'paisTexto'),
+        dbpediaUri,
+        seeAlso
+      });
+    }
+
+    this.offlineDbpediaRecords = records;
+    return records;
+  }
+
+  _offlineSearchText(group) {
+    return [
+      ...(group.labels || []).map(item => item.value),
+      ...(group.descriptions || []).map(item => item.value),
+      ...(group.requirements || []).map(item => item.value),
+      ...(group.benefits || []).map(item => item.value),
+      group.type,
+      group.institution,
+      group.level,
+      group.area,
+      group.country
+    ].join(' ');
+  }
+
+  async _getOfflineDbpediaGroups() {
+    return this._loadOfflineDbpediaRecords();
+  }
+
+  async searchOfflineDbpediaScholarships(term, lang = 'es') {
+    const groups = await this._getOfflineDbpediaGroups();
+    const words = this._normalize(term).split(/\s+/).filter(Boolean);
+    const isGeneric = !term || !String(term).trim() || this._isGenericScholarshipSearch(term);
+
+    return Array.from(groups.entries())
+      .filter(([, group]) => {
+        if (isGeneric) return true;
+        const haystack = this._normalize(this._offlineSearchText(group));
+        return words.every(word => haystack.includes(word));
+      })
+      .map(([uri, group]) => this._mapOfflineGroup(uri, group, lang));
+  }
+
+  async getOfflineDbpediaScholarshipDetails(uri, lang = 'es') {
+    const groups = await this._getOfflineDbpediaGroups();
+    const target = String(uri || '')
+      .replace(/^offline-dbpedia:/, '')
+      .toLowerCase();
+
+    for (const [subject, group] of groups.entries()) {
+      const fragment = (subject.split('#').pop() || subject).toLowerCase();
+      if (subject === uri || group.dbpediaUri === uri || fragment === target) {
+        return this._mapOfflineGroup(subject, group, lang);
+      }
+    }
+
+    return null;
   }
 
   /**
@@ -129,15 +333,7 @@ class RDFService {
       } LIMIT 50
     `;
 
-    // Consultamos pasando los datos serializados
-    const bindingsStream = await this.engine.queryBindings(query, { sources: this._getComunicaSources() });
-    const bindings = [];
-
-    await new Promise((resolve, reject) => {
-      bindingsStream.on('data', b => bindings.push(b));
-      bindingsStream.on('end', resolve);
-      bindingsStream.on('error', reject);
-    });
+    const bindings = await this._queryBindings(query);
 
     return bindings.map(binding => {
       const s = binding.get('s') || binding.get('?s');
@@ -171,15 +367,7 @@ class RDFService {
       }
     `;
 
-    // Consultamos pasando los datos serializados
-    const bindingsStream = await this.engine.queryBindings(query, { sources: this._getComunicaSources() });
-    const bindings = [];
-
-    await new Promise((resolve, reject) => {
-      bindingsStream.on('data', b => bindings.push(b));
-      bindingsStream.on('end', resolve);
-      bindingsStream.on('error', reject);
-    });
+    const bindings = await this._queryBindings(query);
 
     const NS = 'http://www.semanticweb.org/ontologia/becas-universitarias#';
     const RDFS = 'http://www.w3.org/2000/01/rdf-schema#';
