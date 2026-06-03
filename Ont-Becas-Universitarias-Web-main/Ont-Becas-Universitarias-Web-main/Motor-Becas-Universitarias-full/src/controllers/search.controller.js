@@ -1,5 +1,4 @@
 const dbpediaService = require('../services/dbpediaService');
-const translationService = require('../services/translationService');
 // CORREGIDO: Faltaba importar rdfService en este archivo
 const rdfService = require('../services/rdfService');
 
@@ -15,22 +14,12 @@ exports.search = async (req, res) => {
     const { q } = req.query;
     const lang = req.lang || 'es';
 
-    // Buscar en AMBAS fuentes en paralelo: Local (TTL) y DBpedia
-    const [localResult, dbpediaResult] = await Promise.allSettled([
-      rdfService.searchScholarships(q, lang),
-      dbpediaService.searchScholarships(q, lang)
-    ]);
+    // La búsqueda principal usa DBpedia remoto y cae al respaldo RDF/XML del OWL si no hay respuesta.
+    const dbpediaResult = await Promise.resolve(dbpediaService.searchScholarships(q, lang))
+      .then(value => ({ status: 'fulfilled', value }))
+      .catch(reason => ({ status: 'rejected', reason }));
 
-    // Resultados locales (ontologia_becas_instances.ttl)
-    const localResults = (localResult.status === 'fulfilled' ? localResult.value : []).map(r => ({
-      uri: r.uri,
-      label: r.label,
-      name: r.name || r.label,
-      description: r.description || '',
-      amount: r.amount || null,
-      deadline: r.deadline || null,
-      source: 'local'
-    }));
+    const localResults = [];
 
     // Resultados de DBpedia
     const dbpediaResults = (dbpediaResult.status === 'fulfilled' ? dbpediaResult.value : []).map(r => ({
@@ -38,13 +27,21 @@ exports.search = async (req, res) => {
       label: r.label,
       name: r.name || r.label,
       description: r.description || '',
-      source: 'dbpedia'
+      dbpediaUri: r.dbpediaUri || null,
+      dbpediaPage: r.dbpediaPage || r.dbpediaUri || null,
+      amount: r.amount || null,
+      deadline: r.deadline || null,
+      institution: r.institution || null,
+      level: r.level || null,
+      area: r.area || null,
+      country: r.country || null,
+      requirements: r.requirements || null,
+      benefits: r.benefits || null,
+      seeAlso: r.seeAlso || null,
+      source: r.source || 'dbpedia'
     }));
 
     // Log de errores si alguna fuente falló
-    if (localResult.status === 'rejected') {
-      console.error('Error en búsqueda local:', localResult.reason?.message);
-    }
     if (dbpediaResult.status === 'rejected') {
       console.error('Error en búsqueda DBpedia:', dbpediaResult.reason?.message);
     }
@@ -66,10 +63,19 @@ exports.search = async (req, res) => {
       }
     }
 
-    console.log(`Búsqueda "${q}": ${localResults.length} locales, ${dbpediaResults.length} DBpedia, ${results.length} combinados`);
+    const remoteDbpediaCount = dbpediaResults.filter(r => r.source === 'dbpedia').length;
+    const offlineDbpediaCount = dbpediaResults.filter(r => r.source === 'dbpedia-offline').length;
+
+    console.log(`Búsqueda "${q}": ${localResults.length} locales, ${remoteDbpediaCount} DBpedia, ${offlineDbpediaCount} DBpedia offline, ${results.length} combinados`);
 
     if (req.query.format === 'json') {
-      return res.json({ query: q, results, localCount: localResults.length, dbpediaCount: dbpediaResults.length });
+      return res.json({
+        query: q,
+        results,
+        localCount: localResults.length,
+        dbpediaCount: remoteDbpediaCount,
+        dbpediaOfflineCount: offlineDbpediaCount
+      });
     }
 
     res.render('search-results', {
@@ -79,7 +85,8 @@ exports.search = async (req, res) => {
       scholarships: results,
       isEmpty: results.length === 0,
       localCount: localResults.length,
-      dbpediaCount: dbpediaResults.length,
+      dbpediaCount: remoteDbpediaCount,
+      dbpediaOfflineCount: offlineDbpediaCount,
       lang,
       showDetails: true
     });
@@ -101,7 +108,9 @@ exports.diseaseDetails = async (req, res) => {
 
     // Enrutar por origen: dbpedia.org → servicio remoto, resto → ontología local
     let scholarship;
-    if (decoded.includes('dbpedia.org')) {
+    if (decoded.startsWith('offline-dbpedia:')) {
+      scholarship = await dbpediaService.getOfflineScholarshipDetails(decoded, lang);
+    } else if (decoded.includes('dbpedia.org')) {
       // CORREGIDO
       scholarship = await dbpediaService.getScholarshipDetails(decoded, lang);
     } else {
@@ -130,5 +139,36 @@ exports.diseaseDetails = async (req, res) => {
       error,
       lang: req.lang
     });
+  }
+};
+
+// Admin action: trigger DBpedia extraction script (hidden). Requires query param dev=1.
+exports.importDbpedia = (req, res) => {
+  try {
+    if (req.query.dev !== '1') return res.status(403).json({ error: 'Forbidden' });
+
+    const { limit = 300, merge = 'true', langs = 'es,en,pt,de,fr' } = req.body || {};
+    const ints = parseInt(limit, 10) || 300;
+    const mergeFlag = merge === 'true' || merge === true;
+    const langsList = String(langs).split(',').map(s => s.trim()).filter(Boolean);
+
+    const { spawn } = require('child_process');
+    const scriptPath = require('path').join(__dirname, '../../scripts/extract_dbpedia_scholarships.js');
+    const args = [scriptPath, `--limit=${ints}`];
+    if (mergeFlag) args.push('--out', 'src/public/data/ontologia_becas.owl', '--merge');
+    if (langsList.length) args.push(`--langs=${langsList.join(',')}`);
+
+    const child = spawn('node', args, { cwd: require('path').join(__dirname, '../../') });
+
+    // stream logs
+    child.stdout.on('data', d => console.log('[import-dbpedia]', d.toString()));
+    child.stderr.on('data', d => console.error('[import-dbpedia]', d.toString()));
+
+    child.on('close', code => console.log(`import-dbpedia exited ${code}`));
+
+    return res.json({ status: 'started', pid: child.pid });
+  } catch (err) {
+    console.error('importDbpedia error', err);
+    return res.status(500).json({ error: err.message });
   }
 };
