@@ -45,9 +45,20 @@ module.exports = function(app) {
       } else if (root.query && typeof root.query === 'object') {
         queryObj = Object.assign({}, root.query);
       }
+      // Asegurar que `q` aparezca primero y `lang` al final en la query string
       queryObj.lang = code;
+      const orderedKeys = [];
+      if (typeof queryObj.q !== 'undefined') orderedKeys.push('q');
+      Object.keys(queryObj).forEach(k => {
+        if (k === 'q' || k === 'lang') return;
+        orderedKeys.push(k);
+      });
+      orderedKeys.push('lang');
 
-      const parts = Object.keys(queryObj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(queryObj[k])}`).filter(Boolean);
+      const parts = orderedKeys
+        .filter(k => typeof queryObj[k] !== 'undefined' && queryObj[k] !== null && queryObj[k] !== '')
+        .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(queryObj[k])}`);
+
       return thePath + (parts.length ? ('?' + parts.join('&')) : '');
     }
   };
