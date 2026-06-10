@@ -123,13 +123,16 @@ class DBpediaService {
       SELECT DISTINCT ?scholarship ?label ?desc WHERE {
         ?scholarship rdfs:label ?label .
         ?label bif:contains "${bifTerm.replace(/"/g, '\\"')}" .
-        FILTER(LANG(?label) = "${lang}" || LANG(?label) = "en")
+        FILTER(LANG(?label) = "${lang}")
 
-        OPTIONAL { ?scholarship dbo:description ?d .  FILTER(LANG(?d)  = "${lang}" || LANG(?d)  = "en") }
-        OPTIONAL { ?scholarship rdfs:comment    ?c .  FILTER(LANG(?c)  = "${lang}" || LANG(?c)  = "en") }
-        OPTIONAL { ?scholarship dbo:abstract    ?a .  FILTER(LANG(?a)  = "${lang}" || LANG(?a)  = "en") }
+        OPTIONAL { ?scholarship dbo:description ?d . FILTER(LANG(?d) = "${lang}") }
+        OPTIONAL { ?scholarship dbo:description ?d_en . FILTER(LANG(?d_en) = "en") }
+        OPTIONAL { ?scholarship rdfs:comment ?c . FILTER(LANG(?c) = "${lang}") }
+        OPTIONAL { ?scholarship rdfs:comment ?c_en . FILTER(LANG(?c_en) = "en") }
+        OPTIONAL { ?scholarship dbo:abstract ?a . FILTER(LANG(?a) = "${lang}") }
+        OPTIONAL { ?scholarship dbo:abstract ?a_en . FILTER(LANG(?a_en) = "en") }
 
-        BIND(COALESCE(?d, ?c, ?a) AS ?desc)
+        BIND(COALESCE(?d, ?c, ?a, ?d_en, ?c_en, ?a_en) AS ?desc)
 
         # Filtros semánticos estrictos para evitar personas o lugares con la palabra "beca" en su biografía
         MINUS { ?scholarship a dbo:Person }
@@ -166,12 +169,16 @@ class DBpediaService {
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX dbp: <http://dbpedia.org/property/>
 
-      SELECT ?label ?d ?c ?a ?thumbnail ?eligibility ?requirements ?criteria WHERE {
+      SELECT ?label ?label_en ?d ?d_en ?c ?c_en ?a ?a_en ?thumbnail ?eligibility ?requirements ?criteria WHERE {
         BIND(<${uri}> AS ?s)
-        OPTIONAL { ?s rdfs:label ?label .    FILTER(LANG(?label) = "${lang}" || LANG(?label) = "en") }
-        OPTIONAL { ?s dbo:description ?d .   FILTER(LANG(?d)  = "${lang}" || LANG(?d)  = "en") }
-        OPTIONAL { ?s rdfs:comment    ?c .   FILTER(LANG(?c)  = "${lang}" || LANG(?c)  = "en") }
-        OPTIONAL { ?s dbo:abstract    ?a .   FILTER(LANG(?a)  = "${lang}" || LANG(?a)  = "en") }
+        OPTIONAL { ?s rdfs:label ?label .    FILTER(LANG(?label) = "${lang}") }
+        OPTIONAL { ?s rdfs:label ?label_en . FILTER(LANG(?label_en) = "en") }
+        OPTIONAL { ?s dbo:description ?d .   FILTER(LANG(?d)  = "${lang}") }
+        OPTIONAL { ?s dbo:description ?d_en . FILTER(LANG(?d_en) = "en") }
+        OPTIONAL { ?s rdfs:comment    ?c .   FILTER(LANG(?c)  = "${lang}") }
+        OPTIONAL { ?s rdfs:comment    ?c_en . FILTER(LANG(?c_en) = "en") }
+        OPTIONAL { ?s dbo:abstract    ?a .   FILTER(LANG(?a)  = "${lang}") }
+        OPTIONAL { ?s dbo:abstract    ?a_en . FILTER(LANG(?a_en) = "en") }
         OPTIONAL { ?s dbo:thumbnail   ?thumbnail }
         
         # Propiedades de Requisitos extraídas desde las cajas de información (Infoboxes) de Wikipedia
@@ -191,11 +198,16 @@ class DBpediaService {
       if (rows.length === 0) return this.getOfflineScholarshipDetails(uri, lang);
 
       // Selección de idioma preferente para textos básicos
-      const labelRow = rows.find(r => r.label?.['xml:lang'] === lang) || rows[0];
-      const descRow = rows.find(r => (r.d || r.c || r.a) && (r.d?.['xml:lang'] === lang || r.c?.['xml:lang'] === lang || r.a?.['xml:lang'] === lang)) || rows[0];
-      const thumbnail = rows.find(r => r.thumbnail)?.thumbnail?.value || null;
+      const labelRow = rows.find(r => r.label?.['xml:lang'] === lang)
+        || rows.find(r => r.label_en)
+        || rows[0];
 
-      const desc = descRow?.d?.value || descRow?.c?.value || descRow?.a?.value || '';
+      const descRow = rows.find(r => (r.d || r.c || r.a) && ((r.d?.['xml:lang'] === lang) || (r.c?.['xml:lang'] === lang) || (r.a?.['xml:lang'] === lang)))
+        || rows.find(r => r.d_en || r.c_en || r.a_en)
+        || rows[0];
+
+      const thumbnail = rows.find(r => r.thumbnail)?.thumbnail?.value || null;
+      const desc = descRow?.d?.value || descRow?.c?.value || descRow?.a?.value || descRow?.d_en?.value || descRow?.c_en?.value || descRow?.a_en?.value || '';
 
       // Procesamiento dirigido de Requisitos / Criterios detectados en DBpedia
       const rawRequirements = rows.find(r => r.requirements)?.requirements?.value;

@@ -7,7 +7,7 @@ exports.search = async (req, res) => {
     const results = await rdfService.searchScholarships(q);
 
     res.render('search-results', {
-      title: `Resultados para "${q}"`,
+      title: null,
       query: q,
       diseases: results,       // Mantenido por compatibilidad con tu vista actual
       scholarships: results,   // Listo para cuando actualices tu vista

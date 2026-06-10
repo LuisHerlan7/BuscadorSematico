@@ -1,3 +1,94 @@
+# Buscador de Becas Universitarias — Manual de instalación y ejecución
+
+Guía rápida para instalar, configurar y levantar la aplicación localmente.
+
+## Requisitos
+
+- Node.js (recomendado >= 16, probado con Node 18/22)
+- npm (se usa el administrador de paquetes por defecto)
+- Conexión a Internet para consultas a DBpedia (salvo que uses el modo offline)
+
+## Estructura relevante
+
+- `src/` — código fuente de la aplicación.
+- `src/app.js` — punto de entrada del servidor (usa `PORT` o `3000` por defecto).
+- `src/public/data/ontologia_becas.owl` — fichero OWL RDF local (opcional) para fallback offline.
+
+## Instalación
+
+1. Abre una terminal.
+2. Sitúate en la carpeta del proyecto (donde está este `package.json`):
+
+```powershell
+cd "c:\Users\Admin\Desktop\web\BuscadorSematico\Ont-Becas-Universitarias-Web-main\Ont-Becas-Universitarias-Web-main\Motor-Becas-Universitarias-full"
+```
+
+3. Instala dependencias:
+
+```powershell
+npm install
+```
+
+## Variables de entorno (opcionales)
+
+La aplicación funciona sin variables obligatorias, pero puedes personalizar:
+
+- `PORT` — puerto en el que correrá el servidor (por defecto `3000`).
+- `DBPEDIA_ENDPOINT` — si quieres apuntar a un endpoint SPARQL distinto al de DBpedia.
+
+Puedes crear un archivo `.env` en la raíz y añadir por ejemplo:
+
+```env
+PORT=3000
+DBPEDIA_ENDPOINT=https://dbpedia.org/sparql
+```
+
+La app usa `process.env.PORT` si está presente.
+
+## Comandos disponibles
+
+- `npm run build` — valida la estructura del proyecto y realiza chequeos (script local `scripts/validate-build.js`).
+- `npm start` — arranca el servidor (`node src/app.js`).
+- `npm run dev` — arranca el servidor en modo desarrollo con `nodemon` (recarga automática).
+
+Ejemplo (PowerShell):
+
+```powershell
+cd "...\Motor-Becas-Universitarias-full"
+npm install
+npm run dev
+```
+
+Al arrancar verás en consola algo como:
+
+```
+Server running on http://localhost:3000
+```
+
+## Comportamiento del idioma y multilingüalidad
+
+- El middleware `src/middleware/language.js` determina el idioma por (1) query `?lang=es`, (2) cookie `lang`, (3) header `Accept-Language`, o por defecto `en`.
+- Para forzar español en la URL añade `?lang=es` (por ejemplo `/search?q=becas&lang=es`).
+- Las consultas a DBpedia solicitan preferentemente literales en el idioma seleccionado; si no hay, algunos campos usan fallback a inglés o al RDF local.
+
+## Datos offline y extracción DBpedia (opcional)
+
+- Hay un script de extracción: `scripts/extract_dbpedia_scholarships.js` que puede poblar `src/public/data/ontologia_becas.owl`.
+- En la interfaz hay una acción de importación (requiere `dev=1` para seguridad). No se recomienda ejecutar en producción.
+
+## Solución de problemas comunes
+
+- Si ves etiquetas en inglés aún con `?lang=es`, pueden no existir etiquetas en español en DBpedia para esa entidad; revisa el fallback offline.
+- Ejecuta `npm run build` para validar sintaxis y detectar errores antes de `npm start`.
+- Si `nodemon` no está instalado globalmente, `npm run dev` usa la versión en `node_modules`.
+
+## Contacto y siguientes pasos
+
+Si quieres que prepare un script de despliegue (Dockerfile / docker-compose) o que traduzca nombres de fuentes (`DBpedia`, `DBpedia Offline`) a la interfaz, dímelo y lo añado.
+
+---
+
+Archivo creado: `src/app.js` confirma puerto por defecto `3000`.
 # Buscador de Becas Universitarias
 
 ## 📌 Descripción del Proyecto

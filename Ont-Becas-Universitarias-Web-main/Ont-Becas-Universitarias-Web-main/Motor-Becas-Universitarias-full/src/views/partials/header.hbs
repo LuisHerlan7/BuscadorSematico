@@ -17,7 +17,7 @@
 
   <!-- Botón de importación DBpedia (aparece sólo con zoom alejado <=50%) -->
   <div id="dbpedia-import-header" style="display:none;">
-    <button id="btn-import-dbpedia-header" class="btn btn-sm btn-outline-light">Importar DBpedia</button>
+    <button id="btn-import-dbpedia-header" class="btn btn-sm btn-outline-light">{{t 'import_dbpedia'}}</button>
     <span id="import-status-header" style="margin-left:8px;color:#ddd;font-size:0.9rem"></span>
   </div>
 
@@ -183,7 +183,7 @@
 
       if (btn) btn.addEventListener('click', async function(){
         if (!status) return;
-        status.textContent = 'Iniciando...';
+        status.textContent = '{{t "import_status_started"}}';
         try {
           const res = await fetch('/admin/import-dbpedia?dev=1', {
             method: 'POST',
@@ -191,10 +191,10 @@
             body: JSON.stringify({ limit: 300, merge: true, langs: 'es,en,pt,de,fr' })
           });
           const j = await res.json();
-          if (j.status === 'started') status.textContent = 'Importación iniciada (pid ' + j.pid + ')';
-          else status.textContent = 'Respuesta: ' + (j.message || JSON.stringify(j));
+          if (j.status === 'started') status.textContent = '{{t "import_status_started"}} ' + j.pid + ')';
+          else status.textContent = '{{t "import_status_error"}}: ' + (j.message || JSON.stringify(j));
         } catch (err){
-          status.textContent = 'Error: ' + (err.message || err);
+          status.textContent = '{{t "import_status_error"}}: ' + (err.message || err);
         }
       });
     })();

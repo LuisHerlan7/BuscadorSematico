@@ -79,7 +79,7 @@ exports.search = async (req, res) => {
     }
 
     res.render('search-results', {
-      title: `Resultados para "${q}"`,
+      title: null,
       query: q,
       diseases: results,      // Mantenido por compatibilidad
       scholarships: results,

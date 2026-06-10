@@ -7,7 +7,7 @@
           <img
             src="/images/becas.jpg"
             class="hero-image"
-            alt="Explora información sobre becas"
+            alt="{{t 'hero_image_alt'}}"
             loading="lazy"
           />
           <div class="hero-overlay">
@@ -32,7 +32,7 @@
             {{> search-form }}
             <!-- Hidden DBpedia import button (visible only with ?dev=1) -->
             <div id="dbpedia-import" style="display:none; margin-top:10px;">
-              <button id="btn-import-dbpedia" class="btn btn-sm btn-outline-secondary">Importar datos DBpedia (dev)</button>
+              <button id="btn-import-dbpedia" class="btn btn-sm btn-outline-secondary">{{t 'import_dbpedia'}}</button>
               <span id="import-status" style="margin-left:8px;color:#666;font-size:0.9rem"></span>
             </div>
           </div>
@@ -247,7 +247,7 @@
           el.style.display = 'block';
           document.getElementById('btn-import-dbpedia').addEventListener('click', async function(){
             const status = document.getElementById('import-status');
-            status.textContent = 'Iniciando...';
+            status.textContent = '{{t "import_status_started"}}';
             try {
               const res = await fetch('/admin/import-dbpedia?dev=1', {
                 method: 'POST',
@@ -255,10 +255,10 @@
                 body: JSON.stringify({ limit: 300, merge: true, langs: 'es,en,pt,de,fr' })
               });
               const j = await res.json();
-              if (j.status === 'started') status.textContent = 'Importación iniciada (pid ' + j.pid + ')';
-              else status.textContent = 'Respuesta: ' + JSON.stringify(j);
+              if (j.status === 'started') status.textContent = '{{t "import_status_started"}} ' + j.pid + ')';
+              else status.textContent = '{{t "import_status_error"}}: ' + JSON.stringify(j);
             } catch (e) {
-              status.textContent = 'Error: ' + e.message;
+              status.textContent = '{{t "import_status_error"}}: ' + e.message;
             }
           });
         }
@@ -271,7 +271,7 @@
 {{#if featuredDiseases.length}}
   <section class="featured-diseases">
     <div class="container">
-      <h2 class="section-title">Enfermedades Destacadas</h2>
+      <h2 class="section-title">{{t 'featured_scholarships'}}</h2>
       <div class="diseases-grid">
         {{#each featuredDiseases}}
           <div class="disease-card">
@@ -287,8 +287,7 @@
               </div>
               <div class="card-footer">
                 <a href="/disease/{{encodeURI uri}}?lang={{../lang}}" class="btn-details">
-                  {{#if (eq ../lang 'es')}}Ver detalles{{/if}}
-                  {{#if (eq ../lang 'en')}}Details{{/if}}
+                  {{t 'view_details'}}
                 </a>
               </div>
             </div>

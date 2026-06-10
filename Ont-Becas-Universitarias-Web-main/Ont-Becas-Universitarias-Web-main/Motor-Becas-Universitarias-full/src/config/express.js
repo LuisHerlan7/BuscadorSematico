@@ -237,12 +237,124 @@ module.exports = function(app) {
             fr: "Aucune description n'est disponible pour cette bourse.",
             de: 'Für dieses Stipendium ist keine Beschreibung verfügbar.'
           },
-          'requirements': {
-            es: 'Requisitos / Elegibilidad',
-            en: 'Requirements / Eligibility',
-            pt: 'Requisitos / Elegibilidade',
-            fr: 'Conditions / Éligibilité',
-            de: 'Anforderungen / Eignung'
+          'results_for': {
+            es: 'Resultados para',
+            en: 'Results for',
+            pt: 'Resultados para',
+            fr: 'Résultats pour',
+            de: 'Ergebnisse für'
+          },
+          'back_home': {
+            es: 'Volver al inicio',
+            en: 'Back to home',
+            pt: 'Voltar ao início',
+            fr: 'Retour à l’accueil',
+            de: 'Zur Startseite'
+          },
+          'error_title': {
+            es: '¡Ups! Algo salió mal',
+            en: 'Oops! Something went wrong',
+            pt: 'Ops! Algo deu errado',
+            fr: 'Oups ! Quelque chose s’est mal passé',
+            de: 'Ups! Etwas ist schiefgelaufen'
+          },
+          'error_message_home': {
+            es: 'Lo sentimos, para cambiar el idioma debes volver a la página de inicio.',
+            en: 'Sorry, to change the language please return to the home page.',
+            pt: 'Desculpe, para alterar o idioma volte à página inicial.',
+            fr: 'Désolé, pour changer de langue veuillez revenir à la page d’accueil.',
+            de: 'Entschuldigung, um die Sprache zu ändern, kehren Sie bitte zur Startseite zurück.'
+          },
+          'error_message_try_again': {
+            es: 'Luego, realiza una nueva búsqueda para ver los resultados en el idioma seleccionado.',
+            en: 'Then perform a new search to see results in the selected language.',
+            pt: 'Em seguida, faça uma nova pesquisa para ver os resultados no idioma selecionado.',
+            fr: 'Ensuite, effectuez une nouvelle recherche pour voir les résultats dans la langue sélectionnée.',
+            de: 'Führen Sie dann eine neue Suche durch, um die Ergebnisse in der ausgewählten Sprache anzuzeigen.'
+          },
+          'error_suggestion_title': {
+            es: 'Mientras tanto, puedes:',
+            en: 'In the meantime, you can:',
+            pt: 'Enquanto isso, você pode:',
+            fr: 'En attendant, vous pouvez :',
+            de: 'In der Zwischenzeit können Sie:'
+          },
+          'error_suggestion_refresh': {
+            es: 'Intentar refrescar la página',
+            en: 'Try refreshing the page',
+            pt: 'Tentar atualizar a página',
+            fr: 'Essayer d’actualiser la page',
+            de: 'Versuchen Sie, die Seite zu aktualisieren'
+          },
+          'error_suggestion_connection': {
+            es: 'Verificar tu conexión a internet',
+            en: 'Check your internet connection',
+            pt: 'Verificar sua conexão com a internet',
+            fr: 'Vérifier votre connexion Internet',
+            de: 'Überprüfen Sie Ihre Internetverbindung'
+          },
+          'error_suggestion_later': {
+            es: 'Volver a intentar más tarde',
+            en: 'Try again later',
+            pt: 'Tente novamente mais tarde',
+            fr: 'Réessayez plus tard',
+            de: 'Versuchen Sie es später erneut'
+          },
+          'import_dbpedia': {
+            es: 'Importar datos DBpedia (dev)',
+            en: 'Import DBpedia data (dev)',
+            pt: 'Importar dados DBpedia (dev)',
+            fr: 'Importer les données DBpedia (dev)',
+            de: 'DBpedia-Daten importieren (dev)'
+          },
+          'import_status_started': {
+            es: 'Importación iniciada (pid',
+            en: 'Import started (pid',
+            pt: 'Importação iniciada (pid',
+            fr: 'Importation démarrée (pid',
+            de: 'Import gestartet (pid'
+          },
+          'import_status_error': {
+            es: 'Error',
+            en: 'Error',
+            pt: 'Erro',
+            fr: 'Erreur',
+            de: 'Fehler'
+          },
+          'app_subtitle': {
+            es: 'Motor semántico de becas con DBpedia',
+            en: 'Semantic scholarship engine with DBpedia',
+            pt: 'Motor semântico de bolsas com DBpedia',
+            fr: 'Moteur sémantique de bourses avec DBpedia',
+            de: 'Semantische Stipendiensuche mit DBpedia'
+          },
+          'official_site': {
+            es: 'Visitar Sitio Oficial',
+            en: 'Visit Official Site',
+            pt: 'Visitar Site Oficial',
+            fr: 'Visiter le Site Officiel',
+            de: 'Offizielle Seite Besuchen'
+          },
+          'view_dbpedia': {
+            es: 'Ver en DBpedia',
+            en: 'View on DBpedia',
+            pt: 'Ver no DBpedia',
+            fr: 'Voir sur DBpedia',
+            de: 'Auf DBpedia anzeigen'
+          },
+          'featured_scholarships': {
+            es: 'Becas Destacadas',
+            en: 'Featured Scholarships',
+            pt: 'Bolsas em Destaque',
+            fr: 'Bourses en Vedette',
+            de: 'Empfohlene Stipendien'
+          },
+          'hero_image_alt': {
+            es: 'Explora información sobre becas',
+            en: 'Explore scholarship information',
+            pt: 'Explore informações sobre bolsas',
+            fr: 'Explorez les informations sur les bourses',
+            de: 'Entdecken Sie Informationen zu Stipendien'
           },
           'benefits': {
             es: 'Beneficios / Cobertura',
