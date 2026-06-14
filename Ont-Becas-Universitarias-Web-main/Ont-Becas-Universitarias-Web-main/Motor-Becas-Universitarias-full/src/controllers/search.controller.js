@@ -19,7 +19,13 @@ exports.search = async (req, res) => {
       .then(value => ({ status: 'fulfilled', value }))
       .catch(reason => ({ status: 'rejected', reason }));
 
-    const localResults = [];
+    // Buscar en la ontología local (OWL) y en los registros offline de DBpedia
+    let localResults = [];
+    try {
+      localResults = await rdfService.searchScholarships(q, lang);
+    } catch (err) {
+      console.error('Error en búsqueda local:', err.message);
+    }
 
     // Resultados de DBpedia
     const dbpediaResults = (dbpediaResult.status === 'fulfilled' ? dbpediaResult.value : []).map(r => ({

@@ -5,11 +5,24 @@ const path = require('path');
 const defaultOwl = path.join(__dirname, '../public/data/ontologia_becas.owl');
 const rdfFilePath = process.env.ONTOLOGY_FILE || defaultOwl;
 
-// Términos genéricos que describen la ontología o conectores comunes
+// Términos genéricos en 5 idiomas que no deben usarse como filtro específico
 const GENERIC_TERMS = new Set([
-  'beca', 'becas', 'universitaria', 'universitarias', 
+  // Español
+  'beca', 'becas', 'universitaria', 'universitarias',
   'universitario', 'universitarios', 'universidad', 'universidades',
-  'estudio', 'estudios', 'programa', 'programas', 'de', 'para', 'en'
+  'estudio', 'estudios', 'programa', 'programas', 'de', 'para', 'en',
+  // Inglés
+  'scholarship', 'scholarships', 'university', 'universities',
+  'study', 'studies', 'program', 'programs', 'the', 'for', 'and',
+  // Portugués
+  'bolsa', 'bolsas', 'universidade', 'universidades',
+  'estudo', 'estudos', 'programa', 'programas',
+  // Francés
+  'bourse', 'bourses', 'universite', 'universites',
+  'etude', 'etudes', 'programme', 'programmes', 'des', 'pour', 'les',
+  // Alemán
+  'stipendium', 'stipendien', 'universitat', 'universitaet',
+  'studium', 'studien', 'programm', 'programme', 'fur', 'und', 'die', 'der', 'das'
 ]);
 
 class RDFService {
@@ -74,7 +87,14 @@ class RDFService {
 
   _isGenericScholarshipSearch(term) {
     const normalized = this._normalize(term);
-    return ['beca', 'becas', 'scholarship', 'scholarships', 'bolsa', 'bolsas', 'bourse', 'stipendium'].includes(normalized);
+    const genericSingles = [
+      'beca', 'becas', 'beca universitaria', 'becas universitarias',
+      'scholarship', 'scholarships', 'university scholarship', 'university scholarships',
+      'bolsa', 'bolsas', 'bolsa de estudos', 'bolsas de estudo',
+      'bourse', 'bourses', 'bourse universitaire', 'bourses universitaires',
+      'stipendium', 'stipendien', 'universitatsstipendium'
+    ];
+    return genericSingles.includes(normalized);
   }
 
   _pickLiteral(group, field, lang = 'es') {
@@ -293,8 +313,59 @@ class RDFService {
       return '';
     }
 
-    // Si contiene palabras clave específicas, construimos filtros tolerantes con OR (||)
-    const filterClauses = specific.map(word => {
+    // Mapeos multilingüe para expandir búsqueda
+    const synonyms = {
+      'fulbright': ['fulbright'],
+      'erasmus': ['erasmus'],
+      'daad': ['daad'],
+      'rhodes': ['rhodes'],
+      'chevening': ['chevening'],
+      'carolina': ['carolina'],
+      'oea': ['oea', 'oas'],
+      'oas': ['oea', 'oas'],
+      'google': ['google'],
+      'confucio': ['confucio', 'confucius'],
+      'confucius': ['confucio', 'confucius'],
+      'maestria': ['maestria', 'master'],
+      'master': ['maestria', 'master'],
+      'doctorado': ['doctorado', 'doctoral', 'phd'],
+      'doctoral': ['doctorado', 'doctoral'],
+      'phd': ['doctorado', 'phd'],
+      'intercambio': ['intercambio', 'exchange'],
+      'exchange': ['intercambio', 'exchange'],
+      'investigacion': ['investigacion', 'research'],
+      'research': ['investigacion', 'research'],
+      'excelencia': ['excelencia', 'excellence'],
+      'excellence': ['excelencia', 'excellence'],
+      'movilidad': ['movilidad', 'mobility'],
+      'mobility': ['movilidad', 'mobility'],
+      'bolivia': ['bolivia'],
+      'argentina': ['argentina'],
+      'espana': ['espana', 'spain'],
+      'spain': ['espana', 'spain'],
+      'alemania': ['alemania', 'germany'],
+      'germany': ['alemania', 'germany'],
+      'mestrado': ['maestria', 'master'],
+      'doutorado': ['doctorado', 'doctoral'],
+      'maitrise': ['maestria', 'master'],
+      'doctorat': ['doctorado', 'doctoral'],
+      'echange': ['intercambio', 'exchange'],
+      'recherche': ['investigacion', 'research'],
+      'forschung': ['investigacion', 'research'],
+      'austausch': ['intercambio', 'exchange']
+    };
+
+    // Expandir cada keyword con sus sinónimos
+    const allSearchWords = new Set();
+    for (const word of specific) {
+      allSearchWords.add(word);
+      if (synonyms[word]) {
+        synonyms[word].forEach(s => allSearchWords.add(s));
+      }
+    }
+
+    // Construir filtros tolerantes con OR (||)
+    const filterClauses = Array.from(allSearchWords).map(word => {
       const escaped = word.replace(/"/g, '\\"');
       return `(
         CONTAINS(LCASE(STR(?label)), "${escaped}")
@@ -312,7 +383,8 @@ class RDFService {
     const query = `
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
-      SELECT DISTINCT ?s ?label ?descripcion ?monto ?fechaFinal ?nombre WHERE {
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      SELECT DISTINCT ?s ?label ?descripcionFinal ?monto ?fechaFinal ?nombre WHERE {
         {
           # Buscar instancias de Beca o cualquier subclase de Beca
           ?s a ?type .
@@ -320,13 +392,18 @@ class RDFService {
         } UNION {
           # Fallback: cualquier entidad con nombreBeca es una beca
           ?s becas:nombreBeca ?anyNombre .
+        } UNION {
+          # Fallback 2: cualquier NamedIndividual (incluyendo los de respaldo)
+          ?s a owl:NamedIndividual .
         }
         ?s rdfs:label ?label .
         OPTIONAL { ?s becas:descripcion ?descripcion }
+        OPTIONAL { ?s becas:descripción ?descripcionAlt }
         OPTIONAL { ?s becas:montoCubierto ?monto }
         OPTIONAL { ?s becas:fechaLímitePostulación ?fecha }
         OPTIONAL { ?s becas:fechaLimitePostulacion ?fechaAlt }
         OPTIONAL { ?s becas:nombreBeca ?nombre }
+        BIND(COALESCE(?descripcion, ?descripcionAlt) AS ?descripcionFinal)
         BIND(COALESCE(?fecha, ?fechaAlt) AS ?fechaFinal)
         
         ${filterClause}
@@ -338,7 +415,7 @@ class RDFService {
     return bindings.map(binding => {
       const s = binding.get('s') || binding.get('?s');
       const label = binding.get('label') || binding.get('?label');
-      const descripcion = binding.get('descripcion') || binding.get('?descripcion');
+      const descripcion = binding.get('descripcionFinal') || binding.get('?descripcionFinal') || binding.get('descripcion') || binding.get('?descripcion');
       const monto = binding.get('monto') || binding.get('?monto');
       const fecha = binding.get('fechaFinal') || binding.get('?fechaFinal') || binding.get('fecha') || binding.get('?fecha');
       const nombre = binding.get('nombre') || binding.get('?nombre');
@@ -426,12 +503,12 @@ class RDFService {
       deadline,
       dbpediaUri,
       seeAlso,
-      requirements: requirements.length > 0 ? requirements.join(', ') : null,
-      benefits: benefits.length > 0 ? benefits.join(', ') : null,
-      institution,
-      level,
-      area,
-      country,
+      requirements: requirements.length > 0 ? requirements.join(', ') : (raw[`${NS}requisitosTexto`] || null),
+      benefits: benefits.length > 0 ? benefits.join(', ') : (raw[`${NS}beneficiosTexto`] || null),
+      institution: institution || raw[`${NS}institucionTexto`] || raw[`${NS}instituciónTexto`] || null,
+      level: level || raw[`${NS}nivelTexto`] || null,
+      area: area || raw[`${NS}areaTexto`] || raw[`${NS}áreaTexto`] || null,
+      country: country || raw[`${NS}paisTexto`] || raw[`${NS}paísTexto`] || null,
       thumbnail: null,
       source: 'local',
       _raw: raw
