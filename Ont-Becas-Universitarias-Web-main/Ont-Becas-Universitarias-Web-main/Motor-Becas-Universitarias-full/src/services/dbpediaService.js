@@ -188,7 +188,22 @@ class DBpediaService {
       });
 
       const rows = response.data?.results?.bindings || [];
-      if (rows.length === 0) return this.getOfflineScholarshipDetails(uri, lang);
+      if (rows.length === 0) {
+        const offline = await this.getOfflineScholarshipDetails(uri, lang);
+        if (offline) return offline;
+        const fallbackLabel = uri.split('/').pop() || uri;
+        return {
+          uri,
+          label: fallbackLabel,
+          name: fallbackLabel,
+          abstract: '',
+          description: '',
+          thumbnail: null,
+          requirements: null,
+          source: 'dbpedia',
+          dbpediaUri: uri
+        };
+      }
 
       // Selección de idioma preferente para textos básicos
       const labelRow = rows.find(r => r.label?.['xml:lang'] === lang) || rows[0];
