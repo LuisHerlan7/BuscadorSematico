@@ -55,7 +55,18 @@ class RDFService {
     const bindings = [];
 
     await new Promise((resolve, reject) => {
-      bindingsStream.on('data', b => bindings.push(b));
+      bindingsStream.on('data', b => {
+        const plain = new Map();
+        for (const [key, value] of b) {
+          plain.set(key, value ? {
+            value: value.value,
+            language: value.language,
+            datatype: value.datatype?.value,
+            termType: value.termType
+          } : null);
+        }
+        bindings.push(plain);
+      });
       bindingsStream.on('end', resolve);
       bindingsStream.on('error', reject);
     });
