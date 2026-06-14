@@ -96,6 +96,8 @@ class DBpediaService {
       results.push({
         uri,
         safeUri: encodeURIComponent(uri),
+        dbpediaUri: uri,
+        dbpediaPage: uri,
         label: b.label?.value || '',
         name: b.label?.value || '',
         description: b.desc?.value || '',
@@ -232,7 +234,20 @@ class DBpediaService {
       };
     } catch (error) {
       this._handleError(error);
-      return this.getOfflineScholarshipDetails(uri, lang);
+      const offline = await this.getOfflineScholarshipDetails(uri, lang);
+      if (offline) return offline;
+      const fallbackLabel = uri.split('/').pop() || uri;
+      return {
+        uri,
+        label: fallbackLabel,
+        name: fallbackLabel,
+        abstract: '',
+        description: '',
+        thumbnail: null,
+        requirements: null,
+        source: 'dbpedia',
+        dbpediaUri: uri
+      };
     }
   }
 
