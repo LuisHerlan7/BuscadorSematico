@@ -380,11 +380,12 @@ class RDFService {
   async searchScholarships(term, lang = 'es') {
     const filterClause = this._buildSPARQLFilter(term);
 
+    // Seleccionamos todo para poder agrupar y elegir el idioma en JS
     const query = `
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
       PREFIX owl: <http://www.w3.org/2002/07/owl#>
-      SELECT DISTINCT ?s ?label ?descripcionFinal ?monto ?fechaFinal ?nombre WHERE {
+      SELECT DISTINCT ?s ?label ?descripcion ?descripcionAlt ?monto ?fecha ?fechaAlt ?nombre WHERE {
         {
           # Buscar instancias de Beca o cualquier subclase de Beca
           ?s a ?type .
@@ -403,36 +404,64 @@ class RDFService {
         OPTIONAL { ?s becas:fechaLímitePostulación ?fecha }
         OPTIONAL { ?s becas:fechaLimitePostulacion ?fechaAlt }
         OPTIONAL { ?s becas:nombreBeca ?nombre }
-        BIND(COALESCE(?descripcion, ?descripcionAlt) AS ?descripcionFinal)
-        BIND(COALESCE(?fecha, ?fechaAlt) AS ?fechaFinal)
         
         ${filterClause}
-      } LIMIT 50
+      } LIMIT 500
     `;
 
     const bindings = await this._queryBindings(query);
 
-    return bindings.map(binding => {
+    const grouped = new Map();
+
+    bindings.forEach(binding => {
       const s = binding.get('s') || binding.get('?s');
+      if (!s) return;
+      const uri = s.value;
+      if (!grouped.has(uri)) {
+        grouped.set(uri, { uri, labels: [], descriptions: [], amounts: [], deadlines: [], names: [] });
+      }
+      const group = grouped.get(uri);
+
       const label = binding.get('label') || binding.get('?label');
-      const descripcion = binding.get('descripcionFinal') || binding.get('?descripcionFinal') || binding.get('descripcion') || binding.get('?descripcion');
-      const monto = binding.get('monto') || binding.get('?monto');
-      const fecha = binding.get('fechaFinal') || binding.get('?fechaFinal') || binding.get('fecha') || binding.get('?fecha');
-      const nombre = binding.get('nombre') || binding.get('?nombre');
+      if (label && label.value) group.labels.push({ value: label.value, lang: label.language || '' });
+
+      const desc = binding.get('descripcion') || binding.get('?descripcion');
+      if (desc && desc.value) group.descriptions.push({ value: desc.value, lang: desc.language || '' });
+
+      const descAlt = binding.get('descripcionAlt') || binding.get('?descripcionAlt');
+      if (descAlt && descAlt.value) group.descriptions.push({ value: descAlt.value, lang: descAlt.language || '' });
+
+      const amount = binding.get('monto') || binding.get('?monto');
+      if (amount && amount.value) group.amounts.push(amount.value);
+
+      const fecha = binding.get('fecha') || binding.get('?fecha');
+      if (fecha && fecha.value) group.deadlines.push(fecha.value);
+
+      const fechaAlt = binding.get('fechaAlt') || binding.get('?fechaAlt');
+      if (fechaAlt && fechaAlt.value) group.deadlines.push(fechaAlt.value);
+
+      const name = binding.get('nombre') || binding.get('?nombre');
+      if (name && name.value) group.names.push({ value: name.value, lang: name.language || '' });
+    });
+
+    return Array.from(grouped.values()).slice(0, 50).map(group => {
+      const label = this._pickLiteral(group, 'labels', lang) || group.uri;
+      const desc = this._pickLiteral(group, 'descriptions', lang) || '';
+      const name = this._pickLiteral(group, 'names', lang) || label;
 
       return {
-        uri: s?.value,
-        label: label?.value,
-        name: nombre?.value || label?.value,
-        description: descripcion?.value,
-        amount: monto?.value,
-        deadline: fecha?.value,
+        uri: group.uri,
+        label: label,
+        name: name,
+        description: desc,
+        amount: group.amounts[0] || null,
+        deadline: group.deadlines[0] || null,
         source: 'local'
       };
     });
   }
 
-  async getScholarshipDetails(uri) {
+  async getScholarshipDetails(uri, lang = 'es') {
     const query = `
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
@@ -451,6 +480,7 @@ class RDFService {
     const OWL = 'http://www.w3.org/2002/07/owl#';
 
     const raw = {};
+    const rawLangObj = {};
     const requirements = [];
     const benefits = [];
     let institution = null;
@@ -467,9 +497,12 @@ class RDFService {
 
       const propUri = p.value;
       const objVal = o.value;
+      const objLang = o.language || '';
       const objLabel = oLbl ? oLbl.value : objVal.split('#')[1] || objVal;
 
       raw[propUri] = objVal;
+      if (!rawLangObj[propUri]) rawLangObj[propUri] = [];
+      rawLangObj[propUri].push({ value: objVal, lang: objLang });
 
       if (propUri === `${NS}tieneRequisito`) {
         requirements.push(objLabel);
@@ -486,8 +519,10 @@ class RDFService {
       }
     });
 
-    const label = raw[`${RDFS}label`] || raw[`${NS}nombreBeca`] || uri;
-    const desc = raw[`${NS}descripcion`] || raw[`${NS}descripción`] || '';
+    const getBestLiteral = (prop) => this._pickLiteral({ vals: rawLangObj[prop] }, 'vals', lang);
+
+    const label = getBestLiteral(`${RDFS}label`) || getBestLiteral(`${NS}nombreBeca`) || uri;
+    const desc = getBestLiteral(`${NS}descripcion`) || getBestLiteral(`${NS}descripción`) || '';
     const amount = raw[`${NS}montoCubierto`] || null;
     const deadline = raw[`${NS}fechaLímitePostulación`] || raw[`${NS}fechaLimitePostulacion`] || null;
     const dbpediaUri = raw[`${OWL}sameAs`] || null;

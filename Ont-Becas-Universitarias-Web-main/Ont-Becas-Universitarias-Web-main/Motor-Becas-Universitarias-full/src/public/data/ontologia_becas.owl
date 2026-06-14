@@ -761,81 +761,20 @@
     </owl:DatatypeProperty>
 
 
-    <!-- ============================================================ -->
-    <!--  SECCIÓN PARA INSTANCIAS                                     -->
-    <!--  Añade tus instancias debajo de cada bloque correspondiente  -->
-    <!-- ============================================================ -->
-
-    <!-- INSTANCIAS DE: Beca
-    <owl:NamedIndividual rdf:about="#NombreDeTuBeca">
-        <rdf:type rdf:resource="#BecaCompleta"/>
-        <nombreBeca>Nombre oficial de la beca</nombreBeca>
-        <descripción>Descripción breve</descripción>
-        <duración rdf:datatype="&xsd;integer">24</duración>
-        <esRenovable rdf:datatype="&xsd;boolean">true</esRenovable>
-        <perteneceANivel rdf:resource="#Maestría"/>
-        <perteneceAÁrea rdf:resource="#Tecnología"/>
-        <esOfrecidaPor rdf:resource="#NombreDeTuInstitucion"/>
-    </owl:NamedIndividual>
-    -->
-
-    <!-- INSTANCIAS DE: Universidad / Institución
-    <owl:NamedIndividual rdf:about="#NombreDeTuInstitucion">
-        <rdf:type rdf:resource="#Universidad"/>
-        <nombreInstitucion>Nombre oficial</nombreInstitucion>
-        <seDesarrollaEn rdf:resource="#Bolivia"/>
-    </owl:NamedIndividual>
-    -->
-
-    <!-- INSTANCIAS DE: País
-    <owl:NamedIndividual rdf:about="#Bolivia">
-        <rdf:type rdf:resource="#País"/>
-        <nombreInstitucion>Bolivia</nombreInstitucion>
-    </owl:NamedIndividual>
-    -->
-
-    <!-- INSTANCIAS DE: Convocatoria
-    <owl:NamedIndividual rdf:about="#NombreDeTuConvocatoria">
-        <rdf:type rdf:resource="#ConvocatoriaNacional"/>
-        <fechaInicio rdf:datatype="&xsd;date">2025-03-01</fechaInicio>
-        <fechaLímitePostulación rdf:datatype="&xsd;date">2025-05-31</fechaLímitePostulación>
-        <fechaDeResultados rdf:datatype="&xsd;date">2025-07-01</fechaDeResultados>
-        <tieneProcesoDeSelección rdf:resource="#NombreDeTuProceso"/>
-    </owl:NamedIndividual>
-    -->
-
-    <!-- INSTANCIAS DE: Postulante / Beneficiario
-    <owl:NamedIndividual rdf:about="#NombreDelEstudiante">
-        <rdf:type rdf:resource="#Beneficiario"/>
-        <nombreCompleto>Nombre Apellido</nombreCompleto>
-        <correoElectrónico>correo@ejemplo.com</correoElectrónico>
-        <esBeneficiarioDe rdf:resource="#NombreDeTuBeca"/>
-    </owl:NamedIndividual>
-    -->
-
-    <!-- INSTANCIAS DE: Requisito
-    <owl:NamedIndividual rdf:about="#RequisitoPromedio">
-        <rdf:type rdf:resource="#RequisitoAcadémico"/>
-        <promedioMínimo rdf:datatype="&xsd;decimal">7.0</promedioMínimo>
-    </owl:NamedIndividual>
-    -->
-
-    <!-- INSTANCIAS DE: Organismo / Patrocinador
-    <owl:NamedIndividual rdf:about="#NombreDelOrganismo">
-        <rdf:type rdf:resource="#OrganismoGubernamental"/>
-        <nombreInstitucion>Nombre del organismo</nombreInstitucion>
-        <seDesarrollaEn rdf:resource="#Bolivia"/>
-    </owl:NamedIndividual>
-    -->
-
 
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_1">
     <rdfs:label xml:lang="es">Programa Fulbright</rdfs:label>
     <rdfs:label xml:lang="en">Fulbright Programme</rdfs:label>
+    <rdfs:label xml:lang="pt">Programa Fulbright</rdfs:label>
+    <rdfs:label xml:lang="de">Fulbright-Programm</rdfs:label>
+    <rdfs:label xml:lang="fr">Programme Fulbright</rdfs:label>
     <descripción xml:lang="es">Programa de becas internacionales para estudiantes y profesionales estadounidenses que deseen estudiar o investigar en el extranjero. Especialización y maestría en universidades de prestigio. Oportunidad de especialización profesional.</descripción>
     <descripción xml:lang="en">International scholarship program for American students and professionals to study or conduct research abroad.</descripción>
+    <descripción xml:lang="pt">Programa de bolsas internacionais para estudantes e profissionais americanos estudarem ou realizarem pesquisas no exterior.</descripción>
+    <descripción xml:lang="de">Internationales Stipendienprogramm für amerikanische Studenten und Berufstätige, um im Ausland zu studieren oder zu forschen.</descripción>
+    <descripción xml:lang="fr">Programme de bourses internationales pour les étudiants et professionnels américains souhaitant étudier ou mener des recherches à l'étranger.</descripción>
     <paisTexto>United States</paisTexto>
-    <nivelTexto>Master&apos;s, PhD</nivelTexto>
+    <nivelTexto>Master's, PhD</nivelTexto>
     <requisitosTexto>Diploma de licenciatura, dominio de inglés, expediente académico excelente</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -843,10 +782,16 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_2">
     <rdfs:label xml:lang="es">Beca Erasmus+</rdfs:label>
     <rdfs:label xml:lang="en">Erasmus+ Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa Erasmus+</rdfs:label>
+    <rdfs:label xml:lang="de">Erasmus+ Stipendium</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse Erasmus+</rdfs:label>
     <descripción xml:lang="es">Programa europeo de becas para movilidad educativa en educación superior, formación profesional y aprendizaje permanente. Estudios de especialización en España y otros países europeos.</descripción>
     <descripción xml:lang="en">European scholarship program for educational mobility in higher education, vocational training and lifelong learning.</descripción>
+    <descripción xml:lang="pt">Programa europeu de bolsas para mobilidade educacional no ensino superior, formação profissional e aprendizagem ao longo da vida.</descripción>
+    <descripción xml:lang="de">Europäisches Stipendienprogramm für Bildungsmobilität in Hochschulbildung, Berufsbildung und lebenslangem Lernen.</descripción>
+    <descripción xml:lang="fr">Programme européen de bourses pour la mobilité éducative dans l'enseignement supérieur, la formation professionnelle et l'apprentissage tout au long de la vie.</descripción>
     <paisTexto>European Union, Spain</paisTexto>
-    <nivelTexto>Undergraduate, Master&apos;s</nivelTexto>
+    <nivelTexto>Undergraduate, Master's</nivelTexto>
     <requisitosTexto>Ser ciudadano de país participante, estar matriculado en institución de educación superior</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -854,10 +799,16 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_3">
     <rdfs:label xml:lang="es">Beca DAAD</rdfs:label>
     <rdfs:label xml:lang="en">DAAD Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa DAAD</rdfs:label>
+    <rdfs:label xml:lang="de">DAAD-Stipendium</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse DAAD</rdfs:label>
     <descripción xml:lang="es">Servicio Alemán de Intercambio Académico. Becas para estudiantes y académicos internacionales de todas las disciplinas para estudiar en Alemania. Programas de maestría y especialización.</descripción>
     <descripción xml:lang="en">German Academic Exchange Service scholarships for international students and academics to study in Germany.</descripción>
+    <descripción xml:lang="pt">Bolsas do Serviço Alemão de Intercâmbio Acadêmico para estudantes e acadêmicos internacionais estudarem na Alemanha.</descripción>
+    <descripción xml:lang="de">Stipendien des Deutschen Akademischen Austauschdienstes für internationale Studenten und Akademiker, um in Deutschland zu studieren.</descripción>
+    <descripción xml:lang="fr">Bourses du Service allemand d'échanges universitaires pour les étudiants et universitaires internationaux afin d'étudier en Allemagne.</descripción>
     <paisTexto>Germany</paisTexto>
-    <nivelTexto>Undergraduate, Master&apos;s, PhD, Research</nivelTexto>
+    <nivelTexto>Undergraduate, Master's, PhD, Research</nivelTexto>
     <requisitosTexto>Candidato con excelente expediente académico, dominio del idioma alemán o inglés</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -865,10 +816,16 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_4">
     <rdfs:label xml:lang="es">Beca Rhodes</rdfs:label>
     <rdfs:label xml:lang="en">Rhodes Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa Rhodes</rdfs:label>
+    <rdfs:label xml:lang="de">Rhodes-Stipendium</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse Rhodes</rdfs:label>
     <descripción xml:lang="es">Una de las becas internacionales más prestigiosas para estudiantes graduados de universidades seleccionadas para estudiar en la Universidad de Oxford. Maestría en universidades británicas.</descripción>
     <descripción xml:lang="en">One of the most prestigious international scholarships for graduate students to study at Oxford University.</descripción>
+    <descripción xml:lang="pt">Uma das bolsas internacionais mais prestigiadas para estudantes de pós-graduação estudarem na Universidade de Oxford.</descripción>
+    <descripción xml:lang="de">Eines der renommiertesten internationalen Stipendien für Doktoranden zum Studium an der Universität Oxford.</descripción>
+    <descripción xml:lang="fr">L'une des bourses internationales les plus prestigieuses pour les étudiants de troisième cycle souhaitant étudier à l'Université d'Oxford.</descripción>
     <paisTexto>United Kingdom, Oxford</paisTexto>
-    <nivelTexto>Master&apos;s, Post-doctoral</nivelTexto>
+    <nivelTexto>Master's, Post-doctoral</nivelTexto>
     <requisitosTexto>Licenciado, capacidad intelectual excepcional, ciudadanía calificada</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -876,10 +833,16 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_5">
     <rdfs:label xml:lang="es">Beca Chevening</rdfs:label>
     <rdfs:label xml:lang="en">Chevening Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa Chevening</rdfs:label>
+    <rdfs:label xml:lang="de">Chevening-Stipendium</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse Chevening</rdfs:label>
     <descripción xml:lang="es">Programa de becas del Gobierno del Reino Unido para líderes del futuro de países en todo el mundo que deseen estudiar en universidades británicas. Especialización profesional en Reino Unido.</descripción>
     <descripción xml:lang="en">UK Government scholarship program for future leaders worldwide to study at British universities.</descripción>
+    <descripción xml:lang="pt">Programa de bolsas do Governo do Reino Unido para futuros líderes de todo o mundo estudarem em universidades britânicas.</descripción>
+    <descripción xml:lang="de">Stipendienprogramm der britischen Regierung für zukünftige Führungskräfte weltweit, um an britischen Universitäten zu studieren.</descripción>
+    <descripción xml:lang="fr">Programme de bourses du gouvernement britannique pour les futurs leaders du monde entier souhaitant étudier dans des universités britanniques.</descripción>
     <paisTexto>United Kingdom</paisTexto>
-    <nivelTexto>Master&apos;s</nivelTexto>
+    <nivelTexto>Master's</nivelTexto>
     <requisitosTexto>Mínimo 2 años de experiencia laboral, dominio de inglés demostrado</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -887,10 +850,16 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_6">
     <rdfs:label xml:lang="es">Beca del Instituto Confucio</rdfs:label>
     <rdfs:label xml:lang="en">Confucius Institute Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa do Instituto Confúcio</rdfs:label>
+    <rdfs:label xml:lang="de">Stipendium des Konfuzius-Instituts</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse de l'Institut Confucius</rdfs:label>
     <descripción xml:lang="es">Becas del Gobierno Chino para estudiantes internacionales para estudiar chino y otros programas académicos en universidades chinas. Programas de especialización y maestría.</descripción>
     <descripción xml:lang="en">Chinese Government scholarships for international students to study Chinese language and academic programs in Chinese universities.</descripción>
+    <descripción xml:lang="pt">Bolsas do Governo Chinês para estudantes internacionais estudarem chinês e programas acadêmicos em universidades chinesas.</descripción>
+    <descripción xml:lang="de">Stipendien der chinesischen Regierung für internationale Studenten zum Studium der chinesischen Sprache und akademischer Programme an chinesischen Universitäten.</descripción>
+    <descripción xml:lang="fr">Bourses du gouvernement chinois pour les étudiants internationaux souhaitant étudier la langue chinoise et des programmes académiques dans des universités chinoises.</descripción>
     <paisTexto>China</paisTexto>
-    <nivelTexto>Language Training, Undergraduate, Master&apos;s</nivelTexto>
+    <nivelTexto>Language Training, Undergraduate, Master's</nivelTexto>
     <requisitosTexto>Buen estado de salud, excelente expediente académico</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -898,10 +867,16 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_7">
     <rdfs:label xml:lang="es">Becas Carolina</rdfs:label>
     <rdfs:label xml:lang="en">Carolina Scholarships</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsas Carolina</rdfs:label>
+    <rdfs:label xml:lang="de">Carolina-Stipendien</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourses Carolina</rdfs:label>
     <descripción xml:lang="es">Programa de becas para profesionales y estudiantes de América Latina, el Caribe y Portugal para estudios en universidades españolas. Maestría y especialización en España.</descripción>
     <descripción xml:lang="en">Scholarship program for professionals and students from Latin America, the Caribbean and Portugal to study at Spanish universities.</descripción>
+    <descripción xml:lang="pt">Programa de bolsas para profissionais e estudantes da América Latina, Caribe e Portugal estudarem em universidades espanholas.</descripción>
+    <descripción xml:lang="de">Stipendienprogramm für Fachkräfte und Studenten aus Lateinamerika, der Karibik und Portugal für ein Studium an spanischen Universitäten.</descripción>
+    <descripción xml:lang="fr">Programme de bourses pour professionnels et étudiants d'Amérique latine, des Caraïbes et du Portugal pour étudier dans des universités espagnoles.</descripción>
     <paisTexto>Spain, Latin America</paisTexto>
-    <nivelTexto>Master&apos;s, PhD, Research</nivelTexto>
+    <nivelTexto>Master's, PhD, Research</nivelTexto>
     <requisitosTexto>Tener nacionalidad de país beneficiario, máster o licenciatura, conocimiento de español</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -909,10 +884,16 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_8">
     <rdfs:label xml:lang="es">Beca Fundación Carolina</rdfs:label>
     <rdfs:label xml:lang="en">Carolina Foundation Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa da Fundação Carolina</rdfs:label>
+    <rdfs:label xml:lang="de">Stipendium der Carolina-Stiftung</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse de la Fondation Carolina</rdfs:label>
     <descripción xml:lang="es">Becas para jóvenes profesionales iberoamericanos para realizar posgrados y programas de especialización en universidades españolas. Maestría y especialización profesional.</descripción>
     <descripción xml:lang="en">Scholarships for young Ibero-American professionals to pursue postgraduate studies and specialization programs at Spanish universities.</descripción>
+    <descripción xml:lang="pt">Bolsas para jovens profissionais ibero-americanos realizarem estudos de pós-graduação e especialização em universidades espanholas.</descripción>
+    <descripción xml:lang="de">Stipendien für junge iberoamerikanische Fachkräfte zur Absolvierung von Aufbaustudien und Spezialisierungsprogrammen an spanischen Universitäten.</descripción>
+    <descripción xml:lang="fr">Bourses pour les jeunes professionnels ibéro-américains afin de poursuivre des études de troisième cycle et des programmes de spécialisation dans les universités espagnoles.</descripción>
     <paisTexto>Spain, Iberoamerica</paisTexto>
-    <nivelTexto>Master&apos;s, Specialization</nivelTexto>
+    <nivelTexto>Master's, Specialization</nivelTexto>
     <requisitosTexto>Ser ciudadano de país iberoamericano, tener licenciatura, experiencia laboral comprobable</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -920,10 +901,16 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_9">
     <rdfs:label xml:lang="es">Beca de la OEA</rdfs:label>
     <rdfs:label xml:lang="en">OAS Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa da OEA</rdfs:label>
+    <rdfs:label xml:lang="de">OEA-Stipendium</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse de l'OEA</rdfs:label>
     <descripción xml:lang="es">Becas de la Organización de Estados Americanos para ciudadanos de países miembros para estudiar en universidades de las Américas. Programas de maestría y especialización profesional.</descripción>
     <descripción xml:lang="en">Organization of American States scholarships for citizens of member countries to study at universities in the Americas.</descripción>
+    <descripción xml:lang="pt">Bolsas da Organização dos Estados Americanos para cidadãos dos países membros estudarem em universidades das Américas.</descripción>
+    <descripción xml:lang="de">Stipendien der Organisation der Amerikanischen Staaten für Bürger von Mitgliedsländern für ein Studium an Universitäten in Nord- und Südamerika.</descripción>
+    <descripción xml:lang="fr">Bourses de l'Organisation des États américains pour les citoyens des pays membres afin d'étudier dans des universités des Amériques.</descripción>
     <paisTexto>Americas, Latin America</paisTexto>
-    <nivelTexto>Master&apos;s, PhD</nivelTexto>
+    <nivelTexto>Master's, PhD</nivelTexto>
     <requisitosTexto>Ciudadanía de país miembro de OEA, licenciatura finalizada, experiencia profesional</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -931,10 +918,16 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_10">
     <rdfs:label xml:lang="es">Becas Iberoamérica Jóvenes Profesionales</rdfs:label>
     <rdfs:label xml:lang="en">Iberoamerica Young Professionals Scholarships</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsas Ibero-América Jovens Profissionais</rdfs:label>
+    <rdfs:label xml:lang="de">Stipendien Iberoamerika für junge Fachkräfte</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourses Ibéro-Amérique Jeunes Professionnels</rdfs:label>
     <descripción xml:lang="es">Becas para jóvenes profesionales iberoamericanos menores de 35 años para realizar estudios de máster y especialización académica en universidades españolas. Programas de posgrado.</descripción>
-    <descripción xml:lang="en">Scholarships for young Ibero-American professionals under 35 to pursue master&apos;s studies and academic specialization at Spanish universities.</descripción>
+    <descripción xml:lang="en">Scholarships for young Ibero-American professionals under 35 to pursue master's studies and academic specialization at Spanish universities.</descripción>
+    <descripción xml:lang="pt">Bolsas para jovens profissionais ibero-americanos com menos de 35 anos realizarem estudos de mestrado e especialização acadêmica em universidades espanholas.</descripción>
+    <descripción xml:lang="de">Stipendien für junge iberoamerikanische Fachkräfte unter 35 Jahren für Masterstudien und akademische Spezialisierungen an spanischen Universitäten.</descripción>
+    <descripción xml:lang="fr">Bourses pour les jeunes professionnels ibéro-américains de moins de 35 ans pour poursuivre des études de master et de spécialisation universitaire dans des universités espagnoles.</descripción>
     <paisTexto>Spain, Iberoamerica, Latin America</paisTexto>
-    <nivelTexto>Master&apos;s, Specialization</nivelTexto>
+    <nivelTexto>Master's, Specialization</nivelTexto>
     <requisitosTexto>Menores de 35 años, ciudadanía iberoamericana, licenciatura finalizada</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
@@ -942,33 +935,51 @@
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_11">
     <rdfs:label xml:lang="es">Beca Google para América Latina</rdfs:label>
     <rdfs:label xml:lang="en">Google Scholarship for Latin America</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa Google para a América Latina</rdfs:label>
+    <rdfs:label xml:lang="de">Google-Stipendium für Lateinamerika</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse Google pour l'Amérique latine</rdfs:label>
     <descripción xml:lang="es">Programa de becas de Google para estudiantes de informática y carreras técnicas en América Latina comprometidos con la excelencia académica. Especialización en tecnología.</descripción>
     <descripción xml:lang="en">Google scholarship program for computer science and technical students in Latin America committed to academic excellence.</descripción>
+    <descripción xml:lang="pt">Programa de bolsas do Google para estudantes de ciência da computação e cursos técnicos na América Latina comprometidos com a excelência acadêmica.</descripción>
+    <descripción xml:lang="de">Google-Stipendienprogramm für Informatik- und Technikstudenten in Lateinamerika, die sich der akademischen Exzellenz verschrieben haben.</descripción>
+    <descripción xml:lang="fr">Programme de bourses Google pour les étudiants en informatique et filières techniques en Amérique latine engagés dans l'excellence académique.</descripción>
     <paisTexto>Latin America</paisTexto>
-    <nivelTexto>Undergraduate, Master&apos;s</nivelTexto>
+    <nivelTexto>Undergraduate, Master's</nivelTexto>
     <requisitosTexto>Estudiante de carrera técnica, rendimiento académico destacado, interés en tecnología</requisitosTexto>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
   
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_12">
-        <rdfs:label xml:lang="es">Beca Nacional Bolivia</rdfs:label>
-        <rdfs:label xml:lang="en">Bolivia National Scholarship</rdfs:label>
-        <descripción xml:lang="es">Beca nacional dirigida a estudiantes bolivianos para estudios de pregrado y posgrado en universidades nacionales. Incluye apoyo para matrícula y manutención en Bolivia. País: Bolivia.</descripción>
-        <descripción xml:lang="en">National scholarship aimed at Bolivian students for undergraduate and postgraduate studies at national universities. Includes tuition and living support in Bolivia. Country: Bolivia.</descripción>
-        <paisTexto>Bolivia</paisTexto>
-        <nivelTexto>Undergraduate, Master&apos;s, PhD</nivelTexto>
-        <requisitosTexto>Ciudadanía boliviana, expediente académico, carta de postulación</requisitosTexto>
-        <esRespaldoDBpedia>true</esRespaldoDBpedia>
-    </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_12">
+    <rdfs:label xml:lang="es">Beca Nacional Bolivia</rdfs:label>
+    <rdfs:label xml:lang="en">Bolivia National Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa Nacional Bolívia</rdfs:label>
+    <rdfs:label xml:lang="de">Nationales Stipendium Bolivien</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse Nationale Bolivie</rdfs:label>
+    <descripción xml:lang="es">Beca nacional dirigida a estudiantes bolivianos para estudios de pregrado y posgrado en universidades nacionales. Incluye apoyo para matrícula y manutención en Bolivia. País: Bolivia.</descripción>
+    <descripción xml:lang="en">National scholarship aimed at Bolivian students for undergraduate and postgraduate studies at national universities. Includes tuition and living support in Bolivia. Country: Bolivia.</descripción>
+    <descripción xml:lang="pt">Bolsa nacional destinada a estudantes bolivianos para estudos de graduação e pós-graduação em universidades nacionais. Inclui apoio de matrícula e manutenção na Bolívia. País: Bolívia.</descripción>
+    <descripción xml:lang="de">Nationales Stipendium für bolivianische Studenten für ein Grund- und Aufbaustudium an nationalen Universitäten. Beinhaltet Studiengebühren und Lebenshaltungskosten in Bolivien. Land: Bolivien.</descripción>
+    <descripción xml:lang="fr">Bourse nationale destinée aux étudiants boliviens pour des études de premier cycle et de troisième cycle dans les universités nationales. Comprend les frais de scolarité et l'entretien en Bolivie. Pays: Bolivie.</descripción>
+    <paisTexto>Bolivia</paisTexto>
+    <nivelTexto>Undergraduate, Master's, PhD</nivelTexto>
+    <requisitosTexto>Ciudadanía boliviana, expediente académico, carta de postulación</requisitosTexto>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_13">
-        <rdfs:label xml:lang="es">Programa de Becas Argentina</rdfs:label>
-        <rdfs:label xml:lang="en">Argentina Scholarship Program</rdfs:label>
-        <descripción xml:lang="es">Programa de becas para estudiantes argentinos que cubre maestrías y programas de intercambio en universidades nacionales e internacionales. País: Argentina.</descripción>
-        <descripción xml:lang="en">Scholarship program for Argentine students covering master's degrees and exchange programs at national and international universities. Country: Argentina.</descripción>
-        <paisTexto>Argentina</paisTexto>
-        <nivelTexto>Master&apos;s, Exchange</nivelTexto>
-        <requisitosTexto>Ciudadanía argentina, promedio mínimo, entrevistas</requisitosTexto>
-        <esRespaldoDBpedia>true</esRespaldoDBpedia>
-    </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Scholarship_13">
+    <rdfs:label xml:lang="es">Programa de Becas Argentina</rdfs:label>
+    <rdfs:label xml:lang="en">Argentina Scholarship Program</rdfs:label>
+    <rdfs:label xml:lang="pt">Programa de Bolsas Argentina</rdfs:label>
+    <rdfs:label xml:lang="de">Stipendienprogramm Argentinien</rdfs:label>
+    <rdfs:label xml:lang="fr">Programme de Bourses Argentine</rdfs:label>
+    <descripción xml:lang="es">Programa de becas para estudiantes argentinos que cubre maestrías y programas de intercambio en universidades nacionales e internacionales. País: Argentina.</descripción>
+    <descripción xml:lang="en">Scholarship program for Argentine students covering master's degrees and exchange programs at national and international universities. Country: Argentina.</descripción>
+    <descripción xml:lang="pt">Programa de bolsas para estudantes argentinos que cobre mestrados e programas de intercâmbio em universidades nacionais e internacionais. País: Argentina.</descripción>
+    <descripción xml:lang="de">Stipendienprogramm für argentinische Studenten, das Masterabschlüsse und Austauschprogramme an nationalen und internationalen Universitäten abdeckt. Land: Argentinien.</descripción>
+    <descripción xml:lang="fr">Programme de bourses pour les étudiants argentins couvrant les diplômes de master et les programmes d'échange dans des universités nationales et internationales. Pays: Argentine.</descripción>
+    <paisTexto>Argentina</paisTexto>
+    <nivelTexto>Master's, Exchange</nivelTexto>
+    <requisitosTexto>Ciudadanía argentina, promedio mínimo, entrevistas</requisitosTexto>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
 </rdf:RDF>

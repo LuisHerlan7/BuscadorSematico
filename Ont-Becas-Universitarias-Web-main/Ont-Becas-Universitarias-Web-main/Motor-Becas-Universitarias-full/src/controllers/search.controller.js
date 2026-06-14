@@ -121,7 +121,7 @@ exports.diseaseDetails = async (req, res) => {
       scholarship = await dbpediaService.getScholarshipDetails(decoded, lang);
     } else {
       // CORREGIDO
-      scholarship = await rdfService.getScholarshipDetails(decoded);
+      scholarship = await rdfService.getScholarshipDetails(decoded, lang);
     }
 
     if (!scholarship) {
