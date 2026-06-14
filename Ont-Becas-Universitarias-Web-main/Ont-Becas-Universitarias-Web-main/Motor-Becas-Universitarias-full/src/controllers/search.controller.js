@@ -119,11 +119,16 @@ exports.diseaseDetails = async (req, res) => {
     }
 
     if (!scholarship) {
-      return res.status(404).render('error', {
-        title: 'Beca no encontrada',
-        message: 'La beca solicitada no fue encontrada',
-        lang
-      });
+      console.warn(`Detalle no disponible para URI ${decoded}. Mostrando página mínima.`);
+      scholarship = {
+        uri: decoded,
+        label: decoded.split('/').pop() || decoded,
+        name: decoded.split('/').pop() || decoded,
+        abstract: '',
+        description: '',
+        source: decoded.includes('dbpedia.org') ? 'dbpedia' : 'local',
+        dbpediaUri: decoded.includes('dbpedia.org') ? decoded : null
+      };
     }
 
     res.render('disease-detail', {
