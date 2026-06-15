@@ -58,7 +58,8 @@ class RDFService {
       bindingsStream.on('data', b => {
         const plain = new Map();
         for (const [key, value] of b) {
-          plain.set(key, value ? {
+          const keyName = key?.value || key?.id || String(key).replace(/^\?/, '');
+          plain.set(keyName, value ? {
             value: value.value,
             language: value.language,
             datatype: value.datatype?.value,
@@ -308,9 +309,15 @@ class RDFService {
     const filterClauses = specific.map(word => {
       const escaped = word.replace(/"/g, '\\"');
       return `(
-        CONTAINS(LCASE(STR(?label)), "${escaped}")
-        || CONTAINS(LCASE(STR(?nombre)), "${escaped}")
-        || CONTAINS(LCASE(STR(?descripcion)), "${escaped}")
+        CONTAINS(LCASE(COALESCE(STR(?label), "")), "${escaped}")
+        || CONTAINS(LCASE(COALESCE(STR(?nombre), "")), "${escaped}")
+        || CONTAINS(LCASE(COALESCE(STR(?descripcion), "")), "${escaped}")
+        || CONTAINS(LCASE(COALESCE(STR(?requisitosTexto), "")), "${escaped}")
+        || CONTAINS(LCASE(COALESCE(STR(?beneficiosTexto), "")), "${escaped}")
+        || CONTAINS(LCASE(COALESCE(STR(?institucionTexto), "")), "${escaped}")
+        || CONTAINS(LCASE(COALESCE(STR(?nivelTexto), "")), "${escaped}")
+        || CONTAINS(LCASE(COALESCE(STR(?areaTexto), "")), "${escaped}")
+        || CONTAINS(LCASE(COALESCE(STR(?paisTexto), "")), "${escaped}")
       )`;
     });
 
@@ -318,12 +325,10 @@ class RDFService {
   }
 
   async searchScholarships(term, lang = 'es') {
-    const filterClause = this._buildSPARQLFilter(term);
-
     const query = `
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
-      SELECT DISTINCT ?s ?label ?descripcion ?monto ?fechaFinal ?nombre WHERE {
+      SELECT DISTINCT ?s ?label ?descripcion ?monto ?fechaFinal ?nombre ?requisitosTexto ?beneficiosTexto ?institucionTexto ?nivelTexto ?areaTexto ?paisTexto WHERE {
         {
           # Buscar instancias de Beca o cualquier subclase de Beca
           ?s a ?type .
@@ -333,26 +338,40 @@ class RDFService {
           ?s becas:nombreBeca ?anyNombre .
         }
         ?s rdfs:label ?label .
-        OPTIONAL { ?s becas:descripcion ?descripcion }
+        FILTER(LANG(?label) = "${lang}" || LANG(?label) = "es" || LANG(?label) = "en" || LANG(?label) = "")
+        OPTIONAL { ?s becas:descripcion ?descripcionSinTilde }
+        OPTIONAL { ?s becas:descripción ?descripcionConTilde }
+        OPTIONAL { ?s becas:requisitosTexto ?requisitosTexto }
+        OPTIONAL { ?s becas:beneficiosTexto ?beneficiosTexto }
+        OPTIONAL { ?s becas:institucionTexto ?institucionTexto }
+        OPTIONAL { ?s becas:nivelTexto ?nivelTexto }
+        OPTIONAL { ?s becas:areaTexto ?areaTexto }
+        OPTIONAL { ?s becas:paisTexto ?paisTexto }
         OPTIONAL { ?s becas:montoCubierto ?monto }
         OPTIONAL { ?s becas:fechaLímitePostulación ?fecha }
         OPTIONAL { ?s becas:fechaLimitePostulacion ?fechaAlt }
         OPTIONAL { ?s becas:nombreBeca ?nombre }
         BIND(COALESCE(?fecha, ?fechaAlt) AS ?fechaFinal)
-        
-        ${filterClause}
-      } LIMIT 50
+        BIND(COALESCE(?descripcionSinTilde, ?descripcionConTilde) AS ?descripcion)
+      } LIMIT 200
     `;
 
     const bindings = await this._queryBindings(query);
+    const specific = this._getSpecificKeywords(this._parseSearchKeywords(term));
 
-    return bindings.map(binding => {
+    const mapped = bindings.map(binding => {
       const s = binding.get('s') || binding.get('?s');
       const label = binding.get('label') || binding.get('?label');
       const descripcion = binding.get('descripcion') || binding.get('?descripcion');
       const monto = binding.get('monto') || binding.get('?monto');
       const fecha = binding.get('fechaFinal') || binding.get('?fechaFinal') || binding.get('fecha') || binding.get('?fecha');
       const nombre = binding.get('nombre') || binding.get('?nombre');
+      const requisitos = binding.get('requisitosTexto') || binding.get('?requisitosTexto');
+      const beneficios = binding.get('beneficiosTexto') || binding.get('?beneficiosTexto');
+      const institucion = binding.get('institucionTexto') || binding.get('?institucionTexto');
+      const nivel = binding.get('nivelTexto') || binding.get('?nivelTexto');
+      const area = binding.get('areaTexto') || binding.get('?areaTexto');
+      const pais = binding.get('paisTexto') || binding.get('?paisTexto');
 
       return {
         uri: s?.value,
@@ -361,12 +380,44 @@ class RDFService {
         description: descripcion?.value,
         amount: monto?.value,
         deadline: fecha?.value,
+        requirements: requisitos?.value,
+        benefits: beneficios?.value,
+        institution: institucion?.value,
+        level: nivel?.value,
+        area: area?.value,
+        country: pais?.value,
         source: 'local'
       };
     });
+
+    const deduped = [];
+    const seen = new Set();
+
+    for (const item of mapped) {
+      if (!item.uri || seen.has(item.uri)) continue;
+
+      const haystack = this._normalize([
+        item.label,
+        item.name,
+        item.description,
+        item.requirements,
+        item.benefits,
+        item.institution,
+        item.level,
+        item.area,
+        item.country
+      ].join(' '));
+
+      if (specific.length > 0 && !specific.some(word => haystack.includes(word))) continue;
+
+      seen.add(item.uri);
+      deduped.push(item);
+    }
+
+    return deduped.slice(0, 50);
   }
 
-  async getScholarshipDetails(uri) {
+  async getScholarshipDetails(uri, lang = 'es') {
     const query = `
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX becas: <http://www.semanticweb.org/ontologia/becas-universitarias#>
@@ -387,6 +438,8 @@ class RDFService {
     const raw = {};
     const requirements = [];
     const benefits = [];
+    const labels = [];
+    const descriptions = [];
     let institution = null;
     let level = null;
     let area = null;
@@ -405,7 +458,11 @@ class RDFService {
 
       raw[propUri] = objVal;
 
-      if (propUri === `${NS}tieneRequisito`) {
+      if (propUri === `${RDFS}label`) {
+        labels.push({ value: objVal, lang: o.language || '' });
+      } else if (propUri === `${NS}descripción` || propUri === `${NS}descripcion`) {
+        descriptions.push({ value: objVal, lang: o.language || '' });
+      } else if (propUri === `${NS}tieneRequisito`) {
         requirements.push(objLabel);
       } else if (propUri === `${NS}otorgaBeneficio`) {
         benefits.push(objLabel);
@@ -420,12 +477,26 @@ class RDFService {
       }
     });
 
-    const label = raw[`${RDFS}label`] || raw[`${NS}nombreBeca`] || uri;
-    const desc = raw[`${NS}descripcion`] || raw[`${NS}descripción`] || '';
+    const pickLang = values => {
+      const preferred = values.find(v => v.lang === lang)
+        || values.find(v => v.lang === 'es')
+        || values.find(v => v.lang === 'en')
+        || values[0];
+      return preferred?.value || null;
+    };
+
+    const label = pickLang(labels) || raw[`${NS}nombreBeca`] || uri;
+    const desc = pickLang(descriptions) || raw[`${NS}descripcion`] || raw[`${NS}descripción`] || '';
     const amount = raw[`${NS}montoCubierto`] || null;
     const deadline = raw[`${NS}fechaLímitePostulación`] || raw[`${NS}fechaLimitePostulacion`] || null;
     const dbpediaUri = raw[`${OWL}sameAs`] || null;
     const seeAlso = raw[`${RDFS}seeAlso`] || null;
+    const requirementsText = raw[`${NS}requisitosTexto`] || null;
+    const benefitsText = raw[`${NS}beneficiosTexto`] || null;
+    const institutionText = raw[`${NS}institucionTexto`] || null;
+    const levelText = raw[`${NS}nivelTexto`] || null;
+    const areaText = raw[`${NS}areaTexto`] || null;
+    const countryText = raw[`${NS}paisTexto`] || null;
 
     return {
       uri,
@@ -437,12 +508,12 @@ class RDFService {
       deadline,
       dbpediaUri,
       seeAlso,
-      requirements: requirements.length > 0 ? requirements.join(', ') : null,
-      benefits: benefits.length > 0 ? benefits.join(', ') : null,
-      institution,
-      level,
-      area,
-      country,
+      requirements: requirements.length > 0 ? requirements.join(', ') : requirementsText,
+      benefits: benefits.length > 0 ? benefits.join(', ') : benefitsText,
+      institution: institution || institutionText,
+      level: level || levelText,
+      area: area || areaText,
+      country: country || countryText,
       thumbnail: null,
       source: 'local',
       _raw: raw
