@@ -163,7 +163,10 @@ class RDFService {
 
   _isGenericScholarshipSearch(term) {
     const normalized = this._normalize(term);
-    return ['beca', 'becas', 'scholarship', 'scholarships', 'bolsa', 'bolsas', 'bourse', 'stipendium'].includes(normalized);
+    return [
+      'beca', 'becas', 'scholarship', 'scholarships', 'bolsa', 'bolsas', 'bourse', 'stipendium',
+      'estudiante', 'estudiantes', 'student', 'students', 'estudante', 'estudantes', 'etudiant', 'etudiants', 'studenten'
+    ].includes(normalized);
   }
 
   _pickLiteral(group, field, lang = 'es') {
@@ -213,6 +216,12 @@ class RDFService {
 
   _offlineDescription(fragment, lang = 'es') {
     const descriptions = {
+      Offline_Fulbright_Competencia: {
+        en: 'International research, master and doctoral scholarship offered by Fulbright commissions, host universities and government sponsors.',
+        pt: 'Bolsa internacional de pesquisa, mestrado e doutorado oferecida por comissoes Fulbright, universidades anfitrias e organismos governamentais.',
+        de: 'Internationales Forschungs-, Master- und Promotionsstipendium von Fulbright-Kommissionen, Gastuniversitaeten und staatlichen Traegern.',
+        fr: 'Bourse internationale de recherche, master et doctorat proposee par les commissions Fulbright, universites d accueil et organismes publics.'
+      },
       Offline_Erasmus_Competencia: {
         en: 'Mobility and academic exchange program for undergraduate, master and professional internship studies in European universities.',
         pt: 'Programa de mobilidade e intercambio academico para graduacao, mestrado e estagios profissionais em universidades europeias.',
@@ -242,6 +251,12 @@ class RDFService {
         pt: 'Bolsa de excelencia para estudantes de informatica, tecnologia e engenharia na America Latina.',
         de: 'Exzellenzstipendium fuer Informatik-, Technologie- und Ingenieurstudierende in Lateinamerika.',
         fr: 'Bourse d excellence pour etudiants en informatique, technologie et ingenierie en Amerique latine.'
+      },
+      Offline_Resumen_40_Preguntas: {
+        en: 'Offline summary covering scholarship programs, institutions, requirements, benefits, application stages, selection criteria, beneficiaries and statistics.',
+        pt: 'Resumo offline sobre programas de bolsas, instituicoes, requisitos, beneficios, etapas de candidatura, criterios de selecao, beneficiarios e estatisticas.',
+        de: 'Offline-Zusammenfassung zu Stipendienprogrammen, Einrichtungen, Anforderungen, Leistungen, Bewerbungsschritten, Auswahlkriterien, Beguenstigten und Statistiken.',
+        fr: 'Resume hors ligne sur les programmes de bourses, institutions, exigences, avantages, etapes de candidature, criteres de selection, beneficiaires et statistiques.'
       }
     };
 
@@ -508,7 +523,23 @@ class RDFService {
    * Filtra términos genéricos para quedarse con las palabras clave específicas
    */
   _getSpecificKeywords(keywords) {
-    return keywords.filter(w => {
+    const expanded = [];
+    const synonymMap = {
+      estudante: ['estudiante', 'estudiantes', 'student', 'students', 'beneficiario', 'postulante'],
+      estudantes: ['estudiante', 'estudiantes', 'student', 'students', 'beneficiario', 'postulante'],
+      student: ['estudiante', 'estudiantes', 'student', 'students', 'beneficiario', 'postulante'],
+      students: ['estudiante', 'estudiantes', 'student', 'students', 'beneficiario', 'postulante'],
+      etudiant: ['estudiante', 'estudiantes', 'student', 'students', 'beneficiario', 'postulante'],
+      etudiants: ['estudiante', 'estudiantes', 'student', 'students', 'beneficiario', 'postulante'],
+      studenten: ['estudiante', 'estudiantes', 'student', 'students', 'beneficiario', 'postulante'],
+      bolsa: ['beca', 'scholarship', 'bourse', 'stipendium'],
+      bourse: ['beca', 'scholarship', 'bolsa', 'stipendium'],
+      stipendium: ['beca', 'scholarship', 'bolsa', 'bourse']
+    };
+
+    for (const w of keywords) expanded.push(...(synonymMap[w] || [w]));
+
+    return Array.from(new Set(expanded)).filter(w => {
       let stem = w;
       // Singularización básica para español
       if (w.endsWith('es') && w.length > 4) {
