@@ -19,7 +19,28 @@ exports.search = async (req, res) => {
       .then(value => ({ status: 'fulfilled', value }))
       .catch(reason => ({ status: 'rejected', reason }));
 
-    const localResults = [];
+    const localResult = await Promise.resolve(rdfService.searchScholarships(q, lang))
+      .then(value => ({ status: 'fulfilled', value }))
+      .catch(reason => ({ status: 'rejected', reason }));
+
+    const localResults = (localResult.status === 'fulfilled' ? localResult.value : []).map(r => ({
+      uri: r.uri,
+      label: r.label,
+      name: r.name || r.label,
+      description: r.description || '',
+      dbpediaUri: r.dbpediaUri || null,
+      dbpediaPage: r.dbpediaPage || r.dbpediaUri || null,
+      amount: r.amount || null,
+      deadline: r.deadline || null,
+      institution: r.institution || null,
+      level: r.level || null,
+      area: r.area || null,
+      country: r.country || null,
+      requirements: r.requirements || null,
+      benefits: r.benefits || null,
+      seeAlso: r.seeAlso || null,
+      source: r.source || 'local'
+    }));
 
     // Resultados de DBpedia
     const dbpediaResults = (dbpediaResult.status === 'fulfilled' ? dbpediaResult.value : []).map(r => ({
@@ -44,6 +65,9 @@ exports.search = async (req, res) => {
     // Log de errores si alguna fuente falló
     if (dbpediaResult.status === 'rejected') {
       console.error('Error en búsqueda DBpedia:', dbpediaResult.reason?.message);
+    }
+    if (localResult.status === 'rejected') {
+      console.error('Error en búsqueda local:', localResult.reason?.message);
     }
 
     // Combinar: primero locales, luego DBpedia (evitar duplicados por URI)
@@ -110,12 +134,12 @@ exports.diseaseDetails = async (req, res) => {
     let scholarship;
     if (decoded.startsWith('offline-dbpedia:')) {
       scholarship = await dbpediaService.getOfflineScholarshipDetails(decoded, lang);
-    } else if (decoded.includes('dbpedia.org')) {
+    } else if (decoded.includes('dbpedia.org') || decoded.includes('wikidata.org/entity/')) {
       // CORREGIDO
       scholarship = await dbpediaService.getScholarshipDetails(decoded, lang);
     } else {
       // CORREGIDO
-      scholarship = await rdfService.getScholarshipDetails(decoded);
+      scholarship = await rdfService.getScholarshipDetails(decoded, lang);
     }
 
     if (!scholarship) {
@@ -126,8 +150,8 @@ exports.diseaseDetails = async (req, res) => {
         name: decoded.split('/').pop() || decoded,
         abstract: '',
         description: '',
-        source: decoded.includes('dbpedia.org') ? 'dbpedia' : 'local',
-        dbpediaUri: decoded.includes('dbpedia.org') ? decoded : null
+        source: (decoded.includes('dbpedia.org') || decoded.includes('wikidata.org/entity/')) ? 'dbpedia' : 'local',
+        dbpediaUri: (decoded.includes('dbpedia.org') || decoded.includes('wikidata.org/entity/')) ? decoded : null
       };
     }
 
