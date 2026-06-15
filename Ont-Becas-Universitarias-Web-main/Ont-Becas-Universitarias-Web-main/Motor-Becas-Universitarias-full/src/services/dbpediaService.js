@@ -168,19 +168,6 @@ class DBpediaService {
   async searchWikidataScholarships(term, lang = 'es') {
     if (!term || !String(term).trim()) return [];
 
-    const languageFilter = lang === 'en'
-      ? 'LANG(?label) = "en"'
-      : `LANG(?label) = "${lang}"`;
-    const textLanguageFilter = lang === 'en'
-      ? 'LANG(?d) = "en"'
-      : `LANG(?d) = "${lang}"`;
-    const commentLanguageFilter = lang === 'en'
-      ? 'LANG(?c) = "en"'
-      : `LANG(?c) = "${lang}"`;
-    const abstractLanguageFilter = lang === 'en'
-      ? 'LANG(?a) = "en"'
-      : `LANG(?a) = "${lang}"`;
-
     const query = `
       PREFIX bd: <http://www.bigdata.com/rdf#>
       PREFIX mwapi: <https://www.mediawiki.org/ontology#API/>
@@ -230,6 +217,18 @@ class DBpediaService {
     if (!term || !String(term).trim()) return [];
 
     const bifTerm = this._buildBifTerm(term);
+    const languageFilter = lang === 'en'
+      ? 'LANG(?label) = "en"'
+      : `LANG(?label) = "${lang}"`;
+    const textLanguageFilter = lang === 'en'
+      ? 'LANG(?d) = "en"'
+      : `LANG(?d) = "${lang}"`;
+    const commentLanguageFilter = lang === 'en'
+      ? 'LANG(?c) = "en"'
+      : `LANG(?c) = "${lang}"`;
+    const abstractLanguageFilter = lang === 'en'
+      ? 'LANG(?a) = "en"'
+      : `LANG(?a) = "${lang}"`;
 
     const query = `
       PREFIX dbo: <http://dbpedia.org/ontology/>
