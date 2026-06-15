@@ -971,4 +971,180 @@
         <requisitosTexto>Ciudadanía argentina, promedio mínimo, entrevistas</requisitosTexto>
         <esRespaldoDBpedia>true</esRespaldoDBpedia>
     </owl:NamedIndividual>
+
+    <!-- Respaldo offline alineado a las 40 preguntas de competencia del informe. -->
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Offline_Fulbright_Competencia">
+        <rdf:type rdf:resource="#BecaDeInvestigación"/>
+        <rdfs:label xml:lang="es">Programa Fulbright - Respaldo Offline</rdfs:label>
+        <rdfs:label xml:lang="en">Fulbright Program - Offline Backup</rdfs:label>
+        <rdfs:label xml:lang="pt">Programa Fulbright - Apoio Offline</rdfs:label>
+        <rdfs:label xml:lang="de">Fulbright-Programm - Offline-Sicherung</rdfs:label>
+        <rdfs:label xml:lang="fr">Programme Fulbright - Sauvegarde hors ligne</rdfs:label>
+        <nombreBeca>Programa Fulbright</nombreBeca>
+        <descripción xml:lang="es">Beca internacional de investigación, maestría y doctorado ofrecida por comisiones Fulbright, universidades receptoras y organismos gubernamentales. Responde consultas sobre programas registrados, instituciones participantes, patrocinadores, nivel de posgrado, país destino, colaboración internacional, experiencia de investigación, comités evaluadores, entrevistas, criterios de selección, fechas de convocatoria, duración, postulantes, beneficiarios activos y tasa de aceptación.</descripción>
+        <descripción xml:lang="en">International research, master's and doctoral scholarship offered by Fulbright commissions, host universities and government sponsors.</descripción>
+        <descripción xml:lang="pt">Bolsa internacional de pesquisa, mestrado e doutorado oferecida por comissões Fulbright, universidades e organismos governamentais.</descripción>
+        <descripción xml:lang="de">Internationales Forschungs-, Master- und Promotionsstipendium von Fulbright-Kommissionen, Universitäten und staatlichen Trägern.</descripción>
+        <descripción xml:lang="fr">Bourse internationale de recherche, master et doctorat proposée par les commissions Fulbright, universités et organismes publics.</descripción>
+        <institucionTexto>Comisión Fulbright; universidades de Estados Unidos; comité evaluador académico internacional</institucionTexto>
+        <paisTexto>Estados Unidos; países participantes</paisTexto>
+        <nivelTexto>Maestría; Doctorado; Investigación</nivelTexto>
+        <areaTexto>Investigación; ciencias sociales; educación; tecnología; salud</areaTexto>
+        <montoCubierto>Completa o parcial: matrícula, manutención, seguro médico, pasajes internacionales y materiales de investigación</montoCubierto>
+        <fechaLímitePostulación rdf:datatype="&xsd;date">2026-05-31</fechaLímitePostulación>
+        <duración rdf:datatype="&xsd;integer">24</duración>
+        <requisitosTexto xml:lang="es">Requisitos académicos: licenciatura concluida, promedio mínimo 80/100, certificación TOEFL o IELTS, cartas de recomendación, propuesta de investigación, experiencia académica previa y entrevista. Documentos: pasaporte, certificado académico, carta de motivación y formulario de postulación en línea.</requisitosTexto>
+        <beneficiosTexto xml:lang="es">Beneficios: cobertura de matrícula, manutención mensual, alojamiento parcial, transporte internacional, seguro médico, tutoría académica, apoyo para materiales y vinculación con prácticas o intercambio académico.</beneficiosTexto>
+        <procesoTexto>Convocatoria anual; revisión documental; evaluación de mérito; prueba o validación de idioma; entrevista; comité evaluador; publicación de resultados en julio; proceso en varias fases; postulación digital.</procesoTexto>
+        <estadisticasTexto>Beneficiarios 2024-2026: Ana Flores, Diego Rojas y Laura Méndez; países receptores frecuentes: Estados Unidos y Reino Unido; áreas con mayor concentración: investigación, tecnología y ciencias sociales; postulantes registrados: 120; tasa de aceptación referencial: 12%; becas activas con permanencia por promedio mínimo y reporte semestral.</estadisticasTexto>
+        <esRenovable rdf:datatype="&xsd;boolean">true</esRenovable>
+        <esRespaldoDBpedia>true</esRespaldoDBpedia>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Offline_Erasmus_Competencia">
+        <rdf:type rdf:resource="#BecaDeMovilidad"/>
+        <rdfs:label xml:lang="es">Beca Erasmus+ - Respaldo Offline</rdfs:label>
+        <rdfs:label xml:lang="en">Erasmus+ Scholarship - Offline Backup</rdfs:label>
+        <rdfs:label xml:lang="pt">Bolsa Erasmus+ - Apoio Offline</rdfs:label>
+        <rdfs:label xml:lang="de">Erasmus+-Stipendium - Offline-Sicherung</rdfs:label>
+        <rdfs:label xml:lang="fr">Bourse Erasmus+ - Sauvegarde hors ligne</rdfs:label>
+        <nombreBeca>Beca Erasmus+</nombreBeca>
+        <descripción xml:lang="es">Programa de movilidad e intercambio académico para pregrado, maestría y prácticas profesionales en universidades europeas. Cubre preguntas sobre instituciones internacionales colaboradoras, universidades participantes, país de destino, áreas de estudio, beneficios adicionales, transporte, alojamiento, tutoría, postulación en línea, varias fases de selección y resultados por cronograma.</descripción>
+        <descripción xml:lang="en">Mobility and academic exchange scholarship for undergraduate, master's and professional internship programs in European universities.</descripción>
+        <descripción xml:lang="pt">Programa de mobilidade e intercâmbio acadêmico para graduação, mestrado e estágios profissionais em universidades europeias.</descripción>
+        <descripción xml:lang="de">Mobilitäts- und Austauschprogramm für Bachelor, Master und Praktika an europäischen Universitäten.</descripción>
+        <descripción xml:lang="fr">Programme de mobilité et d'échange académique pour licence, master et stages professionnels dans des universités européennes.</descripción>
+        <institucionTexto>Unión Europea; universidades socias; oficinas de relaciones internacionales</institucionTexto>
+        <paisTexto>España; Alemania; Francia; Portugal; Unión Europea</paisTexto>
+        <nivelTexto>Pregrado; Maestría; Intercambio</nivelTexto>
+        <areaTexto>Todas las áreas; movilidad; idiomas; prácticas profesionales</areaTexto>
+        <montoCubierto>Parcial: matrícula de intercambio, manutención, alojamiento parcial y transporte</montoCubierto>
+        <fechaLímitePostulación rdf:datatype="&xsd;date">2026-03-30</fechaLímitePostulación>
+        <duración rdf:datatype="&xsd;integer">12</duración>
+        <requisitosTexto xml:lang="es">Estar matriculado en una universidad participante, promedio mínimo 70/100, certificado de idioma según universidad destino, plan de estudios aprobado, pasaporte, carta de motivación y documentos académicos.</requisitosTexto>
+        <beneficiosTexto xml:lang="es">Beneficios: movilidad internacional, manutención, apoyo para alojamiento, pasajes, seguro médico, tutoría, prácticas profesionales e intercambio académico.</beneficiosTexto>
+        <procesoTexto>Postulación digital; revisión documental; nominación de universidad origen; evaluación por comité; entrevista opcional; publicación de resultados en mayo; varias fases.</procesoTexto>
+        <estadisticasTexto>Mayor número de estudiantes becados hacia España, Alemania, Francia y Portugal; duración promedio 6 a 12 meses; áreas frecuentes: ingeniería, educación, administración e idiomas; estudiantes activos deben aprobar créditos y reportar permanencia.</estadisticasTexto>
+        <esRenovable rdf:datatype="&xsd;boolean">false</esRenovable>
+        <esRespaldoDBpedia>true</esRespaldoDBpedia>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Offline_DAAD_Competencia">
+        <rdf:type rdf:resource="#BecaDeInvestigación"/>
+        <rdfs:label xml:lang="es">Beca DAAD - Respaldo Offline</rdfs:label>
+        <rdfs:label xml:lang="en">DAAD Scholarship - Offline Backup</rdfs:label>
+        <rdfs:label xml:lang="pt">Bolsa DAAD - Apoio Offline</rdfs:label>
+        <rdfs:label xml:lang="de">DAAD-Stipendium - Offline-Sicherung</rdfs:label>
+        <rdfs:label xml:lang="fr">Bourse DAAD - Sauvegarde hors ligne</rdfs:label>
+        <nombreBeca>Beca DAAD</nombreBeca>
+        <descripción xml:lang="es">Beca alemana para maestría, doctorado, investigación y cursos de especialización. Permite responder sobre becas por país Alemania, certificaciones de idioma TOEFL IELTS alemán, experiencia previa de investigación, apoyo para materiales, seguro médico, instituciones que más becas otorgan, tasa de aceptación, beneficiarios activos y requisitos de permanencia.</descripción>
+        <descripción xml:lang="en">German scholarship for master's, doctoral, research and specialization programs.</descripción>
+        <descripción xml:lang="pt">Bolsa alemã para mestrado, doutorado, pesquisa e especialização.</descripción>
+        <descripción xml:lang="de">Deutsches Stipendium für Master, Promotion, Forschung und Spezialisierung.</descripción>
+        <descripción xml:lang="fr">Bourse allemande pour master, doctorat, recherche et spécialisation.</descripción>
+        <institucionTexto>Servicio Alemán de Intercambio Académico; universidades alemanas; comité académico DAAD</institucionTexto>
+        <paisTexto>Alemania</paisTexto>
+        <nivelTexto>Maestría; Doctorado; Postdoctorado; Investigación</nivelTexto>
+        <areaTexto>Ingeniería; tecnología; ciencias; investigación; artes</areaTexto>
+        <montoCubierto>Completa: estipendio mensual, matrícula, seguro médico, viaje y materiales de investigación</montoCubierto>
+        <fechaLímitePostulación rdf:datatype="&xsd;date">2026-08-31</fechaLímitePostulación>
+        <duración rdf:datatype="&xsd;integer">36</duración>
+        <requisitosTexto xml:lang="es">Excelencia académica, promedio mínimo alto, título universitario, certificación de alemán o inglés, TOEFL o IELTS cuando corresponda, propuesta de investigación, cartas de recomendación, experiencia académica o profesional.</requisitosTexto>
+        <beneficiosTexto xml:lang="es">Beneficios: matrícula, manutención, alojamiento parcial, seguro médico, transporte, curso de idioma, tutoría, materiales académicos e investigación.</beneficiosTexto>
+        <procesoTexto>Convocatoria internacional; postulación en línea; revisión documental; evaluación académica; entrevista; comité DAAD; resultados por cronograma.</procesoTexto>
+        <estadisticasTexto>Institución con alta cantidad de becas internacionales; postulantes registrados 200; tasa de aceptación referencial 15%; permanencia por avance académico, créditos aprobados y reportes de investigación.</estadisticasTexto>
+        <esRenovable rdf:datatype="&xsd;boolean">true</esRenovable>
+        <esRespaldoDBpedia>true</esRespaldoDBpedia>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Offline_Chevening_Competencia">
+        <rdf:type rdf:resource="#BecaCompleta"/>
+        <rdfs:label xml:lang="es">Beca Chevening - Respaldo Offline</rdfs:label>
+        <rdfs:label xml:lang="en">Chevening Scholarship - Offline Backup</rdfs:label>
+        <rdfs:label xml:lang="pt">Bolsa Chevening - Apoio Offline</rdfs:label>
+        <rdfs:label xml:lang="de">Chevening-Stipendium - Offline-Sicherung</rdfs:label>
+        <rdfs:label xml:lang="fr">Bourse Chevening - Sauvegarde hors ligne</rdfs:label>
+        <nombreBeca>Beca Chevening</nombreBeca>
+        <descripción xml:lang="es">Beca completa del Gobierno del Reino Unido para maestría y liderazgo. Cubre consultas sobre patrocinadores, instituciones británicas, beneficios de matrícula, manutención, pasajes internacionales, seguro, entrevistas, experiencia laboral, criterios de liderazgo y resultados de convocatoria.</descripción>
+        <institucionTexto>Gobierno del Reino Unido; Foreign, Commonwealth and Development Office; universidades británicas</institucionTexto>
+        <paisTexto>Reino Unido</paisTexto>
+        <nivelTexto>Maestría</nivelTexto>
+        <areaTexto>Políticas públicas; administración; tecnología; educación; liderazgo</areaTexto>
+        <montoCubierto>Completa: matrícula, manutención, viaje internacional, visa y seguro</montoCubierto>
+        <fechaLímitePostulación rdf:datatype="&xsd;date">2026-11-05</fechaLímitePostulación>
+        <duración rdf:datatype="&xsd;integer">12</duración>
+        <requisitosTexto xml:lang="es">Licenciatura, dos años de experiencia laboral, dominio de inglés, liderazgo demostrado, cartas de referencia, admisión universitaria y entrevista.</requisitosTexto>
+        <beneficiosTexto xml:lang="es">Beneficios: matrícula completa, estipendio, transporte, seguro médico, red profesional, tutoría y oportunidades de prácticas o intercambio académico.</beneficiosTexto>
+        <procesoTexto>Formulario digital; evaluación de elegibilidad; preselección; entrevista; comité evaluador; resultados publicados en fechas específicas.</procesoTexto>
+        <estadisticasTexto>Postulantes registrados 180; tasa de aceptación referencial 10%; becarios activos mantienen la beca aprobando asignaturas y cumpliendo obligaciones del contrato.</estadisticasTexto>
+        <esRespaldoDBpedia>true</esRespaldoDBpedia>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Offline_Beca_Socioeconomica_Competencia">
+        <rdf:type rdf:resource="#BecaSocioeconómica"/>
+        <rdfs:label xml:lang="es">Beca Socioeconómica Universitaria - Respaldo Offline</rdfs:label>
+        <rdfs:label xml:lang="en">University Socioeconomic Scholarship - Offline Backup</rdfs:label>
+        <rdfs:label xml:lang="pt">Bolsa Socioeconômica Universitária - Apoio Offline</rdfs:label>
+        <rdfs:label xml:lang="de">Sozioökonomisches Universitätsstipendium - Offline-Sicherung</rdfs:label>
+        <rdfs:label xml:lang="fr">Bourse universitaire socio-économique - Sauvegarde hors ligne</rdfs:label>
+        <nombreBeca>Beca Socioeconómica Universitaria</nombreBeca>
+        <descripción xml:lang="es">Beca nacional parcial para estudiantes de pregrado con vulnerabilidad económica. Responde preguntas sobre criterios socioeconómicos, documentos, matrícula parcial, manutención, alojamiento, beneficiarios activos, renovación, permanencia, promedio mínimo y universidades nacionales.</descripción>
+        <institucionTexto>Universidades nacionales; dirección de bienestar estudiantil; comité socioeconómico</institucionTexto>
+        <paisTexto>Bolivia</paisTexto>
+        <nivelTexto>Pregrado</nivelTexto>
+        <areaTexto>Todas las áreas de estudio</areaTexto>
+        <montoCubierto>Parcial: matrícula, alimentación, alojamiento y apoyo de manutención</montoCubierto>
+        <fechaLímitePostulación rdf:datatype="&xsd;date">2026-02-28</fechaLímitePostulación>
+        <duración rdf:datatype="&xsd;integer">10</duración>
+        <requisitosTexto xml:lang="es">Promedio mínimo 65/100, informe socioeconómico, certificado de notas, matrícula vigente, carta de solicitud, documentos familiares y no contar con beca incompatible.</requisitosTexto>
+        <beneficiosTexto xml:lang="es">Beneficios: exención parcial de matrícula, alimentación, alojamiento, tutoría y acompañamiento académico.</beneficiosTexto>
+        <procesoTexto>Postulación presencial o digital; revisión documental; visita o verificación socioeconómica; evaluación por comité; resultados por cronograma.</procesoTexto>
+        <estadisticasTexto>Beneficiarios activos: Carla Soto y Miguel Arce; alta concentración en áreas de salud, ingeniería y educación; renovación por promedio, créditos aprobados y cumplimiento de permanencia.</estadisticasTexto>
+        <esRenovable rdf:datatype="&xsd;boolean">true</esRenovable>
+        <esRespaldoDBpedia>true</esRespaldoDBpedia>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Offline_Google_Tecnologia_Competencia">
+        <rdf:type rdf:resource="#BecaDeExcelencia"/>
+        <rdfs:label xml:lang="es">Beca Google Tecnología - Respaldo Offline</rdfs:label>
+        <rdfs:label xml:lang="en">Google Technology Scholarship - Offline Backup</rdfs:label>
+        <rdfs:label xml:lang="pt">Bolsa Google Tecnologia - Apoio Offline</rdfs:label>
+        <rdfs:label xml:lang="de">Google-Technologiestipendium - Offline-Sicherung</rdfs:label>
+        <rdfs:label xml:lang="fr">Bourse Google Technologie - Sauvegarde hors ligne</rdfs:label>
+        <nombreBeca>Beca Google para América Latina</nombreBeca>
+        <descripción xml:lang="es">Beca de excelencia para estudiantes de informática, tecnología e ingeniería en América Latina. Cubre preguntas sobre áreas de estudio, apoyo para materiales, tutoría, prácticas profesionales, promedio mínimo, postulantes registrados, criterios de mérito y patrocinadores privados.</descripción>
+        <institucionTexto>Google; universidades latinoamericanas; fundaciones tecnológicas</institucionTexto>
+        <paisTexto>América Latina; Bolivia; Argentina; Brasil; México</paisTexto>
+        <nivelTexto>Pregrado; Maestría; Especialización</nivelTexto>
+        <areaTexto>Informática; tecnología; ingeniería; ciencia de datos</areaTexto>
+        <montoCubierto>Parcial: apoyo económico, materiales académicos, cursos, mentoría y certificaciones</montoCubierto>
+        <fechaLímitePostulación rdf:datatype="&xsd;date">2026-09-15</fechaLímitePostulación>
+        <duración rdf:datatype="&xsd;integer">12</duración>
+        <requisitosTexto xml:lang="es">Estudiante de carrera técnica o universitaria, promedio mínimo 75/100, interés en tecnología, ensayo de motivación, certificado académico y disponibilidad para tutorías.</requisitosTexto>
+        <beneficiosTexto xml:lang="es">Beneficios: apoyo económico, materiales, tutoría, certificaciones, prácticas profesionales, red de mentores y acompañamiento académico.</beneficiosTexto>
+        <procesoTexto>Postulación en línea; revisión documental; evaluación de mérito; prueba técnica opcional; entrevista; selección final.</procesoTexto>
+        <estadisticasTexto>Área con alta concentración de becas otorgadas: tecnología; postulantes registrados 300; tasa de aceptación referencial 20%; instituciones privadas con alta cantidad de becas tecnológicas.</estadisticasTexto>
+        <esRespaldoDBpedia>true</esRespaldoDBpedia>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologia/becas-universitarias#Offline_Resumen_40_Preguntas">
+        <rdf:type rdf:resource="#Beca"/>
+        <rdfs:label xml:lang="es">Resumen Offline de Preguntas de Competencia</rdfs:label>
+        <rdfs:label xml:lang="en">Offline Summary of Competency Questions</rdfs:label>
+        <rdfs:label xml:lang="pt">Resumo Offline das Perguntas de Competência</rdfs:label>
+        <rdfs:label xml:lang="de">Offline-Zusammenfassung der Kompetenzfragen</rdfs:label>
+        <rdfs:label xml:lang="fr">Résumé hors ligne des questions de compétence</rdfs:label>
+        <nombreBeca>Respuestas offline sobre becas universitarias</nombreBeca>
+        <descripción xml:lang="es">La ontología registra programas de becas, instituciones educativas, organizaciones financiadoras, patrocinadores, tipos de becas completas parciales investigación movilidad intercambio socioeconómicas excelencia, niveles pregrado posgrado maestría doctorado postdoctorado, países destino, instituciones internacionales colaboradoras, requisitos académicos, promedio mínimo, documentos, certificaciones TOEFL IELTS, criterios socioeconómicos, áreas de estudio, regiones específicas, experiencia en investigación, beneficios, matrícula, manutención, alojamiento, transporte, seguro médico, materiales, tutoría, prácticas profesionales, convocatorias, etapas, comités evaluadores, entrevistas, criterios de selección, postulación digital, varias fases, fechas de resultados, beneficiarios por periodo, universidades y países con más becados, áreas con más becas, postulantes registrados, duración promedio, instituciones con más becas, tasa de aceptación y becarios activos con requisitos de permanencia.</descripción>
+        <institucionTexto>Universidades; organismos gubernamentales; organismos internacionales; fundaciones; patrocinadores privados; comités evaluadores</institucionTexto>
+        <paisTexto>Bolivia; Argentina; España; Alemania; Francia; Portugal; Estados Unidos; Reino Unido; China; América Latina; Unión Europea</paisTexto>
+        <nivelTexto>Pregrado; Posgrado; Maestría; Doctorado; Postdoctorado; Intercambio; Investigación</nivelTexto>
+        <areaTexto>Tecnología; salud; ingeniería; educación; ciencias sociales; investigación; administración; idiomas</areaTexto>
+        <montoCubierto>Beneficios totales y parciales: matrícula, manutención, alojamiento, transporte, pasajes internacionales, seguro médico, materiales, investigación, tutoría, prácticas profesionales e intercambios</montoCubierto>
+        <requisitosTexto xml:lang="es">Requisitos generales: promedio académico mínimo, créditos aprobados, título previo, certificado académico, pasaporte, carta de recomendación, carta de motivación, certificación TOEFL IELTS u otro idioma, condición socioeconómica, experiencia de investigación, entrevista, prueba, postulación en línea y cumplimiento de permanencia.</requisitosTexto>
+        <beneficiosTexto xml:lang="es">Beneficios generales: cobertura de matrícula total o parcial, manutención, alojamiento, transporte, seguro médico, materiales académicos, apoyo de investigación, tutoría, acompañamiento académico, prácticas profesionales e intercambio académico.</beneficiosTexto>
+        <procesoTexto>Procesos: convocatoria, fecha de inicio, fecha límite, revisión documental, evaluación académica, prueba, entrevista, comité evaluador, selección final, publicación de resultados, contrato, renovación y seguimiento de becarios activos.</procesoTexto>
+        <estadisticasTexto>Estadísticas offline: duración promedio 12 a 24 meses; áreas con más becas tecnología ingeniería salud educación investigación; países con más estudiantes becados Bolivia España Alemania Estados Unidos Reino Unido; postulantes registrados por programa; tasa de aceptación referencial 10% a 25%; instituciones con más becas universidades nacionales, DAAD, Erasmus+, Fulbright, Chevening y Google.</estadisticasTexto>
+        <esRespaldoDBpedia>true</esRespaldoDBpedia>
+    </owl:NamedIndividual>
 </rdf:RDF>
