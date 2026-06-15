@@ -85,7 +85,7 @@ class DBpediaService {
   _filterScholarshipResults(bindings) {
     const seen = new Set();
     const results = [];
-    const explicitScholarship = /\b(scholarship|fellowship|grant|bursary|beca|bolsa|bourse|stipendium|stipendien|subvencion|financi)\b/i;
+    const explicitScholarship = /\b(scholarship|fellowship|grant|bursary|beca|bourse|stipendium|stipendien|subvencion|financi)\b|bolsa\s+de\s+estud/i;
     const academicProgram = /\b(erasmus\+|erasmus programme|erasmus program|erasmus mundus|fulbright|daad|chevening|rhodes scholarship|exchange program|student exchange|mobility program)\b/i;
     const noisyResource = /(disambiguation|list_of_|category:|_song|_hospital|_train|_house|_castle|_academy|_school|_college|_university|minor_planets|taxa_named|portrait_of|martyrdom|saint_erasmus|erasmus_of_formia|cereopsius|hypolycaena|crypt_of)/i;
 
@@ -99,7 +99,7 @@ class DBpediaService {
       if (noisyResource.test(uri)) continue;
 
       const haystack = `${label} ${desc}`;
-      const relevant = explicitScholarship.test(haystack) || academicProgram.test(haystack);
+      const relevant = explicitScholarship.test(label) || academicProgram.test(haystack);
       if (!relevant) continue;
 
       seen.add(uri);
@@ -135,7 +135,7 @@ class DBpediaService {
   _filterWikiScholarshipResults(bindings) {
     const seen = new Set();
     const results = [];
-    const multilingualScholarshipPattern = /\b(scholarship|fellowship|grant|bursary|beca|bolsa|bourse|stipendium|stipendien|subvencion|financi)\b/i;
+    const multilingualScholarshipPattern = /\b(scholarship|fellowship|grant|bursary|beca|bourse|stipendium|stipendien|subvencion|financi)\b|bolsa\s+de\s+estud/i;
 
     for (const b of bindings) {
       const uri = b.item?.value;
@@ -167,6 +167,19 @@ class DBpediaService {
 
   async searchWikidataScholarships(term, lang = 'es') {
     if (!term || !String(term).trim()) return [];
+
+    const languageFilter = lang === 'en'
+      ? 'LANG(?label) = "en"'
+      : `LANG(?label) = "${lang}"`;
+    const textLanguageFilter = lang === 'en'
+      ? 'LANG(?d) = "en"'
+      : `LANG(?d) = "${lang}"`;
+    const commentLanguageFilter = lang === 'en'
+      ? 'LANG(?c) = "en"'
+      : `LANG(?c) = "${lang}"`;
+    const abstractLanguageFilter = lang === 'en'
+      ? 'LANG(?a) = "en"'
+      : `LANG(?a) = "${lang}"`;
 
     const query = `
       PREFIX bd: <http://www.bigdata.com/rdf#>
@@ -225,11 +238,11 @@ class DBpediaService {
       SELECT DISTINCT ?scholarship ?label ?desc WHERE {
         ?scholarship rdfs:label ?label .
         ?label bif:contains "${bifTerm.replace(/"/g, '\\"')}" .
-        FILTER(LANG(?label) = "${lang}" || LANG(?label) = "en")
+        FILTER(${languageFilter})
 
-        OPTIONAL { ?scholarship dbo:description ?d .  FILTER(LANG(?d)  = "${lang}" || LANG(?d)  = "en") }
-        OPTIONAL { ?scholarship rdfs:comment    ?c .  FILTER(LANG(?c)  = "${lang}" || LANG(?c)  = "en") }
-        OPTIONAL { ?scholarship dbo:abstract    ?a .  FILTER(LANG(?a)  = "${lang}" || LANG(?a)  = "en") }
+        OPTIONAL { ?scholarship dbo:description ?d .  FILTER(${textLanguageFilter}) }
+        OPTIONAL { ?scholarship rdfs:comment    ?c .  FILTER(${commentLanguageFilter}) }
+        OPTIONAL { ?scholarship dbo:abstract    ?a .  FILTER(${abstractLanguageFilter}) }
 
         BIND(COALESCE(?d, ?c, ?a) AS ?desc)
 
