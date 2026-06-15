@@ -17,6 +17,10 @@ class DBpediaService {
     return dbpediaConfig.endpoint;
   }
 
+  _getWikidataEndpoint() {
+    return 'https://query.wikidata.org/sparql';
+  }
+
   searchOfflineScholarships(term, lang = 'es') {
     return rdfService.searchOfflineDbpediaScholarships(term, lang);
   }
@@ -81,6 +85,9 @@ class DBpediaService {
   _filterScholarshipResults(bindings) {
     const seen = new Set();
     const results = [];
+    const explicitScholarship = /\b(scholarship|fellowship|grant|bursary|beca|bolsa|bourse|stipendium|stipendien|subvencion|financi)\b/i;
+    const academicProgram = /\b(erasmus\+|erasmus programme|erasmus program|erasmus mundus|fulbright|daad|chevening|rhodes scholarship|exchange program|student exchange|mobility program)\b/i;
+    const noisyResource = /(disambiguation|list_of_|category:|_song|_hospital|_train|_house|_castle|_academy|_school|_college|_university|minor_planets|taxa_named|portrait_of|martyrdom|saint_erasmus|erasmus_of_formia|cereopsius|hypolycaena|crypt_of)/i;
 
     for (const b of bindings) {
       const uri = b.scholarship?.value;
@@ -89,7 +96,10 @@ class DBpediaService {
 
       if (!uri || seen.has(uri)) continue;
 
-      const relevant = SCHOLARSHIP_KEYWORDS.some(k => label.includes(k) || desc.includes(k));
+      if (noisyResource.test(uri)) continue;
+
+      const haystack = `${label} ${desc}`;
+      const relevant = explicitScholarship.test(haystack) || academicProgram.test(haystack);
       if (!relevant) continue;
 
       seen.add(uri);
@@ -107,6 +117,96 @@ class DBpediaService {
     }
 
     return results;
+  }
+
+  _escapeSparqlText(value) {
+    return String(value || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  }
+
+  _isWikidataFallbackLang(lang) {
+    return ['pt', 'de', 'fr'].includes(lang);
+  }
+
+  _wikidataEntityId(uri) {
+    const match = String(uri || '').match(/\/(Q[0-9]+)$/);
+    return match ? match[1] : null;
+  }
+
+  _filterWikiScholarshipResults(bindings) {
+    const seen = new Set();
+    const results = [];
+    const multilingualScholarshipPattern = /\b(scholarship|fellowship|grant|bursary|beca|bolsa|bourse|stipendium|stipendien|subvencion|financi)\b/i;
+
+    for (const b of bindings) {
+      const uri = b.item?.value;
+      const label = b.itemLabel?.value || '';
+      const desc = b.itemDescription?.value || '';
+      const labelLower = label.toLowerCase();
+      const haystack = `${label} ${desc}`.toLowerCase();
+
+      if (!uri || seen.has(uri)) continue;
+      if (!multilingualScholarshipPattern.test(haystack)) continue;
+      if (!multilingualScholarshipPattern.test(label) && !/erasmus\s*[-+]?(\+|program|programm|programme)/i.test(labelLower)) continue;
+
+      seen.add(uri);
+      results.push({
+        uri,
+        safeUri: encodeURIComponent(uri),
+        dbpediaUri: uri,
+        dbpediaPage: uri,
+        label,
+        name: label,
+        description: desc,
+        abstract: desc,
+        source: 'dbpedia'
+      });
+    }
+
+    return results;
+  }
+
+  async searchWikidataScholarships(term, lang = 'es') {
+    if (!term || !String(term).trim()) return [];
+
+    const query = `
+      PREFIX bd: <http://www.bigdata.com/rdf#>
+      PREFIX mwapi: <https://www.mediawiki.org/ontology#API/>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX schema: <http://schema.org/>
+      PREFIX wikibase: <http://wikiba.se/ontology#>
+
+      SELECT ?item ?itemLabel ?itemDescription WHERE {
+        SERVICE wikibase:mwapi {
+          bd:serviceParam wikibase:endpoint "www.wikidata.org";
+                          wikibase:api "EntitySearch";
+                          mwapi:search "${this._escapeSparqlText(term)}";
+                          mwapi:language "${lang}".
+          ?item wikibase:apiOutputItem mwapi:item.
+        }
+        SERVICE wikibase:label {
+          bd:serviceParam wikibase:language "${lang},en,es".
+          ?item rdfs:label ?itemLabel.
+          ?item schema:description ?itemDescription.
+        }
+      }
+      LIMIT 40
+    `;
+
+    try {
+      const response = await axios.get(this._getWikidataEndpoint(), {
+        params: { query, format: 'json' },
+        timeout: 9000,
+        headers: {
+          Accept: 'application/sparql-results+json',
+          'User-Agent': 'BuscadorBecasUniversitarias/1.0'
+        }
+      });
+
+      return this._filterWikiScholarshipResults(response.data?.results?.bindings || []);
+    } catch (error) {
+      this._handleError(error);
+      return [];
+    }
   }
 
   /**
@@ -151,9 +251,20 @@ class DBpediaService {
 
       const bindings = response.data?.results?.bindings || [];
       const remoteResults = this._filterScholarshipResults(bindings);
-      return remoteResults.length > 0 ? remoteResults : await this.searchOfflineScholarships(term, lang);
+      if (remoteResults.length > 0) return remoteResults;
+
+      if (this._isWikidataFallbackLang(lang)) {
+        const wikiResults = await this.searchWikidataScholarships(term, lang);
+        if (wikiResults.length > 0) return wikiResults;
+      }
+
+      return this.searchOfflineScholarships(term, lang);
     } catch (error) {
       this._handleError(error);
+      if (this._isWikidataFallbackLang(lang)) {
+        const wikiResults = await this.searchWikidataScholarships(term, lang);
+        if (wikiResults.length > 0) return wikiResults;
+      }
       return this.searchOfflineScholarships(term, lang);
     }
   }
@@ -163,6 +274,11 @@ class DBpediaService {
    * Extrae de forma dirigida los campos de requisitos y criterios de elegibilidad mapeados por DBpedia.
    */
   async getScholarshipDetails(uri, lang = 'es') {
+    if (String(uri || '').includes('wikidata.org/entity/')) {
+      const wikiDetails = await this.getWikidataScholarshipDetails(uri, lang);
+      if (wikiDetails) return wikiDetails;
+    }
+
     const query = `
       PREFIX dbo: <http://dbpedia.org/ontology/>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -248,6 +364,70 @@ class DBpediaService {
         source: 'dbpedia',
         dbpediaUri: uri
       };
+    }
+  }
+
+  async getWikidataScholarshipDetails(uri, lang = 'es') {
+    const entityId = this._wikidataEntityId(uri);
+    if (!entityId) return null;
+
+    const query = `
+      PREFIX bd: <http://www.bigdata.com/rdf#>
+      PREFIX wd: <http://www.wikidata.org/entity/>
+      PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX schema: <http://schema.org/>
+      PREFIX wikibase: <http://wikiba.se/ontology#>
+
+      SELECT ?item ?itemLabel ?itemDescription ?image ?countryLabel ?website WHERE {
+        BIND(wd:${entityId} AS ?item)
+        OPTIONAL { ?item wdt:P18 ?image. }
+        OPTIONAL { ?item wdt:P17|wdt:P495 ?country. }
+        OPTIONAL { ?item wdt:P856 ?website. }
+        SERVICE wikibase:label {
+          bd:serviceParam wikibase:language "${lang},en,es".
+          ?item rdfs:label ?itemLabel.
+          ?item schema:description ?itemDescription.
+          ?country rdfs:label ?countryLabel.
+        }
+      }
+      LIMIT 1
+    `;
+
+    try {
+      const response = await axios.get(this._getWikidataEndpoint(), {
+        params: { query, format: 'json' },
+        timeout: 9000,
+        headers: {
+          Accept: 'application/sparql-results+json',
+          'User-Agent': 'BuscadorBecasUniversitarias/1.0'
+        }
+      });
+
+      const row = response.data?.results?.bindings?.[0];
+      if (!row) return null;
+
+      const label = row.itemLabel?.value || entityId;
+      const description = row.itemDescription?.value || '';
+
+      return {
+        uri,
+        label,
+        name: label,
+        abstract: description,
+        description,
+        thumbnail: row.image?.value || null,
+        requirements: null,
+        benefits: null,
+        country: row.countryLabel?.value || null,
+        seeAlso: row.website?.value || null,
+        source: 'dbpedia',
+        dbpediaUri: uri,
+        dbpediaPage: uri
+      };
+    } catch (error) {
+      this._handleError(error);
+      return null;
     }
   }
 
