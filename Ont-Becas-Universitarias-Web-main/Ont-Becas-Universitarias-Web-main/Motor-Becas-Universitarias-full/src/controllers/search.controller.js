@@ -71,32 +71,40 @@ exports.search = async (req, res) => {
     }
 
     // Combinar: primero locales, luego DBpedia (evitar duplicados por URI)
+    const canonicalKey = uri => String(uri || '')
+      .replace(/^offline-dbpedia:/, '')
+      .split('#')
+      .pop()
+      .toLowerCase();
     const seenUris = new Set();
     const results = [];
 
     for (const r of localResults) {
-      if (r.uri && !seenUris.has(r.uri)) {
-        seenUris.add(r.uri);
+      const key = canonicalKey(r.uri);
+      if (r.uri && !seenUris.has(key)) {
+        seenUris.add(key);
         results.push(r);
       }
     }
     for (const r of dbpediaResults) {
-      if (r.uri && !seenUris.has(r.uri)) {
-        seenUris.add(r.uri);
+      const key = canonicalKey(r.uri);
+      if (r.uri && !seenUris.has(key)) {
+        seenUris.add(key);
         results.push(r);
       }
     }
 
-    const remoteDbpediaCount = dbpediaResults.filter(r => r.source === 'dbpedia').length;
-    const offlineDbpediaCount = dbpediaResults.filter(r => r.source === 'dbpedia-offline').length;
+    const visibleLocalCount = results.filter(r => r.source === 'local').length;
+    const remoteDbpediaCount = results.filter(r => r.source === 'dbpedia').length;
+    const offlineDbpediaCount = results.filter(r => r.source === 'dbpedia-offline').length;
 
-    console.log(`Búsqueda "${q}": ${localResults.length} locales, ${remoteDbpediaCount} DBpedia, ${offlineDbpediaCount} DBpedia offline, ${results.length} combinados`);
+    console.log(`Búsqueda "${q}": ${visibleLocalCount} locales, ${remoteDbpediaCount} DBpedia, ${offlineDbpediaCount} DBpedia offline, ${results.length} combinados`);
 
     if (req.query.format === 'json') {
       return res.json({
         query: q,
         results,
-        localCount: localResults.length,
+        localCount: visibleLocalCount,
         dbpediaCount: remoteDbpediaCount,
         dbpediaOfflineCount: offlineDbpediaCount
       });
@@ -108,7 +116,7 @@ exports.search = async (req, res) => {
       diseases: results,      // Mantenido por compatibilidad
       scholarships: results,
       isEmpty: results.length === 0,
-      localCount: localResults.length,
+      localCount: visibleLocalCount,
       dbpediaCount: remoteDbpediaCount,
       dbpediaOfflineCount: offlineDbpediaCount,
       lang,
