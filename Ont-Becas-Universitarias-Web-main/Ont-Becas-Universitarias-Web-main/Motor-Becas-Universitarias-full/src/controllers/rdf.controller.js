@@ -27,7 +27,7 @@ exports.diseaseDetails = async (req, res) => {
     const { uri } = req.params;
     const decodedUri = decodeURIComponent(uri);
     // CORREGIDO: Llamada al nuevo nombre del método
-    const scholarship = await rdfService.getScholarshipDetails(decodedUri);
+    const scholarship = await rdfService.getScholarshipDetails(decodedUri, req.lang || 'es');
 
     res.render('disease-detail', {
       title: scholarship.name || scholarship.label || 'Detalles de la Beca',
