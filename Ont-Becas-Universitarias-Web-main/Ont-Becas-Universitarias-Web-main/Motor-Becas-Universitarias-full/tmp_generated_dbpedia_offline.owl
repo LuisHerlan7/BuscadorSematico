@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/ontologia/becas-universitarias#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q5094324">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Chevening Scholarship</rdfs:label>
+    <rdfs:label xml:lang="es">beca Chevening</rdfs:label>
+    <descripción xml:lang="es">beca otorgada por el Reino Unido</descripción>
+    <descripción xml:lang="en">international scholarship programme</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q5094324"/>
+    <rdfs:seeAlso rdf:resource="http://www.chevening.org/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q253936">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">Fulbright-Programm</rdfs:label>
+    <rdfs:label xml:lang="en">Fulbright Scholarship</rdfs:label>
+    <rdfs:label xml:lang="es">beca Fulbright</rdfs:label>
+    <rdfs:label xml:lang="fr">bourse Fulbright</rdfs:label>
+    <rdfs:label xml:lang="pt">Programa Fulbright</rdfs:label>
+    <descripción xml:lang="fr">système de bourses d&apos;étude</descripción>
+    <descripción xml:lang="es">beca Fulbright de investigación (subvenciones basadas en méritos)</descripción>
+    <descripción xml:lang="en">American educational grant program</descripción>
+    <descripción xml:lang="de">akademisches Stipendien- und Austauschprogramm</descripción>
+    <descripción xml:lang="pt">bolsa de estudo</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q253936"/>
+    <rdfs:seeAlso rdf:resource="https://us.fulbrightonline.org/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q1151557">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">DAAD-Stipendium</rdfs:label>
+    <rdfs:label xml:lang="en">DAAD Scholarship</rdfs:label>
+    <descripción xml:lang="de">Stipendium des DAAD</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q1151557"/>
+    <rdfs:seeAlso rdf:resource="http://www.daad.de/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q1204346">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Rhodes Scholarship</rdfs:label>
+    <rdfs:label xml:lang="de">Rhodes-Stipendium</rdfs:label>
+    <rdfs:label xml:lang="es">beca Rhodes</rdfs:label>
+    <rdfs:label xml:lang="fr">bourse Rhodes</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa de Estudos Rhodes</rdfs:label>
+    <descripción xml:lang="de">prestigeträchtiges Stipendium für die Universität Oxford</descripción>
+    <descripción xml:lang="fr">bourse post-licence permettant à des étudiants d&apos;entrer à l&apos;université d&apos;Oxford</descripción>
+    <descripción xml:lang="en">international postgraduate award for students to study at the University of Oxford</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q1204346"/>
+    <rdfs:seeAlso rdf:resource="http://www.rhodeshouse.ox.ac.uk/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q254168">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="fr">Erasmus</rdfs:label>
+    <rdfs:label xml:lang="de">Erasmus-Programm</rdfs:label>
+    <rdfs:label xml:lang="en">Erasmus Programme</rdfs:label>
+    <rdfs:label xml:lang="es">Programa Erasmus</rdfs:label>
+    <rdfs:label xml:lang="pt">Programa Erasmus</rdfs:label>
+    <descripción xml:lang="fr">programme d&apos;échange d&apos;étudiants et d&apos;enseignants entre les universités et les grandes écoles européennes</descripción>
+    <descripción xml:lang="es">programa de la Comisión Europea para el intercambio de estudiantes y profesores europeos en la Unión Europea</descripción>
+    <descripción xml:lang="en">student exchange program</descripción>
+    <descripción xml:lang="de">europäisches Studentenaustauschprogramm</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q254168"/>
+    <rdfs:seeAlso rdf:resource="https://erasmus-plus.ec.europa.eu/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q2092820">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Erasmus Mundus</rdfs:label>
+    <rdfs:label xml:lang="es">Erasmus Mundus</rdfs:label>
+    <rdfs:label xml:lang="fr">Erasmus Mundus</rdfs:label>
+    <descripción xml:lang="es">programa europeo de intercambio de estudiantes</descripción>
+    <descripción xml:lang="en">European student exchange program</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q2092820"/>
+    <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Erasmus_Mundus"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q4813771">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">athletic scholarship</rdfs:label>
+    <rdfs:label xml:lang="es">Beca atlética</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse sportive</rdfs:label>
+    <descripción xml:lang="es">concesión de ayuda económica educativa para un deportista</descripción>
+    <descripción xml:lang="en">award of educational financial aid for an athlete</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q4813771"/>
+    <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Athletic_scholarship"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Fulbright_Program">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="es">Programa Fulbright</rdfs:label>
+    <rdfs:label xml:lang="fr">Programme Fulbright</rdfs:label>
+    <rdfs:label xml:lang="pt">Programa Fulbright</rdfs:label>
+    <rdfs:label xml:lang="de">Fulbright-Programm</rdfs:label>
+    <rdfs:label xml:lang="en">Fulbright Program</rdfs:label>
+    <descripción xml:lang="es">beca Fulbright de investigación (subvenciones basadas en méritos)</descripción>
+    <descripción xml:lang="en">American educational grant program</descripción>
+    <descripción xml:lang="fr">système de bourses d&apos;étude</descripción>
+    <descripción xml:lang="pt">bolsa de estudo</descripción>
+    <descripción xml:lang="de">akademisches Stipendien- und Austauschprogramm</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://dbpedia.org/resource/Fulbright_Program"/>
+    <rdfs:seeAlso rdf:resource="http://commons.wikimedia.org/wiki/Special:FilePath/Fulbright_Program.svg?width=300"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Erasmus_Programme">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="fr">Erasmus</rdfs:label>
+    <rdfs:label xml:lang="en">Erasmus Programme</rdfs:label>
+    <rdfs:label xml:lang="pt">Programa Erasmus</rdfs:label>
+    <rdfs:label xml:lang="es">Programa Erasmus</rdfs:label>
+    <rdfs:label xml:lang="de">Erasmus-Programm</rdfs:label>
+    <descripción xml:lang="de">europäisches Studentenaustauschprogramm</descripción>
+    <descripción xml:lang="es">programa de la Comisión Europea para el intercambio de estudiantes y profesores europeos en la Unión Europea</descripción>
+    <descripción xml:lang="en">student exchange program</descripción>
+    <descripción xml:lang="fr">programme d&apos;échange d&apos;étudiants et d&apos;enseignants entre les universités et les grandes écoles européennes</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://dbpedia.org/resource/Erasmus_Programme"/>
+    <rdfs:seeAlso rdf:resource="http://commons.wikimedia.org/wiki/Special:FilePath/Programa_Erasmus.png?width=300"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+</rdf:RDF>
