@@ -1473,4 +1473,870 @@
     <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Scholarship"/>
     <esRespaldoDBpedia>true</esRespaldoDBpedia>
   </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q5094324">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Chevening Scholarship</rdfs:label>
+    <rdfs:label xml:lang="es">beca Chevening</rdfs:label>
+    <descripción xml:lang="es">beca otorgada por el Reino Unido</descripción>
+    <descripción xml:lang="en">international scholarship programme</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q5094324"/>
+    <rdfs:seeAlso rdf:resource="http://www.chevening.org/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q253936">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">Fulbright-Programm</rdfs:label>
+    <rdfs:label xml:lang="en">Fulbright Scholarship</rdfs:label>
+    <rdfs:label xml:lang="es">beca Fulbright</rdfs:label>
+    <rdfs:label xml:lang="fr">bourse Fulbright</rdfs:label>
+    <rdfs:label xml:lang="pt">Programa Fulbright</rdfs:label>
+    <descripción xml:lang="fr">système de bourses d&apos;étude</descripción>
+    <descripción xml:lang="es">beca Fulbright de investigación (subvenciones basadas en méritos)</descripción>
+    <descripción xml:lang="en">American educational grant program</descripción>
+    <descripción xml:lang="de">akademisches Stipendien- und Austauschprogramm</descripción>
+    <descripción xml:lang="pt">bolsa de estudo</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q253936"/>
+    <rdfs:seeAlso rdf:resource="https://us.fulbrightonline.org/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q1151557">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">DAAD-Stipendium</rdfs:label>
+    <rdfs:label xml:lang="en">DAAD Scholarship</rdfs:label>
+    <descripción xml:lang="de">Stipendium des DAAD</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q1151557"/>
+    <rdfs:seeAlso rdf:resource="http://www.daad.de/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q1204346">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Rhodes Scholarship</rdfs:label>
+    <rdfs:label xml:lang="de">Rhodes-Stipendium</rdfs:label>
+    <rdfs:label xml:lang="es">beca Rhodes</rdfs:label>
+    <rdfs:label xml:lang="fr">bourse Rhodes</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa de Estudos Rhodes</rdfs:label>
+    <descripción xml:lang="de">prestigeträchtiges Stipendium für die Universität Oxford</descripción>
+    <descripción xml:lang="fr">bourse post-licence permettant à des étudiants d&apos;entrer à l&apos;université d&apos;Oxford</descripción>
+    <descripción xml:lang="en">international postgraduate award for students to study at the University of Oxford</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q1204346"/>
+    <rdfs:seeAlso rdf:resource="http://www.rhodeshouse.ox.ac.uk/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q254168">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="fr">Erasmus</rdfs:label>
+    <rdfs:label xml:lang="de">Erasmus-Programm</rdfs:label>
+    <rdfs:label xml:lang="en">Erasmus Programme</rdfs:label>
+    <rdfs:label xml:lang="es">Programa Erasmus</rdfs:label>
+    <rdfs:label xml:lang="pt">Programa Erasmus</rdfs:label>
+    <descripción xml:lang="fr">programme d&apos;échange d&apos;étudiants et d&apos;enseignants entre les universités et les grandes écoles européennes</descripción>
+    <descripción xml:lang="es">programa de la Comisión Europea para el intercambio de estudiantes y profesores europeos en la Unión Europea</descripción>
+    <descripción xml:lang="en">student exchange program</descripción>
+    <descripción xml:lang="de">europäisches Studentenaustauschprogramm</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q254168"/>
+    <rdfs:seeAlso rdf:resource="https://erasmus-plus.ec.europa.eu/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q2092820">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Erasmus Mundus</rdfs:label>
+    <rdfs:label xml:lang="es">Erasmus Mundus</rdfs:label>
+    <rdfs:label xml:lang="fr">Erasmus Mundus</rdfs:label>
+    <descripción xml:lang="es">programa europeo de intercambio de estudiantes</descripción>
+    <descripción xml:lang="en">European student exchange program</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q2092820"/>
+    <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Erasmus_Mundus"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q4813771">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">athletic scholarship</rdfs:label>
+    <rdfs:label xml:lang="es">Beca atlética</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse sportive</rdfs:label>
+    <descripción xml:lang="es">concesión de ayuda económica educativa para un deportista</descripción>
+    <descripción xml:lang="en">award of educational financial aid for an athlete</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q4813771"/>
+    <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Athletic_scholarship"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q11570936">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">scholarship student</rdfs:label>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q11570936"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q11570936"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100397819">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Scholarship Exchange (Ireland and the United States of America) Act, 1957</rdfs:label>
+    <descripción xml:lang="en">Act of the Oireachtas No. 24 of 1957</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100397819"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100397819"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q104177052">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">USF Scholarship Repository</rdfs:label>
+    <descripción xml:lang="en">institutional repository at the University of San Francisco</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q104177052"/>
+    <rdfs:seeAlso rdf:resource="https://repository.usfca.edu/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100565469">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Scholarship Exchange (Ireland and The United States of America) Act, 1957 (Commencement) Order, 1957</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 270/1957</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100565469"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100565469"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q123467043">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Scholarship America records</rdfs:label>
+    <descripción xml:lang="en">archival collection held at the John Hay Library, Brown University</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q123467043"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q123467043"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q9347583">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Scholarship of the Minister of Science and Higher Education for academic performance</rdfs:label>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q9347583"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q9347583"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q59928315">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Scholarship Student Case Files (NAID 60455688)</rdfs:label>
+    <descripción xml:lang="es">una serie en los fondos de la Administración Nacional de Archivos y Registros</descripción>
+    <descripción xml:lang="en">series in the National Archives and Records Administration&apos;s holdings</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q59928315"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q59928315"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q137557098">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Scholarship and criticism of El Sistema</rdfs:label>
+    <descripción xml:lang="en">Scholarship and criticism of El Sistema music education program</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q137557098"/>
+    <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Scholarship_and_criticism_of_El_Sistema_(music_education_program)"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q66166831">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Scholarship Applications and Related Records for Study in the United States Under the Cultural Exchange Program (NAID 6997233)</rdfs:label>
+    <descripción xml:lang="es">una serie en los fondos de la Administración Nacional de Archivos y Registros</descripción>
+    <descripción xml:lang="en">series in the National Archives and Records Administration&apos;s holdings</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q66166831"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q66166831"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q188823">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">scholarship</rdfs:label>
+    <rdfs:label xml:lang="de">Stipendium</rdfs:label>
+    <rdfs:label xml:lang="es">beca</rdfs:label>
+    <rdfs:label xml:lang="fr">bourse d&apos;études</rdfs:label>
+    <rdfs:label xml:lang="pt">bolsa de estudo</rdfs:label>
+    <descripción xml:lang="fr">attribution d&apos;argent à un étudiant en vue de lui permettre de poursuivre ses études</descripción>
+    <descripción xml:lang="es">ayuda financiera para la educación de un estudiante</descripción>
+    <descripción xml:lang="en">award of financial aid for a student, artist, young scientist etc. to further their education</descripción>
+    <descripción xml:lang="de">finanzielle Unterstützung für Künstler, Sportler, Schüler, Studenten oder Jungwissenschaftler</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q188823"/>
+    <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Scholarship"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100551324">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2019</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 152/2019</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100551324"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100551324"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q119829857">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2022</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 118/2022</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q119829857"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q119829857"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q119830401">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant (Amendment) Scheme 2022.</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 579/2022</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q119830401"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q119830401"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q104988472">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant (Amendment) Scheme 2020.</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 570/2020</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q104988472"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q104988472"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q59930695">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant, Loan, and Scholarship Case Files (NAID 2800794)</rdfs:label>
+    <descripción xml:lang="es">una serie en los fondos de la Administración Nacional de Archivos y Registros</descripción>
+    <descripción xml:lang="en">series in the National Archives and Records Administration&apos;s holdings</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q59930695"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q59930695"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q1019990">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">Börse von Montreal</rdfs:label>
+    <rdfs:label xml:lang="en">The Montreal Exchange / Bourse De Montreal</rdfs:label>
+    <rdfs:label xml:lang="fr">bourse de Montréal</rdfs:label>
+    <descripción xml:lang="fr">marché financier situé à Montréal</descripción>
+    <descripción xml:lang="en">derivatives exchange located in Montreal, Canada</descripción>
+    <descripción xml:lang="de">Terminbörse in Montreal</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q1019990"/>
+    <rdfs:seeAlso rdf:resource="https://www.m-x.ca"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q74662">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">Börse Luxemburg</rdfs:label>
+    <rdfs:label xml:lang="en">Luxembourg Stock Exchange</rdfs:label>
+    <rdfs:label xml:lang="es">Bolsa de Luxemburgo</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse de Luxembourg</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa de Valores de Luxemburgo</rdfs:label>
+    <descripción xml:lang="fr">Organe chargée des cotations des obligations internationales basé à Luxembourg</descripción>
+    <descripción xml:lang="de">Wertpapierbörse in Luxemburg</descripción>
+    <descripción xml:lang="en">registration authority</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q74662"/>
+    <rdfs:seeAlso rdf:resource="https://www.luxse.com/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q7627686">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant</rdfs:label>
+    <descripción xml:lang="en">cartoon strip</descripción>
+    <descripción xml:lang="de">Comicstrip</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q7627686"/>
+    <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Student_Grant"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q4491713">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">Stock Exchange of Mauritius</rdfs:label>
+    <rdfs:label xml:lang="en">Stock Exchange Of Mauritius Ltd</rdfs:label>
+    <rdfs:label xml:lang="es">Bolsa de Valores de Mauricio</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse de Maurice</rdfs:label>
+    <descripción xml:lang="fr">bourse des valeurs en Maurice</descripción>
+    <descripción xml:lang="es">bolsa de valores en Mauricio</descripción>
+    <descripción xml:lang="en">stock exchange in Port Louis, Mauritius</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q4491713"/>
+    <rdfs:seeAlso rdf:resource="https://www.stockexchangeofmauritius.com"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100536077">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2013</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 159/2013</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100536077"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100536077"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100538511">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2014</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 201/2014</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100538511"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100538511"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100540598">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2015</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 155/2015</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100540598"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100540598"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100541120">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant (Amendment) Scheme 2015</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 323/2015</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100541120"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100541120"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100542542">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2016</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 153/2016</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100542542"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100542542"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100545342">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2017</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 125/2017</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100545342"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100545342"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100548752">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2018</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 100/2018</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100548752"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100548752"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100548967">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2011</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 305/2011</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100548967"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100548967"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100550623">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant (Amendment) Scheme 2011</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 740/2011</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100550623"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100550623"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100551484">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2012</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 189/2012</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100551484"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100551484"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q100554175">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2020</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 76/2020</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q100554175"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q100554175"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q113300067">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant (Amendment) Scheme 2021.</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 5/2021</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q113300067"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q113300067"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q113300198">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Student Grant Scheme 2021.</rdfs:label>
+    <descripción xml:lang="en">Irish Statutory Instrument S.I. No. 131/2021</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q113300198"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q113300198"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q2380163">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">Bourse de Tunis</rdfs:label>
+    <rdfs:label xml:lang="en">Bourse De Tunis</rdfs:label>
+    <rdfs:label xml:lang="es">Bolsa de Túnez</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse de Tunis</rdfs:label>
+    <descripción xml:lang="fr">bourse située à Tunis, Tunisie</descripción>
+    <descripción xml:lang="en">Stock exchange located in Tunis, Tunisia</descripción>
+    <descripción xml:lang="de">Börse in Tunis, Tunesien</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q2380163"/>
+    <rdfs:seeAlso rdf:resource="https://tunis-stockexchange.com/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q1146518">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">Euronext Brüssel</rdfs:label>
+    <rdfs:label xml:lang="es">Bolsa de Bruselas</rdfs:label>
+    <rdfs:label xml:lang="fr">bourse de Bruxelles</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa de Bruxelas</rdfs:label>
+    <rdfs:label xml:lang="en">Euronext Brussels</rdfs:label>
+    <descripción xml:lang="fr">bourse de valeurs à Bruxelles, Belgique</descripción>
+    <descripción xml:lang="en">stock exchange in Brussels, Belgium</descripción>
+    <descripción xml:lang="pt">Bolsa de valores Euronext em Bruxelas</descripción>
+    <descripción xml:lang="es">bolsa de valores de Bélgica</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q1146518"/>
+    <rdfs:seeAlso rdf:resource="https://live.euronext.com/en/markets/brussels"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q818723">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">Toronto Stock Exchange</rdfs:label>
+    <rdfs:label xml:lang="en">Toronto Stock Exchange</rdfs:label>
+    <rdfs:label xml:lang="es">Bolsa de Toronto</rdfs:label>
+    <rdfs:label xml:lang="fr">Bourse de Toronto</rdfs:label>
+    <rdfs:label xml:lang="pt">Toronto Stock Exchange</rdfs:label>
+    <descripción xml:lang="es">principal bolsa de valores de Canadá</descripción>
+    <descripción xml:lang="de">Wertpapierbörse in Toronto, Kanada</descripción>
+    <descripción xml:lang="en">stock exchange in Canada</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q818723"/>
+    <rdfs:seeAlso rdf:resource="https://www.tsx.com/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q491031">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="de">Bourse Régionale des Valeurs Mobilières</rdfs:label>
+    <rdfs:label xml:lang="en">Bourse Regionale Des Valeurs Mobilieres</rdfs:label>
+    <rdfs:label xml:lang="es">Bolsa de Valores Regional</rdfs:label>
+    <rdfs:label xml:lang="fr">bourse régionale des valeurs mobilières</rdfs:label>
+    <descripción xml:lang="fr">Bourse située à Abidjan, Côte d&apos;Ivoire</descripción>
+    <descripción xml:lang="en">Stock exchange located in Abidjan, Ivory Coast</descripción>
+    <descripción xml:lang="de">Gewerbebetrieb</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q491031"/>
+    <rdfs:seeAlso rdf:resource="https://www.brvm.org"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q28485845">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="fr">Palais de la Bourse</rdfs:label>
+    <rdfs:label xml:lang="de">Börsenpalast</rdfs:label>
+    <rdfs:label xml:lang="es">Palacio de la Bolsa</rdfs:label>
+    <rdfs:label xml:lang="en">Bourse Palace</rdfs:label>
+    <descripción xml:lang="en">former exchange building in Brussels, Belgium</descripción>
+    <descripción xml:lang="fr">ancien immeuble de change à Bruxelles, Belgique</descripción>
+    <descripción xml:lang="es">edificio en Bruselas</descripción>
+    <descripción xml:lang="de">Börsengebäude Brüssel</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q28485845"/>
+    <rdfs:seeAlso rdf:resource="https://beursbourse.be/"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q45131">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">Monbukagakusho Scholarship</rdfs:label>
+    <rdfs:label xml:lang="pt">Bolsa de Estudos Monbukagakusho</rdfs:label>
+    <descripción xml:lang="en">academic scholarship</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q45131"/>
+    <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Monbukagakush%C5%8D_Scholarship"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Q138027407">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologia/becas-universitarias#Beca"/>
+    <rdfs:label xml:lang="en">fellowship grant</rdfs:label>
+    <descripción xml:lang="en">funded, usually temporary position or grant that supports research, study, or professional development</descripción>
+    <requisitosTexto xml:lang="es">Requisitos: promedio academico, documentos de postulacion, carta de motivacion y cumplimiento de elegibilidad segun convocatoria.</requisitosTexto>
+    <beneficiosTexto xml:lang="es">Beneficios: matricula, manutencion, apoyo academico, movilidad, seguro medico o materiales segun disponibilidad del programa.</beneficiosTexto>
+    <montoCubierto>Segun convocatoria oficial</montoCubierto>
+    <fechaLímitePostulación>Segun convocatoria oficial</fechaLímitePostulación>
+    <institucionTexto>Institucion u organismo financiador del programa</institucionTexto>
+    <nivelTexto>Pregrado; Maestria; Doctorado; Investigacion; Intercambio</nivelTexto>
+    <areaTexto>Todas las areas; investigacion; tecnologia; educacion; ciencias sociales</areaTexto>
+    <paisTexto>Internacional</paisTexto>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q138027407"/>
+    <rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q138027407"/>
+    <esRespaldoDBpedia>true</esRespaldoDBpedia>
+  </owl:NamedIndividual>
 </rdf:RDF>
