@@ -134,9 +134,15 @@ exports.search = async (req, res) => {
 
 exports.diseaseDetails = async (req, res) => {
   try {
-    const { uri } = req.params;
+    // Acepta tanto /disease/:uri como /disease?uri=encodedUri
+    const paramUri = req.params && req.params.uri ? req.params.uri : null;
+    const queryUri = req.query && req.query.uri ? req.query.uri : null;
+    const raw = paramUri || queryUri;
+    if (!raw) {
+      return res.status(400).render('error', { title: 'Error', message: 'URI faltante', error: null, lang: req.lang });
+    }
     const lang = req.lang || 'es';
-    const decoded = decodeURIComponent(uri);
+    const decoded = decodeURIComponent(raw);
 
     // Enrutar por origen: dbpedia.org → servicio remoto, resto → ontología local
     let scholarship;

@@ -14,6 +14,8 @@ router.get('/', (req, res) => {
 router.get('/search', rdfController.search);
 
 // Ruta para mostrar detalles de una enfermedad RDF
+// Soporta también /rdf/disease?uri=... para evitar problemas con barras en URIs
 router.get('/disease/:uri', rdfController.diseaseDetails);
+router.get('/disease', rdfController.diseaseDetails);
 
 module.exports = router;

@@ -24,8 +24,11 @@ exports.search = async (req, res) => {
 
 exports.diseaseDetails = async (req, res) => {
   try {
-    const { uri } = req.params;
-    const decodedUri = decodeURIComponent(uri);
+    const paramUri = req.params && req.params.uri ? req.params.uri : null;
+    const queryUri = req.query && req.query.uri ? req.query.uri : null;
+    const raw = paramUri || queryUri;
+    if (!raw) return res.status(400).render('error', { title: 'Error', message: 'URI faltante', error: null });
+    const decodedUri = decodeURIComponent(raw);
     // CORREGIDO: Llamada al nuevo nombre del método
     const scholarship = await rdfService.getScholarshipDetails(decodedUri, req.lang || 'es');
 
